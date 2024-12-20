@@ -1,0 +1,52 @@
+{
+  "data": [
+    {
+      "category": "Technical",
+      "name": "API Design",
+      "level": 4,
+      "importance": 85,
+      "growth_rate": 12,
+      "required_roles": ["Developer Relations Engineer", "Developer Advocate"],
+      "timestamp": "2024-01-20 12:00:00+00:00"
+    },
+    {
+      "category": "Communication",
+      "name": "Technical Writing",
+      "level": 5,
+      "importance": 90,
+      "growth_rate": 8,
+      "required_roles": ["Developer Relations Engineer", "Technical Writer"],
+      "timestamp": "2024-01-20 12:00:00+00:00"
+    },
+    {
+      "category": "Community",
+      "name": "Event Management",
+      "level": 3,
+      "importance": 75,
+      "growth_rate": 15,
+      "required_roles": ["Community Manager", "Developer Advocate"],
+      "timestamp": "2024-01-20 12:00:00+00:00"
+    },
+    {
+      "category": "Leadership",
+      "name": "Program Management",
+      "level": 4,
+      "importance": 88,
+      "growth_rate": 10,
+      "required_roles": ["Developer Relations Manager", "Head of Developer Relations"],
+      "timestamp": "2024-01-20 12:00:00+00:00"
+    },
+    {
+      "category": "Technical",
+      "name": "SDK Development",
+      "level": 3,
+      "importance": 80,
+      "growth_rate": 18,
+      "required_roles": ["Developer Relations Engineer"],
+      "timestamp": "2024-01-20 12:00:00+00:00"
+    }
+  ],
+  "metadata": {
+    "last_updated": "2024-12-20T03:28:58.818203"
+  }
+}

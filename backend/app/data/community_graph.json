@@ -1,0 +1,17 @@
+{
+  "nodes": [
+    {
+      "id": "community-1",
+      "name": "Open Source Community",
+      "category": "Developer Community",
+      "connections": [
+        "github-1",
+        "discord-1"
+      ],
+      "timestamp": "2024-01-20 12:00:00+00:00"
+    }
+  ],
+  "metadata": {
+    "last_updated": "2024-12-20T03:30:31.640847"
+  }
+}
