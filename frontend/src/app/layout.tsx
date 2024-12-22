@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import "./globals.css";
 import Layout from "@/components/layout/Layout";
+import { CTABanner } from '@/components/ui/cta-banner'
 
 const geist = Geist({
   subsets: ["latin"],
@@ -33,6 +34,7 @@ export default function RootLayout({
           <Layout>
             <main className="flex-grow">
               {children}
+              <CTABanner />
             </main>
           </Layout>
         </div>

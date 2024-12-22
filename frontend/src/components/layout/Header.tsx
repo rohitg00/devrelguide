@@ -1,13 +1,23 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
+import { Menu, X } from 'lucide-react'
 
 const Header = () => {
   const pathname = usePathname()
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
   
+  const navLinks = [
+    { href: '/', label: 'Home' },
+    { href: '/whitepaper', label: 'Free Whitepaper', isNew: true },
+    { href: '/resources', label: 'Resources' },
+    { href: '/visualizations', label: 'Visualizations' },
+    { href: '/contact', label: 'Contact Us' }
+  ]
+
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between">
@@ -18,49 +28,66 @@ const Header = () => {
           </span>
         </Link>
 
-        <nav className="flex items-center gap-6">
-          <Link 
-            href="/"
-            className={cn(
-              "text-sm font-medium transition-colors hover:text-primary",
-              pathname === "/" ? "text-primary" : "text-muted-foreground"
-            )}
-          >
-            Home
-          </Link>
-          <Link 
-            href="/whitepaper" 
-            className="text-foreground hover:text-primary flex items-center gap-2"
-          >
-            <span>Free Whitepaper</span>
-            <span className="bg-primary/10 text-primary text-xs px-2 py-1 rounded-full">New</span>
-          </Link>
-          <Link 
-            href="/resources"
-            className={cn(
-              "text-sm font-medium transition-colors hover:text-primary",
-              pathname === "/resources" ? "text-primary" : "text-muted-foreground"
-            )}
-          >
-            Resources
-          </Link>
-          <Link 
-            href="/visualizations"
-            className={cn(
-              "text-sm font-medium transition-colors hover:text-primary",
-              pathname === "/visualizations" ? "text-primary" : "text-muted-foreground"
-            )}
-          >
-            Visualizations
-          </Link>
-          <Link 
-            href="/contact"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary/90 transition-colors"
-          >
-            Contact Us
-          </Link>
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex items-center gap-6">
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={cn(
+                "text-sm font-medium transition-colors hover:text-primary",
+                pathname === link.href ? "text-primary" : "text-muted-foreground"
+              )}
+            >
+              <span className="flex items-center gap-2">
+                {link.label}
+                {link.isNew && (
+                  <span className="bg-primary/10 text-primary text-xs px-2 py-1 rounded-full">New</span>
+                )}
+              </span>
+            </Link>
+          ))}
         </nav>
+
+        {/* Mobile Menu Button */}
+        <button
+          className="md:hidden p-2"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          aria-label="Toggle menu"
+        >
+          {isMenuOpen ? (
+            <X className="h-6 w-6" />
+          ) : (
+            <Menu className="h-6 w-6" />
+          )}
+        </button>
       </div>
+
+      {/* Mobile Navigation */}
+      {isMenuOpen && (
+        <div className="md:hidden">
+          <nav className="flex flex-col p-4 space-y-4 bg-background border-t">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={cn(
+                  "text-sm font-medium transition-colors hover:text-primary p-2",
+                  pathname === link.href ? "text-primary bg-primary/10 rounded-lg" : "text-muted-foreground"
+                )}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <span className="flex items-center gap-2">
+                  {link.label}
+                  {link.isNew && (
+                    <span className="bg-primary/10 text-primary text-xs px-2 py-1 rounded-full">New</span>
+                  )}
+                </span>
+              </Link>
+            ))}
+          </nav>
+        </div>
+      )}
     </header>
   )
 }

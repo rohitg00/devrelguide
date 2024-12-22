@@ -52,28 +52,51 @@ export function ResourceContainer() {
   const categorizeResource = (resource: Resource) => {
     const type = (resource.type || '').toLowerCase()
     const url = (resource.url || '').toLowerCase()
-    const title = (resource.title || '').toLowerCase()
-    const description = (resource.description || '').toLowerCase()
 
+    // First check the explicit type
+    if (type === 'job_listing') {
+      return 'job_listings'
+    }
+
+    // Then check GitHub repos
     if (type.includes('github') || type.includes('repository') || url.includes('github.com')) {
       return 'github_programs'
     }
 
-    if (
-      type.includes('job') || type.includes('career') ||
-      url.includes('jobs') || url.includes('careers') ||
-      title.includes('job') || title.includes('career') ||
-      description.includes('hiring') || description.includes('position')
-    ) {
+    // Check for job listings from common job sites
+    if (url.includes('linkedin.com/jobs') || 
+        url.includes('careers.') || 
+        url.includes('/jobs/') || 
+        url.includes('greenhouse.io') || 
+        url.includes('lever.co')) {
       return 'job_listings'
     }
 
+    // Default to blog posts
     return 'blog_posts'
   }
 
   const handleRefresh = async () => {
-    setUpdating(true)
-    await fetchResources()
+    try {
+      setUpdating(true)
+      
+      // First trigger a refresh of the data
+      const refreshResponse = await fetch('/api/resources/refresh', {
+        method: 'POST',
+      })
+      
+      if (!refreshResponse.ok) {
+        throw new Error('Failed to refresh resources')
+      }
+      
+      // Then fetch the updated data
+      await fetchResources()
+    } catch (err) {
+      console.error('Error refreshing resources:', err)
+      setError('Failed to refresh resources. Please try again.')
+    } finally {
+      setUpdating(false)
+    }
   }
 
   useEffect(() => {

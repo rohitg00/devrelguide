@@ -25,11 +25,20 @@ class DevRelScraper:
         """Initialize the DevRel scraper."""
         self.timeout = timeout or aiohttp.ClientTimeout(total=120, connect=30, sock_read=30)
         self.headers = {
-            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+            'Accept': 'application/vnd.github.v3+json',  # Updated to use GitHub API v3
             'Accept-Language': 'en-US,en;q=0.5',
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
             'Connection': 'keep-alive'
         }
+        
+        # Add GitHub API token if available
+        github_token = os.environ.get('GITHUB_TOKEN')  # Use environ.get() to check current environment
+        if github_token:
+            self.headers['Authorization'] = f'Bearer {github_token}'  # Updated to use Bearer token
+            logger.info("Using GitHub API authentication")
+        else:
+            logger.warning("No GitHub token found. API rate limits will be restricted.")
+        
         self.data_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data')
         self._ensure_data_directory()
 
@@ -65,7 +74,7 @@ class DevRelScraper:
             logger.error(f"Unexpected error for URL {url}: {str(e)}")
             return {}
 
-    def get_github_devrel_programs(self) -> List[Dict]:
+    async def get_github_devrel_programs(self) -> List[Dict]:
         """Get DevRel programs and resources from GitHub."""
         resources = []
         search_terms = [
@@ -77,52 +86,57 @@ class DevRelScraper:
             'developer+experience+framework'
         ]
 
-        # First, search for general DevRel resources
-        for term in search_terms:
-            try:
-                url = f'https://api.github.com/search/repositories?q={term}+in:name,description,readme&sort=stars&order=desc'
-                response = self._safe_request(url)
+        async with aiohttp.ClientSession(headers=self.headers) as session:
+            for term in search_terms:
+                try:
+                    url = f'https://api.github.com/search/repositories?q={term}+in:name,description,readme&sort=stars&order=desc'
+                    data = await self._safe_request(session, url)
 
-                if response and response.ok:
-                    data = response.json()
-                    repos = data.get('items', [])
-                    total_count = data.get('total_count', 0)
-                    logging.info(f"Found {total_count} repositories for term: {term}")
+                    if data:
+                        repos = data.get('items', [])
+                        total_count = data.get('total_count', 0)
+                        logger.info(f"Found {total_count} repositories for term: {term}")
 
-                    for repo in repos[:10]:  # Get top 10 repos per search term
-                        # Validate repository data
-                        if not all(key in repo for key in ['name', 'html_url', 'description', 'stargazers_count']):
-                            logging.warning(f"Skipping repository with incomplete data: {repo.get('name', 'unknown')}")
-                            continue
+                        for repo in repos[:10]:  # Get top 10 repos per search term
+                            # Validate repository data
+                            if not all(key in repo for key in ['name', 'html_url', 'description', 'stargazers_count']):
+                                logger.warning(f"Skipping repository with incomplete data: {repo.get('name', 'unknown')}")
+                                continue
 
-                        # Check for minimum stars to ensure quality
-                        if repo['stargazers_count'] < 5:
-                            continue
+                            # Check for minimum stars to ensure quality
+                            if repo['stargazers_count'] < 5:
+                                continue
 
-                        resources.append({
-                            'name': repo['name'],
-                            'url': repo['html_url'],
-                            'description': repo['description'] or '',
-                            'stars': repo['stargazers_count'],
-                            'source': 'github',
-                            'search_term': term,
-                            'type': 'repository',
-                            'topics': repo.get('topics', []),
-                            'last_updated': repo.get('updated_at', ''),
-                            'language': repo.get('language', '')
-                        })
+                            # Get detailed repo info to ensure accurate stargazer count
+                            repo_url = f"https://api.github.com/repos/{repo['full_name']}"
+                            detailed_repo = await self._safe_request(session, repo_url)
+                            
+                            if detailed_repo:
+                                stargazers_count = detailed_repo.get('stargazers_count', repo['stargazers_count'])
+                            else:
+                                stargazers_count = repo['stargazers_count']
 
-                else:
-                    logging.warning(f"Failed to fetch GitHub results for term {term}")
+                            resources.append({
+                                'name': repo['name'],
+                                'url': repo['html_url'],
+                                'description': repo['description'] or '',
+                                'stars': stargazers_count,
+                                'language': repo.get('language', ''),
+                                'topics': repo.get('topics', []),
+                                'last_updated': repo.get('updated_at', ''),
+                                'source': 'github',
+                                'search_term': term,
+                                'type': 'repository'
+                            })
 
-                # Respect GitHub API rate limits
-                time.sleep(2)
-            except Exception as e:
-                logging.error(f"Error fetching GitHub data for term {term}: {str(e)}")
-                if 'rate limit' in str(e).lower():
-                    logging.warning("Rate limit reached, waiting 60 seconds...")
-                    time.sleep(60)
-                continue
+                    # Respect GitHub API rate limits
+                    await asyncio.sleep(2)
+                except Exception as e:
+                    logger.error(f"Error fetching GitHub data for term {term}: {str(e)}")
+                    if 'rate limit' in str(e).lower():
+                        logger.warning("Rate limit reached, waiting 60 seconds...")
+                        await asyncio.sleep(60)
+                    continue
 
         # Remove duplicates while preserving order
         seen = set()
@@ -132,7 +146,13 @@ class DevRelScraper:
                 seen.add(resource['url'])
                 unique_resources.append(resource)
 
-        logging.info(f"Found {len(unique_resources)} unique DevRel resources on GitHub")
+        # Sort repositories by star count in descending order
+        unique_resources.sort(key=lambda x: x.get('stars', 0), reverse=True)
+        
+        logger.info(f"Found {len(unique_resources)} unique DevRel resources on GitHub")
+        
+        # Save to file
+        self.save_resources('github_programs', unique_resources)
         return unique_resources
 
     def get_devrel_blog_posts(self) -> List[Dict]:
@@ -160,25 +180,30 @@ class DevRelScraper:
         except Exception as e:
             logging.error(f"Error fetching DevRel.net RSS: {str(e)}")
 
-        # Mary Thengvall's blog - try multiple feed URLs
-        logging.info("Fetching Mary Thengvall's blog feed")
+        # Various DevRel blogs - try multiple feed URLs
+        logging.info("Fetching various DevRel blog feeds")
         feed_urls = [
-            'https://www.marythengvall.com/blog?format=rss',
-            'https://www.marythengvall.com/blog?format=atom',
-            'https://www.marythengvall.com/feed',
-            'https://www.marythengvall.com/rss.xml'
+            'https://dev.to/feed',
+            'https://medium.com/feed/tag/developer-advocacy',
+            'https://medium.com/feed/tag/developer-relations',
+            'https://medium.com/feed/tag/devrel',
+            'https://medium.com/feed/tag/developer-experience',
+            'https://developerrelations.com/feed',
+            'https://developerrelations.com/rss',
+            'https://developerrelations.com/atom',
+            'https://developerrelations.com/rss.xml'
         ]
 
         for feed_url in feed_urls:
             try:
                 feed = feedparser.parse(feed_url)
                 if feed.entries:
-                    logging.info(f"Found {len(feed.entries)} posts from Mary Thengvall's blog at {feed_url}")
+                    logging.info(f"Found {len(feed.entries)} posts from DevRel blogs at {feed_url}")
                     for entry in feed.entries[:20]:
                         blog_posts.append({
                             'title': entry.title,
                             'url': entry.link,
-                            'source': 'marythengvall.com',
+                            'source': feed_url.split('/')[2],
                             'published_date': entry.published if hasattr(entry, 'published') else '',
                             'excerpt': entry.summary if hasattr(entry, 'summary') else '',
                             'type': 'blog_post'
@@ -319,19 +344,63 @@ class DevRelScraper:
         try:
             logger.info("Starting job listings fetch")
             async with aiohttp.ClientSession(timeout=self.timeout) as session:
-                # DevRel Keywords for Filtering
+                # Add headers to avoid rate limiting
+                headers = {
+                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+                }
+                session._default_headers = headers
+
+                # DevRel-specific keywords for filtering
                 devrel_keywords = [
                     'developer relations', 'devrel', 'developer advocate',
-                    'developer advocacy', 'developer community', 'technical evangelist',
-                    'developer experience', 'dx', 'developer education',
-                    'developer marketing', 'api evangelist'
+                    'developer advocacy', 'technical evangelist', 'developer evangelist',
+                    'developer experience', 'dx engineer', 'developer education',
+                    'community manager', 'api evangelist', 'community advocate',
+                    'community evangelist', 'developer community'
                 ]
+
+                # Keywords that indicate a role is NOT a DevRel position
+                negative_keywords = [
+                    'account executive', 'sales development', 'business developer',
+                    'finance analyst', 'graphic designer', 'production designer',
+                    'solutions engineer', 'engineering manager', 'product manager',
+                    'program manager', 'talent acquisition', 'recruiter', 'billing',
+                    'machine learning engineer', 'principal engineer', 'data scientist',
+                    'analytics', 'platform engineer', 'software engineer', 'swe',
+                    'frontend', 'backend', 'full stack', 'fullstack', 'full-stack',
+                    'devops', 'sre', 'reliability', 'security engineer', 'sales manager',
+                    'sales representative', 'business development', 'enterprise',
+                    'account manager', 'customer success', 'support engineer',
+                    'product designer', 'ui designer', 'ux designer', 'data engineer',
+                    'infrastructure', 'network engineer', 'systems engineer',
+                    'qa engineer', 'quality assurance', 'technical writer',
+                    'content writer', 'marketing manager', 'growth manager',
+                    'operations manager', 'project coordinator', 'scrum master',
+                    'agile coach', 'business analyst', 'financial analyst',
+                    'hr manager', 'recruiter', 'talent specialist', 'office manager',
+                    'executive assistant', 'administrative', 'coordinator',
+                    'business operations', 'sales operations', 'revenue operations'
+                ]
+
+                # Companies known for having dedicated DevRel teams
+                devrel_focused_companies = {
+                    'stripe', 'twilio', 'github', 'google', 'microsoft',
+                    'aws', 'digitalocean', 'netlify', 'vercel', 'mongodb',
+                    'hashicorp', 'docker', 'gitlab', 'atlassian', 'auth0',
+                    'postman', 'datadog', 'elastic', 'contentful', 'shopify'
+                }
 
                 # Fetch jobs from different sources
                 tasks = [
                     self._parse_linkedin_jobs(session, 'https://www.linkedin.com/jobs/developer-relations-jobs'),
+                    asyncio.sleep(2),
+                    self._parse_linkedin_jobs(session, 'https://www.linkedin.com/jobs/developer-advocate-jobs'),
+                    asyncio.sleep(2),
+                    self._parse_linkedin_jobs(session, 'https://www.linkedin.com/jobs/technical-evangelist-jobs'),
                     self._parse_lever_jobs(session, 'https://jobs.lever.co/search?team=Developer%20Relations'),
-                    self._parse_greenhouse_jobs(session, 'https://boards.greenhouse.io/search?query=developer+relations')
+                    # Use the jobs/search endpoint for Greenhouse
+                    self._parse_greenhouse_jobs(session, 'https://boards-api.greenhouse.io/v1/boards/stripe/jobs?content=true'),
+                    self._parse_greenhouse_jobs(session, 'https://boards-api.greenhouse.io/v1/boards/twilio/jobs?content=true')
                 ]
 
                 results = await asyncio.gather(*tasks, return_exceptions=True)
@@ -347,20 +416,34 @@ class DevRelScraper:
                 # Filter for DevRel jobs and transform
                 devrel_jobs = []
                 for job in all_jobs:
-                    if any(keyword in job.get('title', '').lower() or
-                          keyword in job.get('description', '').lower()
-                          for keyword in devrel_keywords):
+                    title = job.get('title', '')
+                    company = job.get('company', '')
+                    description = job.get('description', '')
+
+                    # Skip if it's a non-DevRel job from a major tech company
+                    if company.lower() in {'stripe', 'twilio'} and not any(keyword in title.lower() for keyword in {
+                        'developer relations', 'devrel', 'developer advocate', 'developer advocacy',
+                        'technical evangelist', 'developer evangelist', 'developer experience',
+                        'dx engineer', 'developer education', 'community manager',
+                        'api evangelist', 'community advocate', 'community evangelist',
+                        'developer community'
+                    }):
+                        continue
+
+                    # Use the filtering method
+                    if self._is_devrel_job(title, description, company):
                         devrel_jobs.append({
                             'title': job.get('title', 'Untitled Position'),
                             'url': job.get('url', ''),
                             'description': job.get('description', ''),
                             'type': 'job_listing',
                             'company': job.get('company', 'Unknown Company'),
-                            'location': job.get('location', 'Remote/Unspecified'),
-                            'date': job.get('date', datetime.now().strftime('%Y-%m-%d'))
+                            'source': job.get('source', 'Unknown Source'),
+                            'date': job.get('date', datetime.now().strftime('%Y-%m-%d')),
+                            'locations': job.get('locations', ['Remote/Unspecified'])
                         })
 
-                logger.info(f"Found {len(devrel_jobs)} DevRel job listings")
+                logger.info(f"Found {len(devrel_jobs)} DevRel job listings after filtering")
                 return devrel_jobs
 
         except Exception as e:
@@ -443,37 +526,128 @@ class DevRelScraper:
     async def _parse_greenhouse_jobs(self, session: aiohttp.ClientSession, url: str) -> List[Dict]:
         """Parse Greenhouse DevRel job listings."""
         try:
-            async with session.get(url, headers=self.headers) as response:
-                if response.status == 200:
-                    text = await response.text()
-                    soup = BeautifulSoup(text, 'html.parser')
-                    jobs = []
-                    job_cards = soup.find_all('div', {'class': 'opening'})
+            async with session.get(url) as response:
+                if response.status != 200:
+                    logger.error(f"HTTP {response.status} error for URL: {url}")
+                    return []
 
-                    for card in job_cards:
-                        try:
-                            title = card.find('a', {'class': 'opening-title'})
-                            company = card.find('div', {'class': 'company-name'})
-                            location = card.find('span', {'class': 'location'})
+                data = await response.json()
+                jobs = []
 
-                            if title:
-                                jobs.append({
-                                    'title': title.text.strip(),
-                                    'company': company.text.strip() if company else '',
-                                    'location': location.text.strip() if location else '',
-                                    'url': f"https://boards.greenhouse.io{title['href']}" if title.get('href') else '',
-                                    'type': 'job_listing',
-                                    'source': 'greenhouse'
-                                })
-                        except Exception as e:
-                            logger.error(f"Error parsing Greenhouse job card: {str(e)}")
-                            continue
+                # Extract company name from URL
+                company = url.split('/boards/')[1].split('/')[0] if '/boards/' in url else 'Unknown'
 
-                    return jobs
-                return []
+                # Parse jobs from the Greenhouse API response
+                job_list = data.get('jobs', [])
+                for job in job_list:
+                    title = job.get('title', '')
+                    description = job.get('content', '')
+                    location = job.get('location', {}).get('name', '')
+                    job_url = job.get('absolute_url', '')
+
+                    # Only add jobs that pass the DevRel filtering criteria
+                    if self._is_devrel_job(title, description, company):
+                        jobs.append({
+                            'title': title,
+                            'company': company,
+                            'url': job_url,
+                            'description': description,
+                            'locations': [location] if location else [],
+                            'source': 'greenhouse',
+                            'date': datetime.now().strftime('%Y-%m-%d')
+                        })
+
         except Exception as e:
             logger.error(f"Error parsing Greenhouse jobs: {str(e)}")
             return []
+
+        return jobs
+
+    def _is_devrel_job(self, title: str, description: str, company: str) -> bool:
+        """
+        Check if a job posting is a Developer Relations role.
+        Uses strict filtering for certain companies and checks for negative keywords.
+        """
+        title = title.lower()
+        description = description.lower() if description else ""
+        company = company.lower().strip() if company else ""
+
+        # Exclude all jobs from these companies
+        excluded_companies = {'stripe', 'twilio'}
+        if company in excluded_companies or any(company.startswith(excluded) for excluded in excluded_companies):
+            return False
+
+        # Negative keywords that indicate non-DevRel roles
+        negative_keywords = {
+            'account executive', 'sales development', 'business developer',
+            'finance analyst', 'graphic designer', 'production designer',
+            'solutions engineer', 'engineering manager', 'product manager',
+            'program manager', 'talent acquisition', 'recruiter', 'billing',
+            'machine learning engineer', 'principal engineer', 'data scientist',
+            'analytics', 'platform engineer', 'software engineer', 'swe',
+            'frontend', 'backend', 'full stack', 'fullstack', 'full-stack',
+            'devops', 'sre', 'reliability', 'security engineer', 'sales manager',
+            'sales representative', 'business development', 'enterprise',
+            'account manager', 'customer success', 'support engineer',
+            'product designer', 'ui designer', 'ux designer', 'data engineer',
+            'infrastructure', 'network engineer', 'systems engineer',
+            'qa engineer', 'quality assurance', 'technical writer',
+            'content writer', 'marketing manager', 'growth manager',
+            'operations manager', 'project coordinator', 'scrum master',
+            'agile coach', 'business analyst', 'financial analyst',
+            'hr manager', 'recruiter', 'talent specialist', 'office manager',
+            'executive assistant', 'administrative', 'coordinator',
+            'business operations', 'sales operations', 'revenue operations'
+        }
+
+        # DevRel title keywords (must be in title)
+        title_keywords = {
+            'developer relations', 'devrel', 'developer advocate',
+            'developer advocacy', 'technical evangelist', 'developer evangelist',
+            'developer experience', 'dx engineer', 'developer education',
+            'community manager', 'api evangelist', 'community advocate',
+            'community evangelist', 'developer community', 'developer programs',
+            'developer success', 'developer outreach', 'developer engagement',
+            'developer ecosystem', 'developer platform', 'api advocate',
+            'platform advocate', 'product educator', 'technical community',
+            'dev community', 'dev rel', 'dev advocate', 'dx advocate',
+            'dx manager', 'dx lead', 'devrel lead', 'devrel manager',
+            'developer relations lead', 'developer relations manager',
+            'developer advocate lead', 'developer advocate manager'
+        }
+
+        # Companies requiring strict title-only filtering
+        strict_filtering_companies = {
+            'stripe', 'twilio', 'microsoft', 'google', 'amazon', 'meta',
+            'apple', 'netflix', 'uber', 'lyft', 'airbnb', 'twitter',
+            'linkedin', 'adobe', 'salesforce', 'oracle', 'ibm', 'github',
+            'gitlab', 'atlassian', 'hashicorp', 'digitalocean', 'mongodb',
+            'elastic', 'datadog', 'snowflake', 'confluent', 'databricks',
+            'new relic', 'dynatrace', 'splunk', 'okta', 'auth0', 'twitch',
+            'roblox', 'unity', 'epic games', 'ea', 'activision', 'ubisoft'
+        }
+
+        # For major tech companies, only accept if DevRel keywords are in the title
+        if company in strict_filtering_companies:
+            return any(keyword in title for keyword in title_keywords)
+
+        # For other companies, also check description
+        description_keywords = {
+            'developer community', 'developer ecosystem', 'api documentation',
+            'technical content', 'developer education', 'developer experience',
+            'developer engagement', 'developer success', 'developer outreach',
+            'developer advocacy', 'developer evangelism', 'devrel',
+            'developer platform', 'developer tools', 'sdk', 'api platform',
+            'developer portal', 'developer hub', 'developer network',
+            'developer program', 'developer relations', 'developer support',
+            'technical community', 'api strategy', 'developer strategy'
+        }
+
+        # Check title first, then description
+        return (
+            any(keyword in title for keyword in title_keywords) or
+            (description and any(keyword in description for keyword in description_keywords))
+        )
 
     async def scrape_all_async(self):
         """Scrape all resources asynchronously."""
@@ -482,7 +656,7 @@ class DevRelScraper:
 
             # Create tasks for all resource types
             tasks = [
-                self.get_github_programs_async(),
+                self.get_github_devrel_programs(),
                 self.get_blog_posts_async(),
                 self.get_job_listings_async()  # Use get_job_listings_async directly
             ]
@@ -526,18 +700,68 @@ class DevRelScraper:
             logger.error(f"Error in scrape_all_async: {str(e)}")
             return self._load_existing_resources()
 
-    def scrape_all(self) -> bool:
+    def scrape_all(self):
         """Synchronous wrapper for async scraping."""
-        return asyncio.run(self.scrape_all_async())
-
-    async def get_devrel_job_listings(self):
-        """Get DevRel job listings using the async implementation."""
         try:
-            logger.info("Starting DevRel job listings fetch using async implementation")
-            return await self.get_job_listings_async()
+            # Create a new event loop instead of getting the current one
+            loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(loop)
+            
+            try:
+                # Run scraping
+                results = loop.run_until_complete(self.scrape_all_async())
+            finally:
+                # Always close the loop to prevent warnings
+                loop.close()
+            
+            # Load existing resources
+            existing = self._load_existing_resources()
+            
+            # Merge new resources with existing ones
+            merged = self.append_resources(results, existing)
+            
+            # Save GitHub results
+            github_path = os.path.join(self.data_dir, 'github_results.json')
+            with open(github_path, 'w', encoding='utf-8') as f:
+                json.dump(merged['github_programs'], f, indent=2)
+            
+            # Save blog posts
+            blogs_path = os.path.join(self.data_dir, 'blog_results.json')
+            with open(blogs_path, 'w', encoding='utf-8') as f:
+                json.dump(merged['blog_posts'], f, indent=2)
+            
+            # Save job listings
+            jobs_path = os.path.join(self.data_dir, 'job_results.json')
+            with open(jobs_path, 'w', encoding='utf-8') as f:
+                # Deduplicate one final time before saving
+                job_dict = {}
+                for job in merged['job_listings']:
+                    key = (job.get('company', ''), job.get('title', ''))
+                    if key not in job_dict:
+                        if 'location' in job and 'locations' not in job:
+                            job['locations'] = [job['location']]
+                            job.pop('location', None)
+                        job_dict[key] = job
+                    else:
+                        existing_job = job_dict[key]
+                        if 'location' in job:
+                            locations = set(existing_job.get('locations', []))
+                            locations.add(job['location'])
+                            existing_job['locations'] = sorted(list(locations))
+                
+                # Convert back to list and sort by added_at
+                final_jobs = sorted(
+                    job_dict.values(),
+                    key=lambda x: x.get('added_at', ''),
+                    reverse=True
+                )
+                json.dump(final_jobs, f, indent=2)
+            
+            return merged
+            
         except Exception as e:
-            logger.error(f"Error in get_devrel_job_listings: {str(e)}")
-            return []
+            logger.error(f"Error in scrape_all: {str(e)}")
+            return self._load_existing_resources()
 
     def _load_existing_resources(self) -> Dict:
         """Load existing resources from JSON files."""
@@ -558,14 +782,49 @@ class DevRelScraper:
             try:
                 if os.path.exists(file_path):
                     with open(file_path, 'r') as f:
-                        resources[resource_type] = json.load(f)
+                        data = json.load(f)
+                        if resource_type == 'job_listings':
+                            # Migrate existing job listings to new format
+                            job_dict = {}
+                            for job in data:
+                                key = (job.get('company', ''), job.get('title', ''))
+                                if key not in job_dict:
+                                    if 'location' in job and 'locations' not in job:
+                                        job['locations'] = [job['location']]
+                                        job.pop('location', None)
+                                    job_dict[key] = job
+                                else:
+                                    existing_job = job_dict[key]
+                                    if 'location' in job:
+                                        locations = set(existing_job.get('locations', []))
+                                        locations.add(job['location'])
+                                        existing_job['locations'] = sorted(list(locations))
+                            resources[resource_type] = sorted(
+                                job_dict.values(),
+                                key=lambda x: x.get('added_at', ''),
+                                reverse=True
+                            )
+                        else:
+                            resources[resource_type] = data
                     logger.info(f"Loaded {len(resources[resource_type])} existing {resource_type}")
             except Exception as e:
                 logger.error(f"Error loading {filename}: {str(e)}")
-                # Continue with empty list if file can't be loaded
                 resources[resource_type] = []
 
         return resources
+
+    def _normalize_string(self, s: str) -> str:
+        """Normalize a string for comparison by removing special characters and converting to lowercase."""
+        if not s:
+            return ''
+        # Remove special characters and convert to lowercase
+        return ''.join(c.lower() for c in s if c.isalnum())
+
+    def _get_job_key(self, job: Dict) -> tuple:
+        """Get a normalized key for job deduplication."""
+        company = self._normalize_string(job.get('company', ''))
+        title = self._normalize_string(job.get('title', ''))
+        return (company, title)
 
     def append_resources(self, new_resources: Dict, existing_resources: Dict) -> Dict:
         """Append new resources to existing ones without duplicates."""
@@ -576,32 +835,111 @@ class DevRelScraper:
                 merged[resource_type] = []
 
             if resource_type in new_resources:
-                # Create unique identifier based on URL
-                existing_urls = {item.get('url') for item in merged[resource_type]}
+                # Add timestamp to new resources
+                current_time = datetime.utcnow().isoformat()
+                for resource in new_resources[resource_type]:
+                    if not resource.get('added_at'):  # Only add timestamp if not already present
+                        resource['added_at'] = current_time
 
-                # Only append items with new URLs
-                new_items = [
-                    item for item in new_resources[resource_type]
-                    if item.get('url') and item['url'] not in existing_urls
-                ]
-
-                # Add timestamp for tracking
-                for item in new_items:
-                    item['added_at'] = datetime.utcnow().isoformat()
-
-                merged[resource_type].extend(new_items)
-
-                # Save the updated resources
-                output_file = os.path.join(
-                    self.data_dir,
-                    f"{resource_type.replace('_programs', '_results')}.json"
-                )
-                with open(output_file, 'w') as f:
-                    json.dump(merged[resource_type], f, indent=2)
-
-                logger.info(f"Appended {len(new_items)} new items to {resource_type}")
+                if resource_type == 'job_listings':
+                    # For job listings, deduplicate based on normalized company and title
+                    job_dict = {}
+                    
+                    # First process existing jobs
+                    for job in merged[resource_type]:
+                        key = self._get_job_key(job)
+                        if key not in job_dict:
+                            if 'location' in job and 'locations' not in job:
+                                job['locations'] = [job['location']]
+                                job.pop('location', None)
+                            job_dict[key] = job
+                        else:
+                            existing_job = job_dict[key]
+                            if 'location' in job:
+                                locations = set(existing_job.get('locations', []))
+                                locations.add(job['location'])
+                                existing_job['locations'] = sorted(list(locations))
+                                job.pop('location', None)
+                    
+                    # Then process new jobs
+                    for job in new_resources[resource_type]:
+                        key = self._get_job_key(job)
+                        if key not in job_dict:
+                            if 'location' in job and 'locations' not in job:
+                                job['locations'] = [job['location']]
+                                job.pop('location', None)
+                            job_dict[key] = job
+                        else:
+                            existing_job = job_dict[key]
+                            if 'location' in job:
+                                locations = set(existing_job.get('locations', []))
+                                locations.add(job['location'])
+                                existing_job['locations'] = sorted(list(locations))
+                                job.pop('location', None)
+                    
+                    # Convert back to list and sort
+                    merged[resource_type] = sorted(
+                        job_dict.values(),
+                        key=lambda x: x.get('added_at', ''),
+                        reverse=True
+                    )
+                else:
+                    # For other resource types, deduplicate based on URL
+                    existing_urls = {r.get('url', '') for r in merged[resource_type]}
+                    new_items = [
+                        r for r in new_resources[resource_type]
+                        if r.get('url', '') and r.get('url', '') not in existing_urls
+                    ]
+                    merged[resource_type].extend(new_items)
+                    
+                    # Sort GitHub programs by stars, others by added_at
+                    if resource_type == 'github_programs':
+                        merged[resource_type].sort(
+                            key=lambda x: x.get('stars', 0),
+                            reverse=True
+                        )
+                    else:
+                        merged[resource_type].sort(
+                            key=lambda x: x.get('added_at', ''),
+                            reverse=True
+                        )
+                
+                logger.info(f"Added {len(new_items if resource_type != 'job_listings' else new_resources[resource_type])} new {resource_type}")
 
         return merged
+
+    def save_resources(self, resources_type: str, resources: list):
+        """Save resources to a JSON file."""
+        file_path = os.path.join(self.data_dir, f'{resources_type}_results.json')
+        
+        # Load existing resources
+        existing_resources = []
+        if os.path.exists(file_path):
+            with open(file_path, 'r') as f:
+                existing_resources = json.load(f)
+                
+        logger.info(f"Loaded {len(existing_resources)} existing {resources_type}")
+        
+        # Add new resources
+        existing_urls = {r['url'] for r in existing_resources}
+        new_resources = [r for r in resources if r['url'] not in existing_urls]
+        logger.info(f"Added {len(new_resources)} new {resources_type}")
+        
+        # Combine all resources
+        all_resources = existing_resources + new_resources
+        
+        # Save all resources
+        with open(file_path, 'w') as f:
+            json.dump(all_resources, f, indent=2)
+
+    async def get_devrel_job_listings(self):
+        """Get DevRel job listings using the async implementation."""
+        try:
+            logger.info("Starting DevRel job listings fetch using async implementation")
+            return await self.get_job_listings_async()
+        except Exception as e:
+            logger.error(f"Error in get_devrel_job_listings: {str(e)}")
+            return []
 
 def main():
     """Main function to run the scraper and save results."""
