@@ -10,391 +10,391 @@
             "role": "Junior Developer Advocate",
             "category": "Technical",
             "skill": "API Design",
-            "value": 39
-        },
-        {
-            "role": "Junior Developer Advocate",
-            "category": "Technical",
-            "skill": "Documentation",
-            "value": 48
-        },
-        {
-            "role": "Junior Developer Advocate",
-            "category": "Technical",
-            "skill": "Technical Writing",
             "value": 35
         },
         {
             "role": "Junior Developer Advocate",
             "category": "Technical",
+            "skill": "Documentation",
+            "value": 36
+        },
+        {
+            "role": "Junior Developer Advocate",
+            "category": "Technical",
+            "skill": "Technical Writing",
+            "value": 45
+        },
+        {
+            "role": "Junior Developer Advocate",
+            "category": "Technical",
             "skill": "System Architecture",
-            "value": 37
+            "value": 30
         },
         {
             "role": "Junior Developer Advocate",
             "category": "Communication",
             "skill": "Public Speaking",
-            "value": 34
+            "value": 36
         },
         {
             "role": "Junior Developer Advocate",
             "category": "Communication",
             "skill": "Technical Presentations",
-            "value": 39
+            "value": 40
         },
         {
             "role": "Junior Developer Advocate",
             "category": "Communication",
             "skill": "Blog Writing",
-            "value": 30
+            "value": 47
         },
         {
             "role": "Junior Developer Advocate",
             "category": "Communication",
             "skill": "Social Media",
-            "value": 38
+            "value": 31
         },
         {
             "role": "Junior Developer Advocate",
             "category": "Communication",
             "skill": "Workshop Facilitation",
-            "value": 39
+            "value": 49
         },
         {
             "role": "Junior Developer Advocate",
             "category": "Community",
             "skill": "Community Building",
-            "value": 45
+            "value": 31
         },
         {
             "role": "Junior Developer Advocate",
             "category": "Community",
             "skill": "Event Management",
-            "value": 49
+            "value": 38
         },
         {
             "role": "Junior Developer Advocate",
             "category": "Community",
             "skill": "Developer Support",
-            "value": 40
+            "value": 31
         },
         {
             "role": "Junior Developer Advocate",
             "category": "Community",
             "skill": "Program Development",
-            "value": 30
+            "value": 40
         },
         {
             "role": "Junior Developer Advocate",
             "category": "Community",
             "skill": "Metrics & Analytics",
-            "value": 49
+            "value": 45
         },
         {
             "role": "Junior Developer Advocate",
             "category": "Leadership",
             "skill": "Strategy Development",
-            "value": 40
+            "value": 32
         },
         {
             "role": "Junior Developer Advocate",
             "category": "Leadership",
             "skill": "Team Management",
-            "value": 43
+            "value": 40
         },
         {
             "role": "Junior Developer Advocate",
             "category": "Leadership",
             "skill": "Budget Planning",
-            "value": 43
+            "value": 38
         },
         {
             "role": "Junior Developer Advocate",
             "category": "Leadership",
             "skill": "Stakeholder Management",
-            "value": 34
+            "value": 37
         },
         {
             "role": "Junior Developer Advocate",
             "category": "Leadership",
             "skill": "Cross-team Collaboration",
-            "value": 39
+            "value": 49
         },
         {
             "role": "Senior Developer Advocate",
             "category": "Technical",
             "skill": "Programming",
-            "value": 65
+            "value": 61
         },
         {
             "role": "Senior Developer Advocate",
             "category": "Technical",
             "skill": "API Design",
-            "value": 73
+            "value": 60
         },
         {
             "role": "Senior Developer Advocate",
             "category": "Technical",
             "skill": "Documentation",
-            "value": 74
+            "value": 66
         },
         {
             "role": "Senior Developer Advocate",
             "category": "Technical",
             "skill": "Technical Writing",
-            "value": 65
+            "value": 66
         },
         {
             "role": "Senior Developer Advocate",
             "category": "Technical",
             "skill": "System Architecture",
-            "value": 65
+            "value": 71
         },
         {
             "role": "Senior Developer Advocate",
             "category": "Communication",
             "skill": "Public Speaking",
-            "value": 68
+            "value": 64
         },
         {
             "role": "Senior Developer Advocate",
+            "category": "Communication",
+            "skill": "Technical Presentations",
+            "value": 77
+        },
+        {
+            "role": "Senior Developer Advocate",
+            "category": "Communication",
+            "skill": "Blog Writing",
+            "value": 61
+        },
+        {
+            "role": "Senior Developer Advocate",
+            "category": "Communication",
+            "skill": "Social Media",
+            "value": 73
+        },
+        {
+            "role": "Senior Developer Advocate",
+            "category": "Communication",
+            "skill": "Workshop Facilitation",
+            "value": 75
+        },
+        {
+            "role": "Senior Developer Advocate",
+            "category": "Community",
+            "skill": "Community Building",
+            "value": 63
+        },
+        {
+            "role": "Senior Developer Advocate",
+            "category": "Community",
+            "skill": "Event Management",
+            "value": 69
+        },
+        {
+            "role": "Senior Developer Advocate",
+            "category": "Community",
+            "skill": "Developer Support",
+            "value": 79
+        },
+        {
+            "role": "Senior Developer Advocate",
+            "category": "Community",
+            "skill": "Program Development",
+            "value": 72
+        },
+        {
+            "role": "Senior Developer Advocate",
+            "category": "Community",
+            "skill": "Metrics & Analytics",
+            "value": 62
+        },
+        {
+            "role": "Senior Developer Advocate",
+            "category": "Leadership",
+            "skill": "Strategy Development",
+            "value": 77
+        },
+        {
+            "role": "Senior Developer Advocate",
+            "category": "Leadership",
+            "skill": "Team Management",
+            "value": 66
+        },
+        {
+            "role": "Senior Developer Advocate",
+            "category": "Leadership",
+            "skill": "Budget Planning",
+            "value": 72
+        },
+        {
+            "role": "Senior Developer Advocate",
+            "category": "Leadership",
+            "skill": "Stakeholder Management",
+            "value": 65
+        },
+        {
+            "role": "Senior Developer Advocate",
+            "category": "Leadership",
+            "skill": "Cross-team Collaboration",
+            "value": 76
+        },
+        {
+            "role": "Technical Community Manager",
+            "category": "Technical",
+            "skill": "Programming",
+            "value": 62
+        },
+        {
+            "role": "Technical Community Manager",
+            "category": "Technical",
+            "skill": "API Design",
+            "value": 62
+        },
+        {
+            "role": "Technical Community Manager",
+            "category": "Technical",
+            "skill": "Documentation",
+            "value": 69
+        },
+        {
+            "role": "Technical Community Manager",
+            "category": "Technical",
+            "skill": "Technical Writing",
+            "value": 60
+        },
+        {
+            "role": "Technical Community Manager",
+            "category": "Technical",
+            "skill": "System Architecture",
+            "value": 65
+        },
+        {
+            "role": "Technical Community Manager",
+            "category": "Communication",
+            "skill": "Public Speaking",
+            "value": 62
+        },
+        {
+            "role": "Technical Community Manager",
             "category": "Communication",
             "skill": "Technical Presentations",
             "value": 63
         },
         {
-            "role": "Senior Developer Advocate",
+            "role": "Technical Community Manager",
             "category": "Communication",
             "skill": "Blog Writing",
-            "value": 75
+            "value": 59
         },
         {
-            "role": "Senior Developer Advocate",
+            "role": "Technical Community Manager",
             "category": "Communication",
             "skill": "Social Media",
-            "value": 66
+            "value": 53
         },
         {
-            "role": "Senior Developer Advocate",
+            "role": "Technical Community Manager",
             "category": "Communication",
             "skill": "Workshop Facilitation",
-            "value": 61
+            "value": 62
         },
         {
-            "role": "Senior Developer Advocate",
+            "role": "Technical Community Manager",
             "category": "Community",
             "skill": "Community Building",
-            "value": 77
+            "value": 53
         },
         {
-            "role": "Senior Developer Advocate",
+            "role": "Technical Community Manager",
             "category": "Community",
             "skill": "Event Management",
-            "value": 69
+            "value": 65
         },
         {
-            "role": "Senior Developer Advocate",
+            "role": "Technical Community Manager",
             "category": "Community",
             "skill": "Developer Support",
-            "value": 72
+            "value": 65
         },
         {
-            "role": "Senior Developer Advocate",
+            "role": "Technical Community Manager",
             "category": "Community",
             "skill": "Program Development",
-            "value": 79
-        },
-        {
-            "role": "Senior Developer Advocate",
-            "category": "Community",
-            "skill": "Metrics & Analytics",
-            "value": 72
-        },
-        {
-            "role": "Senior Developer Advocate",
-            "category": "Leadership",
-            "skill": "Strategy Development",
-            "value": 70
-        },
-        {
-            "role": "Senior Developer Advocate",
-            "category": "Leadership",
-            "skill": "Team Management",
-            "value": 78
-        },
-        {
-            "role": "Senior Developer Advocate",
-            "category": "Leadership",
-            "skill": "Budget Planning",
-            "value": 79
-        },
-        {
-            "role": "Senior Developer Advocate",
-            "category": "Leadership",
-            "skill": "Stakeholder Management",
-            "value": 69
-        },
-        {
-            "role": "Senior Developer Advocate",
-            "category": "Leadership",
-            "skill": "Cross-team Collaboration",
-            "value": 70
-        },
-        {
-            "role": "Technical Community Manager",
-            "category": "Technical",
-            "skill": "Programming",
-            "value": 52
-        },
-        {
-            "role": "Technical Community Manager",
-            "category": "Technical",
-            "skill": "API Design",
-            "value": 68
-        },
-        {
-            "role": "Technical Community Manager",
-            "category": "Technical",
-            "skill": "Documentation",
-            "value": 61
-        },
-        {
-            "role": "Technical Community Manager",
-            "category": "Technical",
-            "skill": "Technical Writing",
-            "value": 56
-        },
-        {
-            "role": "Technical Community Manager",
-            "category": "Technical",
-            "skill": "System Architecture",
-            "value": 64
-        },
-        {
-            "role": "Technical Community Manager",
-            "category": "Communication",
-            "skill": "Public Speaking",
-            "value": 54
-        },
-        {
-            "role": "Technical Community Manager",
-            "category": "Communication",
-            "skill": "Technical Presentations",
-            "value": 60
-        },
-        {
-            "role": "Technical Community Manager",
-            "category": "Communication",
-            "skill": "Blog Writing",
-            "value": 52
-        },
-        {
-            "role": "Technical Community Manager",
-            "category": "Communication",
-            "skill": "Social Media",
-            "value": 68
-        },
-        {
-            "role": "Technical Community Manager",
-            "category": "Communication",
-            "skill": "Workshop Facilitation",
-            "value": 56
-        },
-        {
-            "role": "Technical Community Manager",
-            "category": "Community",
-            "skill": "Community Building",
-            "value": 57
-        },
-        {
-            "role": "Technical Community Manager",
-            "category": "Community",
-            "skill": "Event Management",
             "value": 59
         },
         {
             "role": "Technical Community Manager",
             "category": "Community",
-            "skill": "Developer Support",
-            "value": 54
-        },
-        {
-            "role": "Technical Community Manager",
-            "category": "Community",
-            "skill": "Program Development",
-            "value": 50
-        },
-        {
-            "role": "Technical Community Manager",
-            "category": "Community",
             "skill": "Metrics & Analytics",
-            "value": 53
+            "value": 67
         },
         {
             "role": "Technical Community Manager",
             "category": "Leadership",
             "skill": "Strategy Development",
-            "value": 54
+            "value": 68
         },
         {
             "role": "Technical Community Manager",
             "category": "Leadership",
             "skill": "Team Management",
-            "value": 62
+            "value": 67
         },
         {
             "role": "Technical Community Manager",
             "category": "Leadership",
             "skill": "Budget Planning",
-            "value": 56
+            "value": 57
         },
         {
             "role": "Technical Community Manager",
             "category": "Leadership",
             "skill": "Stakeholder Management",
-            "value": 58
+            "value": 55
         },
         {
             "role": "Technical Community Manager",
             "category": "Leadership",
             "skill": "Cross-team Collaboration",
-            "value": 63
+            "value": 52
         },
         {
             "role": "DevRel Program Manager",
             "category": "Technical",
             "skill": "Programming",
-            "value": 70
+            "value": 66
         },
         {
             "role": "DevRel Program Manager",
             "category": "Technical",
             "skill": "API Design",
-            "value": 74
+            "value": 84
         },
         {
             "role": "DevRel Program Manager",
             "category": "Technical",
             "skill": "Documentation",
-            "value": 76
+            "value": 75
         },
         {
             "role": "DevRel Program Manager",
             "category": "Technical",
             "skill": "Technical Writing",
-            "value": 79
+            "value": 70
         },
         {
             "role": "DevRel Program Manager",
             "category": "Technical",
             "skill": "System Architecture",
-            "value": 76
+            "value": 70
         },
         {
             "role": "DevRel Program Manager",
             "category": "Communication",
             "skill": "Public Speaking",
-            "value": 84
+            "value": 78
         },
         {
             "role": "DevRel Program Manager",
@@ -406,7 +406,7 @@
             "role": "DevRel Program Manager",
             "category": "Communication",
             "skill": "Blog Writing",
-            "value": 77
+            "value": 80
         },
         {
             "role": "DevRel Program Manager",
@@ -418,145 +418,145 @@
             "role": "DevRel Program Manager",
             "category": "Communication",
             "skill": "Workshop Facilitation",
-            "value": 66
+            "value": 76
         },
         {
             "role": "DevRel Program Manager",
             "category": "Community",
             "skill": "Community Building",
-            "value": 66
+            "value": 74
         },
         {
             "role": "DevRel Program Manager",
             "category": "Community",
             "skill": "Event Management",
-            "value": 71
+            "value": 78
         },
         {
             "role": "DevRel Program Manager",
             "category": "Community",
             "skill": "Developer Support",
-            "value": 75
+            "value": 78
         },
         {
             "role": "DevRel Program Manager",
             "category": "Community",
             "skill": "Program Development",
-            "value": 84
+            "value": 80
         },
         {
             "role": "DevRel Program Manager",
             "category": "Community",
             "skill": "Metrics & Analytics",
-            "value": 70
+            "value": 68
         },
         {
             "role": "DevRel Program Manager",
             "category": "Leadership",
             "skill": "Strategy Development",
-            "value": 77
+            "value": 67
         },
         {
             "role": "DevRel Program Manager",
             "category": "Leadership",
             "skill": "Team Management",
-            "value": 66
+            "value": 65
         },
         {
             "role": "DevRel Program Manager",
             "category": "Leadership",
             "skill": "Budget Planning",
-            "value": 80
+            "value": 79
         },
         {
             "role": "DevRel Program Manager",
             "category": "Leadership",
             "skill": "Stakeholder Management",
-            "value": 74
+            "value": 69
         },
         {
             "role": "DevRel Program Manager",
             "category": "Leadership",
             "skill": "Cross-team Collaboration",
-            "value": 83
+            "value": 71
         },
         {
             "role": "Head of Developer Relations",
             "category": "Technical",
             "skill": "Programming",
-            "value": 90
-        },
-        {
-            "role": "Head of Developer Relations",
-            "category": "Technical",
-            "skill": "API Design",
             "value": 89
         },
         {
             "role": "Head of Developer Relations",
             "category": "Technical",
+            "skill": "API Design",
+            "value": 86
+        },
+        {
+            "role": "Head of Developer Relations",
+            "category": "Technical",
             "skill": "Documentation",
-            "value": 84
+            "value": 90
         },
         {
             "role": "Head of Developer Relations",
             "category": "Technical",
             "skill": "Technical Writing",
-            "value": 83
+            "value": 91
         },
         {
             "role": "Head of Developer Relations",
             "category": "Technical",
             "skill": "System Architecture",
-            "value": 91
+            "value": 75
         },
         {
             "role": "Head of Developer Relations",
             "category": "Communication",
             "skill": "Public Speaking",
-            "value": 91
+            "value": 90
         },
         {
             "role": "Head of Developer Relations",
             "category": "Communication",
             "skill": "Technical Presentations",
-            "value": 83
+            "value": 92
         },
         {
             "role": "Head of Developer Relations",
             "category": "Communication",
             "skill": "Blog Writing",
-            "value": 76
+            "value": 88
         },
         {
             "role": "Head of Developer Relations",
             "category": "Communication",
             "skill": "Social Media",
-            "value": 83
+            "value": 78
         },
         {
             "role": "Head of Developer Relations",
             "category": "Communication",
             "skill": "Workshop Facilitation",
-            "value": 79
+            "value": 92
         },
         {
             "role": "Head of Developer Relations",
             "category": "Community",
             "skill": "Community Building",
-            "value": 78
+            "value": 83
         },
         {
             "role": "Head of Developer Relations",
             "category": "Community",
             "skill": "Event Management",
-            "value": 75
+            "value": 85
         },
         {
             "role": "Head of Developer Relations",
             "category": "Community",
             "skill": "Developer Support",
-            "value": 81
+            "value": 78
         },
         {
             "role": "Head of Developer Relations",
@@ -568,37 +568,37 @@
             "role": "Head of Developer Relations",
             "category": "Community",
             "skill": "Metrics & Analytics",
-            "value": 88
+            "value": 78
         },
         {
             "role": "Head of Developer Relations",
             "category": "Leadership",
             "skill": "Strategy Development",
-            "value": 80
+            "value": 83
         },
         {
             "role": "Head of Developer Relations",
             "category": "Leadership",
             "skill": "Team Management",
-            "value": 89
+            "value": 82
         },
         {
             "role": "Head of Developer Relations",
             "category": "Leadership",
             "skill": "Budget Planning",
-            "value": 93
+            "value": 82
         },
         {
             "role": "Head of Developer Relations",
             "category": "Leadership",
             "skill": "Stakeholder Management",
-            "value": 75
+            "value": 84
         },
         {
             "role": "Head of Developer Relations",
             "category": "Leadership",
             "skill": "Cross-team Collaboration",
-            "value": 91
+            "value": 86
         }
     ],
     "roles": [
