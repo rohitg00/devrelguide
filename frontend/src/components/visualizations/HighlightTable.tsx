@@ -1,8 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
-import * as d3 from 'd3'
-import { Card } from '@/components/ui/card'
+import { VisualizationContainer } from './VisualizationContainer'
 
 interface ResourceMetric {
   name: string
@@ -10,187 +9,228 @@ interface ResourceMetric {
   engagement: number
   growth: number
   impact: number
-  trends: number[]
+  trends: {
+    engagement: number
+    growth: number
+    impact: number
+  }
   comparisons: {
     industry: number
-    previous: number
+    target: number
   }
 }
 
 const resourceData: ResourceMetric[] = [
   {
-    name: 'Technical Documentation',
+    name: 'Documentation',
     category: 'Content',
     engagement: 85,
     growth: 12,
-    impact: 90,
-    trends: [82, 84, 83, 86, 85],
-    comparisons: { industry: 80, previous: 82 }
-  },
-  {
-    name: 'Community Forum',
-    category: 'Community',
-    engagement: 92,
-    growth: 15,
-    impact: 88,
-    trends: [88, 89, 90, 91, 92],
-    comparisons: { industry: 85, previous: 88 }
-  },
-  {
-    name: 'Developer Workshops',
-    category: 'Education',
-    engagement: 78,
-    growth: 8,
-    impact: 85,
-    trends: [75, 76, 78, 77, 78],
-    comparisons: { industry: 75, previous: 76 }
+    impact: 78,
+    trends: {
+      engagement: 5,
+      growth: 2,
+      impact: 3
+    },
+    comparisons: {
+      industry: 70,
+      target: 90
+    }
   },
   {
     name: 'API Reference',
     category: 'Technical',
-    engagement: 95,
-    growth: 5,
-    impact: 95,
-    trends: [92, 93, 94, 94, 95],
-    comparisons: { industry: 90, previous: 92 }
+    engagement: 92,
+    growth: 8,
+    impact: 85,
+    trends: {
+      engagement: 3,
+      growth: -1,
+      impact: 2
+    },
+    comparisons: {
+      industry: 80,
+      target: 95
+    }
   },
   {
     name: 'Blog Posts',
     category: 'Content',
-    engagement: 82,
+    engagement: 72,
+    growth: 15,
+    impact: 65,
+    trends: {
+      engagement: 8,
+      growth: 5,
+      impact: 7
+    },
+    comparisons: {
+      industry: 65,
+      target: 80
+    }
+  },
+  {
+    name: 'Sample Code',
+    category: 'Technical',
+    engagement: 88,
     growth: 10,
-    impact: 80,
-    trends: [78, 79, 80, 81, 82],
-    comparisons: { industry: 75, previous: 78 }
+    impact: 82,
+    trends: {
+      engagement: 4,
+      growth: 3,
+      impact: 5
+    },
+    comparisons: {
+      industry: 75,
+      target: 85
+    }
+  },
+  {
+    name: 'Tutorials',
+    category: 'Educational',
+    engagement: 80,
+    growth: 18,
+    impact: 75,
+    trends: {
+      engagement: 10,
+      growth: 8,
+      impact: 6
+    },
+    comparisons: {
+      industry: 68,
+      target: 82
+    }
+  },
+  {
+    name: 'Community Forum',
+    category: 'Community',
+    engagement: 65,
+    growth: 25,
+    impact: 70,
+    trends: {
+      engagement: 15,
+      growth: 12,
+      impact: 8
+    },
+    comparisons: {
+      industry: 60,
+      target: 75
+    }
   }
 ]
 
-function SparklineCell({ data }: { data: number[] }) {
-  const width = 60
-  const height = 20
-  const margin = { top: 2, right: 2, bottom: 2, left: 2 }
-
-  const xScale = d3.scaleLinear()
-    .domain([0, data.length - 1])
-    .range([margin.left, width - margin.right])
-
-  const yScale = d3.scaleLinear()
-    .domain([d3.min(data) || 0, d3.max(data) || 100])
-    .range([height - margin.bottom, margin.top])
-
-  const line = d3.line<number>()
-    .x((_, i) => xScale(i))
-    .y(d => yScale(d))
-    .curve(d3.curveMonotoneX)
-
-  return (
-    <svg width={width} height={height} className="inline-block ml-2">
-      <path
-        d={line(data) || ''}
-        fill="none"
-        stroke="currentColor"
-        strokeWidth={1.5}
-        className="text-primary"
-      />
-    </svg>
-  )
-}
-
-function getColorForMetric(value: number, type: 'engagement' | 'growth' | 'impact', comparisons?: { industry: number, previous: number }): string {
-  const thresholds = {
-    engagement: { high: 90, medium: 70, max: 100 },
-    growth: { high: 12, medium: 8, max: 15 },
-    impact: { high: 90, medium: 70, max: 100 }
+function getColorForMetric(value: number, type: 'engagement' | 'growth' | 'impact'): string {
+  const colors = {
+    engagement: ['#fee2e2', '#fecaca', '#fca5a5', '#f87171', '#ef4444', '#dc2626', '#b91c1c'],
+    growth: ['#dcfce7', '#bbf7d0', '#86efac', '#4ade80', '#22c55e', '#16a34a', '#15803d'],
+    impact: ['#dbeafe', '#bfdbfe', '#93c5fd', '#60a5fa', '#3b82f6', '#2563eb', '#1d4ed8']
   }
 
-  const { high, medium, max } = thresholds[type]
-
-  if (comparisons) {
-    const performanceRatio = (value - comparisons.industry) / (max - comparisons.industry)
-    return d3.scaleSequential()
-      .domain([0, 1])
-      .interpolator(performanceRatio > 0 ? d3.interpolateGnBu : d3.interpolateOrRd)(Math.abs(performanceRatio))
-  }
-
-  return d3.scaleSequential()
-    .domain([0, max])
-    .interpolator(d3.interpolateRdYlGn)(value)
+  const index = Math.min(Math.floor(value / 15), 6)
+  return colors[type][index]
 }
 
-function MetricCell({ value, type, label, trends, comparisons }: {
+interface MetricCellProps {
   value: number
   type: 'engagement' | 'growth' | 'impact'
   label: string
-  trends: number[]
-  comparisons: { industry: number, previous: number }
-}) {
-  const [showTooltip, setShowTooltip] = useState(false)
-  const improvement = ((value - comparisons.previous) / comparisons.previous * 100).toFixed(1)
-  const vsIndustry = ((value - comparisons.industry) / comparisons.industry * 100).toFixed(1)
+  trends: {
+    engagement: number
+    growth: number
+    impact: number
+  }
+  comparisons: {
+    industry: number
+    target: number
+  }
+}
+
+function MetricCell({ value, type, label, trends, comparisons }: MetricCellProps) {
+  const [showDetails, setShowDetails] = useState(false)
+  const trend = trends[type]
+  const industry = comparisons.industry
+  const target = comparisons.target
 
   return (
-    <td
-      className="px-4 py-3 text-sm font-medium relative group"
-      style={{ backgroundColor: getColorForMetric(value, type, comparisons) }}
-      role="cell"
-      aria-label={`${label}: ${value}%`}
-      onMouseEnter={() => setShowTooltip(true)}
-      onMouseLeave={() => setShowTooltip(false)}
+    <td 
+      className="p-2 border-t relative cursor-pointer"
+      onMouseEnter={() => setShowDetails(true)}
+      onMouseLeave={() => setShowDetails(false)}
     >
-      <div className="flex items-center justify-between">
+      <div className="flex items-center">
+        <div 
+          className="w-3 h-3 rounded-full mr-2" 
+          style={{ backgroundColor: getColorForMetric(value, type) }}
+        ></div>
         <span>{value}%</span>
-        <SparklineCell data={trends} />
-        {showTooltip && (
-          <div className="absolute z-10 bg-white p-3 rounded-lg shadow-lg -top-28 left-1/2 transform -translate-x-1/2 text-xs w-48">
-            <div className="font-semibold mb-1">{label}</div>
-            <div className="space-y-1">
-              <div>Current: {value}%</div>
-              <div className={improvement.startsWith('-') ? 'text-red-500' : 'text-green-500'}>
-                vs Previous: {improvement}%
-              </div>
-              <div className={vsIndustry.startsWith('-') ? 'text-red-500' : 'text-green-500'}>
-                vs Industry: {vsIndustry}%
+        <span className={`ml-2 text-xs ${trend >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+          {trend >= 0 ? '↑' : '↓'}{Math.abs(trend)}%
+        </span>
+      </div>
+      
+      {showDetails && (
+        <div className="absolute z-10 bg-white p-3 rounded-lg shadow-lg border text-xs -mt-1 left-full ml-2 w-48">
+          <div className="font-semibold mb-1">{label} Details</div>
+          <div className="space-y-2">
+            <div>
+              <div className="text-muted-foreground">Current Value</div>
+              <div className="font-medium">{value}%</div>
+            </div>
+            <div>
+              <div className="text-muted-foreground">Trend (30 days)</div>
+              <div className={`font-medium ${trend >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                {trend >= 0 ? '+' : ''}{trend}%
               </div>
             </div>
-            <div className="mt-2 text-xs text-gray-500">
-              Trend over last 5 periods
+            <div>
+              <div className="text-muted-foreground">Industry Average</div>
+              <div className="font-medium">{industry}%</div>
+              <div className="w-full bg-gray-200 h-1.5 rounded-full mt-1">
+                <div 
+                  className="bg-blue-400 h-1.5 rounded-full" 
+                  style={{ width: `${industry}%` }}
+                ></div>
+              </div>
+            </div>
+            <div>
+              <div className="text-muted-foreground">Target</div>
+              <div className="font-medium">{target}%</div>
+              <div className="w-full bg-gray-200 h-1.5 rounded-full mt-1">
+                <div 
+                  className="bg-green-400 h-1.5 rounded-full" 
+                  style={{ width: `${target}%` }}
+                ></div>
+              </div>
             </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </td>
   )
 }
 
 export function HighlightTable() {
   return (
-    <Card className="w-full overflow-hidden">
-      <div className="p-4 border-b">
-        <h3 className="text-lg font-semibold">DevRel Resource Performance</h3>
-        <p className="text-sm text-gray-500 mt-1">
-          Interactive metrics with trends and industry comparisons
-        </p>
-      </div>
-      <div className="overflow-x-auto">
-        <table
-          className="min-w-full divide-y divide-border"
-          role="table"
-          aria-label="DevRel Resource Metrics"
-        >
+    <VisualizationContainer
+      title="DevRel Metrics Highlight Table"
+      description="Visualization of key DevRel metrics with color-coded performance indicators"
+    >
+      <div className="w-full overflow-auto">
+        <table className="w-full border-collapse">
           <thead>
             <tr className="bg-muted/50">
-              <th scope="col" className="px-4 py-3 text-left text-sm font-medium text-muted-foreground">Resource</th>
-              <th scope="col" className="px-4 py-3 text-left text-sm font-medium text-muted-foreground">Category</th>
-              <th scope="col" className="px-4 py-3 text-left text-sm font-medium text-muted-foreground">Engagement</th>
-              <th scope="col" className="px-4 py-3 text-left text-sm font-medium text-muted-foreground">Growth</th>
-              <th scope="col" className="px-4 py-3 text-left text-sm font-medium text-muted-foreground">Impact</th>
+              <th className="p-2 text-left font-medium text-muted-foreground">Resource</th>
+              <th className="p-2 text-left font-medium text-muted-foreground">Category</th>
+              <th className="p-2 text-left font-medium text-muted-foreground">Engagement</th>
+              <th className="p-2 text-left font-medium text-muted-foreground">Growth</th>
+              <th className="p-2 text-left font-medium text-muted-foreground">Impact</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-border bg-background">
-            {resourceData.map((resource, idx) => (
-              <tr key={idx} className="hover:bg-muted/50 transition-colors">
-                <td className="px-4 py-3 text-sm">{resource.name}</td>
-                <td className="px-4 py-3 text-sm">{resource.category}</td>
+          <tbody>
+            {resourceData.map((resource, i) => (
+              <tr key={i} className={i % 2 === 0 ? 'bg-background' : 'bg-muted/20'}>
+                <td className="p-2 border-t">{resource.name}</td>
+                <td className="p-2 border-t">{resource.category}</td>
                 <MetricCell
                   value={resource.engagement}
                   type="engagement"
@@ -217,7 +257,7 @@ export function HighlightTable() {
           </tbody>
         </table>
       </div>
-    </Card>
+    </VisualizationContainer>
   )
 }
 

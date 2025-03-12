@@ -1,173 +1,268 @@
 'use client'
 
-import React, { useEffect, useState, Suspense } from 'react'
-import dynamic from 'next/dynamic'
-import {
-  Tooltip,
-  Rectangle,
-  Layer
-} from 'recharts'
+import React, { useRef, useMemo } from 'react'
+import { ResponsiveTreeMap } from '@nivo/treemap'
+import { useFetchVisualization } from '@/lib/use-fetch-visualization'
+import { getFallbackData } from '@/lib/visualization-utils'
+import { useResponsiveVisualizationSize } from '@/lib/use-responsive-visualization-size'
 
-// Dynamically import Sankey and ResponsiveContainer with no SSR
-const Sankey = dynamic(
-  () => import('recharts').then((mod) => mod.Sankey),
-  { ssr: false }
-)
-
-const ResponsiveContainer = dynamic(
-  () => import('recharts').then((mod) => mod.ResponsiveContainer),
-  { ssr: false }
-)
-
+// Type definitions for visualization
 interface JourneyNode {
+  id: string
   name: string
   value: number
-  category: 'discovery' | 'learning' | 'building' | 'contributing' | 'leading'
+  children?: JourneyNode[]
 }
 
-interface JourneyPayload extends JourneyNode {
-  x: number
-  y: number
-  width: number
-  height: number
-  index: number
+interface CustomData {
+  name: string
+  children: JourneyNode[]
 }
 
-interface JourneyLink {
-  source: number
-  target: number
-  value: number
+// Type definitions for incoming data from customizer
+interface JourneyStep {
+  id: string;
+  stepId: string;
+  title: string;
+  description: string;
+  metrics: {
+    engagement: number;
+    conversion: number;
+    satisfaction: number;
+  };
+  content: string[];
 }
 
 interface JourneyData {
-  nodes: JourneyNode[]
-  links: JourneyLink[]
+  stages: JourneyStep[];
 }
 
-const COLORS = {
-  discovery: '#3B82F6',  // Blue
-  learning: '#10B981',   // Emerald
-  building: '#F59E0B',   // Amber
-  contributing: '#8B5CF6', // Purple
-  leading: '#EC4899'     // Pink
+interface DeveloperJourneyProps {
+  customData?: JourneyData;
+  showLabels?: boolean;
 }
 
-const LoadingSpinner = () => (
-  <div className="w-full h-[600px] p-4 flex items-center justify-center">
-    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900" />
-  </div>
-)
+// Sample data for the developer journey
+const sampleData: JourneyData = {
+  stages: [
+    {
+      id: "awareness-1",
+      stepId: "awareness",
+      title: "Discovery",
+      description: "Developers discover your product through various channels",
+      metrics: {
+        engagement: 70,
+        conversion: 30,
+        satisfaction: 60
+      },
+      content: [
+        "Blog posts",
+        "Social media",
+        "Developer events",
+        "Word of mouth"
+      ]
+    },
+    {
+      id: "evaluation-1",
+      stepId: "evaluation",
+      title: "Evaluation",
+      description: "Developers evaluate if your product meets their needs",
+      metrics: {
+        engagement: 60,
+        conversion: 40,
+        satisfaction: 55
+      },
+      content: [
+        "Documentation",
+        "Tutorials",
+        "Sample code",
+        "Community forums"
+      ]
+    },
+    {
+      id: "activation-1",
+      stepId: "activation",
+      title: "Getting Started",
+      description: "Developers begin using your product for the first time",
+      metrics: {
+        engagement: 50,
+        conversion: 60,
+        satisfaction: 70
+      },
+      content: [
+        "Quickstart guides",
+        "Interactive demos",
+        "Setup wizards",
+        "Video walkthroughs"
+      ]
+    },
+    {
+      id: "usage-1",
+      stepId: "usage",
+      title: "Regular Usage",
+      description: "Developers use your product as part of their workflow",
+      metrics: {
+        engagement: 80,
+        conversion: 75,
+        satisfaction: 75
+      },
+      content: [
+        "API references",
+        "Advanced tutorials",
+        "Use case examples",
+        "Support channels"
+      ]
+    },
+    {
+      id: "advocacy-1",
+      stepId: "advocacy",
+      title: "Advocacy",
+      description: "Developers become advocates for your product",
+      metrics: {
+        engagement: 90,
+        conversion: 85,
+        satisfaction: 90
+      },
+      content: [
+        "Community contributions",
+        "Speaking at events",
+        "Creating content",
+        "Referring others"
+      ]
+    }
+  ]
+};
 
-const ErrorDisplay = ({ message }: { message: string }) => (
-  <div className="w-full h-[600px] p-4 flex items-center justify-center">
-    <div className="text-red-500">Error: {message}</div>
-  </div>
-)
+// Color mapping for journey steps
+const colorMapping = {
+  'awareness': '#FF6F61',   // Coral red
+  'evaluation': '#6B5B95',  // Purple
+  'activation': '#88B04B',  // Green
+  'usage': '#FCBF49',       // Yellow
+  'advocacy': '#51DACF',    // Teal
+  'other': '#5D5C61'        // Gray
+};
 
-const NoDataDisplay = () => (
-  <div className="w-full h-[600px] p-4 flex items-center justify-center">
-    <div className="text-gray-500">No data available</div>
-  </div>
-)
-
-export function DeveloperJourney() {
-  const [data, setData] = useState<JourneyData | null>(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
-        const response = await fetch(`${apiUrl}/api/visualizations/developer-journey`)
-        if (!response.ok) {
-          throw new Error('Failed to fetch journey data')
+// Transform customizer data to treemap data
+function transformToTreemapData(data: JourneyData): CustomData {
+  return {
+    name: "Developer Journey",
+    children: data.stages.map(stage => {
+      // Calculate the average score for sizing
+      const avgMetric = (stage.metrics.engagement + stage.metrics.conversion + stage.metrics.satisfaction) / 3;
+      
+      return {
+        id: stage.id,
+        name: stage.title,
+        value: avgMetric,
+        stepType: stage.stepId,
+        data: {
+          description: stage.description,
+          metrics: stage.metrics,
+          content: stage.content
         }
-        const journeyData = await response.json()
-        setData(journeyData)
-      } catch (err) {
-        console.error('Error fetching journey data:', err)
-        setError(err instanceof Error ? err.message : 'Failed to load data')
-      } finally {
-        setLoading(false)
-      }
-    }
+      };
+    })
+  };
+}
 
-    fetchData()
-  }, [])
+// Get node color based on id (which contains step type)
+function getNodeColor(id: string, data: JourneyData): string {
+  const step = data.stages.find(s => s.id === id);
+  if (!step) return colorMapping['other'];
+  return colorMapping[step.stepId as keyof typeof colorMapping] || colorMapping['other'];
+}
 
-  if (loading) return <LoadingSpinner />
-  if (error) return <ErrorDisplay message={error} />
-  if (!data) return <NoDataDisplay />
-
-  const renderNode = ({ x, y, width, height, index, payload }: {
-    x: number
-    y: number
-    width: number
-    height: number
-    index: number
-    payload: JourneyPayload
-  }) => (
-    <Rectangle
-      x={x}
-      y={y}
-      width={width}
-      height={height}
-      fill={COLORS[payload.category]}
-      fillOpacity={0.9}
-    >
-      <text
-        x={x + width / 2}
-        y={y + height / 2}
-        textAnchor="middle"
-        fill="#fff"
-        dy=".35em"
-        fontSize={12}
-      >
-        {payload.name}
-      </text>
-    </Rectangle>
-  )
-
-  const renderTooltip = ({ active, payload }: any) => {
-    if (active && payload && payload.length) {
-      const data = payload[0].payload as JourneyNode
-      return (
-        <div className="bg-white p-2 border rounded shadow">
-          <p className="font-semibold">{data.name}</p>
-          <p>Category: {data.category}</p>
-          <p>Value: {data.value}</p>
-        </div>
-      )
-    }
-    return null
-  }
-
+export function DeveloperJourney({ customData, showLabels = true }: DeveloperJourneyProps) {
+  // Fetch data if no custom data is provided
+  const { data: fetchedData, error, loading } = useFetchVisualization<JourneyData>(
+    '/api/visualizations/developer-journey',
+    sampleData
+  );
+  const { containerRef, width, height } = useResponsiveVisualizationSize();
+  
+  // Use custom data if provided, otherwise use fetched data
+  const data = customData || fetchedData || sampleData;
+  
+  // Transform data for treemap
+  const treeMapData = useMemo(() => transformToTreemapData(data), [data]);
+  
   return (
-    <div className="w-full h-[600px] p-4">
-      <Suspense fallback={<LoadingSpinner />}>
-        <ResponsiveContainer width="100%" height="100%">
-          <Sankey
-            data={data}
-            node={renderNode}
-            link={{
-              stroke: '#77777777',
-              strokeWidth: 2,
-              fillOpacity: 0.2
-            }}
-            margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
-            nodePadding={50}
-            nodeWidth={10}
-          >
-            <Tooltip content={renderTooltip} />
-            <Layer key="custom-layer">
-              <text x={20} y={20} fill="#666" fontSize={14}>Developer Journey Flow</text>
-            </Layer>
-          </Sankey>
-        </ResponsiveContainer>
-      </Suspense>
+    <div ref={containerRef} className="w-full h-full relative">
+      {loading ? (
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+        </div>
+      ) : error ? (
+        <div className="absolute inset-0 flex items-center justify-center text-red-500">
+          Error loading data
+        </div>
+      ) : (
+        <ResponsiveTreeMap
+          data={treeMapData}
+          identity="id"
+          value="value"
+          valueFormat=".2f"
+          margin={{ top: 10, right: 10, bottom: 10, left: 10 }}
+          labelSkipSize={12}
+          labelTextColor={{ from: 'color', modifiers: [['darker', 3]] }}
+          parentLabelTextColor={{ from: 'color', modifiers: [['darker', 3]] }}
+          borderColor={{ from: 'color', modifiers: [['darker', 0.2]] }}
+          nodeOpacity={1}
+          borderWidth={2}
+          colors={(node) => getNodeColor(node.id as string, data)}
+          label={showLabels ? (node) => `${node.data.name}` : undefined}
+          tooltip={({ node }) => (
+            <div className="bg-white p-2 shadow-lg rounded-md border border-gray-200 max-w-xs">
+              <div className="font-bold">{node.data.name}</div>
+              <div className="text-sm text-gray-600">{(node.data as any).data?.description}</div>
+              {(node.data as any).data?.metrics && (
+                <div className="mt-2 grid grid-cols-3 gap-2 text-xs">
+                  <div>
+                    <div className="font-semibold">Engagement</div>
+                    <div>{(node.data as any).data.metrics.engagement}%</div>
+                  </div>
+                  <div>
+                    <div className="font-semibold">Conversion</div>
+                    <div>{(node.data as any).data.metrics.conversion}%</div>
+                  </div>
+                  <div>
+                    <div className="font-semibold">Satisfaction</div>
+                    <div>{(node.data as any).data.metrics.satisfaction}%</div>
+                  </div>
+                </div>
+              )}
+              {(node.data as any).data?.content && (
+                <div className="mt-2">
+                  <div className="font-semibold text-xs">Key Components:</div>
+                  <ul className="list-disc list-inside text-xs">
+                    {(node.data as any).data.content.map((item: string, i: number) => (
+                      <li key={i}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          )}
+        />
+      )}
+      
+      <div className="absolute bottom-2 right-2 bg-white bg-opacity-80 rounded-md p-2 shadow-sm">
+        <div className="text-xs font-medium mb-1">Journey Stages:</div>
+        <div className="grid grid-cols-2 gap-x-3 gap-y-1">
+          {Object.entries(colorMapping).slice(0, 5).map(([stage, color]) => (
+            <div key={stage} className="flex items-center">
+              <div 
+                className="w-3 h-3 rounded-full mr-1" 
+                style={{ backgroundColor: color }}
+              />
+              <span className="text-xs capitalize">{stage}</span>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
-  )
+  );
 }
 
 export default DeveloperJourney

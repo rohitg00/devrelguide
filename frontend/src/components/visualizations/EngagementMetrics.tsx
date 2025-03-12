@@ -1,9 +1,9 @@
 'use client'
 
-import React from 'react'
-import { Card } from '../ui/card'
+import React, { useState } from 'react'
+import { ResponsiveContainer, PieChart, Pie, Cell, Tooltip, Legend } from 'recharts'
+import { VisualizationContainer } from './VisualizationContainer'
 import {
-  ResponsiveContainer,
   ComposedChart,
   Bar,
   Line,
@@ -11,8 +11,6 @@ import {
   XAxis,
   YAxis,
   CartesianGrid,
-  Tooltip,
-  Legend,
   Label,
   ReferenceLine
 } from 'recharts'
@@ -107,8 +105,10 @@ export function EngagementMetrics() {
   }))
 
   return (
-    <Card className="p-4">
-      <h3 className="text-lg font-semibold mb-4">Developer Engagement Analytics</h3>
+    <VisualizationContainer 
+      title="Developer Engagement Analytics"
+      description="Visualization of key developer engagement metrics over time"
+    >
       <div className="w-full h-screen md:h-[32rem] lg:h-[40rem]">
         <ResponsiveContainer width="100%" height="100%">
           <ComposedChart data={normalizedData} margin={{ top: 20, right: 30, bottom: 20, left: 20 }}>
@@ -229,7 +229,7 @@ export function EngagementMetrics() {
           <li className="line-clamp-1">Reference line indicates target performance</li>
         </ul>
       </div>
-    </Card>
+    </VisualizationContainer>
   )
 }
 

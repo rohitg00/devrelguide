@@ -1,131 +1,169 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
-import {
-  ResponsiveContainer,
-  Sankey,
-  Tooltip
-} from 'recharts';
+import { useState, useEffect, useRef, useMemo } from 'react';
+import { ResponsiveSankey } from '@nivo/sankey';
+import { Typography } from '@/components/ui/typography';
+import { useFetchVisualization } from '@/lib/use-fetch-visualization';
+import { fallbackData } from '@/lib/visualization-utils';
+import { useResponsiveVisualizationSize } from '@/lib/use-responsive-visualization-size';
 
-interface Node {
-  id: number;
+// Types for custom data
+interface CustomNode {
+  id: string;
   name: string;
-  fullName: string;
-  type: 'category' | 'activity' | 'component';
-  size: number;
-  order: number;
-}
-
-interface Link {
-  source: number;
-  target: number;
+  pillar: string;
   value: number;
 }
 
-interface EcosystemData {
-  nodes: Node[];
-  links: Link[];
+interface CustomLink {
+  source: string;
+  target: string;
+  value: number;
 }
 
-const categoryColors = {
-  category: '#3B82F6',    // Blue
-  activity: '#10B981',    // Green
-  component: '#8B5CF6'    // Purple
-};
+interface CustomData {
+  nodes: CustomNode[];
+  links: CustomLink[];
+}
 
-const DevRelEcosystem: React.FC = () => {
-  const [ecosystemData, setEcosystemData] = useState<EcosystemData | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+interface DevRelEcosystemProps {
+  customData?: CustomData;
+}
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
-        const response = await fetch(`${apiUrl}/api/visualizations/devrel-ecosystem`);
-        if (!response.ok) {
-          throw new Error('Failed to fetch ecosystem data');
-        }
-        const data = await response.json();
-        setEcosystemData(data);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'An error occurred');
-      } finally {
-        setLoading(false);
-      }
-    };
+// Type for processed ecosystem data
+interface EcosystemData {
+  nodes: Array<{
+    id: string | number;
+    name: string;
+    pillar?: string;
+    value?: number;
+  }>;
+  links: Array<{
+    source: string | number;
+    target: string | number;
+    value?: number;
+  }>;
+}
 
-    fetchData();
-  }, []);
+export function DevRelEcosystem({ customData }: DevRelEcosystemProps) {
+  const { data, loading, error } = useFetchVisualization<EcosystemData>(
+    '/api/visualizations/devrel-ecosystem',
+    fallbackData.devrelEcosystem
+  );
 
-  if (loading) {
-    return (
-      <div className="w-full h-[600px] bg-white p-6 rounded-xl shadow-lg flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
-      </div>
-    );
-  }
+  const { containerRef, width, height } = useResponsiveVisualizationSize({
+    defaultWidth: 800,
+    defaultHeight: 500,
+    minWidth: 300,
+    minHeight: 300,
+    maxWidth: 1600,
+    maxHeight: 800,
+    aspectRatio: 16 / 9,
+  });
 
-  if (error) {
-    return (
-      <div className="w-full h-[600px] bg-white p-6 rounded-xl shadow-lg flex items-center justify-center">
-        <div className="text-red-500">Error: {error}</div>
-      </div>
-    );
-  }
+  // Use customData if provided, otherwise use fetched data
+  const displayData = customData || data;
 
-  if (!ecosystemData) {
-    return (
-      <div className="w-full h-[600px] bg-white p-6 rounded-xl shadow-lg flex items-center justify-center">
-        <div className="text-gray-500">No data available</div>
-      </div>
-    );
-  }
+  // Define color mapping for categories
+  const categoryColors = {
+    community: '#8764FF',
+    content: '#00C49F', 
+    product: '#FF5733',
+    ecosystem: '#7CDA24',
+    default: '#AAAAAA'
+  };
+
+  // Process data for the Nivo Sankey chart
+  const processedData = useMemo(() => {
+    if (!displayData?.nodes?.length) return { nodes: [], links: [] };
+
+    // Format nodes for Nivo
+    const nodes = displayData.nodes.map(node => ({
+      id: node.id.toString(),
+      nodeColor: categoryColors[node.pillar as keyof typeof categoryColors] || categoryColors.default,
+      label: node.name,
+      category: node.pillar || 'community'
+    }));
+    
+    // Format links for Nivo
+    const links = displayData.links
+      .filter(link => 
+        nodes.some(node => node.id === link.source.toString()) && 
+        nodes.some(node => node.id === link.target.toString())
+      )
+      .map(link => ({
+        source: link.source.toString(),
+        target: link.target.toString(),
+        value: link.value || 1,
+      }));
+    
+    const result = { nodes, links };
+    console.log("DevRelEcosystem - processed data:", result);
+    return result;
+  }, [displayData, categoryColors]);
+
+  // Debug logs
+  console.log("DevRelEcosystem - dimensions:", { width, height });
+  console.log("DevRelEcosystem - raw data:", displayData);
+
+  if (loading) return <div className="h-full flex items-center justify-center"><p>Loading ecosystem visualization...</p></div>;
+  if (error) return <div className="h-full flex items-center justify-center"><p className="text-red-500">Error: {error}</p></div>;
+  if (!processedData.nodes.length) return <div className="h-full flex items-center justify-center"><p>No data available for visualization</p></div>;
 
   return (
-    <div className="w-full h-[600px] bg-white p-6 rounded-xl shadow-lg">
-      <h3 className="text-xl font-semibold mb-4 text-gray-800">DevRel Framework Ecosystem</h3>
-      <p className="text-sm text-gray-600 mb-6">
-        Explore the interconnected components of the Developer Relations framework
-      </p>
-      <ResponsiveContainer width="100%" height="80%">
-        <Sankey
-          data={ecosystemData}
-          node={{
-            nodePadding: 50,
-            nodeWidth: 10,
-            fill: (node: any) => categoryColors[node.type] || '#94A3B8'
-          }}
-          link={{
-            stroke: '#cbd5e1',
-            strokeWidth: 2,
-            strokeOpacity: 0.2,
-            fill: '#cbd5e1',
-            fillOpacity: 0.2
-          }}
-          margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
-        >
-          <Tooltip
-            content={({ active, payload }) => {
-              if (active && payload && payload.length) {
-                const node = payload[0].payload;
-                return (
-                  <div className="bg-white p-3 rounded-lg shadow-lg border border-gray-200">
-                    <p className="font-medium">{node.fullName || node.name}</p>
-                    <p className="text-sm text-gray-600">Type: {node.type}</p>
-                    {node.value && (
-                      <p className="text-sm">Flow Value: {node.value}</p>
-                    )}
-                  </div>
-                );
-              }
-              return null;
-            }}
-          />
-        </Sankey>
-      </ResponsiveContainer>
+    <div ref={containerRef} className="w-full h-full flex flex-col">
+      <div className="flex-grow" style={{ minHeight: '500px', height: '500px' }}>
+        <ResponsiveSankey
+          data={processedData}
+          margin={{ top: 40, right: 40, bottom: 40, left: 40 }}
+          align="justify"
+          colors={(node) => node.nodeColor || categoryColors.default}
+          nodeOpacity={1}
+          nodeHoverOthersOpacity={0.35}
+          nodeThickness={18}
+          nodeSpacing={24}
+          nodeBorderWidth={0}
+          nodeBorderRadius={3}
+          linkOpacity={0.5}
+          linkHoverOthersOpacity={0.1}
+          linkContract={1}
+          enableLinkGradient={true}
+          labelPosition="outside"
+          labelOrientation="horizontal"
+          labelPadding={16}
+          labelTextColor={{ from: 'color', modifiers: [['darker', 1]] }}
+          animate={true}
+          motionConfig="gentle"
+          nodeTooltip={({ node }) => (
+            <div className="bg-white p-3 shadow-lg rounded-lg border border-gray-200">
+              <p className="font-semibold text-sm">{node.label}</p>
+              <p className="text-xs text-gray-600">Category: <span className="font-medium">{node.category}</span></p>
+            </div>
+          )}
+          linkTooltip={({ link }) => (
+            <div className="bg-white p-3 shadow-lg rounded-lg border border-gray-200">
+              <p className="font-semibold text-sm">Connection</p>
+              <p className="text-xs text-gray-600">From: <span className="font-medium">{link.source.label}</span></p>
+              <p className="text-xs text-gray-600">To: <span className="font-medium">{link.target.label}</span></p>
+              <p className="text-xs text-gray-600">Strength: <span className="font-medium">{link.value}</span></p>
+            </div>
+          )}
+        />
+      </div>
+      
+      <div className="mt-3 flex flex-wrap gap-3 justify-center">
+        {Object.entries(categoryColors).filter(([key]) => key !== 'default').map(([category, color]) => (
+          <div key={category} className="inline-flex items-center">
+            <div 
+              className="w-4 h-4 rounded-full mr-1 border border-gray-200" 
+              style={{ backgroundColor: color }}
+            />
+            <span className="text-xs font-medium capitalize">{category}</span>
+          </div>
+        ))}
+      </div>
     </div>
   );
-};
+}
 
 export default DevRelEcosystem;

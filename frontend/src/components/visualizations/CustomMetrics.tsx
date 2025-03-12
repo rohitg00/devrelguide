@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import * as d3 from 'd3'
 import { useResizeObserver } from '@/hooks/useResizeObserver'
+import { VisualizationContainer } from './VisualizationContainer'
 
 interface MetricData {
   category: string
@@ -152,8 +153,10 @@ export function CustomMetrics() {
   }
 
   return (
-    <Card className="p-4 sm:p-6">
-      <h3 className="text-lg font-semibold mb-4">Custom Metrics Analysis</h3>
+    <VisualizationContainer 
+      title="Custom Metrics Analysis"
+      description="Visualization of custom DevRel metrics and their impact"
+    >
       <div ref={wrapperRef} className="w-full aspect-[4/3] min-h-0">
         <svg
           ref={svgRef}
@@ -161,6 +164,6 @@ export function CustomMetrics() {
           style={{ touchAction: 'none' }}
         />
       </div>
-    </Card>
+    </VisualizationContainer>
   )
 }

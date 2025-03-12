@@ -14,6 +14,7 @@ import {
   TooltipProps
 } from 'recharts';
 import { NameType, ValueType } from 'recharts/types/component/DefaultTooltipContent';
+import { VisualizationContainer } from './VisualizationContainer';
 
 interface MetricPoint {
   date: string;
@@ -75,8 +76,10 @@ export function HorizonMetrics() {
   };
 
   return (
-    <Card className="p-4 sm:p-6">
-      <h3 className="text-lg font-semibold mb-4">Developer Engagement Horizon</h3>
+    <VisualizationContainer
+      title="Developer Engagement Horizon"
+      description="Visualization of developer engagement metrics over time"
+    >
       <div className="w-full aspect-[4/3] min-h-0">
         <ResponsiveContainer width="100%" height="100%">
           <ComposedChart data={data}>
@@ -149,6 +152,6 @@ export function HorizonMetrics() {
           </ComposedChart>
         </ResponsiveContainer>
       </div>
-    </Card>
+    </VisualizationContainer>
   );
 }

@@ -19,8 +19,8 @@ const Footer = () => {
                 alt="DevRel Guide" 
                 width={32} 
                 height={32} 
-                priority={true}
-                unoptimized
+                style={{ width: 32, height: 32 }}
+                priority
               />
               <span className="font-bold text-xl bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
                 DevRel Guide

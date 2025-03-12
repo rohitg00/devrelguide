@@ -6,6 +6,7 @@ import {
   ResponsiveContainer,
   Tooltip
 } from 'recharts'
+import { VisualizationContainer } from './VisualizationContainer'
 
 interface FrameworkNode {
   name: string
@@ -148,8 +149,10 @@ export function DevRelFramework() {
   ))
 
   return (
-    <Card className="p-4 sm:p-6">
-      <h3 className="text-lg font-semibold mb-4">DevRel Framework Overview</h3>
+    <VisualizationContainer
+      title="DevRel Framework Overview"
+      description="Hierarchical visualization of the DevRel framework components"
+    >
       <div className="w-full aspect-[4/3] min-h-0">
         <ResponsiveContainer width="100%" height="100%">
           <Treemap
@@ -177,7 +180,7 @@ export function DevRelFramework() {
           </Treemap>
         </ResponsiveContainer>
       </div>
-    </Card>
+    </VisualizationContainer>
   )
 }
 

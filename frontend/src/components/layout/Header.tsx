@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import { Menu, X } from 'lucide-react'
@@ -15,6 +16,7 @@ const Header = () => {
     { href: '/whitepaper', label: 'Free Whitepaper', isNew: true },
     { href: '/resources', label: 'Resources' },
     { href: '/visualizations', label: 'Visualizations' },
+    { href: '/builder', label: 'Visualization Builder', isNew: true },
     { href: '/contact', label: 'Contact Us' }
   ]
 
@@ -22,7 +24,7 @@ const Header = () => {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between">
         <Link href="/" className="flex items-center space-x-2">
-          <img src="/Icon.svg" alt="DevRel Guide" className="h-8 w-8" />
+          <Image src="/Icon.svg" alt="DevRel Guide" width={32} height={32} style={{ width: 32, height: 32 }} priority />
           <span className="font-bold text-xl bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
             DevRel Guide
           </span>

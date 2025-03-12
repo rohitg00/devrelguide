@@ -1,9 +1,9 @@
 'use client'
 
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import * as d3 from 'd3'
 import { useResizeObserver } from '@/hooks/useResizeObserver'
-import { Card } from '../ui/card'
+import { VisualizationContainer } from './VisualizationContainer'
 
 interface Node {
   id: string
@@ -200,21 +200,14 @@ export const CommunityForceGraph: React.FC = () => {
   }, [dimensions])
 
   return (
-    <Card className="p-4 sm:p-6">
-      <h3 className="text-lg font-semibold mb-4">Developer Relations Network</h3>
-      <div ref={wrapperRef} className="w-full aspect-[4/3] min-h-0">
+    <VisualizationContainer
+      title="Community Interaction Network"
+      description="Force-directed graph visualization of community interactions and relationships"
+    >
+      <div ref={wrapperRef} className="w-full h-[600px]">
         <svg ref={svgRef} className="w-full h-full" />
       </div>
-      <div className="mt-4 text-sm text-gray-600">
-        <p className="mb-2">This visualization shows the DevRel ecosystem connections:</p>
-        <ul className="list-disc ml-6 space-y-1">
-          <li>Node colors represent different entity types (developers, resources, platforms)</li>
-          <li>Arrow colors indicate relationship types (mentorship, contribution, learning)</li>
-          <li>Node size reflects relative importance or activity level</li>
-          <li>Hover over nodes and links for detailed information</li>
-        </ul>
-      </div>
-    </Card>
+    </VisualizationContainer>
   )
 }
 

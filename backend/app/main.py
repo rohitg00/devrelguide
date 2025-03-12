@@ -28,6 +28,7 @@ logger = logging.getLogger(__name__)
 from .scripts.update_resources import update_resources
 from .scripts.analyze_data import analyze_data
 from .scripts.verify_links import verify_links
+from .scripts.generate_visualizations import generate_all_visualizations
 from .scraper.devrel_scraper import DevRelScraper
 
 # Create FastAPI app
@@ -55,6 +56,26 @@ data_path = Path(__file__).parent / "data"
 static_path.mkdir(exist_ok=True)
 data_path.mkdir(exist_ok=True)
 app.mount("/static", StaticFiles(directory=str(static_path)), name="static")
+
+# Add startup event to check for visualization files
+@app.on_event("startup")
+async def startup_event():
+    """Check for visualization files on startup and generate them if needed."""
+    try:
+        # Import here to avoid circular imports
+        from .scripts.utils.check_visualizations import check_visualizations
+        logger.info("Checking visualization files on startup...")
+        
+        # Run in a separate thread to avoid blocking startup
+        loop = asyncio.get_event_loop()
+        result = await loop.run_in_executor(None, check_visualizations)
+        
+        if result:
+            logger.info("Visualization files are ready")
+        else:
+            logger.warning("Failed to prepare visualization files")
+    except Exception as e:
+        logger.error(f"Error checking visualization files: {str(e)}")
 
 class ScriptResponse(BaseModel):
     status: str
@@ -459,3 +480,28 @@ async def run_verify_links() -> ScriptResponse:
         )
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/api/visualizations/generate")
+async def generate_visualizations() -> ScriptResponse:
+    """Generate all visualization data files."""
+    try:
+        result = await run_with_timeout(generate_all_visualizations, timeout=60)
+        if result:
+            return ScriptResponse(
+                status="success",
+                message="Visualizations generated successfully",
+                data={"generated": True}
+            )
+        else:
+            return ScriptResponse(
+                status="error",
+                message="Failed to generate visualizations",
+                data={"generated": False}
+            )
+    except Exception as e:
+        logger.error(f"Error in visualization generation: {str(e)}")
+        return ScriptResponse(
+            status="error",
+            message=f"Error in visualization generation: {str(e)}",
+            data=None
+        )

@@ -3,6 +3,8 @@
 import React, { useMemo } from 'react';
 import { ResponsiveContainer, Sankey, Tooltip, TooltipProps } from 'recharts';
 import { NameType, ValueType } from 'recharts/types/component/DefaultTooltipContent';
+import { VisualizationContainer } from './VisualizationContainer';
+import { useFetchVisualization, fallbackData } from '@/lib/visualization-utils';
 
 interface Node {
   name: string;
@@ -25,21 +27,22 @@ type SankeyNode = Node & {
   depth?: number;
 };
 
-type SankeyLink = Omit<Link, 'source' | 'target'> & {
-  source: SankeyNode;
-  target: SankeyNode;
+type SankeyLink = Link & {
+  source?: SankeyNode;
+  target?: SankeyNode;
 };
 
 type CategoryColors = {
   [K in 'discovery' | 'learning' | 'engagement' | 'contribution' | 'leadership']: string;
 };
 
+// More vibrant category colors for better visibility
 const CATEGORIES: CategoryColors = {
-  discovery: '#8884d8',
-  learning: '#82ca9d',
-  engagement: '#ffc658',
-  contribution: '#ff7300',
-  leadership: '#a4de6c'
+  discovery: '#8764FF',   // Brighter purple
+  learning: '#00C49F',    // Brighter teal
+  engagement: '#FFC658',  // Amber (kept the same)
+  contribution: '#FF5733', // Brighter orange
+  leadership: '#7CDA24'   // Brighter green
 };
 
 const generateSankeyData = (): SankeyData => ({
@@ -70,17 +73,31 @@ const generateSankeyData = (): SankeyData => ({
 });
 
 export function DeveloperProgressFlow() {
-  const data = useMemo(() => generateSankeyData(), []);
+  // Use API data with fallback to static data if the API fails
+  const { data: apiData, loading, error, retry } = useFetchVisualization<SankeyData>({
+    endpoint: '/api/visualizations/developer-progress',
+    fallbackData: fallbackData.developerProgress
+  });
+
+  // Use either API data or generate static data if no API data
+  const data = useMemo(() => apiData || generateSankeyData(), [apiData]);
 
   const CustomTooltip = ({
     active,
     payload
   }: TooltipProps<ValueType, NameType>) => {
     if (active && payload && payload.length) {
-      const sourceNode = payload[0].payload.source;
-      const targetNode = payload[0].payload.target;
-      const value = payload[0].value;
-      const category = payload[0].payload.category;
+      // Safely accessing payload with type checking
+      const payloadItem = payload[0];
+      if (!payloadItem || !payloadItem.payload) return null;
+      
+      const linkData = payloadItem.payload as SankeyLink;
+      if (!linkData.source || !linkData.target) return null;
+      
+      const sourceNode = linkData.source as SankeyNode;
+      const targetNode = linkData.target as SankeyNode;
+      const value = payloadItem.value;
+      const category = linkData.category;
 
       return (
         <div className="bg-white p-3 border rounded-lg shadow-lg">
@@ -100,53 +117,75 @@ export function DeveloperProgressFlow() {
     return null;
   };
 
-  const getCategoryColor = (category: keyof CategoryColors): string => {
-    return CATEGORIES[category] || '#cccccc';
+  const getCategoryColor = (category: string): string => {
+    return category in CATEGORIES 
+      ? CATEGORIES[category as keyof CategoryColors] 
+      : '#cccccc';
   };
 
   return (
-    <div className="w-full h-[600px] p-4">
-      <h3 className="text-lg font-semibold mb-4">Developer Journey Flow</h3>
-      <ResponsiveContainer width="100%" height="100%">
-        <Sankey
-          data={data}
-          nodeWidth={15}
-          nodePadding={20}
-          margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
-          link={{
-            stroke: '#cccccc',
-            strokeOpacity: (entry: any) => entry.category === 'discovery' ? 0.7 : 0.5,
-            fill: '#cccccc',
-            fillOpacity: (entry: any) => entry.category === 'discovery' ? 0.7 : 0.5,
-            style: {
-              stroke: (entry: any) => getCategoryColor(entry.category),
-              fill: (entry: any) => getCategoryColor(entry.category)
+    <VisualizationContainer
+      title="Developer Progress Stages"
+      description="Visualization of developer progression stages and transitions between different levels of engagement"
+      hasError={!!error}
+      isLoading={loading}
+      errorMessage={error ? error.message : ''}
+      onRetry={retry}
+    >
+      <div className="w-full h-[500px]">
+        <ResponsiveContainer width="100%" height="100%">
+          <Sankey
+            data={data}
+            nodeWidth={20}
+            nodePadding={30}
+            margin={{ top: 20, right: 30, bottom: 20, left: 30 }}
+            link={
+              {
+                stroke: '#000',  // Black border for better visibility
+                strokeOpacity: 0.2,
+                fill: '#000',
+                fillOpacity: 0.12,
+                style: {
+                  stroke: (entry: any) => getCategoryColor(entry.category),
+                  fill: (entry: any) => getCategoryColor(entry.category),
+                  fillOpacity: 0.8,
+                  strokeOpacity: 0.5,
+                  strokeWidth: 1
+                }
+              } as any
             }
-          }}
-          node={{
-            fill: '#cccccc',
-            style: {
-              fill: (entry: any) => getCategoryColor(entry.category)
+            node={
+              {
+                stroke: '#000',
+                strokeWidth: 1,
+                strokeOpacity: 0.3,
+                style: {
+                  fill: (entry: any) => getCategoryColor(entry.category),
+                  fillOpacity: 0.9,  // More opaque for better visibility
+                  stroke: '#000',
+                  strokeWidth: 1
+                }
+              } as any
             }
-          }}
-        >
-          <Tooltip content={CustomTooltip} />
-        </Sankey>
-      </ResponsiveContainer>
-      <div className="flex flex-wrap gap-4 mt-4 justify-center">
-        {Object.entries(CATEGORIES).map(([category, color]) => (
-          <div key={category} className="flex items-center gap-2">
-            <div
-              className="w-4 h-4 rounded"
-              style={{ backgroundColor: color }}
-            />
-            <span className="text-sm capitalize">
-              {category}
-            </span>
-          </div>
-        ))}
+          >
+            <Tooltip content={<CustomTooltip />} />
+          </Sankey>
+        </ResponsiveContainer>
+        <div className="flex flex-wrap gap-4 mt-4 justify-center">
+          {Object.entries(CATEGORIES).map(([category, color]) => (
+            <div key={category} className="flex items-center gap-2">
+              <div
+                className="w-4 h-4 rounded border border-gray-300"
+                style={{ backgroundColor: color }}
+              />
+              <span className="text-sm capitalize">
+                {category}
+              </span>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+    </VisualizationContainer>
   );
 }
 

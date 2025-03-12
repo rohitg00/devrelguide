@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
-import { Card } from '../ui/card';
+import { VisualizationContainer } from './VisualizationContainer';
 
 interface MarketImpactData {
   name: string;
@@ -184,19 +184,14 @@ export function MarketImpactAnalysis() {
   }, []);
 
   return (
-    <Card className="p-4">
-      <h3 className="text-lg font-semibold mb-4">Market Impact Analysis</h3>
-      <div className="text-sm text-gray-600 mb-4">
-        Force-directed visualization showing relationships and impact of different DevRel aspects in the market
+    <VisualizationContainer
+      title="Market Impact Analysis"
+      description="Visualization of market impact across different segments"
+    >
+      <div ref={wrapperRef} className="w-full h-[500px]">
+        <svg ref={svgRef} className="w-full h-full" />
       </div>
-      <div ref={wrapperRef} className="w-full">
-        <svg
-          ref={svgRef}
-          className="w-full"
-          style={{ height: '600px', overflow: 'visible' }}
-        />
-      </div>
-    </Card>
+    </VisualizationContainer>
   );
 }
 

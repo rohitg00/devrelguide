@@ -36,11 +36,11 @@ def generate_all_visualizations():
         output_dir = ensure_output_directory()
         logger.info(f"Generating visualizations in {output_dir}")
 
-        # Generate each visualization
-        generate_career_path()
-        generate_community_graph()
-        generate_metrics_dashboard()
-        generate_skills_matrix()
+        # Generate each visualization with explicit output directory
+        generate_career_path(output_dir=str(output_dir))
+        generate_community_graph(output_dir=str(output_dir))
+        generate_metrics_dashboard(output_dir=str(output_dir))
+        generate_skills_matrix(output_dir=str(output_dir))
 
         logger.info("All visualizations generated successfully")
         return True

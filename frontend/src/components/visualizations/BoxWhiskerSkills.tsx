@@ -1,8 +1,8 @@
 'use client'
 
 import React, { useEffect, useRef } from 'react'
-import { Card } from '../ui/card'
 import * as d3 from 'd3'
+import { VisualizationContainer } from './VisualizationContainer'
 
 interface SkillMetric {
   category: string
@@ -181,20 +181,14 @@ export function BoxWhiskerSkills() {
   }, [])
 
   return (
-    <Card className="p-4 sm:p-6">
-      <h3 className="text-lg font-semibold mb-4">Developer Skill Distribution</h3>
-      <div ref={wrapperRef} className="w-full aspect-[4/3] min-h-0">
+    <VisualizationContainer
+      title="Developer Skills Distribution"
+      description="Box and whisker plot showing the distribution of developer skills"
+    >
+      <div ref={wrapperRef} className="w-full h-[600px]">
         <svg ref={svgRef} className="w-full h-full" />
       </div>
-      <div className="mt-4 text-sm text-muted-foreground">
-        <p className="mb-2">This visualization combines violin plots with box-and-whisker plots to show:</p>
-        <ul className="list-disc ml-6 space-y-1">
-          <li>Skill distribution density across different competencies</li>
-          <li>Key percentiles (min, 25th, median, 75th, max)</li>
-          <li>Areas of skill concentration and spread</li>
-        </ul>
-      </div>
-    </Card>
+    </VisualizationContainer>
   )
 }
 

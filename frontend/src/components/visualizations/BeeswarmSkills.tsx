@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react'
 import * as d3 from 'd3'
-import { Card } from '../ui/card'
+import { VisualizationContainer } from './VisualizationContainer'
 
 interface SkillPoint {
   skill: string
@@ -161,34 +161,13 @@ export function BeeswarmSkills() {
   }, [])
 
   return (
-    <Card className="p-4">
-      <h3 className="text-lg font-semibold mb-2">DevRel Skill Distribution</h3>
-      <p className="text-sm text-gray-600 mb-4">
-        Interactive visualization showing skill distribution, impact, and progression paths
-      </p>
-      <div ref={wrapperRef} className="w-full relative">
-        <svg
-          ref={svgRef}
-          className="w-full"
-          style={{ height: '600px', overflow: 'visible' }}
-        />
-        {selectedSkill && (
-          <div className="absolute right-4 top-4 bg-white p-3 rounded-lg shadow-lg border text-sm max-w-xs">
-            <div className="font-semibold mb-1">{selectedSkill.skill}</div>
-            <p className="text-gray-600 text-xs mb-2">{selectedSkill.description}</p>
-            <div className="space-y-1 text-xs">
-              <div>Proficiency: {Math.round(selectedSkill.proficiency)}%</div>
-              <div>Growth Rate: +{Math.round(selectedSkill.growth)}%</div>
-              <div>Impact Score: {Math.round(selectedSkill.impact)}</div>
-              {selectedSkill.prerequisites.length > 0 && (
-                <div>
-                  Prerequisites: {selectedSkill.prerequisites.join(', ')}
-                </div>
-              )}
-            </div>
-          </div>
-        )}
+    <VisualizationContainer
+      title="Developer Skills Distribution"
+      description="Beeswarm visualization showing the distribution of developer skills"
+    >
+      <div ref={wrapperRef} className="w-full h-[500px]">
+        <svg ref={svgRef} className="w-full h-full" />
       </div>
-    </Card>
+    </VisualizationContainer>
   )
 }

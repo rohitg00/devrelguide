@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useEffect, useRef } from 'react'
-import { Card } from '../ui/card'
+import { VisualizationContainer } from './VisualizationContainer'
 import * as d3 from 'd3'
 
 interface FrameworkDimension {
@@ -192,25 +192,26 @@ export function DevRelFrameworkViz() {
   }, [])
 
   return (
-    <Card className="p-4">
-      <h3 className="text-lg font-semibold mb-4">DevRel Framework Analysis</h3>
-      <div className="text-sm text-gray-600 mb-4">
-        Interactive visualization showing relationships and impact flows between DevRel framework dimensions
+    <VisualizationContainer
+      title="DevRel Framework Analysis"
+      description="Interactive visualization showing relationships and impact flows between DevRel framework dimensions"
+    >
+      <div>
+        <div ref={wrapperRef} className="w-full h-[600px]">
+          <svg ref={svgRef} className="w-full h-full" />
+        </div>
+        <div className="mt-4 text-sm text-gray-600">
+          <p className="mb-2">Framework dimensions represent key aspects of Developer Relations:</p>
+          <ul className="list-disc ml-6 space-y-1">
+            <li>Node size indicates current performance level</li>
+            <li>Node color shows performance (red: low, blue: medium, green: high)</li>
+            <li>Solid lines show primary relationships</li>
+            <li>Dashed lines show secondary influences</li>
+            <li>Line thickness indicates relationship strength</li>
+          </ul>
+        </div>
       </div>
-      <div ref={wrapperRef} className="w-full h-[600px]">
-        <svg ref={svgRef} className="w-full h-full" />
-      </div>
-      <div className="mt-4 text-sm text-gray-600">
-        <p className="mb-2">Framework dimensions represent key aspects of Developer Relations:</p>
-        <ul className="list-disc ml-6 space-y-1">
-          <li>Node size indicates current performance level</li>
-          <li>Node color shows performance (red: low, blue: medium, green: high)</li>
-          <li>Solid lines show primary relationships</li>
-          <li>Dashed lines show secondary influences</li>
-          <li>Line thickness indicates relationship strength</li>
-        </ul>
-      </div>
-    </Card>
+    </VisualizationContainer>
   )
 }
 

@@ -1,8 +1,9 @@
 'use client'
 
-import React, { useMemo } from 'react'
+import React, { useMemo, useEffect, useRef } from 'react'
+import * as d3 from 'd3'
 import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, Tooltip } from 'recharts'
-import { Card } from '../ui/card'
+import { VisualizationContainer } from './VisualizationContainer'
 
 interface SkillMetric {
   date: string
@@ -50,75 +51,133 @@ const COLORS = {
 export function RidgelinePlot() {
   const data = useMemo(() => generateRidgelineData(), [])
   const [hoveredCategory, setHoveredCategory] = React.useState<string | null>(null)
+  const wrapperRef = useRef<HTMLDivElement>(null)
+  const svgRef = useRef<SVGSVGElement>(null)
+
+  useEffect(() => {
+    if (wrapperRef.current && svgRef.current) {
+      const svg = d3.select(svgRef.current)
+      const width = wrapperRef.current.clientWidth
+      const height = wrapperRef.current.clientHeight
+
+      const xScale = d3.scaleLinear()
+        .domain([0, data.length - 1])
+        .range([0, width])
+
+      const yScale = d3.scaleLinear()
+        .domain([0, 100])
+        .range([height, 0])
+
+      svg.selectAll('*').remove()
+
+      const g = svg.append('g')
+
+      data.forEach((categoryData, index) => {
+        g.append('path')
+          .attr('d', d3.line()
+            .x((d, i) => xScale(i))
+            .y((d) => yScale(d.value))
+            .curve(d3.curveBasis)
+          )
+          .attr('fill', 'none')
+          .attr('stroke', COLORS[categoryData.category as keyof typeof COLORS])
+          .attr('stroke-width', 2)
+      })
+
+      svg.append('g')
+        .attr('transform', `translate(0,${height})`)
+        .call(d3.axisBottom(xScale))
+        .selectAll('text')
+        .attr('class', 'axis-label')
+
+      svg.append('g')
+        .call(d3.axisLeft(yScale))
+        .selectAll('text')
+        .attr('class', 'axis-label')
+
+      svg.append('text')
+        .attr('x', width / 2)
+        .attr('y', height + 30)
+        .attr('text-anchor', 'middle')
+        .attr('class', 'axis-label')
+        .text('Time')
+
+      svg.append('text')
+        .attr('transform', 'rotate(-90)')
+        .attr('x', -height / 2)
+        .attr('y', -30)
+        .attr('text-anchor', 'middle')
+        .attr('class', 'axis-label')
+        .text('Proficiency')
+
+      svg.append('g')
+        .attr('class', 'legend')
+        .selectAll('rect')
+        .data(Object.entries(COLORS))
+        .enter()
+        .append('rect')
+        .attr('x', width + 10)
+        .attr('y', (d, i) => i * 20)
+        .attr('width', 10)
+        .attr('height', 10)
+        .attr('fill', (d) => d[1])
+
+      svg.append('text')
+        .attr('x', width + 20)
+        .attr('y', (d, i) => i * 20 + 10)
+        .attr('text-anchor', 'start')
+        .attr('class', 'legend-label')
+        .text((d) => d[0])
+
+      svg.append('g')
+        .attr('class', 'tooltip')
+        .attr('fill', 'none')
+        .attr('stroke', 'black')
+        .attr('stroke-width', 1)
+
+      svg.append('g')
+        .attr('class', 'tooltip-content')
+        .attr('fill', 'white')
+        .attr('stroke', 'none')
+        .attr('text-anchor', 'start')
+
+      svg.selectAll('.tooltip')
+        .data(data)
+        .enter()
+        .append('circle')
+        .attr('cx', (d, i) => xScale(i))
+        .attr('cy', (d) => yScale(d.value))
+        .attr('r', 5)
+        .attr('class', 'tooltip-circle')
+        .attr('fill', (d) => COLORS[d.category as keyof typeof COLORS])
+        .attr('opacity', 0)
+
+      svg.selectAll('.tooltip-circle')
+        .on('mouseover', function(event, d) {
+          d3.select(this).attr('opacity', 0.5)
+          d3.select('.tooltip')
+            .attr('transform', `translate(${event.pageX + 10}, ${event.pageY - 10})`)
+          d3.select('.tooltip-content')
+            .text(`${d.category}: ${Math.round(d.value)}%`)
+        })
+        .on('mouseout', function() {
+          d3.select(this).attr('opacity', 0)
+          d3.select('.tooltip')
+            .attr('transform', `translate(0, 0)`)
+          d3.select('.tooltip-content')
+            .text('')
+        })
+    }
+  }, [data])
 
   return (
-    <Card className="p-4">
-      <h3 className="text-lg font-semibold mb-2">Developer Skill Distribution</h3>
-      <p className="text-sm text-gray-600 mb-4">
-        Distribution of developer skills across different areas over time
-      </p>
-      <div className="space-y-[-30px]">
-        {data.map((categoryData) => (
-          <div
-            key={categoryData.category}
-            className="h-[100px] relative group"
-            onMouseEnter={() => setHoveredCategory(categoryData.category)}
-            onMouseLeave={() => setHoveredCategory(null)}
-          >
-            <ResponsiveContainer width="100%" height="100%">
-              <AreaChart
-                data={categoryData.data}
-                margin={{ top: 10, right: 20, left: 20, bottom: 0 }}
-              >
-                <XAxis
-                  dataKey="date"
-                  tick={{ fontSize: 10 }}
-                  stroke="#9CA3AF"
-                  tickLine={false}
-                />
-                <YAxis hide domain={[0, 100]} />
-                <Area
-                  type="monotone"
-                  dataKey="value"
-                  stroke={COLORS[categoryData.category as keyof typeof COLORS]}
-                  fill={COLORS[categoryData.category as keyof typeof COLORS]}
-                  fillOpacity={0.3}
-                  strokeWidth={2}
-                />
-                <Tooltip
-                  content={({ active, payload }) => {
-                    if (active && payload && payload.length) {
-                      const data = payload[0].payload as SkillMetric
-                      return (
-                        <div className="bg-white p-2 rounded shadow-lg border text-xs">
-                          <div className="font-semibold mb-1">{categoryData.category}</div>
-                          <div>Date: {data.date}</div>
-                          <div>Proficiency: {Math.round(data.proficiency)}%</div>
-                        </div>
-                      )
-                    }
-                    return null
-                  }}
-                />
-              </AreaChart>
-            </ResponsiveContainer>
-            {hoveredCategory === categoryData.category && (
-              <div className="absolute right-4 top-1/2 -translate-y-1/2 bg-white p-2 rounded shadow-lg border text-xs">
-                <div className="font-semibold">{categoryData.category}</div>
-                <p className="text-gray-600">{categoryData.description}</p>
-              </div>
-            )}
-          </div>
-        ))}
+    <VisualizationContainer
+      title="Developer Skills Ridgeline Plot"
+      description="Visualization of developer skills distribution across different domains"
+    >
+      <div ref={wrapperRef} className="w-full h-[500px]">
+        <svg ref={svgRef} className="w-full h-full" />
       </div>
-      <div className="flex flex-wrap gap-4 mt-6 justify-center">
-        {Object.entries(COLORS).map(([category, color]) => (
-          <div key={category} className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded" style={{ backgroundColor: color }} />
-            <span className="text-xs text-gray-700">{category}</span>
-          </div>
-        ))}
-      </div>
-    </Card>
+    </VisualizationContainer>
   )
 }

@@ -1,9 +1,9 @@
 'use client'
 
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import * as d3 from 'd3'
 import { useResizeObserver } from '@/hooks/useResizeObserver'
-import { Card } from '../ui/card'
+import { VisualizationContainer } from './VisualizationContainer'
 
 interface HierarchyNode {
   name: string
@@ -16,7 +16,7 @@ interface HierarchyNode {
   engagement?: number
 }
 
-export const DevRelSunburst: React.FC = () => {
+function DevRelSunburst() {
   const svgRef = useRef<SVGSVGElement>(null)
   const wrapperRef = useRef<HTMLDivElement>(null)
   const dimensions = useResizeObserver(wrapperRef)
@@ -266,8 +266,10 @@ export const DevRelSunburst: React.FC = () => {
   }, [dimensions])
 
   return (
-    <Card className="p-4 sm:p-6">
-      <h3 className="text-lg font-semibold mb-4">DevRel Framework Structure</h3>
+    <VisualizationContainer
+      title="DevRel Framework Structure"
+      description="Interactive visualization of Developer Relations strategy and focus areas."
+    >
       <div ref={wrapperRef} className="w-full aspect-square min-h-0">
         <svg ref={svgRef} className="w-full h-full" />
       </div>
@@ -286,7 +288,7 @@ export const DevRelSunburst: React.FC = () => {
           )}
         </div>
       )}
-    </Card>
+    </VisualizationContainer>
   )
 }
 

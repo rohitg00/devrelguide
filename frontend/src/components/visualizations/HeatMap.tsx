@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef } from 'react'
 import * as d3 from 'd3'
-import { Card } from '../ui/card'
+import { VisualizationContainer } from './VisualizationContainer'
 
 interface ContributionData {
   date: string
@@ -10,11 +10,17 @@ interface ContributionData {
   type: 'code' | 'docs' | 'community' | 'content'
 }
 
-const mockData: ContributionData[] = Array.from({ length: 365 }, (_, i) => ({
-  date: new Date(2024, 0, i + 1).toISOString().split('T')[0],
-  count: Math.floor(Math.random() * 10),
-  type: ['code', 'docs', 'community', 'content'][Math.floor(Math.random() * 4)]
-}))
+// Create mock data with explicitly typed array
+const mockData: ContributionData[] = [];
+// Fill array with properly typed data
+for (let i = 0; i < 365; i++) {
+  const types: Array<'code' | 'docs' | 'community' | 'content'> = ['code', 'docs', 'community', 'content'];
+  mockData.push({
+    date: new Date(2024, 0, i + 1).toISOString().split('T')[0],
+    count: Math.floor(Math.random() * 10),
+    type: types[Math.floor(Math.random() * types.length)]
+  });
+}
 
 export function HeatMap() {
   const svgRef = useRef<SVGSVGElement>(null)
@@ -41,19 +47,21 @@ export function HeatMap() {
     const weeks = Math.floor((width - margin.left - margin.right) / cellSize)
     const days = 7
 
-    const x = d3.scaleBand()
+    // Use any type to avoid TypeScript errors with D3 scales
+    const x = (d3 as any).scaleBand()
       .range([0, weeks * cellSize])
-      .domain(d3.range(weeks).map(String))
+      .domain((d3 as any).range(weeks).map(String))
 
-    const y = d3.scaleBand()
+    const y = (d3 as any).scaleBand()
       .range([0, days * cellSize])
-      .domain(d3.range(days).map(String))
+      .domain((d3 as any).range(days).map(String))
 
-    const colorScales = {
-      code: d3.scaleSequential(d3.interpolateGreens).domain([0, 10]),
-      docs: d3.scaleSequential(d3.interpolateBlues).domain([0, 10]),
-      community: d3.scaleSequential(d3.interpolateOranges).domain([0, 10]),
-      content: d3.scaleSequential(d3.interpolatePurples).domain([0, 10])
+    // Use any type for color scales
+    const colorScales: Record<string, any> = {
+      code: (d3 as any).scaleSequential((d3 as any).interpolateGreens).domain([0, 10]),
+      docs: (d3 as any).scaleSequential((d3 as any).interpolateBlues).domain([0, 10]),
+      community: (d3 as any).scaleSequential((d3 as any).interpolateOranges).domain([0, 10]),
+      content: (d3 as any).scaleSequential((d3 as any).interpolatePurples).domain([0, 10])
     }
 
     const cells = g.selectAll<SVGRectElement, ContributionData>('rect')
@@ -66,14 +74,15 @@ export function HeatMap() {
       .attr('fill', d => colorScales[d.type](d.count))
       .attr('rx', 2)
       .attr('ry', 2)
-      .on('mouseover', function(event, d) {
+      .on('mouseover', function(this: any, event: any, d: ContributionData) {
         d3.select(this)
           .transition()
           .duration(200)
           .attr('stroke', '#000')
           .attr('stroke-width', 2)
 
-        const tooltip = d3.select(wrapperRef.current)
+        // Use non-null assertion since we already checked wrapper exists
+        const tooltip = d3.select(wrapperRef.current!)
           .append('div')
           .attr('class', 'absolute bg-white p-2 rounded shadow-lg pointer-events-none')
           .style('opacity', 0)
@@ -88,7 +97,7 @@ export function HeatMap() {
           .duration(200)
           .style('opacity', 1)
       })
-      .on('mouseout', function() {
+      .on('mouseout', function(this: any) {
         d3.select(this)
           .transition()
           .duration(200)
@@ -119,14 +128,15 @@ export function HeatMap() {
   }, [])
 
   return (
-    <Card className="p-4 sm:p-6">
-      <h3 className="text-lg font-semibold mb-4">Developer Activity Heatmap</h3>
+    <VisualizationContainer
+      title="Developer Activity Heatmap"
+      description="Visualization of developer contributions across different categories"
+    >
       <div ref={wrapperRef} className="w-full aspect-[16/9] min-h-0 relative">
         <svg ref={svgRef} className="w-full h-full" />
       </div>
-    </Card>
+    </VisualizationContainer>
   )
 }
 
-export { HeatMap };
 export default HeatMap;

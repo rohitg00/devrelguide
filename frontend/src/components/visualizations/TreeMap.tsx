@@ -82,6 +82,7 @@ export function TreeMap() {
   const [error, setError] = useState<Error | null>(null);
   const [selectedNode, setSelectedNode] = useState<d3.HierarchyRectangularNode<SkillNode> | null>(null);
   const [zoomState, setZoomState] = useState({ k: 1, x: 0, y: 0 });
+  const [hoverData, setHoverData] = useState<{ x: number; y: number; name: string; value: number; connections?: string[] } | null>(null);
 
   useEffect(() => {
     if (!dimensions || !svgRef.current) return;
@@ -143,6 +144,29 @@ export function TreeMap() {
         .attr('stroke', '#fff')
         .attr('stroke-width', d => d.depth === 1 ? 2 : 1)
         .style('cursor', 'pointer')
+        .on('mouseover', (event, d) => {
+          if (d.depth > 0) {
+            setHoverData({
+              x: event.pageX,
+              y: event.pageY,
+              name: d.data.name,
+              value: d.value || 0,
+              connections: d.data.connections
+            });
+          }
+        })
+        .on('mousemove', (event) => {
+          if (hoverData) {
+            setHoverData({
+              ...hoverData,
+              x: event.pageX,
+              y: event.pageY
+            });
+          }
+        })
+        .on('mouseout', () => {
+          setHoverData(null);
+        })
         .on('click', (event, d) => {
           event.stopPropagation();
           setSelectedNode(selectedNode === d ? null : d);
@@ -233,24 +257,35 @@ export function TreeMap() {
         <svg
           ref={svgRef}
           className="w-full h-full"
-          style={{ touchAction: 'none' }}
+          style={{ maxHeight: '800px' }}
         />
-        {selectedNode && (
-          <div className="absolute top-4 right-4 bg-white p-4 rounded shadow-lg">
-            <h4 className="font-semibold">{selectedNode.data.name}</h4>
-            {selectedNode.data.progression && (
-              <div className="mt-2">
-                <p className="text-sm font-medium">Progression Path:</p>
-                <ul className="text-xs mt-1">
-                  {selectedNode.data.progression.map((step, i) => (
-                    <li key={i} className="text-gray-600">→ {step}</li>
+        {hoverData && (
+          <div
+            className="absolute bg-secondary p-3 rounded-md shadow-md text-sm z-10"
+            style={{
+              top: hoverData.y + 'px',
+              left: hoverData.x + 'px',
+              transform: 'translate(-50%, -100%)',
+              transition: 'all 0.2s ease'
+            }}
+          >
+            <p className="font-medium">{hoverData.name}</p>
+            <p className="text-xs text-muted-foreground">Value: {hoverData.value}</p>
+            {hoverData.connections && hoverData.connections.length > 0 && (
+              <div className="mt-1">
+                <p className="text-xs font-medium">Connections:</p>
+                <div className="flex flex-wrap gap-1 mt-1">
+                  {hoverData.connections.map((conn) => (
+                    <span key={conn} className="px-1.5 py-0.5 bg-primary/10 rounded-full text-xs">
+                      {conn}
+                    </span>
                   ))}
-                </ul>
+                </div>
               </div>
             )}
           </div>
         )}
       </div>
-    </Card>
+    </VisualizationContainer>
   );
 }

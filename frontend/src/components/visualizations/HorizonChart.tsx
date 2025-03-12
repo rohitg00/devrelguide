@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
-import { Card } from '../ui/card';
+import { VisualizationContainer } from './VisualizationContainer';
 
 interface TrendPoint {
   date: string;
@@ -179,19 +179,14 @@ export function HorizonChart() {
   }, []);
 
   return (
-    <Card className="p-4">
-      <h3 className="text-lg font-semibold mb-4">Developer Engagement Patterns</h3>
-      <div className="text-sm text-gray-600 mb-4">
-        Temporal patterns showing developer engagement metrics across different dimensions
+    <VisualizationContainer
+      title="Developer Engagement Horizon Chart"
+      description="Visualization of developer engagement metrics over time"
+    >
+      <div ref={wrapperRef} className="w-full h-[500px]">
+        <svg ref={svgRef} className="w-full h-full" />
       </div>
-      <div ref={wrapperRef} className="w-full" style={{ height: `${120 * 4 + 60}px` }}>
-        <svg
-          ref={svgRef}
-          className="w-full h-full"
-          style={{ overflow: 'visible' }}
-        />
-      </div>
-    </Card>
+    </VisualizationContainer>
   );
 }
 

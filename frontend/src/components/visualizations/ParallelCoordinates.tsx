@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
-import { Card } from '../ui/card';
+import { VisualizationContainer } from './VisualizationContainer';
 
 interface DevRelMetric {
   name: string;
@@ -233,19 +233,14 @@ export function ParallelCoordinates() {
   }, []);
 
   return (
-    <Card className="p-4">
-      <h3 className="text-lg font-semibold mb-4">DevRel Metrics Relationships</h3>
-      <div className="text-sm text-gray-600 mb-4">
-        Multi-dimensional analysis of DevRel metrics showing relationships and patterns across different dimensions
+    <VisualizationContainer
+      title="Developer Skills Parallel Coordinates"
+      description="Multi-dimensional visualization of developer skills across different domains"
+    >
+      <div ref={wrapperRef} className="w-full h-[500px]">
+        <svg ref={svgRef} className="w-full h-full" />
       </div>
-      <div ref={wrapperRef} className="w-full" style={{ height: '500px' }}>
-        <svg
-          ref={svgRef}
-          className="w-full h-full"
-          style={{ overflow: 'visible' }}
-        />
-      </div>
-    </Card>
+    </VisualizationContainer>
   );
 }
 

@@ -1,10 +1,11 @@
 'use client'
 
-import React, { useEffect, useRef } from 'react'
+import React, { useRef, useEffect } from 'react'
 import { select } from 'd3-selection'
 import { hierarchy, tree } from 'd3-hierarchy'
-import { linkHorizontal } from 'd3-shape'
 import { zoom as d3Zoom } from 'd3-zoom'
+import { VisualizationContainer } from './VisualizationContainer'
+import { useFetchVisualization, fallbackData, useResponsiveVisualizationSize } from '@/lib/visualization-utils'
 
 interface CareerNode {
   title: string;
@@ -12,156 +13,34 @@ interface CareerNode {
   children?: CareerNode[];
 }
 
-const careerData: CareerNode = {
-  title: "DevRel Career Path",
-  level: "root",
-  children: [
-    {
-      title: "Entry Level",
-      level: "category",
-      children: [
-        {
-          title: "Junior Developer Advocate",
-          level: "Entry",
-          children: [
-            { title: "Developer Advocate", level: "Mid" },
-            { title: "Technical Writer", level: "Mid" },
-            { title: "Community Coordinator", level: "Mid" }
-          ]
-        },
-        {
-          title: "Associate Technical Writer",
-          level: "Entry",
-          children: [
-            { title: "Technical Writer", level: "Mid" }
-          ]
-        },
-        {
-          title: "Community Coordinator",
-          level: "Entry",
-          children: [
-            { title: "Community Manager", level: "Mid" }
-          ]
-        }
-      ]
-    },
-    {
-      title: "Mid Level",
-      level: "category",
-      children: [
-        {
-          title: "Developer Advocate",
-          level: "Mid",
-          children: [
-            { title: "Senior Developer Advocate", level: "Senior" },
-            { title: "DevRel Program Manager", level: "Senior" }
-          ]
-        },
-        {
-          title: "Technical Writer",
-          level: "Mid",
-          children: [
-            { title: "Lead Technical Writer", level: "Senior" }
-          ]
-        },
-        {
-          title: "Community Manager",
-          level: "Mid",
-          children: [
-            { title: "Senior Community Manager", level: "Senior" }
-          ]
-        },
-        {
-          title: "Developer Experience Engineer",
-          level: "Mid",
-          children: [
-            { title: "Senior Developer Advocate", level: "Senior" }
-          ]
-        },
-        {
-          title: "Developer Programs Engineer",
-          level: "Mid",
-          children: [
-            { title: "DevRel Program Manager", level: "Senior" }
-          ]
-        }
-      ]
-    },
-    {
-      title: "Senior Level",
-      level: "category",
-      children: [
-        {
-          title: "Senior Developer Advocate",
-          level: "Senior",
-          children: [
-            { title: "DevRel Manager", level: "Leadership" }
-          ]
-        },
-        {
-          title: "DevRel Program Manager",
-          level: "Senior",
-          children: [
-            { title: "Head of DevRel", level: "Leadership" }
-          ]
-        },
-        {
-          title: "Senior Community Manager",
-          level: "Senior",
-          children: [
-            { title: "VP of DevRel", level: "Leadership" }
-          ]
-        },
-        {
-          title: "Lead Technical Writer",
-          level: "Senior",
-          children: [
-            { title: "DevRel Manager", level: "Leadership" }
-          ]
-        }
-      ]
-    },
-    {
-      title: "Leadership",
-      level: "category",
-      children: [
-        {
-          title: "DevRel Manager",
-          level: "Leadership",
-          children: [
-            { title: "Head of DevRel", level: "Leadership" }
-          ]
-        },
-        {
-          title: "Head of DevRel",
-          level: "Leadership",
-          children: [
-            { title: "VP of DevRel", level: "Leadership" }
-          ]
-        }
-      ]
-    }
-  ]
-};
-
-const CareerPath: React.FC = () => {
-  const svgRef = useRef<SVGSVGElement>(null);
+export function CareerPath() {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const svgRef = useRef<SVGSVGElement>(null)
+  
+  // Use our custom hook for fetching data with fallback and error handling
+  const { data: careerData, loading, error, retry } = useFetchVisualization<CareerNode>({
+    endpoint: '/api/visualizations/career-path',
+    fallbackData: fallbackData.careerPath
+  })
+  
+  // Use responsive sizing hook with explicit type parameter
+  const dimensions = useResponsiveVisualizationSize<HTMLDivElement>(containerRef, { minHeight: 600 })
 
   useEffect(() => {
-    if (!svgRef.current) return;
-
+    if (!svgRef.current || !careerData) return;
+    
     // Clear any existing content
     select(svgRef.current).selectAll('*').remove();
 
     const margin = { top: 60, right: 20, bottom: 40, left: 20 };
-    const width = 800;
-    const height = 1200;
+    const width = dimensions.width || 800;
+    const height = dimensions.height || 800;
 
     const svg = select(svgRef.current)
       .attr('width', '100%')
       .attr('height', '100%')
       .attr('viewBox', [0, 0, width, height].join(' '))
-      .attr('style', 'max-width: 100%; height: auto; background-color: white;')
+      .attr('style', 'max-width: 100%; height: auto;')
       .append('g')
       .attr('transform', `translate(${margin.left},${margin.top})`);
 
@@ -235,7 +114,7 @@ const CareerPath: React.FC = () => {
       .attr('font-size', '12px')
       .attr('font-weight', '500')
       .attr('fill', '#1F2937')
-      .each(function(d) {
+      .each(function(this: SVGTextElement, d) {
         const text = select(this);
         const words = d.data.title.split(/\s+/);
         const lineHeight = 1.2;
@@ -252,7 +131,7 @@ const CareerPath: React.FC = () => {
     nodes.append('g')
       .attr('class', 'level-badge')
       .attr('transform', 'translate(0, 45)')
-      .each(function(d) {
+      .each(function(this: SVGGElement, d) {
         if (d.data.level !== 'category') {
           const badge = select(this);
           
@@ -284,17 +163,25 @@ const CareerPath: React.FC = () => {
         }
       });
 
-  }, []);
+  }, [careerData, dimensions.width, dimensions.height]);
 
   return (
-    <div className="w-full bg-white p-6 rounded-lg shadow-lg" style={{ height: '800px' }}>
-      <svg
-        ref={svgRef}
-        className="w-full h-full"
-        style={{ minHeight: '800px' }}
-      />
+    <div ref={containerRef} className="w-full h-full min-h-[600px]">
+      <VisualizationContainer
+        title="Developer Relations Career Path"
+        description="Explore various career progression paths within Developer Relations"
+        hasError={!!error}
+        isLoading={loading}
+        errorMessage={error ? error.message : ''}
+        onRetry={retry}
+      >
+        <div className="w-full h-full">
+          <svg
+            ref={svgRef}
+            className="w-full h-full"
+          />
+        </div>
+      </VisualizationContainer>
     </div>
   );
-};
-
-export default CareerPath;
+}

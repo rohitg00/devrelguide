@@ -2,7 +2,8 @@
 
 import React, { useEffect, useRef } from 'react'
 import * as d3 from 'd3'
-import { Card } from '../ui/card'
+import { useResizeObserver } from '@/hooks/useResizeObserver'
+import { VisualizationContainer } from './VisualizationContainer'
 
 interface DevRelActivity {
   name: string
@@ -56,7 +57,7 @@ const devrelData: DevRelActivity = {
   ]
 }
 
-export function SunburstDiagram() {
+function SunburstDiagram() {
   const svgRef = useRef<SVGSVGElement>(null)
   const wrapperRef = useRef<HTMLDivElement>(null)
 
@@ -161,12 +162,14 @@ export function SunburstDiagram() {
   }, [])
 
   return (
-    <Card className="p-4 sm:p-6">
-      <h3 className="text-lg font-semibold mb-4">DevRel Activity Impact</h3>
+    <VisualizationContainer
+      title="DevRel Activity Impact"
+      description="Visualization of Developer Relations activities and their impact across different categories."
+    >
       <div ref={wrapperRef} className="w-full aspect-square min-h-0 relative">
         <svg ref={svgRef} className="w-full h-full" />
       </div>
-    </Card>
+    </VisualizationContainer>
   )
 }
 

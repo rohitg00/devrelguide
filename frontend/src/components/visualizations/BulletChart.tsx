@@ -1,17 +1,22 @@
 'use client'
 
-import React from 'react'
-import { Card } from '../ui/card'
+import React, { useRef, useEffect } from 'react'
+import * as d3 from 'd3'
+import { useResizeObserver } from '@/hooks/useResizeObserver'
 import {
   BarChart,
   Bar,
   XAxis,
   YAxis,
+  CartesianGrid,
   Tooltip,
   ResponsiveContainer,
+  Cell,
   ReferenceLine,
-  Cell
+  Legend
 } from 'recharts'
+import { NameType, ValueType } from 'recharts/types/component/DefaultTooltipContent'
+import { VisualizationContainer } from './VisualizationContainer'
 
 interface MetricData {
   title: string
@@ -81,8 +86,10 @@ export function BulletChart() {
   const data = transformDataForBullet(metricsData)
 
   return (
-    <Card className="p-4">
-      <h3 className="text-lg font-semibold mb-4">DevRel Performance Metrics</h3>
+    <VisualizationContainer
+      title="DevRel Performance Metrics"
+      description="Key performance metrics compared to targets"
+    >
       <div className="w-full h-[300px]">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
@@ -114,7 +121,7 @@ export function BulletChart() {
           </BarChart>
         </ResponsiveContainer>
       </div>
-    </Card>
+    </VisualizationContainer>
   )
 }
 
