@@ -13,6 +13,11 @@ const nextConfig = {
   },
   env: {
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
+  },
+  output: 'standalone',
+  experimental: {
+    // Disable strict mode for missing Suspense boundaries
+    missingSuspenseWithCSRBailout: false
   }
 }
 
