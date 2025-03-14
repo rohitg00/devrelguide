@@ -6,10 +6,12 @@ import asyncio
 import aiohttp
 import requests
 import feedparser
+import urllib.parse
 from typing import List, Dict, Optional, Any
-from datetime import datetime
+from datetime import datetime, timedelta
 from bs4 import BeautifulSoup
 from pathlib import Path
+import traceback
 
 # Configure logging
 logging.basicConfig(
@@ -32,10 +34,79 @@ class DevRelScraper:
         }
         
         # Add GitHub API token if available
-        github_token = os.environ.get('GITHUB_TOKEN')  # Use environ.get() to check current environment
+        # First check environment variable directly, then try to load from .env file
+        github_token = os.environ.get('GITHUB_TOKEN')
+        
+        logger.info("Looking for GitHub token...")
+        
+        # If no token in environment, try to load from .env file
+        if not github_token:
+            logger.info("No GitHub token found in environment variables, checking .env file")
+            try:
+                # Try multiple possible locations for the .env file
+                possible_paths = [
+                    os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), '.env'),  # /backend/.env
+                    os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__)))), '.env'),  # Root .env
+                    '.env',  # Current directory
+                ]
+                
+                env_path = None
+                for path in possible_paths:
+                    logger.info(f"Checking for .env file at: {path}")
+                    if os.path.exists(path):
+                        env_path = path
+                        logger.info(f"Found .env file at: {path}")
+                        break
+                
+                if env_path:
+                    with open(env_path, 'r') as env_file:
+                        env_content = env_file.read()
+                        logger.debug(f"Read env file content (length: {len(env_content)})")
+                        
+                        # Try multiple approaches to extract the token
+                        if 'GITHUB_TOKEN' in env_content:
+                            logger.debug("Found GITHUB_TOKEN in env file content")
+                            
+                            # Method 1: Parse line by line
+                            for line in env_content.splitlines():
+                                line = line.strip()
+                                if line and not line.startswith('#') and 'GITHUB_TOKEN' in line:
+                                    logger.debug(f"Found line with GITHUB_TOKEN: {line[:15]}...")
+                                    
+                                    # Extract token using split
+                                    parts = line.split('=', 1)
+                                    if len(parts) == 2:
+                                        token_value = parts[1].strip()
+                                        # Remove any quotes
+                                        token_value = token_value.strip('"').strip("'")
+                                        
+                                        # Check if the token looks valid (non-empty and not just whitespace)
+                                        if token_value and not token_value.isspace():
+                                            github_token = token_value
+                                            logger.info(f"Successfully extracted GitHub token (length: {len(github_token)})")
+                                            break
+                        else:
+                            logger.warning("GITHUB_TOKEN not found in .env file content")
+                else:
+                    logger.warning("No .env file found in any expected location")
+            except Exception as e:
+                logger.error(f"Error loading GitHub token from .env file: {str(e)}")
+        else:
+            logger.info(f"GitHub token found in environment variables (length: {len(github_token)})")
+        
         if github_token:
-            self.headers['Authorization'] = f'Bearer {github_token}'  # Updated to use Bearer token
-            logger.info("Using GitHub API authentication")
+            # Clean the token - sometimes GitHub tokens might have newlines or other unwanted characters
+            github_token = github_token.strip()
+            # Log some token details for debugging (safely)
+            if len(github_token) > 10:
+                logger.info(f"Token starts with: {github_token[:5]}... and ends with: ...{github_token[-5:]}")
+                logger.info(f"Token length: {len(github_token)}")
+            
+            if github_token:
+                self.headers['Authorization'] = f'token {github_token}'
+                logger.info("GitHub API authentication configured successfully")
+            else:
+                logger.warning("GitHub token was found but appears to be empty")
         else:
             logger.warning("No GitHub token found. API rate limits will be restricted.")
         
@@ -49,11 +120,26 @@ class DevRelScraper:
     async def _safe_request(self, session: aiohttp.ClientSession, url: str, timeout: int = 30) -> Dict:
         """Make a safe HTTP request with timeout and error handling."""
         try:
+            # Add additional debugging for GitHub API calls
+            if 'api.github.com' in url:
+                auth_header = self.headers.get('Authorization', 'None')
+                masked_header = 'None' if auth_header == 'None' else f"{auth_header.split(' ')[0]} {'*' * 10}"
+                logger.debug(f"GitHub API request to {url} with auth: {masked_header}")
+                
             async with session.get(url, timeout=aiohttp.ClientTimeout(total=timeout)) as response:
                 if response.status == 200:
                     return await response.json()
                 elif response.status == 403:
-                    logger.error(f"Access forbidden for URL: {url}")
+                    # Check if this is a rate limit issue
+                    remaining = response.headers.get('X-RateLimit-Remaining')
+                    reset_time = response.headers.get('X-RateLimit-Reset')
+                    
+                    if remaining == '0' and reset_time:
+                        reset_datetime = datetime.fromtimestamp(int(reset_time))
+                        wait_time = (reset_datetime - datetime.now()).total_seconds()
+                        logger.error(f"GitHub API rate limit exceeded. Resets in {wait_time:.0f} seconds at {reset_datetime}")
+                    else:
+                        logger.error(f"Access forbidden for URL: {url}")
                     return {}
                 elif response.status == 404:
                     logger.error(f"Resource not found at URL: {url}")
@@ -77,60 +163,91 @@ class DevRelScraper:
     async def get_github_devrel_programs(self) -> List[Dict]:
         """Get DevRel programs and resources from GitHub."""
         resources = []
+        # Reduce the number of search terms to minimize API calls
         search_terms = [
-            'awesome+devrel', 'awesome+"developer+relations"',
-            'devrel+resources', 'devrel+guide',
+            'awesome+devrel', 
+            'devrel+resources',
             '"developer+relations"+handbook',
-            '"developer+advocacy"+guide',
-            'devrel+community+building',
-            'developer+experience+framework'
+            'developer+experience+resources'
         ]
 
         async with aiohttp.ClientSession(headers=self.headers) as session:
             for term in search_terms:
                 try:
-                    url = f'https://api.github.com/search/repositories?q={term}+in:name,description,readme&sort=stars&order=desc'
-                    data = await self._safe_request(session, url)
-
-                    if data:
-                        repos = data.get('items', [])
-                        total_count = data.get('total_count', 0)
-                        logger.info(f"Found {total_count} repositories for term: {term}")
-
-                        for repo in repos[:10]:  # Get top 10 repos per search term
-                            # Validate repository data
-                            if not all(key in repo for key in ['name', 'html_url', 'description', 'stargazers_count']):
-                                logger.warning(f"Skipping repository with incomplete data: {repo.get('name', 'unknown')}")
-                                continue
-
-                            # Check for minimum stars to ensure quality
-                            if repo['stargazers_count'] < 5:
-                                continue
-
-                            # Get detailed repo info to ensure accurate stargazer count
-                            repo_url = f"https://api.github.com/repos/{repo['full_name']}"
-                            detailed_repo = await self._safe_request(session, repo_url)
+                    # Check if we're hitting rate limits
+                    try:
+                        rate_limit_url = 'https://api.github.com/rate_limit'
+                        rate_limit_data = await self._safe_request(session, rate_limit_url)
+                        
+                        if rate_limit_data and 'resources' in rate_limit_data:
+                            core_limit = rate_limit_data['resources']['core']
+                            search_limit = rate_limit_data['resources']['search']
                             
-                            if detailed_repo:
-                                stargazers_count = detailed_repo.get('stargazers_count', repo['stargazers_count'])
-                            else:
+                            logger.info(f"GitHub API rate limits - Core: {core_limit['remaining']}/{core_limit['limit']}, "
+                                       f"Search: {search_limit['remaining']}/{search_limit['limit']}")
+                            
+                            if search_limit['remaining'] < 3:
+                                reset_time = datetime.fromtimestamp(search_limit['reset'])
+                                wait_seconds = (reset_time - datetime.now()).total_seconds() + 10
+                                
+                                if wait_seconds > 0:
+                                    logger.warning(f"GitHub search rate limit nearly exhausted. Waiting {wait_seconds:.0f} seconds until reset.")
+                                    await asyncio.sleep(wait_seconds)
+                    except Exception as e:
+                        logger.error(f"Error checking rate limits: {str(e)}")
+                    
+                    # Make the search request with exponential backoff
+                    max_retries = 3
+                    retry_delay = 2
+                    
+                    for attempt in range(max_retries):
+                        url = f'https://api.github.com/search/repositories?q={term}+in:name,description,readme&sort=stars&order=desc'
+                        data = await self._safe_request(session, url)
+                        
+                        if data and 'items' in data:
+                            repos = data.get('items', [])
+                            total_count = data.get('total_count', 0)
+                            logger.info(f"Found {total_count} repositories for term: {term}")
+                            
+                            # Process only the top repositories to reduce API calls
+                            for repo in repos[:5]:  # Reduced from 10 to 5
+                                # Validate repository data
+                                if not all(key in repo for key in ['name', 'html_url', 'description', 'stargazers_count']):
+                                    logger.warning(f"Skipping repository with incomplete data: {repo.get('name', 'unknown')}")
+                                    continue
+
+                                # Check for minimum stars to ensure quality
+                                if repo['stargazers_count'] < 10:  # Increased threshold from 5 to 10
+                                    continue
+
+                                # Use the stargazers_count from the search result instead of making another API call
                                 stargazers_count = repo['stargazers_count']
 
-                            resources.append({
-                                'name': repo['name'],
-                                'url': repo['html_url'],
-                                'description': repo['description'] or '',
-                                'stars': stargazers_count,
-                                'language': repo.get('language', ''),
-                                'topics': repo.get('topics', []),
-                                'last_updated': repo.get('updated_at', ''),
-                                'source': 'github',
-                                'search_term': term,
-                                'type': 'repository'
-                            })
+                                resources.append({
+                                    'name': repo['name'],
+                                    'url': repo['html_url'],
+                                    'description': repo['description'] or '',
+                                    'stars': stargazers_count,
+                                    'language': repo.get('language', ''),
+                                    'topics': repo.get('topics', []),
+                                    'last_updated': repo.get('updated_at', ''),
+                                    'source': 'github',
+                                    'search_term': term,
+                                    'type': 'repository'
+                                })
 
-                    # Respect GitHub API rate limits
-                    await asyncio.sleep(2)
+                            # Successfully got data, break the retry loop
+                            break
+                        elif attempt < max_retries - 1:
+                            # If we got a rate limit error, wait with exponential backoff
+                            delay = retry_delay * (2 ** attempt)
+                            logger.warning(f"GitHub API request failed, retrying in {delay} seconds...")
+                            await asyncio.sleep(delay)
+                        else:
+                            logger.error(f"GitHub API request failed after {max_retries} attempts")
+
+                    # Use a longer delay between search terms to avoid rate limits
+                    await asyncio.sleep(5)
                 except Exception as e:
                     logger.error(f"Error fetching GitHub data for term {term}: {str(e)}")
                     if 'rate limit' in str(e).lower():
@@ -246,98 +363,176 @@ class DevRelScraper:
         logging.info(f"Completed blog post collection. Total posts found: {len(blog_posts)}")
         return blog_posts
 
-    async def get_github_programs_async(self, timeout=30):
+    async def get_github_programs_async(self, session: aiohttp.ClientSession) -> List[Dict]:
         """Fetch GitHub programs asynchronously with timeout."""
         try:
             logger.info("Starting GitHub programs fetch")
-            async with aiohttp.ClientSession() as session:
-                tasks = []
+            tasks = [
+                self._safe_request(session, f'https://api.github.com/search/repositories?q={query}&sort=stars&order=desc')
                 for query in [
                     'developer+relations+program',
                     'devrel+program',
                     'developer+advocacy',
                     'developer+community'
-                ]:
-                    url = f'https://api.github.com/search/repositories?q={query}&sort=stars&order=desc'
-                    tasks.append(self._safe_request(session, url))
+                ]
+            ]
 
-                # Wait for all requests with timeout
-                results = await asyncio.gather(*tasks, return_exceptions=True)
+            # Wait for all requests with timeout
+            results = await asyncio.gather(*tasks, return_exceptions=True)
 
-                all_programs = []
-                for result in results:
-                    if isinstance(result, Exception):
-                        logger.error(f"Error in GitHub request: {str(result)}")
-                        continue
+            all_programs = []
+            for result in results:
+                if isinstance(result, Exception):
+                    logger.error(f"Error in GitHub request: {str(result)}")
+                    continue
 
-                    if result and 'items' in result:
-                        for repo in result['items']:
-                            program = {
-                                'name': repo['full_name'],
-                                'url': repo['html_url'],
-                                'description': repo.get('description', ''),
-                                'stars': repo.get('stargazers_count', 0),
-                                'language': repo.get('language', ''),
-                                'topics': repo.get('topics', []),
-                                'last_updated': repo.get('updated_at', '')
-                            }
-                            if program not in all_programs:  # Avoid duplicates
-                                all_programs.append(program)
+                if isinstance(result, dict) and 'items' in result:
+                    for repo in result['items']:
+                        program = {
+                            'name': repo['full_name'],
+                            'url': repo['html_url'],
+                            'description': repo.get('description', ''),
+                            'stars': repo.get('stargazers_count', 0),
+                            'language': repo.get('language', ''),
+                            'topics': repo.get('topics', []),
+                            'last_updated': repo.get('updated_at', '')
+                        }
+                        if program not in all_programs:  # Avoid duplicates
+                            all_programs.append(program)
 
-                logger.info(f"Successfully fetched {len(all_programs)} GitHub programs")
-                return all_programs
+            logger.info(f"Successfully fetched {len(all_programs)} GitHub programs")
+            return all_programs
 
         except asyncio.TimeoutError:
-            logger.error(f"GitHub programs fetch timed out after {timeout} seconds")
+            logger.error(f"GitHub programs fetch timed out after {self.timeout.total} seconds")
             return []
         except Exception as e:
             logger.error(f"Error in get_github_programs_async: {str(e)}")
             return []
 
-    async def get_blog_posts_async(self, timeout=30):
-        """Fetch blog posts asynchronously with timeout."""
-        try:
-            logger.info("Starting blog posts fetch")
-            async with aiohttp.ClientSession() as session:
-                tasks = []
-                blog_urls = [
-                    'https://api.rss2json.com/v1/api.json?rss_url=https://devrel.net/feed',
-                    'https://api.rss2json.com/v1/api.json?rss_url=https://www.developeradvocates.net/feed'
-                ]
+    async def get_blog_posts_async(self, session: aiohttp.ClientSession) -> list:
+        """
+        Get blog posts from feeds
+        """
+        logger.info("Fetching blog posts")
+        results = []
+        
+        # DevRel-specific terms to search for
+        devrel_terms = [
+            "devrel", "developer relations", "developer advocacy", "developer experience", 
+            "community", "developer marketing", "developer advocate"
+        ]
+        
+        # List of known good DevRel-specific RSS/Atom feeds that actually work
+        devrel_feeds = [
+            # Direct API endpoints that usually work better
+            "https://api.rss2json.com/v1/api.json?rss_url=https://dev.to/feed/tag/devrel",
+            "https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/tag/developer-relations",
+            "https://api.rss2json.com/v1/api.json?rss_url=https://developerrelations.com/feed",
+            "https://api.rss2json.com/v1/api.json?rss_url=https://devrel.net/feed",
+            "https://api.rss2json.com/v1/api.json?rss_url=https://hackernoon.com/feed/tagged/developer-relations"
+        ]
+        
+        # Popular tech blogs to check for DevRel content (will be filtered by keywords)
+        tech_blogs = [
+            "https://api.rss2json.com/v1/api.json?rss_url=https://techcrunch.com/feed",
+            "https://api.rss2json.com/v1/api.json?rss_url=https://feeds.feedburner.com/thenextweb"
+        ]
+        
+        # Combine the two lists, but we'll track which feeds are DevRel-specific
+        all_feeds = [(feed, True) for feed in devrel_feeds] + [(feed, False) for feed in tech_blogs]
+        successful_feeds = 0
+        failed_feeds = 0
 
-                for url in blog_urls:
-                    tasks.append(self._safe_request(session, url))
-
-                # Wait for all requests with timeout
-                results = await asyncio.gather(*tasks, return_exceptions=True)
-
-                all_posts = []
-                for result in results:
-                    if isinstance(result, Exception):
-                        logger.error(f"Error in blog request: {str(result)}")
+        # Process each feed
+        for feed_url, is_devrel_specific in all_feeds:
+            try:
+                logger.info(f"Fetching feed from {feed_url}")
+                
+                # Try to fetch with increased timeout
+                async with session.get(feed_url, headers=self.headers, timeout=aiohttp.ClientTimeout(total=60)) as response:
+                    if response.status != 200:
+                        logger.warning(f"Failed to fetch feed from {feed_url}, status code: {response.status}")
+                        failed_feeds += 1
                         continue
-
-                    if result and 'items' in result:
-                        for post in result['items']:
-                            blog_post = {
-                                'title': post.get('title', ''),
-                                'url': post.get('link', ''),
-                                'description': post.get('description', ''),
-                                'author': post.get('author', ''),
-                                'published_date': post.get('pubDate', '')
-                            }
-                            if blog_post not in all_posts:  # Avoid duplicates
-                                all_posts.append(blog_post)
-
-                logger.info(f"Successfully fetched {len(all_posts)} blog posts")
-                return all_posts
-
-        except asyncio.TimeoutError:
-            logger.error(f"Blog posts fetch timed out after {timeout} seconds")
-            return []
-        except Exception as e:
-            logger.error(f"Error in get_blog_posts_async: {str(e)}")
-            return []
+                    
+                    try:
+                        data = await response.json()
+                        items = data.get('items', [])
+                    except Exception as e:
+                        logger.error(f"Error parsing JSON from {feed_url}: {str(e)}")
+                        failed_feeds += 1
+                        continue
+                
+                # Process items
+                for item in items:
+                    # Skip items without titles or links
+                    if not item.get('title') or not item.get('link'):
+                        continue
+                    
+                    title = item.get('title', '')
+                    description = item.get('description', '')
+                    link = item.get('link', '')
+                    pub_date = item.get('pubDate', '')
+                    
+                    # Parse and format the publication date
+                    try:
+                        if pub_date:
+                            # Handle multiple date formats
+                            try:
+                                dt = datetime.fromisoformat(pub_date.replace('Z', '+00:00').replace(' ', 'T'))
+                            except ValueError:
+                                # Try with dateutil parser as fallback
+                                from dateutil import parser
+                                dt = parser.parse(pub_date)
+                            formatted_date = dt.strftime('%Y-%m-%d %H:%M:%S')
+                        else:
+                            formatted_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                    except Exception:
+                        # If date parsing fails, use current date
+                        formatted_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                    
+                    # Calculate relevance score
+                    relevance_score = sum(1 for term in devrel_terms if term.lower() in f"{title} {description}".lower())
+                    
+                    # For DevRel-specific feeds, include all items
+                    # For general tech blogs, only include items with a relevance score > 0
+                    if is_devrel_specific or relevance_score > 0:
+                        # Create a blog post dictionary
+                        blog_post = {
+                            "title": title,
+                            "description": self._clean_html(description),
+                            "link": link,
+                            "date": formatted_date,
+                            "source": feed_url,
+                            "resource_type": "blog",
+                            "relevance_score": relevance_score
+                        }
+                        results.append(blog_post)
+                
+                successful_feeds += 1
+                
+            except Exception as e:
+                logger.error(f"Error fetching blog posts from {feed_url}: {str(e)}")
+                failed_feeds += 1
+        
+        # Remove duplicates based on URL
+        unique_results = []
+        seen_urls = set()
+        for post in results:
+            if post['link'] not in seen_urls:
+                seen_urls.add(post['link'])
+                unique_results.append(post)
+        
+        # Sort by relevance score (highest first) and then by date (newest first)
+        sorted_results = sorted(
+            unique_results, 
+            key=lambda x: (-x.get('relevance_score', 0), x.get('date', '0000-00-00')), 
+            reverse=True
+        )
+        
+        logger.info(f"Successfully fetched {len(sorted_results)} blog posts from {successful_feeds} feeds. {failed_feeds} feeds failed.")
+        return sorted_results
 
     async def get_job_listings_async(self) -> List[Dict]:
         """Get job listings from various sources asynchronously."""
@@ -649,119 +844,43 @@ class DevRelScraper:
             (description and any(keyword in description for keyword in description_keywords))
         )
 
-    async def scrape_all_async(self):
-        """Scrape all resources asynchronously."""
+    async def scrape_all(self) -> Dict[str, Any]:
+        """Scrape DevRel GitHub programs, blogs, and job listings."""
         try:
-            logger.info("Starting async resource scraping")
-
-            # Create tasks for all resource types
-            tasks = [
-                self.get_github_devrel_programs(),
-                self.get_blog_posts_async(),
-                self.get_job_listings_async()  # Use get_job_listings_async directly
-            ]
-
-            # Wait for all tasks to complete
-            results = await asyncio.gather(*tasks, return_exceptions=True)
-
-            # Process results and handle any exceptions
-            github_programs = []
-            blog_posts = []
-            job_listings = []
-
-            for i, result in enumerate(results):
-                if isinstance(result, Exception):
-                    logger.error(f"Error in async scraping task {i}: {str(result)}")
-                    continue
-
-                if i == 0:  # GitHub programs
-                    github_programs = result or []
-                elif i == 1:  # Blog posts
-                    blog_posts = result or []
-                elif i == 2:  # Job listings
-                    job_listings = result or []
-
-            # Load existing resources
-            existing = self._load_existing_resources()
-
-            # Append new resources
-            updated = self.append_resources({
-                'github_programs': github_programs,
-                'blog_posts': blog_posts,
-                'job_listings': job_listings
-            }, existing)
-
-            logger.info(f"Resource counts - GitHub: {len(updated['github_programs'])}, "
-                       f"Blogs: {len(updated['blog_posts'])}, Jobs: {len(updated['job_listings'])}")
-
-            return updated
-
-        except Exception as e:
-            logger.error(f"Error in scrape_all_async: {str(e)}")
-            return self._load_existing_resources()
-
-    def scrape_all(self):
-        """Synchronous wrapper for async scraping."""
-        try:
-            # Create a new event loop instead of getting the current one
-            loop = asyncio.new_event_loop()
-            asyncio.set_event_loop(loop)
+            logger.info("Starting DevRel resource scraping")
             
-            try:
-                # Run scraping
-                results = loop.run_until_complete(self.scrape_all_async())
-            finally:
-                # Always close the loop to prevent warnings
-                loop.close()
-            
-            # Load existing resources
-            existing = self._load_existing_resources()
-            
-            # Merge new resources with existing ones
-            merged = self.append_resources(results, existing)
-            
-            # Save GitHub results
-            github_path = os.path.join(self.data_dir, 'github_results.json')
-            with open(github_path, 'w', encoding='utf-8') as f:
-                json.dump(merged['github_programs'], f, indent=2)
-            
-            # Save blog posts
-            blogs_path = os.path.join(self.data_dir, 'blog_results.json')
-            with open(blogs_path, 'w', encoding='utf-8') as f:
-                json.dump(merged['blog_posts'], f, indent=2)
-            
-            # Save job listings
-            jobs_path = os.path.join(self.data_dir, 'job_results.json')
-            with open(jobs_path, 'w', encoding='utf-8') as f:
-                # Deduplicate one final time before saving
-                job_dict = {}
-                for job in merged['job_listings']:
-                    key = (job.get('company', ''), job.get('title', ''))
-                    if key not in job_dict:
-                        if 'location' in job and 'locations' not in job:
-                            job['locations'] = [job['location']]
-                            job.pop('location', None)
-                        job_dict[key] = job
-                    else:
-                        existing_job = job_dict[key]
-                        if 'location' in job:
-                            locations = set(existing_job.get('locations', []))
-                            locations.add(job['location'])
-                            existing_job['locations'] = sorted(list(locations))
+            async with aiohttp.ClientSession(headers=self.headers, timeout=self.timeout) as session:
+                # Run all scraping tasks concurrently
+                github_programs_task = self.get_github_programs_async(session)
+                blog_posts_task = self.get_blog_posts_async(session)
+                job_listings_task = self.get_job_listings_async()
                 
-                # Convert back to list and sort by added_at
-                final_jobs = sorted(
-                    job_dict.values(),
-                    key=lambda x: x.get('added_at', ''),
-                    reverse=True
+                # Gather results
+                github_programs, blog_posts, job_listings = await asyncio.gather(
+                    github_programs_task,
+                    blog_posts_task,
+                    job_listings_task
                 )
-                json.dump(final_jobs, f, indent=2)
-            
-            return merged
-            
+                
+                logger.info(f"Scraped resources: {len(github_programs)} GitHub programs, {len(blog_posts)} blog posts, {len(job_listings)} job listings")
+                
+                # Append results
+                resources = await self.append_resources({
+                    "github_programs": github_programs,
+                    "blog_posts": blog_posts,
+                    "job_listings": job_listings
+                })
+                
+                return resources
+                
         except Exception as e:
             logger.error(f"Error in scrape_all: {str(e)}")
-            return self._load_existing_resources()
+            return {
+                "error": str(e),
+                "github_programs": [],
+                "blog_posts": [],
+                "job_listings": []
+            }
 
     def _load_existing_resources(self) -> Dict:
         """Load existing resources from JSON files."""
@@ -826,87 +945,183 @@ class DevRelScraper:
         title = self._normalize_string(job.get('title', ''))
         return (company, title)
 
-    def append_resources(self, new_resources: Dict, existing_resources: Dict) -> Dict:
-        """Append new resources to existing ones without duplicates."""
-        merged = existing_resources.copy()
-
-        for resource_type in ['github_programs', 'blog_posts', 'job_listings']:
-            if resource_type not in merged:
-                merged[resource_type] = []
-
-            if resource_type in new_resources:
-                # Add timestamp to new resources
-                current_time = datetime.utcnow().isoformat()
-                for resource in new_resources[resource_type]:
-                    if not resource.get('added_at'):  # Only add timestamp if not already present
-                        resource['added_at'] = current_time
-
-                if resource_type == 'job_listings':
-                    # For job listings, deduplicate based on normalized company and title
-                    job_dict = {}
-                    
-                    # First process existing jobs
-                    for job in merged[resource_type]:
-                        key = self._get_job_key(job)
-                        if key not in job_dict:
-                            if 'location' in job and 'locations' not in job:
-                                job['locations'] = [job['location']]
-                                job.pop('location', None)
-                            job_dict[key] = job
-                        else:
-                            existing_job = job_dict[key]
-                            if 'location' in job:
-                                locations = set(existing_job.get('locations', []))
-                                locations.add(job['location'])
-                                existing_job['locations'] = sorted(list(locations))
-                                job.pop('location', None)
-                    
-                    # Then process new jobs
-                    for job in new_resources[resource_type]:
-                        key = self._get_job_key(job)
-                        if key not in job_dict:
-                            if 'location' in job and 'locations' not in job:
-                                job['locations'] = [job['location']]
-                                job.pop('location', None)
-                            job_dict[key] = job
-                        else:
-                            existing_job = job_dict[key]
-                            if 'location' in job:
-                                locations = set(existing_job.get('locations', []))
-                                locations.add(job['location'])
-                                existing_job['locations'] = sorted(list(locations))
-                                job.pop('location', None)
-                    
-                    # Convert back to list and sort
-                    merged[resource_type] = sorted(
-                        job_dict.values(),
-                        key=lambda x: x.get('added_at', ''),
-                        reverse=True
-                    )
-                else:
-                    # For other resource types, deduplicate based on URL
-                    existing_urls = {r.get('url', '') for r in merged[resource_type]}
-                    new_items = [
-                        r for r in new_resources[resource_type]
-                        if r.get('url', '') and r.get('url', '') not in existing_urls
-                    ]
-                    merged[resource_type].extend(new_items)
-                    
-                    # Sort GitHub programs by stars, others by added_at
-                    if resource_type == 'github_programs':
-                        merged[resource_type].sort(
-                            key=lambda x: x.get('stars', 0),
-                            reverse=True
-                        )
-                    else:
-                        merged[resource_type].sort(
-                            key=lambda x: x.get('added_at', ''),
-                            reverse=True
-                        )
+    async def append_resources(self, new_resources: Dict[str, List[Dict]]) -> Dict[str, List[Dict]]:
+        """
+        Append resources to existing data with 2-month filtering.
+        
+        Args:
+            new_resources: Dictionary containing new resources to append
+            
+        Returns:
+            Dictionary with combined resources
+        """
+        try:
+            # Load existing resources
+            existing_resources = self._load_existing_resources()
+            
+            # Set the current timestamp for newly added resources
+            timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            
+            # Create output structure
+            result = {
+                'github_programs': [],
+                'blog_posts': [],
+                'job_listings': []
+            }
+            
+            # Calculate date 2 months ago for filtering
+            two_months_ago = datetime.now() - timedelta(days=60)
+            
+            # Helper function to add a timestamp to resources
+            def add_timestamp(resources, resource_type):
+                for resource in resources:
+                    if 'added_at' not in resource:
+                        resource['added_at'] = timestamp
+                    if 'resource_type' not in resource:
+                        resource['resource_type'] = resource_type
+                return resources
+            
+            # Process GitHub programs
+            github_programs = add_timestamp(new_resources.get('github_programs', []), 'github')
+            existing_github = existing_resources.get('github_programs', [])
+            
+            # Merge GitHub programs
+            all_github = github_programs + existing_github
+            github_dict = {}
+            
+            for program in all_github:
+                key = program.get('url', '')  # Use url as key, not html_url
+                if key and key not in github_dict:
+                    github_dict[key] = program
+            
+            result['github_programs'] = sorted(
+                github_dict.values(),
+                key=lambda x: int(x.get('stars', 0)) if x.get('stars') else 0,  # Handle None values
+                reverse=True
+            )
+            logger.info(f"Added {len(github_programs)} new GitHub repositories, total: {len(result['github_programs'])}")
+            
+            # Process blog posts - CRITICAL FIX: Keep existing blogs even if no new ones are fetched
+            blog_posts = add_timestamp(new_resources.get('blog_posts', []), 'blog')
+            existing_blogs = existing_resources.get('blog_posts', [])
+            
+            # IMPORTANT: If no new blog posts were fetched but we have existing ones, use existing
+            if len(blog_posts) == 0 and len(existing_blogs) > 0:
+                logger.warning("No new blog posts fetched but found existing ones - preserving existing blog posts")
+                result['blog_posts'] = existing_blogs
+                logger.info(f"Preserved {len(existing_blogs)} existing blog posts")
+            else:
+                # Normal merge with blog post relevance score handling
+                all_blogs = blog_posts + existing_blogs
+                blog_dict = {}
                 
-                logger.info(f"Added {len(new_items if resource_type != 'job_listings' else new_resources[resource_type])} new {resource_type}")
-
-        return merged
+                for post in all_blogs:
+                    key = post.get('link', '')
+                    if not key:
+                        continue
+                        
+                    if key not in blog_dict:
+                        blog_dict[key] = post
+                    elif key in blog_dict:
+                        # If we already have this post, keep the one with higher relevance score
+                        existing_score = blog_dict[key].get('relevance_score', 0)
+                        new_score = post.get('relevance_score', 0)
+                        if new_score > existing_score:
+                            blog_dict[key] = post
+                
+                result['blog_posts'] = sorted(
+                    blog_dict.values(),
+                    key=lambda x: (-x.get('relevance_score', 0), x.get('date', '0000-00-00')),
+                    reverse=True
+                )
+                logger.info(f"Added {len(blog_posts)} new blog posts, total: {len(result['blog_posts'])}")
+            
+            # Process job listings with 2-month filtering
+            job_listings = add_timestamp(new_resources.get('job_listings', []), 'job')
+            existing_jobs = existing_resources.get('job_listings', [])
+            
+            # Merge job listings
+            all_jobs = job_listings + existing_jobs
+            job_dict = {}
+            filtered_count = 0
+            
+            for job in all_jobs:
+                # Check if job is from within the last 2 months
+                job_date_str = job.get('date', job.get('added_at', ''))
+                if job_date_str:
+                    try:
+                        job_date = datetime.strptime(job_date_str, '%Y-%m-%d %H:%M:%S')
+                        if job_date < two_months_ago:
+                            filtered_count += 1
+                            continue  # Skip jobs older than 2 months
+                    except ValueError:
+                        # If date parsing fails, try another format
+                        try:
+                            job_date = datetime.strptime(job_date_str, '%Y-%m-%d')
+                            if job_date < two_months_ago:
+                                filtered_count += 1
+                                continue  # Skip jobs older than 2 months
+                        except ValueError:
+                            # Keep the job if we can't parse the date
+                            pass
+                
+                # Use company and title as a unique key
+                key = (job.get('company', ''), job.get('title', ''))
+                if key and key not in job_dict:
+                    # Normalize location field
+                    if 'location' in job and 'locations' not in job:
+                        job['locations'] = [job['location']]
+                        job.pop('location', None)
+                    job_dict[key] = job
+                elif key in job_dict:
+                    # If already exists, combine locations
+                    existing_job = job_dict[key]
+                    if 'location' in job:
+                        locations = set(existing_job.get('locations', []))
+                        locations.add(job['location'])
+                        existing_job['locations'] = sorted(list(locations))
+            
+            result['job_listings'] = sorted(
+                job_dict.values(),
+                key=lambda x: x.get('added_at', ''),
+                reverse=True
+            )
+            logger.info(f"Added {len(job_listings)} new job listings, filtered out {filtered_count} older than 2 months, total: {len(result['job_listings'])}")
+            
+            # Save results to disk
+            await self._save_results(result)
+            
+            return result
+        
+        except Exception as e:
+            logger.error(f"Error in append_resources: {str(e)}")
+            traceback.print_exc()  # Print full traceback for better debugging
+            # EMERGENCY RECOVERY: Return existing resources in case of error
+            logger.warning("Error occurred during resource processing - returning existing resources")
+            return existing_resources
+    
+    async def _save_results(self, results: Dict[str, List[Dict]]):
+        """Save results to disk."""
+        try:
+            # Save GitHub results - fix filename
+            github_path = os.path.join(self.data_dir, 'github_results.json')
+            with open(github_path, 'w', encoding='utf-8') as f:
+                json.dump(results['github_programs'], f, indent=2)
+            
+            # Save blog posts - ensure using the correct filename
+            blogs_path = os.path.join(self.data_dir, 'blog_results.json')
+            with open(blogs_path, 'w', encoding='utf-8') as f:
+                json.dump(results['blog_posts'], f, indent=2)
+            
+            # Save job listings
+            jobs_path = os.path.join(self.data_dir, 'job_results.json')
+            with open(jobs_path, 'w', encoding='utf-8') as f:
+                json.dump(results['job_listings'], f, indent=2)
+            
+            logger.info(f"Successfully saved results to disk: {github_path}, {blogs_path}, {jobs_path}")
+        except Exception as e:
+            logger.error(f"Error saving results to disk: {str(e)}")
+            raise
 
     def save_resources(self, resources_type: str, resources: list):
         """Save resources to a JSON file."""
@@ -941,15 +1156,51 @@ class DevRelScraper:
             logger.error(f"Error in get_devrel_job_listings: {str(e)}")
             return []
 
+    def _clean_html(self, html_text):
+        """Clean HTML content by removing tags and unnecessary whitespace."""
+        if not html_text:
+            return ""
+        
+        try:
+            # Use BeautifulSoup to remove HTML tags
+            soup = BeautifulSoup(html_text, 'html.parser')
+            text = soup.get_text(separator=' ', strip=True)
+            
+            # Remove extra whitespace
+            text = ' '.join(text.split())
+            
+            # Truncate if too long (to prevent excessively large descriptions)
+            if len(text) > 1000:
+                text = text[:997] + "..."
+                
+            return text
+        except Exception as e:
+            logger.error(f"Error cleaning HTML: {str(e)}")
+            # Return a cleaned version of the original without BeautifulSoup
+            text = html_text.replace('<', ' <').replace('>', '> ')
+            return ' '.join(text.split())[:1000]
+
 def main():
     """Main function to run the scraper and save results."""
-    scraper = DevRelScraper()
-    success = scraper.scrape_all()
-
-    if success:
-        logger.info("Scraping completed successfully")
-    else:
-        logger.error("Scraping encountered errors")
+    try:
+        logger.info("Starting scraper from main function")
+        # Create a new event loop to run the async code
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        
+        # Run the scrape_all method in the event loop
+        scraper = DevRelScraper()
+        try:
+            result = loop.run_until_complete(scraper.scrape_all())
+            if result:
+                logger.info("Scraping completed successfully")
+            else:
+                logger.error("Scraping encountered errors")
+        finally:
+            # Always close the loop
+            loop.close()
+    except Exception as e:
+        logger.error(f"Error in main function: {str(e)}")
 
 if __name__ == '__main__':
     main()
