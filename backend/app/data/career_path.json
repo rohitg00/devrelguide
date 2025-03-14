@@ -1,0 +1,60 @@
+{
+  "nodes": [
+    {
+      "id": "devrel-engineer-1",
+      "label": "Developer Relations Engineer",
+      "level": 2,
+      "category": "technical",
+      "impact": 75,
+      "skills": ["Technical Writing", "Community Management", "API Documentation"],
+      "connections": ["devrel-manager-1", "developer-1"]
+    },
+    {
+      "id": "devrel-manager-1",
+      "label": "Developer Relations Manager",
+      "level": 3,
+      "category": "management",
+      "impact": 85,
+      "skills": ["Team Leadership", "Strategy", "Content Planning"],
+      "connections": ["head-devrel-1"]
+    },
+    {
+      "id": "developer-1",
+      "label": "Developer Advocate",
+      "level": 2,
+      "category": "technical",
+      "impact": 70,
+      "skills": ["Public Speaking", "Code Demos", "Technical Support"],
+      "connections": ["devrel-engineer-1"]
+    },
+    {
+      "id": "head-devrel-1",
+      "label": "Head of Developer Relations",
+      "level": 4,
+      "category": "leadership",
+      "impact": 95,
+      "skills": ["Executive Communication", "Program Management", "Strategy"],
+      "connections": []
+    }
+  ],
+  "connections": [
+    {
+      "source": "devrel-engineer-1",
+      "target": "devrel-manager-1",
+      "strength": 0.8
+    },
+    {
+      "source": "devrel-engineer-1",
+      "target": "developer-1",
+      "strength": 0.6
+    },
+    {
+      "source": "devrel-manager-1",
+      "target": "head-devrel-1",
+      "strength": 0.9
+    }
+  ],
+  "metadata": {
+    "last_updated": "2024-12-20T03:29:29.244657"
+  }
+}

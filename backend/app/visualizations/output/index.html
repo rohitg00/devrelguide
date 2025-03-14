@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevRel Resources Dashboard</title>
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .visualization {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2d3748;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            font-weight: 600;
+        }
+        h2 {
+            color: #4a5568;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            font-weight: 500;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+            h2 {
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>DevRel Resources Dashboard</h1>
+
+        <div class="visualization">
+            <h2>DevRel Career Path</h2>
+            <div class="mermaid">
+flowchart TD
+    A(Entry Level)-->B(Developer Advocate)
+    A-->C(Technical Writer)
+    B-->D(Senior DevRel)
+    C-->D
+    D-->E(DevRel Manager)
+    D-->F(Principal DevRel)
+    E-->G(Director)
+    F-->G
+    G-->H(VP of DevX)
+            </div>
+        </div>
+
+        <div class="visualization">
+            <h2>DevRel Metrics Dashboard</h2>
+            <div id="metrics-dashboard"></div>
+        </div>
+
+        <div class="visualization">
+            <h2>Community Growth Network</h2>
+            <div id="community-graph"></div>
+        </div>
+
+        <div class="visualization">
+            <h2>Skills Matrix</h2>
+            <div id="skills-matrix"></div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Mermaid with specific configuration
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'neutral',
+            securityLevel: 'loose',
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis'
+            }
+        });
+        // Load and process the data
+        async function initializeVisualizations() {
+            try {
+                const [githubData, blogData] = await Promise.all([
+                    fetch('./data/github_results.json').then(response => {
+                        if (!response.ok) throw new Error(`Failed to load GitHub data: ${response.status}`);
+                        return response.json();
+                    }),
+                    fetch('./data/blog_results.json').then(response => {
+                        if (!response.ok) throw new Error(`Failed to load blog data: ${response.status}`);
+                        return response.json();
+                    })
+                ]);
+
+                // Metrics Dashboard
+                const metrics = {
+                    labels: ['GitHub Repos', 'Blog Posts', 'Active Communities', 'Total Resources'],
+                    values: [
+                        githubData.length,
+                        blogData.length,
+                        new Set(githubData.map(repo => repo.language)).size,
+                        githubData.length + blogData.length
+                    ],
+                    colors: ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4']
+                };
+
+                Plotly.newPlot('metrics-dashboard', [{
+                    type: 'bar',
+                    x: metrics.labels,
+                    y: metrics.values,
+                    marker: { color: metrics.colors }
+                }], {
+                    margin: { t: 30, b: 40, l: 40, r: 20 },
+                    responsive: true,
+                    title: 'DevRel Resource Metrics'
+                });
+
+                // Skills Matrix
+                const skills = [
+                    { skill: 'Technical Writing', value: 0.9 },
+                    { skill: 'Public Speaking', value: 0.8 },
+                    { skill: 'Community Building', value: 0.85 },
+                    { skill: 'Programming', value: 0.75 },
+                    { skill: 'Documentation', value: 0.9 },
+                    { skill: 'Analytics', value: 0.7 }
+                ];
+
+                const margin = { top: 20, right: 30, bottom: 40, left: 120 };
+                const width = Math.min(600, window.innerWidth - margin.left - margin.right);
+                const height = 300;
+
+                const svg = d3.select('#skills-matrix')
+                    .append('svg')
+                    .attr('width', '100%')
+                    .attr('height', height + margin.top + margin.bottom)
+                    .attr('viewBox', `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom}`)
+                    .append('g')
+                    .attr('transform', `translate(${margin.left},${margin.top})`);
+
+                const x = d3.scaleLinear()
+                    .domain([0, 1])
+                    .range([0, width]);
+
+                const y = d3.scaleBand()
+                    .domain(skills.map(d => d.skill))
+                    .range([0, height])
+                    .padding(0.1);
+
+                svg.selectAll('rect')
+                    .data(skills)
+                    .enter()
+                    .append('rect')
+                    .attr('y', d => y(d.skill))
+                    .attr('height', y.bandwidth())
+                    .attr('x', 0)
+                    .attr('width', d => x(d.value))
+                    .attr('fill', '#45B7D1');
+
+                svg.append('g')
+                    .attr('transform', `translate(0,${height})`)
+                    .call(d3.axisBottom(x).ticks(5).tickFormat(d3.format('.0%')));
+
+                svg.append('g')
+                    .call(d3.axisLeft(y));
+
+                // Community Growth Network
+                const networkData = {
+                    nodes: githubData.slice(0, 10).map(repo => ({
+                        id: repo.name,
+                        group: 1,
+                        size: Math.log(repo.stars + 1) * 5
+                    })),
+                    links: []
+                };
+
+                // Add connections between related repositories
+                for (let i = 0; i < networkData.nodes.length; i++) {
+                    for (let j = i + 1; j < networkData.nodes.length; j++) {
+                        if (Math.random() < 0.3) {
+                            networkData.links.push({
+                                source: networkData.nodes[i].id,
+                                target: networkData.nodes[j].id,
+                                value: 1
+                            });
+                        }
+                    }
+                }
+
+                const networkWidth = Math.min(600, window.innerWidth - 40);
+                const networkHeight = 400;
+
+                const networkSvg = d3.select('#community-graph')
+                    .append('svg')
+                    .attr('width', networkWidth)
+                    .attr('height', networkHeight);
+
+                const simulation = d3.forceSimulation(networkData.nodes)
+                    .force('link', d3.forceLink(networkData.links).id(d => d.id))
+                    .force('charge', d3.forceManyBody().strength(-50))
+                    .force('center', d3.forceCenter(networkWidth / 2, networkHeight / 2));
+
+                const link = networkSvg.append('g')
+                    .selectAll('line')
+                    .data(networkData.links)
+                    .enter().append('line')
+                    .attr('stroke', '#999')
+                    .attr('stroke-opacity', 0.6);
+
+                const node = networkSvg.append('g')
+                    .selectAll('circle')
+                    .data(networkData.nodes)
+                    .enter().append('circle')
+                    .attr('r', d => d.size)
+                    .attr('fill', '#45B7D1')
+                    .call(d3.drag()
+                        .on('start', dragstarted)
+                        .on('drag', dragged)
+                        .on('end', dragended));
+
+                simulation.on('tick', () => {
+                    link
+                        .attr('x1', d => d.source.x)
+                        .attr('y1', d => d.source.y)
+                        .attr('x2', d => d.target.x)
+                        .attr('y2', d => d.target.y);
+
+                    node
+                        .attr('cx', d => d.x)
+                        .attr('cy', d => d.y);
+                });
+
+                function dragstarted(event) {
+                    if (!event.active) simulation.alphaTarget(0.3).restart();
+                    event.subject.fx = event.subject.x;
+                    event.subject.fy = event.subject.y;
+                }
+
+                function dragged(event) {
+                    event.subject.fx = event.x;
+                    event.subject.fy = event.y;
+                }
+
+                function dragended(event) {
+                    if (!event.active) simulation.alphaTarget(0);
+                    event.subject.fx = null;
+                    event.subject.fy = null;
+                }
+
+                // Make visualizations responsive
+                window.addEventListener('resize', () => {
+                    Plotly.Plots.resize('metrics-dashboard');
+                });
+            } catch (error) {
+                console.error('Error initializing visualizations:', error);
+                // Display error message on the dashboard
+                document.querySelectorAll('.visualization').forEach(viz => {
+                    if (!viz.querySelector('.error-message')) {
+                        const errorDiv = document.createElement('div');
+                        errorDiv.className = 'error-message';
+                        errorDiv.style.color = '#FF6B6B';
+                        errorDiv.style.padding = '1rem';
+                        errorDiv.textContent = 'Error loading data. Please try again later.';
+                        viz.appendChild(errorDiv);
+                    }
+                });
+            }
+        }
+
+        // Initialize all visualizations when the page loads
+        window.addEventListener('load', initializeVisualizations);
+    </script>
+</body>
+</html>

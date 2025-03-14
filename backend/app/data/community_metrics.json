@@ -1,0 +1,34 @@
+{
+  "nodes": [
+    { "id": "1", "name": "Developers", "category": "Technical", "size": 100 },
+    { "id": "2", "name": "Content Creators", "category": "Content", "size": 75 },
+    { "id": "3", "name": "Community Members", "category": "Community", "size": 150 },
+    { "id": "4", "name": "Open Source", "category": "Technical", "size": 80 },
+    { "id": "5", "name": "Documentation", "category": "Content", "size": 60 },
+    { "id": "6", "name": "Events", "category": "Community", "size": 90 },
+    { "id": "7", "name": "Product Teams", "category": "Technical", "size": 70 }
+  ],
+  "links": [
+    { "source": "1", "target": "4", "value": 30, "type": "collaboration" },
+    { "source": "1", "target": "6", "value": 20, "type": "participation" },
+    { "source": "2", "target": "5", "value": 25, "type": "contribution" },
+    { "source": "2", "target": "3", "value": 15, "type": "engagement" },
+    { "source": "3", "target": "6", "value": 35, "type": "participation" },
+    { "source": "4", "target": "7", "value": 20, "type": "integration" },
+    { "source": "5", "target": "1", "value": 15, "type": "support" },
+    { "source": "6", "target": "2", "value": 25, "type": "organization" },
+    { "source": "7", "target": "3", "value": 30, "type": "feedback" }
+  ],
+  "metrics": [
+    {"name": "GitHub Stars", "value": 1200, "change": 15, "trend": "up"},
+    {"name": "Discord Members", "value": 5000, "change": 8, "trend": "up"},
+    {"name": "Twitter Followers", "value": 8500, "change": 12, "trend": "up"},
+    {"name": "Blog Subscribers", "value": 3000, "change": 5, "trend": "stable"}
+  ],
+  "timeline": [
+    {"date": "2024-01", "engagement": 85, "growth": 75, "satisfaction": 90},
+    {"date": "2024-02", "engagement": 92, "growth": 82, "satisfaction": 88},
+    {"date": "2024-03", "engagement": 88, "growth": 85, "satisfaction": 92},
+    {"date": "2024-04", "engagement": 95, "growth": 88, "satisfaction": 95}
+  ]
+}
