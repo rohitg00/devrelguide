@@ -58,3 +58,4 @@ uvicorn[standard]==0.34.0
 uvloop==0.21.0
 watchfiles==1.0.3
 websockets==14.1
+cachetools==4.2.4
