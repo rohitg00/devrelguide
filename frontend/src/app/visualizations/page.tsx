@@ -212,7 +212,8 @@ const visualizations = [
   }
 ]
 
-export default function VisualizationsPage() {
+// Create a client component that uses useSearchParams
+function VisualizationsContent() {
   const searchParams = useSearchParams()
   const vizParam = searchParams.get('viz')
   
@@ -248,47 +249,49 @@ export default function VisualizationsPage() {
           DevRel Visualizations
         </h1>
         <p className="text-xl text-muted-foreground max-w-[800px]">
-          Explore interactive visualizations that provide insights into Developer Relations trends, metrics, and community dynamics
+          Interactive visualizations for DevRel metrics and insights
         </p>
       </div>
 
-      {/* Navigation */}
-      <div className="flex items-center justify-between">
-        <Button
-          variant="ghost"
-          onClick={previousVisualization}
-          className="flex items-center gap-2"
-        >
-          <ChevronLeft className="h-4 w-4" />
-          Previous
-        </Button>
-        <span className="text-sm text-muted-foreground">
-          {currentIndex + 1} of {visualizations.length} - {visualizations[currentIndex].title}
-        </span>
-        <Button
-          variant="ghost"
-          onClick={nextVisualization}
-          className="flex items-center gap-2"
-        >
-          Next
-          <ChevronRight className="h-4 w-4" />
-        </Button>
-      </div>
-
-      {/* Current Visualization */}
-      <div className="bg-card rounded-lg border shadow-sm overflow-hidden">
-        <div className="p-6">
+      {/* Visualization */}
+      <div className="flex flex-col gap-6">
+        <div className="flex items-center justify-between">
           <h2 className="text-2xl font-bold">{visualizations[currentIndex].title}</h2>
-          <p className="text-muted-foreground">{visualizations[currentIndex].description}</p>
+          <div className="flex items-center gap-2">
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={previousVisualization}
+              aria-label="Previous visualization"
+            >
+              <ChevronLeft className="h-5 w-5" />
+            </Button>
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={nextVisualization}
+              aria-label="Next visualization"
+            >
+              <ChevronRight className="h-5 w-5" />
+            </Button>
+          </div>
         </div>
-        <div className="p-6 pt-0">
-          <Suspense fallback={<LoadingFallback />}>
-            <VisualizationContainer>
-              <CurrentVisualization />
-            </VisualizationContainer>
-          </Suspense>
-        </div>
+        <p className="text-muted-foreground">
+          {visualizations[currentIndex].description}
+        </p>
+        <VisualizationContainer>
+          <CurrentVisualization />
+        </VisualizationContainer>
       </div>
     </div>
+  )
+}
+
+// Main component with Suspense
+export default function VisualizationsPage() {
+  return (
+    <Suspense fallback={<LoadingFallback />}>
+      <VisualizationsContent />
+    </Suspense>
   )
 }
