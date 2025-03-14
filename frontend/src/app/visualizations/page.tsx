@@ -279,7 +279,7 @@ function VisualizationsContent() {
         <p className="text-muted-foreground">
           {visualizations[currentIndex].description}
         </p>
-        <VisualizationContainer>
+        <VisualizationContainer title={visualizations[currentIndex].title}>
           <CurrentVisualization />
         </VisualizationContainer>
       </div>
