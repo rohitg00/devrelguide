@@ -4,6 +4,8 @@ A comprehensive web application for Developer Relations (DevRel) resources, tool
 
 ## What is the DevRel Resources Application?
 
+![GIF](/frontend/public/images/homepage.gif)
+
 This application serves as a centralized hub for Developer Relations resources, providing tools, templates, strategies, and metrics to help DevRel professionals excel in their roles. Whether you're new to DevRel or an experienced professional, this application offers valuable resources to enhance your DevRel efforts.
 
 ## Key Features and Benefits
@@ -106,4 +108,4 @@ Contributions to the DevRel Resources Web Application are welcome! Feel free to 
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
