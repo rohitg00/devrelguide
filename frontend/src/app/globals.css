@@ -314,3 +314,12 @@
     transform: rotate(360deg);
   }
 }
+
+@media (prefers-color-scheme: dark) {
+  .from-white {
+    --tw-gradient-from: var(--tw-gradient-stops);
+  }
+  .bg-white {
+    background-color: var(--tw-gradient-stops);
+  }
+}
