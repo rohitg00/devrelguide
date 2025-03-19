@@ -82,11 +82,16 @@ export async function POST() {
       { content: markdown },
       {
         dest: path.join(process.cwd(), 'public', 'generated', 'DevRel-Whitepaper-2024.pdf'),
-        stylesheet: stylesPath,
+        stylesheet: [stylesPath],
         css: `pre, code { background: #f8fafc !important; }`,
         pdf_options: {
           format: 'A4',
-          margin: '30mm 20mm',
+          margin: {
+            top: '30mm',
+            right: '20mm',
+            bottom: '30mm',
+            left: '20mm',
+          },
           printBackground: true,
         },
         marked_options: {
