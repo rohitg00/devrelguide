@@ -95,7 +95,7 @@ export function WhitepaperSection() {
               </motion.h2>
               
               <motion.p 
-                className="text-xl text-gray-600"
+                className="text-xl text-gray-600 dark:text-gray-300"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -116,7 +116,7 @@ export function WhitepaperSection() {
                   <div key={highlight.title} className="flex flex-col items-center text-center p-4">
                     <highlight.icon className="w-8 h-8 text-primary mb-3" />
                     <h3 className="font-semibold mb-2">{highlight.title}</h3>
-                    <p className="text-sm text-gray-600">{highlight.description}</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-300">{highlight.description}</p>
                   </div>
                 ))}
               </motion.div>
@@ -134,7 +134,7 @@ export function WhitepaperSection() {
                   {keyBenefits.map((benefit) => (
                     <div key={benefit} className="flex items-start gap-2">
                       <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-1" />
-                      <span className="text-gray-700">{benefit}</span>
+                      <span className="text-gray-700 dark:text-gray-300">{benefit}</span>
                     </div>
                   ))}
                 </div>
@@ -149,7 +149,7 @@ export function WhitepaperSection() {
               viewport={{ once: true }}
             >
               <h3 className="text-2xl font-semibold mb-4">Download Free Whitepaper</h3>
-              <p className="text-gray-600 mb-6">
+              <p className="text-gray-600 dark:text-gray-300 mb-6">
                 Get practical insights and strategies to build better developer programs and measure their impact.
               </p>
               
