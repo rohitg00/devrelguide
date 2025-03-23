@@ -56,6 +56,51 @@ interface DevRelProgram {
 // Sample data for DevRel programs
 const devRelPrograms: DevRelProgram[] = [
   {
+    id: 'cypress-ambassador',
+    name: 'Cypress Ambassador',
+    organization: 'Cypress',
+    description: 'Share your Cypress knowledge and expertise with the greater developer community.',
+    benefits: [
+      'Insider access',
+      'Special swag',
+      'Stay in the know',
+      'Joint promo efforts',
+      'Grow your network',
+      'Make an impact'
+    ],
+    requirements: [
+      'A passion for educating fellow developers and engineers',
+      'Experience delivering Cypress talks at conferences, meetups, events, etc.',
+      'Ability to build and foster communities',
+      'A love for testing applications with Cypress!'
+    ],
+    applicationUrl: 'https://www.cypress.io/ambassadors',
+    imageUrl: '/images/programs/cypress-logo.svg',
+    category: 'developer',
+    featured: false
+  },
+  {
+    id: 'snyk-ambassador',
+    name: 'Snyk Ambassador',
+    organization: 'Snyk',
+    description: 'Join the Snyk Ambassador team and help the development community build securely.',
+    benefits: [
+      'Supporting you',
+      'Tokens of appreciation'
+    ],
+    requirements: [
+      'Written content',
+      'Webinars and video content',
+      'Give talks',
+      'Provide feedback on the product',
+      'Advocate for Snyk'
+    ],
+    applicationUrl: 'https://snyk.io/snyk-ambassadors/',
+    imageUrl: '/images/programs/snyk-logo.svg',
+    category: 'developer',
+    featured: false
+  },
+  {
     id: 'docker-captain',
     name: 'Docker Captain',
     organization: 'Docker',
