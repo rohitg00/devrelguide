@@ -56,6 +56,26 @@ interface DevRelProgram {
 // Sample data for DevRel programs
 const devRelPrograms: DevRelProgram[] = [
   {
+    id: 'hashicorp-ambassador',
+    name: 'HashiCorp Ambassador',
+    organization: 'HashiCorp',
+    description: 'HashiCorp Ambassador is a community program that recognizes and supports passionate practitioners who actively share their knowledge and promote HashiCorp tools.',
+    benefits: [
+      'Networking',
+      'Exclusive perks',
+      'Growth opportunities',
+    ],
+    requirements: [
+      'Share knowledge transparently',
+      'Create content to educate',
+      'Constructive feedback and actionable insights from members',
+    ],
+    applicationUrl: 'https://www.hashicorp.com/en/ambassador',
+    imageUrl: '/images/programs/hashicorp.svg',
+    category: 'developer',
+    featured: false
+  },
+  {
     id: 'cypress-ambassador',
     name: 'Cypress Ambassador',
     organization: 'Cypress',
