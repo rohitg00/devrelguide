@@ -97,7 +97,7 @@ export function MarketTrends() {
               if (active && payload && payload.length) {
                 const data = payload[0].payload as TrendData
                 return (
-                  <div className="bg-white p-2 border rounded shadow">
+                  <div className="bg-card p-2 border rounded shadow">
                     <p className="font-semibold">{data.category}</p>
                     <p>Trend Strength: {data.trend}</p>
                     <p>Market Impact: {data.impact}</p>

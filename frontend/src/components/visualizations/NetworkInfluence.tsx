@@ -149,7 +149,7 @@ export function NetworkInfluence() {
           className="w-full h-full"
           style={{ background: '#fff' }}
         />
-        <div className="absolute bottom-2 sm:bottom-4 right-2 sm:right-4 bg-white p-2 rounded shadow-lg">
+        <div className="absolute bottom-2 sm:bottom-4 right-2 sm:right-4 bg-card p-2 rounded shadow-lg">
           <div className="text-xs sm:text-sm font-medium mb-1 sm:mb-2">Network Groups</div>
           {Object.entries(COLORS).map(([group, color]) => (
             <div key={group} className="flex items-center gap-1 sm:gap-2 mb-1">
@@ -162,7 +162,7 @@ export function NetworkInfluence() {
           ))}
         </div>
       </div>
-      <div className="text-xs sm:text-sm text-gray-600 mt-2 sm:mt-4 text-center">
+      <div className="text-xs sm:text-sm text-muted-foreground mt-2 sm:mt-4 text-center">
         Interactive visualization of DevRel influence paths and impact areas
       </div>
     </div>

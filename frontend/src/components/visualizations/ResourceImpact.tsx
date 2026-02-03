@@ -43,9 +43,9 @@ const resourceData: ResourceData[] = [
 
 const ResourceImpact: React.FC = () => {
   return (
-    <div className="w-full h-[600px] bg-white p-6 rounded-xl shadow-lg">
-      <h3 className="text-xl font-semibold mb-4 text-gray-800">Resource Impact Analysis</h3>
-      <p className="text-sm text-gray-600 mb-6">
+    <div className="w-full h-[600px] bg-card p-6 rounded-xl shadow-lg">
+      <h3 className="text-xl font-semibold mb-4 text-foreground">Resource Impact Analysis</h3>
+      <p className="text-sm text-muted-foreground mb-6">
         Analyze the relationship between resource engagement and effectiveness
       </p>
       <ResponsiveContainer width="100%" height="80%">
@@ -75,9 +75,9 @@ const ResourceImpact: React.FC = () => {
               if (active && payload && payload.length) {
                 const data = payload[0].payload as ResourceData
                 return (
-                  <div className="bg-white p-3 rounded-lg shadow-lg border border-gray-200">
+                  <div className="bg-card p-3 rounded-lg shadow-lg border border-border">
                     <p className="font-medium">{data.name}</p>
-                    <p className="text-sm text-gray-600">Type: {data.type}</p>
+                    <p className="text-sm text-muted-foreground">Type: {data.type}</p>
                     <p className="text-sm">Engagement: {data.engagement}%</p>
                     <p className="text-sm">Effectiveness: {data.effectiveness}%</p>
                   </div>

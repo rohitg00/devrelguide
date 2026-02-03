@@ -53,8 +53,8 @@ export function HorizonMetrics() {
   }: TooltipProps<ValueType, NameType>) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-white p-3 border rounded-lg shadow-lg">
-          <p className="font-semibold text-gray-800">{label}</p>
+        <div className="bg-card p-3 border rounded-lg shadow-lg">
+          <p className="font-semibold text-foreground">{label}</p>
           <div className="space-y-1 mt-2">
             {payload.map((entry, index) => (
               <p

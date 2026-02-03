@@ -205,7 +205,7 @@ export function ContentImpact({ customData }: ContentImpactProps) {
           tooltip={({ id, value, color, indexValue }) => {
             if (!id || !indexValue) return null;
             return (
-              <div className="bg-white p-2 shadow-lg rounded-md border text-xs">
+              <div className="bg-card p-2 shadow-lg rounded-md border text-xs">
                 <strong>{indexValue}: {id}</strong>
                 <div style={{ color }}>Value: {value ? value.toLocaleString() : '0'}</div>
                 {id === 'engagement' && (

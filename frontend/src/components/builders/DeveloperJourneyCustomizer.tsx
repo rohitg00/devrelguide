@@ -512,11 +512,11 @@ export function DeveloperJourneyCustomizer() {
             
             <div className="overflow-y-auto max-h-[500px] border rounded-md">
               {data.stages.length === 0 ? (
-                <div className="p-4 text-center text-gray-500">No steps added yet</div>
+                <div className="p-4 text-center text-muted-foreground">No steps added yet</div>
               ) : (
                 <div className="divide-y">
                   {data.stages.map((step, index) => (
-                    <div key={step.id} className="p-3 hover:bg-gray-50">
+                    <div key={step.id} className="p-3 hover:bg-muted/50">
                       <div className="flex items-center justify-between mb-2">
                         <div className="flex items-center">
                           <div 
@@ -527,7 +527,7 @@ export function DeveloperJourneyCustomizer() {
                           />
                           <div>
                             <div className="font-medium">{step.title}</div>
-                            <div className="text-xs text-gray-500">
+                            <div className="text-xs text-muted-foreground">
                               <Badge variant="outline" className="mr-1">
                                 {stepTypes.find(t => t.id === step.stepId)?.name || step.stepId}
                               </Badge>
@@ -571,7 +571,7 @@ export function DeveloperJourneyCustomizer() {
                           Satisfaction: {step.metrics.satisfaction}%
                         </Badge>
                       </div>
-                      <div className="ml-7 text-xs text-gray-600">
+                      <div className="ml-7 text-xs text-muted-foreground">
                         <div className="font-medium mb-1">Content:</div>
                         <ul className="list-disc list-inside space-y-1">
                           {step.content.map((item, i) => (
@@ -618,7 +618,7 @@ export function DeveloperJourneyCustomizer() {
       </div>
       
       {/* Right side: Preview */}
-      <div className="border rounded-lg p-4 bg-white">
+      <div className="border rounded-lg p-4 bg-card">
         <h3 className="text-lg font-semibold mb-4">Preview</h3>
         <div className="h-[500px]" ref={visualizationRef}>
           <DeveloperJourney 

@@ -200,7 +200,7 @@ export function DevRelFrameworkViz() {
         <div ref={wrapperRef} className="w-full h-[600px]">
           <svg ref={svgRef} className="w-full h-full" />
         </div>
-        <div className="mt-4 text-sm text-gray-600">
+        <div className="mt-4 text-sm text-muted-foreground">
           <p className="mb-2">Framework dimensions represent key aspects of Developer Relations:</p>
           <ul className="list-disc ml-6 space-y-1">
             <li>Node size indicates current performance level</li>

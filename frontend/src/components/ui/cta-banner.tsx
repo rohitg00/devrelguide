@@ -13,7 +13,7 @@ export function CTABanner() {
 
   return (
     <motion.div
-      className="fixed bottom-0 left-0 right-0 md:bottom-4 md:right-4 md:left-auto z-50 p-4 md:p-0"
+      className="fixed bottom-0 left-0 right-0 md:bottom-4 md:right-4 md:left-auto z-40 p-4 md:p-0"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}

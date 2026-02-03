@@ -156,7 +156,7 @@ const Tooltip: React.FC<TooltipProps> = ({ x, y, node }) => (
     initial={{ opacity: 0, scale: 0.8 }}
     animate={{ opacity: 1, scale: 1 }}
     exit={{ opacity: 0, scale: 0.8 }}
-    className="absolute pointer-events-none bg-white/90 backdrop-blur-sm p-3 rounded-lg shadow-lg border border-gray-200"
+    className="absolute pointer-events-none bg-card/90 backdrop-blur-sm p-3 rounded-lg shadow-lg border border-border"
     style={{
       left: x,
       top: y,
@@ -166,7 +166,7 @@ const Tooltip: React.FC<TooltipProps> = ({ x, y, node }) => (
     }}
   >
     <h3 className="font-semibold text-sm mb-1">{(node as any).id || `${(node as any).source} → ${(node as any).target}`}</h3>
-    <p className="text-xs text-gray-600">{node.description}</p>
+    <p className="text-xs text-muted-foreground">{node.description}</p>
   </motion.div>
 )
 
@@ -333,7 +333,7 @@ export const CommunityFlow: React.FC = () => {
   }, [dimensions])
 
   return (
-    <div ref={wrapperRef} className="relative w-full h-[600px] bg-gradient-to-b from-white to-gray-50/30">
+    <div ref={wrapperRef} className="relative w-full h-[600px] bg-gradient-to-b from-card to-muted/30">
       <svg ref={svgRef} className="w-full h-full" />
       <AnimatePresence>
         {tooltip && <Tooltip x={tooltip.x} y={tooltip.y} node={tooltip.node} />}

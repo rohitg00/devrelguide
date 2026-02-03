@@ -169,7 +169,7 @@ function MetricCell({ value, type, label, trends, comparisons }: MetricCellProps
       </div>
       
       {showDetails && (
-        <div className="absolute z-10 bg-white p-3 rounded-lg shadow-lg border text-xs -mt-1 left-full ml-2 w-48">
+        <div className="absolute z-10 bg-card p-3 rounded-lg shadow-lg border text-xs -mt-1 left-full ml-2 w-48">
           <div className="font-semibold mb-1">{label} Details</div>
           <div className="space-y-2">
             <div>
@@ -185,7 +185,7 @@ function MetricCell({ value, type, label, trends, comparisons }: MetricCellProps
             <div>
               <div className="text-muted-foreground">Industry Average</div>
               <div className="font-medium">{industry}%</div>
-              <div className="w-full bg-gray-200 h-1.5 rounded-full mt-1">
+              <div className="w-full bg-muted h-1.5 rounded-full mt-1">
                 <div 
                   className="bg-blue-400 h-1.5 rounded-full" 
                   style={{ width: `${industry}%` }}
@@ -195,7 +195,7 @@ function MetricCell({ value, type, label, trends, comparisons }: MetricCellProps
             <div>
               <div className="text-muted-foreground">Target</div>
               <div className="font-medium">{target}%</div>
-              <div className="w-full bg-gray-200 h-1.5 rounded-full mt-1">
+              <div className="w-full bg-muted h-1.5 rounded-full mt-1">
                 <div 
                   className="bg-green-400 h-1.5 rounded-full" 
                   style={{ width: `${target}%` }}

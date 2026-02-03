@@ -4,6 +4,29 @@
 
 @layer base {
   :root {
+    --background: 210 30% 98%;
+    --foreground: 210 50% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 210 50% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 50% 10%;
+    --primary: 0 100% 55%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 180 80% 35%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 210 20% 93%;
+    --muted-foreground: 210 15% 45%;
+    --accent: 180 80% 35%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 100% 55%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 210 20% 85%;
+    --input: 210 20% 90%;
+    --ring: 0 100% 55%;
+    --radius: 0px;
+  }
+
+  .dark {
     --background: 210 100% 10%;
     --foreground: 0 0% 100%;
     --card: 210 100% 12%;
@@ -23,7 +46,6 @@
     --border: 0 0% 100% / 0.2;
     --input: 0 0% 100% / 0.15;
     --ring: 0 100% 60%;
-    --radius: 0px;
   }
 }
 
@@ -33,12 +55,15 @@
   }
   body {
     @apply bg-background text-foreground;
-    background-image:
-      linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
-    background-size: 20px 20px;
-    background-attachment: fixed;
   }
+}
+
+.dark body {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 20px 20px;
+  background-attachment: fixed;
 }
 
 @keyframes drafting-reveal {
@@ -68,7 +93,7 @@
   position: absolute;
   font-family: 'Roboto Mono', monospace;
   font-size: 10px;
-  color: rgba(255, 255, 255, 0.3);
+  color: hsl(var(--muted-foreground) / 0.4);
   line-height: 1;
 }
 .crosshair-corners::before {
@@ -81,38 +106,41 @@
 }
 
 .blueprint-card {
-  @apply border border-white/20 bg-card;
+  @apply border border-border bg-card;
   box-shadow: none;
 }
 .blueprint-card:hover {
-  border-color: rgba(0, 255, 255, 0.4);
+  border-color: hsl(var(--secondary) / 0.6);
 }
 
 .gradient-text {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-white to-secondary;
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-foreground to-secondary;
 }
 
 .btn-primary {
-  @apply inline-flex items-center justify-center bg-primary px-4 py-2 text-sm font-medium text-white uppercase tracking-wider hover:bg-primary/80 transition-colors font-mono;
+  @apply inline-flex items-center justify-center bg-primary px-4 py-2 text-sm font-medium text-primary-foreground uppercase tracking-wider hover:bg-primary/80 transition-colors font-mono;
 }
 
 .btn-secondary {
-  @apply inline-flex items-center justify-center border border-white/20 bg-transparent px-4 py-2 text-sm font-medium text-white uppercase tracking-wider hover:border-secondary hover:text-secondary transition-colors font-mono;
+  @apply inline-flex items-center justify-center border border-border bg-transparent px-4 py-2 text-sm font-medium text-foreground uppercase tracking-wider hover:border-secondary hover:text-secondary transition-colors font-mono;
 }
 
 ::-webkit-scrollbar {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: hsl(210 100% 8%);
+  background: hsl(var(--muted));
 }
 ::-webkit-scrollbar-thumb {
-  @apply bg-white/20 hover:bg-white/40;
+  background: hsl(var(--muted-foreground) / 0.3);
   border-radius: 0;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.5);
 }
 
 .markdown-body {
-  color-scheme: dark;
+  color-scheme: light dark;
 }
 .markdown-body h1,
 .markdown-body h2,
@@ -149,43 +177,43 @@
 
 header {
   backdrop-filter: blur(12px);
-  background: hsla(210, 100%, 10%, 0.85);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: hsl(var(--background) / 0.85);
+  border-bottom: 1px solid hsl(var(--border));
 }
 
 .dialog,
 [role="dialog"] {
-  background: hsl(210 100% 12%);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
 }
 
 input,
 textarea,
 select {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.15);
+  background: hsl(var(--input));
+  border-color: hsl(var(--border));
 }
 input:focus,
 textarea:focus,
 select:focus {
-  background: rgba(255, 255, 255, 0.08);
+  background: hsl(var(--input));
   border-color: hsl(var(--secondary));
-  box-shadow: 0 0 0 2px rgba(0, 255, 255, 0.15);
+  box-shadow: 0 0 0 2px hsl(var(--secondary) / 0.15);
 }
 
 [role="tablist"] {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: hsl(var(--muted) / 0.5);
+  border: 1px solid hsl(var(--border));
 }
 [role="tab"][data-state="active"] {
-  background: rgba(0, 255, 255, 0.1);
+  background: hsl(var(--secondary) / 0.1);
   color: hsl(var(--secondary));
 }
 
 .loader {
   width: 32px;
   height: 32px;
-  border: 2px solid rgba(0, 255, 255, 0.6);
+  border: 2px solid hsl(var(--secondary) / 0.6);
   border-bottom-color: transparent;
   border-radius: 0;
   display: inline-block;

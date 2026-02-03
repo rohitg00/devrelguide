@@ -1177,8 +1177,8 @@ export function BubbleInsights() {
     if (active && payload && payload.length) {
       const data = payload[0].payload as InsightPoint;
       return (
-        <div className="bg-white p-3 border rounded-lg shadow-lg">
-          <p className="font-semibold text-gray-800">{data.name}</p>
+        <div className="bg-card p-3 border rounded-lg shadow-lg">
+          <p className="font-semibold text-foreground">{data.name}</p>
           <div className="space-y-1 mt-2">
             <p>Category: {data.category}</p>
             <p>Engagement Score: {data.x.toFixed(1)}%</p>

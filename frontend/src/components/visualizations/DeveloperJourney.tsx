@@ -198,7 +198,7 @@ export function DeveloperJourney({ customData, showLabels = true }: DeveloperJou
       <div className="w-full h-[600px] relative">
         {loading ? (
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-foreground"></div>
           </div>
         ) : error ? (
           <div className="absolute inset-0 flex items-center justify-center text-red-500">
@@ -222,9 +222,9 @@ export function DeveloperJourney({ customData, showLabels = true }: DeveloperJou
                 colors={(node) => getNodeColor(node.id as string, data)}
                 label={showLabels ? (node) => `${node.data.name}` : undefined}
                 tooltip={({ node }) => (
-                  <div className="bg-white p-2 shadow-lg rounded-md border border-gray-200 max-w-xs">
+                  <div className="bg-card p-2 shadow-lg rounded-md border border-border max-w-xs">
                     <div className="font-bold">{node.data.name}</div>
-                    <div className="text-sm text-gray-600">{(node.data as any).data?.description}</div>
+                    <div className="text-sm text-muted-foreground">{(node.data as any).data?.description}</div>
                     {(node.data as any).data?.metrics && (
                       <div className="mt-2 grid grid-cols-3 gap-2 text-xs">
                         <div>
@@ -257,7 +257,7 @@ export function DeveloperJourney({ customData, showLabels = true }: DeveloperJou
             </div>
             
             {/* Legend and explanation */}
-            <div className="mt-4 p-4 bg-slate-50 border border-slate-200 rounded-lg">
+            <div className="mt-4 p-4 bg-muted/50 border border-border rounded-lg">
               <h4 className="font-semibold text-center mb-3">How to read this visualization</h4>
               
               {/* Color legend */}

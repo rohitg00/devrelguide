@@ -121,7 +121,7 @@ function SunburstDiagram() {
 
         const tooltip = d3.select(wrapperRef.current)
           .append('div')
-          .attr('class', 'absolute bg-white p-2 rounded shadow-lg pointer-events-none')
+          .attr('class', 'absolute bg-card p-2 rounded shadow-lg pointer-events-none')
           .style('opacity', 0)
 
         tooltip.html(`
@@ -142,7 +142,7 @@ function SunburstDiagram() {
           .duration(200)
           .style('opacity', opacityScale(d.data.growth || 0))
 
-        d3.selectAll('.absolute.bg-white').remove()
+        d3.selectAll('.absolute.bg-card').remove()
       })
 
     g.selectAll<SVGTextElement, d3.HierarchyRectangularNode<DevRelActivity>>('text')

@@ -365,14 +365,14 @@ export function CommunityGraphCustomizer() {
             
             <div className="overflow-y-auto max-h-[500px] border rounded-md">
               {data.nodes.length === 0 ? (
-                <div className="p-4 text-center text-gray-500">No nodes added yet</div>
+                <div className="p-4 text-center text-muted-foreground">No nodes added yet</div>
               ) : (
                 <div className="divide-y">
                   {data.nodes.map(node => (
-                    <div key={node.id} className="p-3 flex items-center justify-between hover:bg-gray-50">
+                    <div key={node.id} className="p-3 flex items-center justify-between hover:bg-muted/50">
                       <div className="flex items-center">
                         <div 
-                          className="rounded-full mr-3 border border-gray-200" 
+                          className="rounded-full mr-3 border border-border" 
                           style={{ 
                             width: `${Math.min(24, Math.max(12, node.size/2))}px`, 
                             height: `${Math.min(24, Math.max(12, node.size/2))}px`,
@@ -381,7 +381,7 @@ export function CommunityGraphCustomizer() {
                         />
                         <div>
                           <div className="font-medium">{node.name}</div>
-                          <div className="text-xs text-gray-500">
+                          <div className="text-xs text-muted-foreground">
                             <Badge variant="outline" className="mr-1">
                               {nodeGroups.find(g => g.id === node.group)?.name || node.group}
                             </Badge>
@@ -490,16 +490,16 @@ export function CommunityGraphCustomizer() {
             
             <div className="overflow-y-auto max-h-[500px] border rounded-md">
               {data.links.length === 0 ? (
-                <div className="p-4 text-center text-gray-500">No links added yet</div>
+                <div className="p-4 text-center text-muted-foreground">No links added yet</div>
               ) : (
                 <div className="divide-y">
                   {data.links.map(link => (
-                    <div key={`${link.source}-${link.target}`} className="p-3 flex items-center justify-between hover:bg-gray-50">
+                    <div key={`${link.source}-${link.target}`} className="p-3 flex items-center justify-between hover:bg-muted/50">
                       <div>
                         <div className="font-medium">
                           {getNodeName(link.source)} → {getNodeName(link.target)}
                         </div>
-                        <div className="text-xs text-gray-500">
+                        <div className="text-xs text-muted-foreground">
                           Strength: {link.value}
                         </div>
                       </div>
@@ -550,7 +550,7 @@ export function CommunityGraphCustomizer() {
       </div>
       
       {/* Right side: Preview */}
-      <div className="border rounded-lg p-4 bg-white">
+      <div className="border rounded-lg p-4 bg-card">
         <h3 className="text-lg font-semibold mb-4">Preview</h3>
         <div className="h-[500px]" ref={visualizationRef}>
           <CommunityGraph customData={data} />

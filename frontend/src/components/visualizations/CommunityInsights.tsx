@@ -71,7 +71,7 @@ export function CommunityInsights() {
   if (loading) {
     return (
       <div className="w-full h-[600px] p-4 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900" />
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-foreground" />
       </div>
     )
   }
@@ -87,7 +87,7 @@ export function CommunityInsights() {
   if (!data) {
     return (
       <div className="w-full h-[600px] p-4 flex items-center justify-center">
-        <div className="text-gray-500">No data available</div>
+        <div className="text-muted-foreground">No data available</div>
       </div>
     )
   }
@@ -97,20 +97,20 @@ export function CommunityInsights() {
       <h2 className="text-xl font-semibold mb-4">Resource Impact Analysis</h2>
       <div className="mb-4">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div className="bg-white p-4 rounded-lg shadow">
-            <p className="text-sm text-gray-500">Total Resources</p>
+          <div className="bg-card p-4 rounded-lg shadow">
+            <p className="text-sm text-muted-foreground">Total Resources</p>
             <p className="text-2xl font-bold">{data.summary.total_resources}</p>
           </div>
-          <div className="bg-white p-4 rounded-lg shadow">
-            <p className="text-sm text-gray-500">Average Effectiveness</p>
+          <div className="bg-card p-4 rounded-lg shadow">
+            <p className="text-sm text-muted-foreground">Average Effectiveness</p>
             <p className="text-2xl font-bold">{data.summary.avg_effectiveness.toFixed(1)}%</p>
           </div>
-          <div className="bg-white p-4 rounded-lg shadow">
-            <p className="text-sm text-gray-500">Total Reach</p>
+          <div className="bg-card p-4 rounded-lg shadow">
+            <p className="text-sm text-muted-foreground">Total Reach</p>
             <p className="text-2xl font-bold">{data.summary.total_reach.toLocaleString()}</p>
           </div>
-          <div className="bg-white p-4 rounded-lg shadow">
-            <p className="text-sm text-gray-500">Time Range</p>
+          <div className="bg-card p-4 rounded-lg shadow">
+            <p className="text-sm text-muted-foreground">Time Range</p>
             <p className="text-sm font-medium">
               {new Date(data.summary.time_range.start).toLocaleDateString()} - 
               {new Date(data.summary.time_range.end).toLocaleDateString()}
@@ -146,7 +146,7 @@ export function CommunityInsights() {
               if (active && payload && payload.length) {
                 const data = payload[0].payload as DataPoint
                 return (
-                  <div className="bg-white p-2 border rounded shadow">
+                  <div className="bg-card p-2 border rounded shadow">
                     <p className="font-semibold">{data.category}</p>
                     <p>Engagement: {data.engagement_type}</p>
                     <p>Effectiveness: {data.effectiveness_score.toFixed(1)}%</p>
