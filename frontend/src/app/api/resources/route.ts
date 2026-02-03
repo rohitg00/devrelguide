@@ -20,6 +20,12 @@ export async function GET() {
     const githubRepos = await readJsonData<any[]>('github_results.json')
     const jobListings = await readJsonData<any[]>('job_results.json')
 
+    jobListings.sort((a: any, b: any) => {
+      const dateA = a.date || a.added_at || ''
+      const dateB = b.date || b.added_at || ''
+      return dateB.localeCompare(dateA)
+    })
+
     const resources = [
       ...allBlogPosts.map((post: any) => ({
         ...post,
