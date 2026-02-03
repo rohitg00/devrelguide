@@ -20,17 +20,17 @@ const diagrams = [
   {
     name: 'protocol-landscape',
     chart: `graph TD
-    A["<b>AI Application Layer</b>"]
-    A --> M["<b>MCP</b><br/>Vertical: Model ↔ Tools/Data"]
-    A --> Z["<b>A2A</b><br/>Horizontal: Agent ↔ Agent"]
-    M --> M1["Tools, Resources, Prompts"]
-    M --> M2["Streamable HTTP / stdio"]
-    M --> M3["MCP Apps — interactive UIs"]
-    M --> M4["10,000+ servers in registries"]
-    Z --> Z1["Agent Cards, Tasks, Messages"]
-    Z --> Z2["Google ADK integration"]
-    Z --> Z3["SSE streaming, push notifications"]
-    Z --> Z4["Zero Trust patterns"]
+    A[AI Application Layer]
+    A --> M[MCP - Vertical]
+    A --> Z[A2A - Horizontal]
+    M --> M1[Tools, Resources, Prompts]
+    M --> M2[Streamable HTTP / stdio]
+    M --> M3[MCP Apps]
+    M --> M4[10,000+ servers]
+    Z --> Z1[Agent Cards, Tasks]
+    Z --> Z2[Google ADK]
+    Z --> Z3[SSE streaming]
+    Z --> Z4[Zero Trust]
 
     style A fill:#0369a1,stroke:#38bdf8,color:#e2e8f0
     style M fill:#1e3a5f,stroke:#38bdf8,color:#e2e8f0
@@ -47,15 +47,15 @@ const diagrams = [
   {
     name: 'mcp-architecture',
     chart: `graph LR
-    U["👤 User"] --> H
-    subgraph H["MCP Host<br/>(Claude, ChatGPT, VS Code)"]
-      C["MCP Client<br/>JSON-RPC"]
-      L["LLM<br/>AI Model"]
+    U[User] --> H
+    subgraph H[MCP Host]
+      C[MCP Client]
+      L[LLM / AI Model]
       C <--> L
     end
-    C -->|"stdio / Streamable HTTP"| SA["🗄️ MCP Server A<br/>Database Tools"]
-    C -->|"stdio / Streamable HTTP"| SB["📁 MCP Server B<br/>File System"]
-    C -->|"OAuth 2.1 + OIDC"| SC["🌐 MCP Server C<br/>API Gateway"]
+    C -->|stdio| SA[Server A: Database]
+    C -->|Streamable HTTP| SB[Server B: Files]
+    C -->|OAuth 2.1| SC[Server C: API Gateway]
 
     style U fill:#0369a1,stroke:#38bdf8,color:#e2e8f0
     style H fill:#0f172a,stroke:#38bdf8,color:#e2e8f0
@@ -72,30 +72,28 @@ const diagrams = [
     participant H as MCP Host
     participant U as User
 
-    S->>H: Tool Registration (includes ui:// refs)
+    S->>H: Register tools with ui:// refs
     U->>H: Triggers tool
     H->>S: Execute tool
-    S->>H: HTML content + ui:// URI
+    S->>H: Returns HTML + ui:// URI
     H->>U: Renders in sandboxed iframe
     U->>H: Interacts with UI
     H->>S: JSON-RPC over postMessage
     S->>H: Updated state
-    H->>U: UI updates
-
-    Note over S,U: ui:// URI scheme · iframe sandbox · MCP JSON-RPC over postMessage`,
+    H->>U: UI updates`,
   },
   {
     name: 'transport-evolution',
     chart: `graph TB
-    subgraph G1["Gen 1: stdio — Launch to Present"]
-      A1["Client"] <-->|"stdin/stdout<br/>local process"| B1["Server"]
+    subgraph G1[Gen 1: stdio]
+      A1[Client] <-->|stdin/stdout| B1[Server]
     end
-    subgraph G2["Gen 2: HTTP + SSE — March 2025<br/>⚠️ DEPRECATED June 2025"]
-      A2["Client"] -->|"HTTP POST"| B2["Server"]
-      B2 -->|"Server-Sent Events"| A2
+    subgraph G2[Gen 2: HTTP+SSE - DEPRECATED]
+      A2[Client] -->|HTTP POST| B2[Server]
+      B2 -->|SSE| A2
     end
-    subgraph G3["Gen 3: Streamable HTTP — June 2025+"]
-      A3["Client"] <-->|"Single HTTP Endpoint<br/>request-response + streaming"| B3["Server"]
+    subgraph G3[Gen 3: Streamable HTTP - Current]
+      A3[Client] <-->|Single Endpoint| B3[Server]
     end
     G1 ~~~ G2
     G2 ~~~ G3
@@ -117,41 +115,35 @@ const diagrams = [
     participant RA as Remote Agent
 
     CA->>RA: GET /.well-known/agent.json
-    RA-->>CA: Agent Card (capabilities, auth, skills)
-
-    CA->>RA: POST /tasks — Create Task
-    RA-->>CA: Task {id, status: working}
-
-    CA->>RA: GET /tasks/{id}/stream
-    RA-->>CA: SSE: status updates, partial results
-
+    RA-->>CA: Agent Card
+    CA->>RA: POST /tasks - Create Task
+    RA-->>CA: Task id, status: working
+    CA->>RA: GET /tasks/id/stream
+    RA-->>CA: SSE updates
     RA-->>CA: status: input-required
-    CA->>RA: POST /tasks/{id} — Provide input
-
-    RA-->>CA: status: completed, artifacts: [...]
-
-    Note over CA,RA: Discovery → Task Creation → Streaming → Input Loop → Completion`,
+    CA->>RA: POST /tasks/id - Provide input
+    RA-->>CA: status: completed + artifacts`,
   },
   {
     name: 'adk-architecture',
     chart: `graph TB
-    subgraph ADK["Google Agent Development Kit"]
-      subgraph Agent["Your Agent"]
-        subgraph Tools["MCP Tools"]
-          T1["🗄️ Database"]
-          T2["📁 Files"]
-          T3["🌐 APIs"]
+    subgraph ADK[Google ADK]
+      subgraph Agent[Your Agent]
+        subgraph Tools[MCP Tools]
+          T1[Database]
+          T2[Files]
+          T3[APIs]
         end
-        subgraph Remote["A2A Remote Agents"]
-          R1["🔍 Research Agent"]
-          R2["📅 Scheduling Agent"]
-          R3["📊 Analysis Agent"]
+        subgraph Remote[A2A Remote Agents]
+          R1[Research Agent]
+          R2[Scheduling Agent]
+          R3[Analysis Agent]
         end
-        Tools -->|"MCP Protocol<br/>tool access"| P1["Local Resources"]
-        Remote -->|"A2A Protocol<br/>agent collaboration"| P2["External Agents"]
+        Tools -->|MCP Protocol| P1[Local Resources]
+        Remote -->|A2A Protocol| P2[External Agents]
       end
-      D["☁️ Deploy: Cloud Run — Zero Trust A2A"]
-      I["🤖 Interactions API → Gemini Deep Research"]
+      D[Cloud Run: Zero Trust A2A]
+      I[Interactions API: Gemini]
     end
 
     style ADK fill:#0f172a,stroke:#38bdf8,color:#e2e8f0
@@ -172,33 +164,33 @@ const diagrams = [
   {
     name: 'complementary-architecture',
     chart: `graph TB
-    subgraph A2A_Layer["A2A Protocol — Agent Collaboration"]
-      O["🎯 Orchestrator Agent"]
-      R["🔍 Research Agent"]
-      AN["📊 Analytics Agent"]
-      O <-->|"A2A"| R
-      O <-->|"A2A"| AN
+    subgraph A2A_Layer[A2A: Agent Collaboration]
+      O[Orchestrator Agent]
+      R[Research Agent]
+      AN[Analytics Agent]
+      O <-->|A2A| R
+      O <-->|A2A| AN
     end
 
-    subgraph MCP_O["Orchestrator MCP Tools"]
-      OT1["👤 User Data"]
-      OT2["📋 Task Tracking"]
-      OT3["🔔 Notifications"]
+    subgraph MCP_O[Orchestrator Tools]
+      OT1[User Data]
+      OT2[Task Tracking]
+      OT3[Notifications]
     end
 
-    subgraph MCP_R["Research MCP Tools"]
-      RT1["🔍 Web Search"]
-      RT2["📚 Document DB"]
+    subgraph MCP_R[Research Tools]
+      RT1[Web Search]
+      RT2[Document DB]
     end
 
-    subgraph MCP_AN["Analytics MCP Tools"]
-      AT1["🗄️ Data Warehouse"]
-      AT2["📈 Viz Tools"]
+    subgraph MCP_AN[Analytics Tools]
+      AT1[Data Warehouse]
+      AT2[Viz Tools]
     end
 
-    O -.->|"MCP"| MCP_O
-    R -.->|"MCP"| MCP_R
-    AN -.->|"MCP"| MCP_AN
+    O -.->|MCP| MCP_O
+    R -.->|MCP| MCP_R
+    AN -.->|MCP| MCP_AN
 
     style A2A_Layer fill:#0f172a,stroke:#7dd3fc,color:#e2e8f0
     style O fill:#0369a1,stroke:#38bdf8,color:#e2e8f0
@@ -218,25 +210,25 @@ const diagrams = [
   {
     name: 'ecosystem-comparison',
     chart: `graph LR
-    subgraph MCP_Eco["MCP Ecosystem — Feb 2026"]
-      M1["10,000+ servers"]
-      M2["6 official SDKs"]
-      M3["Claude, ChatGPT, VS Code"]
-      M4["MCP Apps — interactive UIs"]
-      M5["Streamable HTTP"]
-      M6["OAuth 2.1 + OIDC"]
-      M7["Working Groups"]
+    subgraph MCP_Eco[MCP Ecosystem]
+      M1[10,000+ servers]
+      M2[6 official SDKs]
+      M3[Claude, ChatGPT, VS Code]
+      M4[MCP Apps]
+      M5[Streamable HTTP]
+      M6[OAuth 2.1 + OIDC]
+      M7[Working Groups]
     end
-    subgraph A2A_Eco["A2A Ecosystem — Feb 2026"]
-      A1["Google ADK — Python + Go"]
-      A2["a2a-protocol.org"]
-      A3["Cloud Run Zero Trust"]
-      A4["Gemini Deep Research"]
-      A5["Enterprise partners"]
-      A6["SSE streaming"]
-      A7["Agent Cards discovery"]
+    subgraph A2A_Eco[A2A Ecosystem]
+      A1[Google ADK]
+      A2[a2a-protocol.org]
+      A3[Cloud Run Zero Trust]
+      A4[Gemini Deep Research]
+      A5[Enterprise partners]
+      A6[SSE streaming]
+      A7[Agent Cards]
     end
-    MCP_Eco <-->|"Complementary<br/>Open Standards"| A2A_Eco
+    MCP_Eco <-->|Complementary| A2A_Eco
 
     style MCP_Eco fill:#0f172a,stroke:#38bdf8,color:#e2e8f0
     style A2A_Eco fill:#0f172a,stroke:#7dd3fc,color:#e2e8f0
@@ -263,9 +255,9 @@ for (const { name, chart } of diagrams) {
   try {
     const svg = await renderMermaid(chart, theme)
     await writeFile(join(outDir, `${name}.svg`), svg)
-    console.log(`  ✓ ${name}.svg`)
+    console.log(`  ok ${name}.svg`)
   } catch (err) {
-    console.error(`  ✗ ${name}: ${err.message}`)
+    console.error(`  FAIL ${name}: ${err.message}`)
   }
 }
 

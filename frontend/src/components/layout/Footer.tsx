@@ -20,8 +20,8 @@ const Footer = () => {
                 height={28}
                 style={{ width: 28, height: 28 }}
               />
-              <span className="font-mono font-bold text-lg text-foreground uppercase tracking-tight">
-                DevRel Guide
+              <span className="font-mono font-bold text-lg text-foreground tracking-tight">
+                DEVREL<span className="text-secondary">GUIDE</span>
               </span>
             </Link>
             <p className="text-sm text-muted-foreground font-mono">

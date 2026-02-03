@@ -524,9 +524,9 @@ agent = Agent(
           </blockquote>
 
           <div className="flex flex-wrap gap-4 mt-8">
-            <a href="https://modelcontextprotocol.io/" target="_blank" rel="noopener noreferrer" className="inline-block px-4 py-2 bg-secondary text-secondary-foreground rounded-md hover:opacity-90 transition-opacity no-underline">MCP Specification</a>
-            <a href="https://a2a-protocol.org" target="_blank" rel="noopener noreferrer" className="inline-block px-4 py-2 bg-secondary text-secondary-foreground rounded-md hover:opacity-90 transition-opacity no-underline">A2A Protocol</a>
-            <a href="https://www.devrelasservice.com/" target="_blank" rel="noopener noreferrer" className="inline-block px-4 py-2 bg-secondary text-secondary-foreground rounded-md hover:opacity-90 transition-opacity no-underline">Partner with DevRel As Service</a>
+            <a href="https://modelcontextprotocol.io/" target="_blank" rel="noopener noreferrer" className="inline-block px-4 py-2 border border-secondary text-secondary rounded-md hover:bg-secondary/10 transition-colors no-underline text-sm font-mono">MCP Specification</a>
+            <a href="https://a2a-protocol.org" target="_blank" rel="noopener noreferrer" className="inline-block px-4 py-2 border border-secondary text-secondary rounded-md hover:bg-secondary/10 transition-colors no-underline text-sm font-mono">A2A Protocol</a>
+            <a href="https://www.devrelasservice.com/" target="_blank" rel="noopener noreferrer" className="inline-block px-4 py-2 border border-secondary text-secondary rounded-md hover:bg-secondary/10 transition-colors no-underline text-sm font-mono">Partner with DevRel As Service</a>
           </div>
         </motion.div>
       </article>

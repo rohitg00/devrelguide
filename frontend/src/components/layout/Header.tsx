@@ -37,8 +37,8 @@ const Header = () => {
       <div className="container flex h-16 items-center justify-between">
         <Link href="/" className="flex items-center gap-1.5 shrink-0">
           <Image src="/Icon.svg" alt="DevRel Guide" width={28} height={28} style={{ width: 28, height: 28 }} priority />
-          <span className="font-mono font-bold text-lg text-foreground uppercase tracking-tight">
-            DevRel Guide
+          <span className="font-mono font-bold text-lg text-foreground tracking-tight">
+            DEVREL<span className="text-secondary">GUIDE</span>
           </span>
         </Link>
 
