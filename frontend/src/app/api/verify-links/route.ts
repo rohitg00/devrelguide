@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server'
 import fs from 'fs/promises'
 import path from 'path'
 
+export const dynamic = 'force-dynamic'
+
 function extractLinks(content: string): [string, string][] {
   const regex = /\[([^\]]+)\]\(([^)]+)\)|(?<![\(\[])(https?:\/\/[^\s\)]+)/g
   const links: [string, string][] = []

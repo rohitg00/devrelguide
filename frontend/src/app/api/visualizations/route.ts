@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server'
 import { readJsonData } from '@/lib/data'
 import type { Resource } from '../../../types/api'
 
+export const dynamic = 'force-dynamic'
+
 export async function GET() {
   try {
     const blogResults = await readJsonData<any[]>('blog_results.json')

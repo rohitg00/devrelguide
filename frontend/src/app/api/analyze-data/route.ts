@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server'
 import { readJsonData } from '@/lib/data'
 
+export const dynamic = 'force-dynamic'
+
 export async function POST() {
   try {
     const data = await readJsonData<Record<string, any>>('devrel_resources.json')

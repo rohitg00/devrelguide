@@ -1,6 +1,9 @@
 import { NextResponse } from 'next/server'
 import { readJsonData } from '@/lib/data'
 
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 export async function GET() {
   try {
     const blogResults = await readJsonData<any[]>('blog_results.json')
