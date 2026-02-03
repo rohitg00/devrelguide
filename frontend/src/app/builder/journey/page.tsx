@@ -17,7 +17,7 @@ export default function DeveloperJourneyBuilder() {
             </Button>
           </Link>
           <h1 className="text-3xl font-bold">Developer Journey Builder</h1>
-          <p className="text-gray-600 mt-1">
+          <p className="text-muted-foreground mt-1">
             Create a custom visualization of your developer journey with metrics for each stage.
           </p>
         </div>

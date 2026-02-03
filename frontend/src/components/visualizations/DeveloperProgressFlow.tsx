@@ -80,7 +80,10 @@ export function DeveloperProgressFlow() {
   });
 
   // Use either API data or generate static data if no API data
-  const data = useMemo(() => apiData || generateSankeyData(), [apiData]);
+  const data = useMemo(() => {
+    const d = apiData || generateSankeyData();
+    return d && d.nodes && d.links ? d : generateSankeyData();
+  }, [apiData]);
 
   const CustomTooltip = ({
     active,
@@ -100,14 +103,14 @@ export function DeveloperProgressFlow() {
       const category = linkData.category;
 
       return (
-        <div className="bg-white p-3 border rounded-lg shadow-lg">
-          <p className="font-semibold text-gray-800">Developer Journey Stage</p>
+        <div className="bg-card p-3 border rounded-lg shadow-lg">
+          <p className="font-semibold text-foreground">Developer Journey Stage</p>
           <div className="space-y-1 mt-2">
             <p>From: {sourceNode.name}</p>
             <p>To: {targetNode.name}</p>
             <p>Phase: {category.charAt(0).toUpperCase() + category.slice(1)}</p>
             <p>Flow Strength: {value}</p>
-            <p className="text-sm text-gray-600 mt-1">
+            <p className="text-sm text-muted-foreground mt-1">
               {value}% of developers progress through this path
             </p>
           </div>
@@ -134,13 +137,13 @@ export function DeveloperProgressFlow() {
     >
       <div className="flex flex-col space-y-4">
         {/* Legend displayed at the top for better visibility */}
-        <div className="bg-slate-50 p-3 rounded-lg border border-slate-200">
+        <div className="bg-muted/50 p-3 rounded-lg border border-border">
           <h4 className="font-semibold text-center mb-2">Journey Stages Legend</h4>
           <div className="flex flex-wrap gap-3 justify-center">
             {Object.entries(CATEGORIES).map(([category, color]) => (
-              <div key={category} className="flex items-center gap-1 px-2 py-1 bg-white rounded shadow-sm">
+              <div key={category} className="flex items-center gap-1 px-2 py-1 bg-card rounded shadow-sm">
                 <div
-                  className="w-4 h-4 rounded border border-gray-300"
+                  className="w-4 h-4 rounded border border-border"
                   style={{ backgroundColor: color }}
                 />
                 <span className="text-sm font-medium capitalize">
@@ -194,18 +197,18 @@ export function DeveloperProgressFlow() {
           
           {/* Overlay node labels */}
           <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
-            <div className="absolute left-[5%] top-[45%] transform -translate-y-1/2 bg-white bg-opacity-80 p-1 rounded text-xs">
+            <div className="absolute left-[5%] top-[45%] transform -translate-y-1/2 bg-card/80 p-1 rounded text-xs">
               New Developer
             </div>
-            <div className="absolute right-[5%] bottom-[35%] transform -translate-y-1/2 bg-white bg-opacity-80 p-1 rounded text-xs">
+            <div className="absolute right-[5%] bottom-[35%] transform -translate-y-1/2 bg-card/80 p-1 rounded text-xs">
               DevRel Advocate
             </div>
           </div>
         </div>
         
         {/* Explanation section */}
-        <div className="bg-slate-50 p-4 rounded-lg border border-slate-200">
-          <h4 className="font-semibold text-slate-900 mb-2 text-center">How to Read This Visualization</h4>
+        <div className="bg-muted/50 p-4 rounded-lg border border-border">
+          <h4 className="font-semibold text-foreground mb-2 text-center">How to Read This Visualization</h4>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <p className="flex items-center gap-2">
@@ -236,10 +239,10 @@ export function DeveloperProgressFlow() {
         </div>
         
         {/* Node names legend */}
-        <div className="bg-white p-3 rounded-lg border border-slate-200">
+        <div className="bg-card p-3 rounded-lg border border-border">
           <h5 className="font-medium text-center mb-2 text-sm">Developer Stages</h5>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 text-xs">
-            {data.nodes.map((node, index) => (
+            {(data.nodes || []).map((node, index) => (
               <div key={index} className="flex items-center gap-1">
                 <div 
                   className="w-3 h-3 rounded-full" 

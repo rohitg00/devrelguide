@@ -1,119 +1,118 @@
 import { NextResponse } from 'next/server'
-import { headers } from 'next/headers'
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
-const API_USERNAME = process.env.NEXT_PUBLIC_API_USERNAME
-const API_PASSWORD = process.env.NEXT_PUBLIC_API_PASSWORD
-
-if (!API_USERNAME || !API_PASSWORD) {
-  console.error('API credentials not configured')
-  throw new Error('API credentials not configured')
-}
+import { readJsonData, writeJsonData } from '@/lib/data'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
+const careerPathData = {
+  title: "DevRel Career Path",
+  level: "root",
+  children: [
+    {
+      title: "Entry Level",
+      level: "category",
+      children: [
+        {
+          title: "Junior Developer Advocate",
+          level: "Entry",
+          children: [
+            { title: "Developer Advocate", level: "Mid" },
+            { title: "Technical Writer", level: "Mid" },
+            { title: "Community Coordinator", level: "Mid" }
+          ]
+        },
+        {
+          title: "Associate Technical Writer",
+          level: "Entry",
+          children: [
+            { title: "Technical Writer", level: "Mid" }
+          ]
+        },
+        {
+          title: "Community Coordinator",
+          level: "Entry",
+          children: [
+            { title: "Community Manager", level: "Mid" }
+          ]
+        }
+      ]
+    },
+    {
+      title: "Mid Level",
+      level: "category",
+      children: [
+        {
+          title: "Developer Advocate",
+          level: "Mid",
+          children: [
+            { title: "Senior Developer Advocate", level: "Senior" },
+            { title: "DevRel Program Manager", level: "Senior" }
+          ]
+        },
+        {
+          title: "Technical Writer",
+          level: "Mid",
+          children: [
+            { title: "Lead Technical Writer", level: "Senior" }
+          ]
+        },
+        {
+          title: "Community Manager",
+          level: "Mid",
+          children: [
+            { title: "Senior Community Manager", level: "Senior" }
+          ]
+        }
+      ]
+    },
+    {
+      title: "Senior Level",
+      level: "category",
+      children: [
+        {
+          title: "Senior Developer Advocate",
+          level: "Senior",
+          children: [
+            { title: "DevRel Manager", level: "Leadership" }
+          ]
+        },
+        {
+          title: "DevRel Program Manager",
+          level: "Senior",
+          children: [
+            { title: "Head of DevRel", level: "Leadership" }
+          ]
+        }
+      ]
+    }
+  ]
+}
+
 export async function GET() {
   try {
-    console.log('Fetching career path data from:', `${API_URL}/api/visualizations/career-path`)
-    const response = await fetch(`${API_URL}/api/visualizations/career-path`, {
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': `Basic ${Buffer.from(`${API_USERNAME}:${API_PASSWORD}`).toString('base64')}`
-      },
-      credentials: 'omit',
-      cache: 'no-store',
-      next: { revalidate: 0 }
-    })
-
-    if (!response.ok) {
-      console.error('Career path API error:', response.status, response.statusText)
-      const errorText = await response.text()
-      console.error('Error details:', errorText)
-      
-      return NextResponse.json(
-        { error: 'Failed to fetch career path data' },
-        { status: response.status }
-      )
-    }
-
-    const data = await response.json()
-    console.log('Career path data fetched successfully')
-
-    return NextResponse.json(data, {
-      headers: {
-        'Cache-Control': 'no-store, must-revalidate',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-        'Access-Control-Allow-Credentials': 'true'
-      }
+    return NextResponse.json(careerPathData, {
+      headers: { 'Cache-Control': 'no-store, must-revalidate' },
     })
   } catch (error) {
     console.error('Career path request failed:', error)
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    )
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }
 
 export async function POST(request: Request) {
   try {
     const body = await request.json()
-    console.log('Appending career path data:', body)
+    const existingData = await readJsonData<Record<string, any>>('career_path.json')
 
-    // Get existing data first
-    const existingResponse = await fetch(`${API_URL}/api/visualizations/career-path`, {
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': `Basic ${Buffer.from(`${API_USERNAME}:${API_PASSWORD}`).toString('base64')}`
-      },
-      credentials: 'omit'
-    })
-
-    if (!existingResponse.ok) {
-      throw new Error(`Failed to fetch existing data: ${existingResponse.status}`)
-    }
-
-    const existingData = await existingResponse.json()
-
-    // Merge new data with existing data
     const mergedData = {
       ...existingData,
       ...body,
       paths: [...(existingData.paths || []), ...(body.paths || [])],
-      skills: [...(existingData.skills || []), ...(body.skills || [])]
+      skills: [...(existingData.skills || []), ...(body.skills || [])],
     }
 
-    // Send merged data to append endpoint
-    const response = await fetch(`${API_URL}/api/visualizations/career-path/append`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Basic ${Buffer.from(`${API_USERNAME}:${API_PASSWORD}`).toString('base64')}`
-      },
-      credentials: 'omit',
-      body: JSON.stringify(mergedData)
-    })
-
-    if (!response.ok) {
-      throw new Error(`Failed to append career path data: ${response.status}`)
-    }
-
-    const result = await response.json()
-    console.log('Career path data appended successfully')
-
-    return NextResponse.json(result, {
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-        'Access-Control-Allow-Credentials': 'true'
-      }
-    })
+    await writeJsonData('career_path.json', mergedData)
+    return NextResponse.json(mergedData)
   } catch (error) {
     console.error('Error appending career path data:', error)
     return NextResponse.json(
@@ -126,10 +125,8 @@ export async function POST(request: Request) {
 export async function OPTIONS() {
   return NextResponse.json({}, {
     headers: {
-      'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-      'Access-Control-Allow-Credentials': 'true'
-    }
+      'Access-Control-Allow-Headers': 'Content-Type',
+    },
   })
 }

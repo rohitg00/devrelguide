@@ -1,1 +1,2244 @@
-[]
+[
+  {
+    "title": "lists",
+    "url": "https://github.com/jnv/lists",
+    "description": "The definitive list of lists (of lists) curated on GitHub and elsewhere",
+    "type": "github_program",
+    "added_at": "2024-12-20T00:41:23.196849",
+    "stars": 10065,
+    "language": null,
+    "topics": [
+      "awesome",
+      "awesome-list",
+      "curated-lists",
+      "lists",
+      "resources"
+    ]
+  },
+  {
+    "title": "awesome-uses",
+    "url": "https://github.com/wesbos/awesome-uses",
+    "description": "A list of /uses pages detailing developer setups, gear, software and configs.",
+    "type": "github_program",
+    "added_at": "2024-12-20T00:41:23.196860",
+    "stars": 4580,
+    "language": "JavaScript",
+    "topics": [
+      "hacktoberfest"
+    ]
+  },
+  {
+    "title": "dear-github-2.0",
+    "url": "https://github.com/drop-ice/dear-github-2.0",
+    "description": "📨 An open letter to GitHub from the maintainers of open source projects ",
+    "type": "github_program",
+    "added_at": "2024-12-20T00:41:23.196864",
+    "stars": 1872,
+    "language": "JavaScript",
+    "topics": []
+  },
+  {
+    "title": "ArchitectureWeekly",
+    "url": "https://github.com/oskardudycz/ArchitectureWeekly",
+    "description": "Architecture Weekly - links and resources to boost your knowledge and developer skills",
+    "type": "github_program",
+    "added_at": "2024-12-20T00:41:23.196868",
+    "stars": 1418,
+    "language": null,
+    "topics": [
+      "architecture",
+      "newsletter",
+      "software-engineering"
+    ]
+  },
+  {
+    "title": "awesome-gpts",
+    "url": "https://github.com/taranjeet/awesome-gpts",
+    "description": "Collection of all the GPTs created by the community",
+    "type": "github_program",
+    "added_at": "2024-12-20T00:41:23.196872",
+    "stars": 1265,
+    "language": null,
+    "topics": [
+      "awesome",
+      "awesome-list",
+      "chatgpt",
+      "gpts",
+      "gptstore",
+      "lists",
+      "resources"
+    ]
+  },
+  {
+    "title": "awesome-devrel",
+    "url": "https://github.com/devrelcollective/awesome-devrel",
+    "description": "Awesome Developer Relations resources curated by the DevRel Collective",
+    "type": "github_program",
+    "added_at": "2024-12-20T00:41:23.196875",
+    "stars": 714,
+    "language": null,
+    "topics": [
+      "awesome-list",
+      "awesome-lists",
+      "cfps",
+      "devrel",
+      "speaking-resources"
+    ]
+  },
+  {
+    "title": "women-tech-speakers-organizers",
+    "url": "https://github.com/fempire/women-tech-speakers-organizers",
+    "description": "A list of women tech speakers & organizers. Add yourself or others by submitting a PR! PS if you do add someone, make sure to tell them! :) #fempire",
+    "type": "github_program",
+    "added_at": "2024-12-20T00:41:23.196878",
+    "stars": 647,
+    "language": null,
+    "topics": [
+      "beginner-friendly"
+    ]
+  },
+  {
+    "title": "samples",
+    "url": "https://github.com/dart-lang/samples",
+    "description": "A collection of Dart code samples by Dart DevRel",
+    "type": "github_program",
+    "added_at": "2024-12-20T00:41:23.196882",
+    "stars": 620,
+    "language": "Dart",
+    "topics": []
+  },
+  {
+    "title": "devtools-angels",
+    "url": "https://github.com/swyxio/devtools-angels",
+    "description": "active angel investors in developer tools!",
+    "type": "github_program",
+    "added_at": "2024-12-20T00:41:23.196885",
+    "stars": 602,
+    "language": null,
+    "topics": []
+  },
+  {
+    "title": "awesome-communities-and-events-tech-brazil",
+    "url": "https://github.com/codecon-dev/awesome-communities-and-events-tech-brazil",
+    "description": "Uma curadoria de comunidades e eventos tech incríveis para você participar.",
+    "type": "github_program",
+    "added_at": "2024-12-20T00:41:23.196888",
+    "stars": 414,
+    "language": null,
+    "topics": [
+      "communities",
+      "comunidades"
+    ]
+  },
+  {
+    "title": "awesome-chatgpt-prompts",
+    "url": "https://github.com/f/awesome-chatgpt-prompts",
+    "description": "This repo includes ChatGPT prompt curation to use ChatGPT better.",
+    "type": "github_program",
+    "added_at": "2024-12-20T00:41:23.196892",
+    "stars": 114069,
+    "language": "HTML",
+    "topics": [
+      "bots",
+      "chatbot",
+      "chatgpt",
+      "chatgpt-api",
+      "language"
+    ]
+  },
+  {
+    "title": "awesome-podcasts",
+    "url": "https://github.com/rShetty/awesome-podcasts",
+    "description": "Collection of awesome podcasts",
+    "type": "github_program",
+    "added_at": "2024-12-20T00:41:23.196895",
+    "stars": 12349,
+    "language": null,
+    "topics": [
+      "awesome",
+      "awesome-list",
+      "awesome-lists",
+      "podcast",
+      "software"
+    ]
+  },
+  {
+    "title": "goQuality-dev-contents",
+    "url": "https://github.com/Integerous/goQuality-dev-contents",
+    "description": "{ 고퀄리티 :zap: 개발 컨텐츠 모음 }",
+    "type": "github_program",
+    "added_at": "2024-12-20T00:41:23.196898",
+    "stars": 9226,
+    "language": null,
+    "topics": []
+  },
+  {
+    "title": "UltimateAndroidReference",
+    "url": "https://github.com/aritraroy/UltimateAndroidReference",
+    "description": ":rocket: Ultimate Android Reference - Your Road to Become a Better Android Developer",
+    "type": "github_program",
+    "added_at": "2024-12-20T00:41:23.196902",
+    "stars": 7858,
+    "language": "Java",
+    "topics": [
+      "android",
+      "android-apps",
+      "android-book",
+      "android-developers",
+      "android-development",
+      "android-game",
+      "android-library",
+      "android-open-source",
+      "android-studio",
+      "android-tests",
+      "kotlin-android",
+      "sample-android",
+      "twitter",
+      "websites"
+    ]
+  },
+  {
+    "title": "awesome-bots",
+    "url": "https://github.com/DopplerHQ/awesome-bots",
+    "description": "The most awesome list about bots ⭐️🤖",
+    "type": "github_program",
+    "added_at": "2024-12-20T00:41:23.196905",
+    "stars": 3844,
+    "language": null,
+    "topics": [
+      "alexa",
+      "alexa-sdk",
+      "alexa-skills-kit",
+      "awesome",
+      "awesome-list",
+      "bot-framework",
+      "bots",
+      "chatbot",
+      "chatbots",
+      "cortana",
+      "facebook-bot",
+      "facebook-messenger",
+      "facebook-messenger-platform",
+      "messenger-bot",
+      "siri",
+      "slack",
+      "slack-bot",
+      "slackbot",
+      "telegram-bot",
+      "voice-assistant"
+    ]
+  },
+  {
+    "title": "amas",
+    "url": "https://github.com/sindresorhus/amas",
+    "description": "Awesome & Marvelous Amas",
+    "type": "github_program",
+    "added_at": "2024-12-20T00:41:23.196908",
+    "stars": 1425,
+    "language": null,
+    "topics": [
+      "ama",
+      "ask",
+      "ask-me-anything",
+      "awesome",
+      "awesome-list",
+      "list",
+      "meta",
+      "question-answering"
+    ]
+  },
+  {
+    "title": "developer-roadmap",
+    "url": "https://github.com/kamranahmedse/developer-roadmap",
+    "description": "Interactive roadmaps, guides and other educational content to help developers grow in their careers.",
+    "type": "github_program",
+    "added_at": "2024-12-20T00:41:23.196911",
+    "stars": 301486,
+    "language": "TypeScript",
+    "topics": [
+      "angular-roadmap",
+      "backend-roadmap",
+      "blockchain-roadmap",
+      "computer-science",
+      "dba-roadmap",
+      "developer-roadmap",
+      "devops-roadmap",
+      "frontend-roadmap",
+      "go-roadmap",
+      "java-roadmap",
+      "javascript-roadmap",
+      "nodejs-roadmap",
+      "python-roadmap",
+      "qa-roadmap",
+      "react-roadmap",
+      "roadmap",
+      "software-architect-roadmap",
+      "vue-roadmap"
+    ]
+  },
+  {
+    "title": "cerbos",
+    "url": "https://github.com/cerbos/cerbos",
+    "description": "Cerbos is the open core, language-agnostic, scalable authorization solution that makes user permissions and authorization simple to implement and manage by writing context-aware access control policies for your application resources.",
+    "type": "github_program",
+    "added_at": "2024-12-20T00:41:23.196915",
+    "stars": 3446,
+    "language": "Go",
+    "topics": [
+      "access-control",
+      "authorization",
+      "go",
+      "golang",
+      "kubernetes",
+      "policy",
+      "security"
+    ]
+  },
+  {
+    "title": "android-arscblamer",
+    "url": "https://github.com/google/android-arscblamer",
+    "description": "ArscBlamer is a command-line tool that can parse an Android app's resources.arsc file and extract useful, actionable information about its contents",
+    "type": "github_program",
+    "added_at": "2024-12-20T00:41:23.196918",
+    "stars": 934,
+    "language": "Java",
+    "topics": []
+  },
+  {
+    "title": "underclassmen-internships",
+    "url": "https://github.com/codicate/underclassmen-internships",
+    "description": "Curated list of internships/externships/fellowships exclusive for CS freshman and sophomore (updated for 2025!)",
+    "type": "github_program",
+    "added_at": "2024-12-20T00:41:23.196921",
+    "stars": 848,
+    "language": null,
+    "topics": [
+      "internships",
+      "jobs",
+      "students",
+      "university"
+    ]
+  },
+  {
+    "title": "js-samples",
+    "url": "https://github.com/googlemaps/js-samples",
+    "description": "Samples for the Google Maps JavaScript v3 API",
+    "type": "github_program",
+    "added_at": "2024-12-20T00:41:23.196924",
+    "stars": 764,
+    "language": "TypeScript",
+    "topics": [
+      "google-maps",
+      "googlemaps",
+      "javascript",
+      "js-samples",
+      "maps",
+      "samples",
+      "typescript"
+    ]
+  },
+  {
+    "title": "GPTs",
+    "url": "https://github.com/linexjlin/GPTs",
+    "description": "leaked prompts of GPTs",
+    "type": "github_program",
+    "added_at": "2024-12-20T00:41:23.196928",
+    "stars": 28974,
+    "language": null,
+    "topics": []
+  },
+  {
+    "title": "roadmaps",
+    "url": "https://github.com/WeMakeDevs/roadmaps",
+    "description": "This repository contains the list of communities and job portals you can join and apply to.",
+    "type": "github_program",
+    "added_at": "2024-12-20T00:41:23.196931",
+    "stars": 4004,
+    "language": null,
+    "topics": [
+      "backend",
+      "community",
+      "devops",
+      "devrel",
+      "frontend",
+      "full-stack",
+      "hacktoberfest",
+      "open-source",
+      "roadmaps"
+    ]
+  },
+  {
+    "title": "website",
+    "url": "https://github.com/flutter/website",
+    "description": "Flutter documentation web site",
+    "type": "github_program",
+    "added_at": "2024-12-20T00:41:23.196934",
+    "stars": 2849,
+    "language": "Dart",
+    "topics": [
+      "dart",
+      "flutter",
+      "website"
+    ]
+  },
+  {
+    "title": "keras-idiomatic-programmer",
+    "url": "https://github.com/GoogleCloudPlatform/keras-idiomatic-programmer",
+    "description": "Books, Presentations, Workshops, Notebook Labs, and Model Zoo  for Software Engineers and Data Scientists wanting to learn the TF.Keras Machine Learning framework",
+    "type": "github_program",
+    "added_at": "2024-12-20T00:41:23.197000",
+    "stars": 814,
+    "language": "Jupyter Notebook",
+    "topics": [
+      "autoencoder",
+      "automl",
+      "dcgan",
+      "deep-learning",
+      "densenet",
+      "inception",
+      "keras",
+      "keras-tutorials",
+      "machine-learning",
+      "mobilenet",
+      "resnet",
+      "resnext",
+      "senet",
+      "shufflenet",
+      "siamese-network",
+      "squeezenet",
+      "tensorflow-keras",
+      "vgg",
+      "xception"
+    ]
+  },
+  {
+    "title": "awesome-developer-marketing",
+    "url": "https://github.com/ronakganatra/awesome-developer-marketing",
+    "description": "A living document of hand-picked resources for marketers working on dev-centric products. ",
+    "type": "github_program",
+    "added_at": "2024-12-20T00:41:23.197008",
+    "stars": 345,
+    "language": null,
+    "topics": [
+      "awesome-list",
+      "devrel",
+      "devrel-community",
+      "marketing",
+      "marketing-dev",
+      "prs-welcome"
+    ]
+  },
+  {
+    "title": "awesome-technical-communication",
+    "url": "https://github.com/lilin90/awesome-technical-communication",
+    "description": "😎 A curated list of awesome resources about technical communication",
+    "type": "github_program",
+    "added_at": "2024-12-20T00:41:23.197013",
+    "stars": 261,
+    "language": null,
+    "topics": [
+      "communication",
+      "content-marketing",
+      "content-strategy",
+      "developer-documentation",
+      "developer-experience",
+      "developer-relations",
+      "devrel",
+      "documentation",
+      "tech-writer",
+      "technical-communication",
+      "technical-documentation",
+      "technical-documents",
+      "technical-translation",
+      "technical-writers",
+      "technical-writing",
+      "user-documentation",
+      "writing"
+    ]
+  },
+  {
+    "title": "Raspberry-Pi-Guide",
+    "url": "https://github.com/mikeroyal/Raspberry-Pi-Guide",
+    "description": "Raspberry Pi Guide. Learn all about the Raspberry Pi and other cool tools such as Tailscale, WireGuard, Home Assistant, Homebridge, ESPHome, and Watchdog timer.",
+    "type": "github_program",
+    "added_at": "2024-12-20T00:41:23.197016",
+    "stars": 252,
+    "language": "Shell",
+    "topics": [
+      "esphome",
+      "home-assistant",
+      "homebridge",
+      "homekit-bridge",
+      "homelab",
+      "kodi",
+      "pi-hole",
+      "pikvm",
+      "plex",
+      "raspberry-pi",
+      "raspberry-pi-4",
+      "raspberrypi",
+      "sbc",
+      "self-hosted",
+      "self-hosting",
+      "selfhosted",
+      "tailscale",
+      "tailscale-server",
+      "wireguard"
+    ]
+  },
+  {
+    "title": "resources",
+    "url": "https://github.com/tunnckoCore/resources",
+    "description": ":book: Huge curated collection (archive) of links of Tech, Science, Economics, Politics, Life, Philosophy, Conferences, Videos and much more resources from everyday surfing. :star: Since October 21, 2017.",
+    "type": "github_program",
+    "added_at": "2024-12-20T00:41:23.197019",
+    "stars": 248,
+    "language": null,
+    "topics": [
+      "articles",
+      "collection",
+      "crypto",
+      "github",
+      "javascript",
+      "linux",
+      "linux-news",
+      "react",
+      "resources",
+      "science",
+      "slides",
+      "talks",
+      "technology",
+      "usefull-materials",
+      "videos"
+    ]
+  },
+  {
+    "title": "awesome-dev-advocacy",
+    "url": "https://github.com/dmitryvinn/awesome-dev-advocacy",
+    "description": "🥑  List of Awesome Developer Advocacy Resources",
+    "type": "github_program",
+    "added_at": "2024-12-20T00:41:23.197023",
+    "stars": 236,
+    "language": null,
+    "topics": []
+  },
+  {
+    "title": "awesome-engineering",
+    "url": "https://github.com/upgundecha/awesome-engineering",
+    "description": "A curated list of awesome engineering blogs, handbooks and open source repos from top technology companies",
+    "type": "github_program",
+    "added_at": "2024-12-20T00:41:23.197026",
+    "stars": 164,
+    "language": "HTML",
+    "topics": [
+      "awesome",
+      "awesome-list",
+      "culture",
+      "engineering",
+      "software-engineering",
+      "teams",
+      "teamwork"
+    ]
+  },
+  {
+    "title": "presenter-terms",
+    "url": "https://github.com/codepo8/presenter-terms",
+    "description": "A no-nonsense explainer for conference organisers about my presenting terms and topics",
+    "type": "github_program",
+    "added_at": "2024-12-20T00:41:23.197029",
+    "stars": 87,
+    "language": "HTML",
+    "topics": []
+  },
+  {
+    "title": "Crypto",
+    "url": "https://github.com/anettrolikova/Crypto",
+    "description": "Articles, decks,websites... Everything interesting that I found and it’s cool to see / read ",
+    "type": "github_program",
+    "added_at": "2024-12-20T00:41:23.197033",
+    "stars": 86,
+    "language": null,
+    "topics": []
+  },
+  {
+    "title": "awesome-java",
+    "url": "https://github.com/akullpp/awesome-java",
+    "description": "A curated list of awesome frameworks, libraries and software for the Java programming language.",
+    "type": "github_program",
+    "added_at": "2024-12-20T00:41:23.197036",
+    "stars": 42247,
+    "language": null,
+    "topics": [
+      "awesome",
+      "awesome-list"
+    ]
+  },
+  {
+    "title": "examples",
+    "url": "https://github.com/pinecone-io/examples",
+    "description": "Jupyter Notebooks to help you get hands-on with Pinecone vector databases",
+    "type": "github_program",
+    "added_at": "2024-12-20T00:41:23.197040",
+    "stars": 2764,
+    "language": "Jupyter Notebook",
+    "topics": [
+      "ai",
+      "jupyter-notebook",
+      "llm",
+      "python",
+      "semantic-search",
+      "vector-database"
+    ]
+  },
+  {
+    "title": "awesome-android-learning-resources",
+    "url": "https://github.com/androiddevnotes/awesome-android-learning-resources",
+    "description": "👓 A curated list of awesome android learning resources for android app developers. ",
+    "type": "github_program",
+    "added_at": "2024-12-20T00:41:23.197043",
+    "stars": 1729,
+    "language": "Kotlin",
+    "topics": [
+      "android",
+      "android-kotlin",
+      "awesome",
+      "awesome-list",
+      "beginner-friendly",
+      "coroutines-android",
+      "dagger",
+      "first-issue",
+      "hacktoberfest",
+      "hacktoberfest2020",
+      "jetpack-android",
+      "jetpack-compose",
+      "kotlin",
+      "learn-android",
+      "learning-resources",
+      "lists",
+      "mvvm",
+      "mvvm-android",
+      "resources",
+      "study-guide"
+    ]
+  },
+  {
+    "title": "awesome-quincy-larson-emails",
+    "url": "https://github.com/freeCodeCamp/awesome-quincy-larson-emails",
+    "description": "This repository is an archive of emails that are sent by the awesome Quincy Larson every week.",
+    "type": "github_program",
+    "added_at": "2024-12-20T00:41:23.197047",
+    "stars": 1125,
+    "language": "Python",
+    "topics": []
+  },
+  {
+    "title": "whatlies",
+    "url": "https://github.com/koaning/whatlies",
+    "description": "Toolkit to help understand \"what lies\" in word embeddings. Also benchmarking! ",
+    "type": "github_program",
+    "added_at": "2024-12-20T00:41:23.197050",
+    "stars": 470,
+    "language": "Python",
+    "topics": [
+      "embeddings",
+      "nlp",
+      "visualisations"
+    ]
+  },
+  {
+    "title": "Rust-Tcp",
+    "url": "https://github.com/Ghvstcode/Rust-Tcp",
+    "description": "Implementing TCP In Rust",
+    "type": "github_program",
+    "added_at": "2024-12-20T00:41:23.197053",
+    "stars": 385,
+    "language": null,
+    "topics": [
+      "network-programming",
+      "rust",
+      "tcp",
+      "tcp-ip",
+      "tun-tap"
+    ]
+  },
+  {
+    "title": "Amazing-Java-List",
+    "url": "https://github.com/wtsxDev/Amazing-Java-List",
+    "description": "A curated list of awesome Java frameworks, libraries, software and books",
+    "type": "github_program",
+    "added_at": "2024-12-20T00:41:23.197057",
+    "stars": 180,
+    "language": null,
+    "topics": []
+  },
+  {
+    "title": "Bay_Area_tech_meetups",
+    "url": "https://github.com/elizabethsiegle/Bay_Area_tech_meetups",
+    "description": "iOS, Android, web, hardware, bots...you name it, there's a meetup for you!",
+    "type": "github_program",
+    "added_at": "2024-12-20T00:41:23.197060",
+    "stars": 176,
+    "language": "Shell",
+    "topics": [
+      "apis",
+      "bay-area",
+      "community",
+      "developer-experience",
+      "devrel",
+      "lightning-talk",
+      "meetup",
+      "meetup-talk",
+      "meetups",
+      "networking",
+      "office",
+      "relationships",
+      "sanfrancisco",
+      "silicon-valley",
+      "speaker",
+      "study-groups",
+      "swift",
+      "tech-meetups",
+      "top-meetups",
+      "webdevelopment"
+    ]
+  },
+  {
+    "title": "flutter.cn",
+    "url": "https://github.com/cfug/flutter.cn",
+    "description": "Flutter CN docs translation plan, get started from the wiki: https://github.com/cfug/flutter.cn/wiki",
+    "type": "github_program",
+    "added_at": "2024-12-20T00:41:23.197063",
+    "stars": 524,
+    "language": "Dart",
+    "topics": [
+      "cfug",
+      "china",
+      "china-region",
+      "dart",
+      "documents",
+      "flutter",
+      "flutter-websites",
+      "localization"
+    ]
+  },
+  {
+    "title": "awesome",
+    "url": "https://github.com/sindresorhus/awesome",
+    "description": "😎 Awesome lists about all kinds of interesting topics",
+    "type": "github_program",
+    "added_at": "2024-12-20T00:41:23.197067",
+    "stars": 337593,
+    "language": null,
+    "topics": [
+      "awesome",
+      "awesome-list",
+      "lists",
+      "resources",
+      "unicorns"
+    ]
+  },
+  {
+    "title": "public-apis",
+    "url": "https://github.com/public-apis/public-apis",
+    "description": "A collective list of free APIs",
+    "type": "github_program",
+    "added_at": "2024-12-20T00:41:23.197070",
+    "stars": 320020,
+    "language": "Python",
+    "topics": [
+      "api",
+      "apis",
+      "dataset",
+      "development",
+      "free",
+      "list",
+      "lists",
+      "open-source",
+      "public",
+      "public-api",
+      "public-apis",
+      "resources",
+      "software"
+    ]
+  },
+  {
+    "title": "system-design-primer",
+    "url": "https://github.com/donnemartin/system-design-primer",
+    "description": "Learn how to design large-scale systems. Prep for the system design interview.  Includes Anki flashcards.",
+    "type": "github_program",
+    "added_at": "2024-12-20T00:41:23.197074",
+    "stars": 279387,
+    "language": "Python",
+    "topics": [
+      "design",
+      "design-patterns",
+      "design-system",
+      "development",
+      "interview",
+      "interview-practice",
+      "interview-questions",
+      "programming",
+      "python",
+      "system",
+      "web",
+      "web-application",
+      "webapp"
+    ]
+  },
+  {
+    "title": "awesome-selfhosted",
+    "url": "https://github.com/awesome-selfhosted/awesome-selfhosted",
+    "description": "A list of Free Software network services and web applications which can be hosted on your own servers",
+    "type": "github_program",
+    "added_at": "2024-12-20T00:41:23.197077",
+    "stars": 207351,
+    "language": null,
+    "topics": [
+      "awesome",
+      "awesome-list",
+      "cloud",
+      "free-software",
+      "hosting",
+      "privacy",
+      "self-hosted",
+      "selfhosted"
+    ]
+  },
+  {
+    "title": "flutter",
+    "url": "https://github.com/flutter/flutter",
+    "description": "Flutter makes it easy and fast to build beautiful apps for mobile and beyond",
+    "type": "github_program",
+    "added_at": "2024-12-20T00:41:23.197080",
+    "stars": 167040,
+    "language": "Dart",
+    "topics": [
+      "android",
+      "app-framework",
+      "cross-platform",
+      "dart",
+      "dart-platform",
+      "desktop",
+      "flutter",
+      "flutter-package",
+      "fuchsia",
+      "ios",
+      "linux-desktop",
+      "macos",
+      "material-design",
+      "mobile",
+      "mobile-development",
+      "skia",
+      "web",
+      "web-framework",
+      "windows"
+    ]
+  },
+  {
+    "title": "the-book-of-secret-knowledge",
+    "url": "https://github.com/trimstray/the-book-of-secret-knowledge",
+    "description": "A collection of inspiring lists, manuals, cheatsheets, blogs, hacks, one-liners, cli/web tools and more.",
+    "type": "github_program",
+    "added_at": "2024-12-20T00:41:23.197083",
+    "stars": 151372,
+    "language": null,
+    "topics": [
+      "awesome",
+      "awesome-list",
+      "bsd",
+      "cheatsheets",
+      "devops",
+      "guidelines",
+      "hacking",
+      "hacks",
+      "howtos",
+      "linux",
+      "lists",
+      "manuals",
+      "one-liners",
+      "pentesters",
+      "resources",
+      "search-engines",
+      "security",
+      "security-researchers",
+      "sysops"
+    ]
+  },
+  {
+    "title": "awesome-go",
+    "url": "https://github.com/avelino/awesome-go",
+    "description": "A curated list of awesome Go frameworks, libraries and software",
+    "type": "github_program",
+    "added_at": "2024-12-20T00:41:23.197086",
+    "stars": 134486,
+    "language": "Go",
+    "topics": [
+      "awesome",
+      "awesome-list",
+      "go",
+      "golang",
+      "golang-library",
+      "hacktoberfest"
+    ]
+  },
+  {
+    "title": "react-native",
+    "url": "https://github.com/facebook/react-native",
+    "description": "A framework for building native applications using React",
+    "type": "github_program",
+    "added_at": "2024-12-20T00:41:23.197090",
+    "stars": 119742,
+    "language": "C++",
+    "topics": [
+      "android",
+      "app-framework",
+      "cross-platform",
+      "ios",
+      "mobile",
+      "mobile-development",
+      "react",
+      "react-native"
+    ]
+  },
+  {
+    "title": "kubernetes",
+    "url": "https://github.com/kubernetes/kubernetes",
+    "description": "Production-Grade Container Scheduling and Management",
+    "type": "github_program",
+    "added_at": "2024-12-20T00:41:23.197093",
+    "stars": 111726,
+    "language": "Go",
+    "topics": [
+      "cncf",
+      "containers",
+      "go",
+      "kubernetes"
+    ]
+  },
+  {
+    "title": "Successful DevRel no matter your org chart",
+    "url": "https://developerrelations.com/strategy-and-metrics/successful-devrel-no-matter-your-org-chart",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197097",
+    "author": "",
+    "published_date": "Wed, 13 Nov 2024 22:03:50 +0000"
+  },
+  {
+    "title": "How to design technical content with inclusivity in mind",
+    "url": "https://developerrelations.com/developer-experience/how-to-design-technical-content-with-inclusivity-in-mind",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197101",
+    "author": "",
+    "published_date": "Thu, 07 Nov 2024 16:59:40 +0000"
+  },
+  {
+    "title": "A success-ful approach to DevRel",
+    "url": "https://developerrelations.com/strategy-and-metrics/a-success-ful-approach-to-devrel",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197104",
+    "author": "",
+    "published_date": "Mon, 28 Oct 2024 14:32:02 +0000"
+  },
+  {
+    "title": "Focus on partners: navigating DevRel in a private ecosystem",
+    "url": "https://developerrelations.com/strategy-and-metrics/focus-on-partners-navigating-devrel-in-a-private-ecosystem",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197107",
+    "author": "",
+    "published_date": "Mon, 28 Oct 2024 14:27:22 +0000"
+  },
+  {
+    "title": "Keynotes: bringing DevRel to the big stage",
+    "url": "https://developerrelations.com/dev-rel/keynotes-bringing-devrel-to-the-big-stage",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197110",
+    "author": "",
+    "published_date": "Mon, 28 Oct 2024 14:21:53 +0000"
+  },
+  {
+    "title": "From stocks to stacks: economic lessons for DevRel",
+    "url": "https://developerrelations.com/strategy-and-metrics/from-stocks-to-stacks-economic-lessons-for-devrel",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197113",
+    "author": "",
+    "published_date": "Mon, 28 Oct 2024 14:15:21 +0000"
+  },
+  {
+    "title": "Write fewer blog posts and reach more developers",
+    "url": "https://developerrelations.com/developer-marketing/write-fewer-blog-posts-and-reach-more-developers",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197116",
+    "author": "",
+    "published_date": "Sun, 25 Feb 2024 21:00:23 +0000"
+  },
+  {
+    "title": "Reward strategies to maximise open source community involvement",
+    "url": "https://developerrelations.com/community/reward-strategies-to-maximise-open-source-community-involvement",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197119",
+    "author": "",
+    "published_date": "Sun, 25 Feb 2024 20:18:33 +0000"
+  },
+  {
+    "title": "What happens when developer advocacy snowballs into company strategy",
+    "url": "https://developerrelations.com/strategy-and-metrics/what-happens-when-developer-advocacy-snowballs-into-company-strategy",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197123",
+    "author": "",
+    "published_date": "Sun, 25 Feb 2024 19:55:33 +0000"
+  },
+  {
+    "title": "Leveraging on-chain use cases for DevRel in the blockchain space",
+    "url": "https://developerrelations.com/community/leveraging-on-chain-use-cases-for-devrel-in-the-blockchain-space",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197126",
+    "author": "",
+    "published_date": "Sun, 25 Feb 2024 18:18:15 +0000"
+  },
+  {
+    "title": "Elevating developer experience in web3",
+    "url": "https://developerrelations.com/developer-experience/elevating-developer-experience-in-web3",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197129",
+    "author": "",
+    "published_date": "Fri, 09 Feb 2024 09:54:20 +0000"
+  },
+  {
+    "title": "Building internal alignment",
+    "url": "https://developerrelations.com/dev-rel/building-internal-alignment",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197132",
+    "author": "",
+    "published_date": "Thu, 08 Feb 2024 20:31:53 +0000"
+  },
+  {
+    "title": "Working with developers in China",
+    "url": "https://developerrelations.com/dev-rel/working-with-developers-in-china",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197135",
+    "author": "",
+    "published_date": "Thu, 08 Feb 2024 20:10:16 +0000"
+  },
+  {
+    "title": "Respecting the social battery in DevRel",
+    "url": "https://developerrelations.com/career/respecting-the-social-battery-in-devrel",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197138",
+    "author": "",
+    "published_date": "Wed, 07 Feb 2024 09:13:43 +0000"
+  },
+  {
+    "title": "A playbook for a successful developer community operations team",
+    "url": "https://developerrelations.com/community/community-operations-playbook",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197141",
+    "author": "",
+    "published_date": "Tue, 06 Feb 2024 22:25:43 +0000"
+  },
+  {
+    "title": "Navigating the blurred lines between DevRel and marketing",
+    "url": "https://developerrelations.com/developer-marketing/navigating-the-blurred-lines-between-devrel-and-marketing",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197145",
+    "author": "",
+    "published_date": "Tue, 06 Feb 2024 22:06:15 +0000"
+  },
+  {
+    "title": "How to make your event manager love you",
+    "url": "https://developerrelations.com/events/how-to-make-your-event-manager-love-you",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197148",
+    "author": "",
+    "published_date": "Fri, 26 Jan 2024 13:11:54 +0000"
+  },
+  {
+    "title": "The DevRel Layoff Survival Guide",
+    "url": "https://developerrelations.com/career/the-devrel-layoff-survival-guide",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197151",
+    "author": "",
+    "published_date": "Thu, 04 Jan 2024 23:17:51 +0000"
+  },
+  {
+    "title": "Beating stage fright",
+    "url": "https://developerrelations.com/dev-rel/beating-stage-fright",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197154",
+    "author": "",
+    "published_date": "Tue, 12 Dec 2023 12:59:45 +0000"
+  },
+  {
+    "title": "How teaching skills elevate developer relations",
+    "url": "https://developerrelations.com/developer-education/teaching-skills-developer-relations",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197157",
+    "author": "",
+    "published_date": "Thu, 30 Nov 2023 17:05:10 +0000"
+  },
+  {
+    "title": "The DevRel Path to Success: Awareness, Enablement, Engagement",
+    "url": "https://www.marythengvall.com/blog/2021/3/9/the-devrel-path-to-success-awareness-enablement-engagement",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197160",
+    "author": "",
+    "published_date": "Wed, 10 Mar 2021 03:22:05 +0000"
+  },
+  {
+    "title": "First, Understand the Company Goals",
+    "url": "https://www.marythengvall.com/blog/2020/12/14/first-understand-the-company-goals",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197163",
+    "author": "",
+    "published_date": "Mon, 14 Dec 2020 22:02:53 +0000"
+  },
+  {
+    "title": "The Camunda Developer Relations Career Path",
+    "url": "https://www.marythengvall.com/blog/2020/6/29/the-camunda-developer-relations-career-path",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197166",
+    "author": "",
+    "published_date": "Tue, 30 Jun 2020 22:51:26 +0000"
+  },
+  {
+    "title": "DevRel Qualified Leads: Repurposing a Common Business Metric to Prove Value",
+    "url": "https://www.marythengvall.com/blog/2019/12/14/devrel-qualified-leads-repurposing-a-common-business-metrics-to-prove-value",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197169",
+    "author": "",
+    "published_date": "Sat, 14 Dec 2019 15:51:34 +0000"
+  },
+  {
+    "title": "Looking Back on Two Years of DevRel Consulting aka I'm (Almost) No Longer Consulting aka Ch-ch-ch-ch-changes",
+    "url": "https://www.marythengvall.com/blog/2019/11/10/joining-camunda-director-devrel",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197172",
+    "author": "",
+    "published_date": "Mon, 11 Nov 2019 17:00:00 +0000"
+  },
+  {
+    "title": "What is Developer Relations (and why should you care?)",
+    "url": "https://www.marythengvall.com/blog/2019/5/22/what-is-developer-relations-and-why-should-you-care",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197175",
+    "author": "",
+    "published_date": "Thu, 23 May 2019 20:52:18 +0000"
+  },
+  {
+    "title": "Be Flexible & Willing to Iterate",
+    "url": "https://www.marythengvall.com/blog/2019/3/3/lessons-learned-while-running-a-first-year-conference-part-3-be-flexible-willing-to-iterate",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197179",
+    "author": "",
+    "published_date": "Fri, 08 Mar 2019 01:46:54 +0000"
+  },
+  {
+    "title": "Lessons Learned while Running a First-Year Conference. Part 2: Setting Boundaries",
+    "url": "https://www.marythengvall.com/blog/2019/2/14/lessons-learned-while-running-a-first-year-conference-part-2-setting-boundaries",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197182",
+    "author": "",
+    "published_date": "Fri, 15 Feb 2019 22:39:45 +0000"
+  },
+  {
+    "title": "DevRel Weekly Year One: Patterns, Projections, Plans",
+    "url": "https://www.marythengvall.com/blog/2019/2/8/devrel-weekly-year-one-patterns-projections-and-plans",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197185",
+    "author": "",
+    "published_date": "Fri, 08 Feb 2019 22:19:43 +0000"
+  },
+  {
+    "title": "A Retrospective on REdeploy (or Lessons Learned while Running a First-Year Conference)",
+    "url": "https://www.marythengvall.com/blog/2019/1/25/redeploy-retrospective-lessons-volunteer-run-conference",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197189",
+    "author": "",
+    "published_date": "Tue, 29 Jan 2019 22:36:00 +0000"
+  },
+  {
+    "title": "Rest. Organize. Prepare.",
+    "url": "https://www.marythengvall.com/blog/2018/12/14/rest-organize-prepare",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197192",
+    "author": "",
+    "published_date": "Fri, 14 Dec 2018 23:03:28 +0000"
+  },
+  {
+    "title": "\"Fail Fast, Fail Forward\" is Great... Until it (Really) Isn't",
+    "url": "https://www.marythengvall.com/blog/2018/7/1/fail-fast-fail-forward-is-great-until-it-really-isnt",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197195",
+    "author": "",
+    "published_date": "Mon, 02 Jul 2018 01:31:15 +0000"
+  },
+  {
+    "title": "Onward, to New Beginnings and Future Performances.",
+    "url": "https://www.marythengvall.com/blog/2018/6/10/onward-to-new-beginnings-and-future-performances",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197198",
+    "author": "",
+    "published_date": "Sun, 10 Jun 2018 23:18:53 +0000"
+  },
+  {
+    "title": "Running on the Water",
+    "url": "https://www.marythengvall.com/blog/2018/5/12/running-on-the-water",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197201",
+    "author": "",
+    "published_date": "Sun, 13 May 2018 03:14:31 +0000"
+  },
+  {
+    "title": "Reclaiming my Life, One Priority at a Time",
+    "url": "https://www.marythengvall.com/blog/2018/5/1/reclaiming-my-life-one-priority-at-a-time",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197204",
+    "author": "",
+    "published_date": "Tue, 01 May 2018 18:10:40 +0000"
+  },
+  {
+    "title": "Measure Twice, Cut Once... but go with the creative flow",
+    "url": "https://www.marythengvall.com/blog/2018/4/28/measure-twice-cut-once-but-go-with-the-creative-flow",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197207",
+    "author": "",
+    "published_date": "Sun, 29 Apr 2018 00:58:39 +0000"
+  },
+  {
+    "title": "Developer Avocados: The Good Kind of Fat",
+    "url": "https://www.marythengvall.com/blog/2018/1/31/developer-avocados-the-good-kind-of-fat",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197211",
+    "author": "",
+    "published_date": "Wed, 31 Jan 2018 09:07:43 +0000"
+  },
+  {
+    "title": "4 Things I've Learned Since Starting my own Business",
+    "url": "https://www.marythengvall.com/blog/2018/1/6/4-things-that-ive-learned-since-starting-my-own-business",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197214",
+    "author": "",
+    "published_date": "Sat, 06 Jan 2018 23:00:38 +0000"
+  },
+  {
+    "title": "Burnout: What Happens When You Take On Too Much",
+    "url": "https://www.marythengvall.com/blog/2017/10/20/burnout",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197218",
+    "author": "",
+    "published_date": "Fri, 20 Oct 2017 21:21:00 +0000"
+  },
+  {
+    "title": "#AlmostAnAuthor",
+    "url": "https://www.marythengvall.com/blog/almostanauthor",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197221",
+    "author": "",
+    "published_date": "Tue, 16 May 2017 19:50:11 +0000"
+  },
+  {
+    "title": "Successful DevRel no matter your org chart",
+    "url": "https://developerrelations.com/strategy-and-metrics/successful-devrel-no-matter-your-org-chart",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197224",
+    "author": "",
+    "published_date": "Wed, 13 Nov 2024 22:03:50 +0000"
+  },
+  {
+    "title": "How to design technical content with inclusivity in mind",
+    "url": "https://developerrelations.com/developer-experience/how-to-design-technical-content-with-inclusivity-in-mind",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197228",
+    "author": "",
+    "published_date": "Thu, 07 Nov 2024 16:59:40 +0000"
+  },
+  {
+    "title": "A success-ful approach to DevRel",
+    "url": "https://developerrelations.com/strategy-and-metrics/a-success-ful-approach-to-devrel",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197231",
+    "author": "",
+    "published_date": "Mon, 28 Oct 2024 14:32:02 +0000"
+  },
+  {
+    "title": "Focus on partners: navigating DevRel in a private ecosystem",
+    "url": "https://developerrelations.com/strategy-and-metrics/focus-on-partners-navigating-devrel-in-a-private-ecosystem",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197235",
+    "author": "",
+    "published_date": "Mon, 28 Oct 2024 14:27:22 +0000"
+  },
+  {
+    "title": "Keynotes: bringing DevRel to the big stage",
+    "url": "https://developerrelations.com/dev-rel/keynotes-bringing-devrel-to-the-big-stage",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197238",
+    "author": "",
+    "published_date": "Mon, 28 Oct 2024 14:21:53 +0000"
+  },
+  {
+    "title": "From stocks to stacks: economic lessons for DevRel",
+    "url": "https://developerrelations.com/strategy-and-metrics/from-stocks-to-stacks-economic-lessons-for-devrel",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197241",
+    "author": "",
+    "published_date": "Mon, 28 Oct 2024 14:15:21 +0000"
+  },
+  {
+    "title": "Write fewer blog posts and reach more developers",
+    "url": "https://developerrelations.com/developer-marketing/write-fewer-blog-posts-and-reach-more-developers",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197245",
+    "author": "",
+    "published_date": "Sun, 25 Feb 2024 21:00:23 +0000"
+  },
+  {
+    "title": "Reward strategies to maximise open source community involvement",
+    "url": "https://developerrelations.com/community/reward-strategies-to-maximise-open-source-community-involvement",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197248",
+    "author": "",
+    "published_date": "Sun, 25 Feb 2024 20:18:33 +0000"
+  },
+  {
+    "title": "What happens when developer advocacy snowballs into company strategy",
+    "url": "https://developerrelations.com/strategy-and-metrics/what-happens-when-developer-advocacy-snowballs-into-company-strategy",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197252",
+    "author": "",
+    "published_date": "Sun, 25 Feb 2024 19:55:33 +0000"
+  },
+  {
+    "title": "Leveraging on-chain use cases for DevRel in the blockchain space",
+    "url": "https://developerrelations.com/community/leveraging-on-chain-use-cases-for-devrel-in-the-blockchain-space",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197255",
+    "author": "",
+    "published_date": "Sun, 25 Feb 2024 18:18:15 +0000"
+  },
+  {
+    "title": "Elevating developer experience in web3",
+    "url": "https://developerrelations.com/developer-experience/elevating-developer-experience-in-web3",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197259",
+    "author": "",
+    "published_date": "Fri, 09 Feb 2024 09:54:20 +0000"
+  },
+  {
+    "title": "Building internal alignment",
+    "url": "https://developerrelations.com/dev-rel/building-internal-alignment",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197263",
+    "author": "",
+    "published_date": "Thu, 08 Feb 2024 20:31:53 +0000"
+  },
+  {
+    "title": "Working with developers in China",
+    "url": "https://developerrelations.com/dev-rel/working-with-developers-in-china",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197266",
+    "author": "",
+    "published_date": "Thu, 08 Feb 2024 20:10:16 +0000"
+  },
+  {
+    "title": "Respecting the social battery in DevRel",
+    "url": "https://developerrelations.com/career/respecting-the-social-battery-in-devrel",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197269",
+    "author": "",
+    "published_date": "Wed, 07 Feb 2024 09:13:43 +0000"
+  },
+  {
+    "title": "A playbook for a successful developer community operations team",
+    "url": "https://developerrelations.com/community/community-operations-playbook",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197273",
+    "author": "",
+    "published_date": "Tue, 06 Feb 2024 22:25:43 +0000"
+  },
+  {
+    "title": "Navigating the blurred lines between DevRel and marketing",
+    "url": "https://developerrelations.com/developer-marketing/navigating-the-blurred-lines-between-devrel-and-marketing",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197276",
+    "author": "",
+    "published_date": "Tue, 06 Feb 2024 22:06:15 +0000"
+  },
+  {
+    "title": "How to make your event manager love you",
+    "url": "https://developerrelations.com/events/how-to-make-your-event-manager-love-you",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197279",
+    "author": "",
+    "published_date": "Fri, 26 Jan 2024 13:11:54 +0000"
+  },
+  {
+    "title": "The DevRel Layoff Survival Guide",
+    "url": "https://developerrelations.com/career/the-devrel-layoff-survival-guide",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197283",
+    "author": "",
+    "published_date": "Thu, 04 Jan 2024 23:17:51 +0000"
+  },
+  {
+    "title": "Beating stage fright",
+    "url": "https://developerrelations.com/dev-rel/beating-stage-fright",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197286",
+    "author": "",
+    "published_date": "Tue, 12 Dec 2023 12:59:45 +0000"
+  },
+  {
+    "title": "How teaching skills elevate developer relations",
+    "url": "https://developerrelations.com/developer-education/teaching-skills-developer-relations",
+    "description": "",
+    "type": "blog_post",
+    "added_at": "2024-12-20T00:41:23.197290",
+    "author": "",
+    "published_date": "Thu, 30 Nov 2023 17:05:10 +0000"
+  },
+  {
+    "title": "Senior Developer Advocate",
+    "url": "https://www.remoterocketship.com/jobs/tailscale/senior-developer-advocate",
+    "description": "Tailscale is looking for a Senior Developer Advocate to join the team. You will create technical content, build demos, speak at conferences, and engage with the developer community to drive adoption of Tailscale's networking solutions.",
+    "type": "job_listing",
+    "company": "Tailscale",
+    "source": "remoterocketship",
+    "date": "2026-01-28",
+    "locations": [
+      "Remote"
+    ],
+    "added_at": "2026-02-03T00:00:00.000000",
+    "location": "Remote",
+    "tags": [
+      "Developer Advocacy",
+      "Networking",
+      "Technical Content"
+    ]
+  },
+  {
+    "title": "Developer Relations Engineer",
+    "url": "https://www.remoterocketship.com/jobs/openrouter/developer-relations-engineer",
+    "description": "OpenRouter is hiring a Developer Relations Engineer to help developers integrate with their unified AI model API. Build sample apps, write documentation, create tutorials, and support the developer community.",
+    "type": "job_listing",
+    "company": "OpenRouter",
+    "source": "remoterocketship",
+    "date": "2026-01-25",
+    "locations": [
+      "Remote"
+    ],
+    "added_at": "2026-02-03T00:00:00.000000",
+    "location": "Remote",
+    "tags": [
+      "Developer Relations",
+      "AI/ML",
+      "API"
+    ]
+  },
+  {
+    "title": "Developer Advocate",
+    "url": "https://www.remoterocketship.com/jobs/netapp/developer-advocate",
+    "description": "NetApp seeks a Developer Advocate to drive adoption of cloud data services. Create technical content, deliver workshops, engage with open source communities, and represent NetApp at industry events.",
+    "type": "job_listing",
+    "company": "NetApp",
+    "source": "remoterocketship",
+    "date": "2026-01-22",
+    "locations": [
+      "Remote",
+      "US"
+    ],
+    "added_at": "2026-02-03T00:00:00.000000",
+    "location": "Remote, US",
+    "tags": [
+      "Developer Advocacy",
+      "Cloud",
+      "Data Services"
+    ]
+  },
+  {
+    "title": "Developer Relations Lead",
+    "url": "https://www.remoterocketship.com/jobs/zencoder/developer-relations-lead",
+    "description": "Zencoder is looking for a Developer Relations Lead to build and scale the DevRel program. Define strategy, create technical content, foster community engagement, and drive developer adoption of AI coding tools.",
+    "type": "job_listing",
+    "company": "Zencoder",
+    "source": "remoterocketship",
+    "date": "2026-01-20",
+    "locations": [
+      "Remote"
+    ],
+    "added_at": "2026-02-03T00:00:00.000000",
+    "location": "Remote",
+    "tags": [
+      "Developer Relations",
+      "AI",
+      "Leadership"
+    ]
+  },
+  {
+    "title": "Developer Advocate",
+    "url": "https://www.remoterocketship.com/jobs/authzed/developer-advocate",
+    "description": "AuthZed is hiring a Developer Advocate to grow the SpiceDB community. Write technical blog posts, create video content, speak at conferences, and help developers implement authorization solutions.",
+    "type": "job_listing",
+    "company": "AuthZed",
+    "source": "remoterocketship",
+    "date": "2026-01-18",
+    "locations": [
+      "Remote"
+    ],
+    "added_at": "2026-02-03T00:00:00.000000",
+    "location": "Remote",
+    "tags": [
+      "Developer Advocacy",
+      "Security",
+      "Authorization"
+    ]
+  },
+  {
+    "title": "Developer Relations Manager",
+    "url": "https://web3.career/developer-relations-manager-genlayer-labs/102345",
+    "description": "GenLayer Labs is seeking a Developer Relations Manager to build and lead developer community initiatives for their Web3 infrastructure platform. Drive hackathons, create educational content, and grow the ecosystem.",
+    "type": "job_listing",
+    "company": "GenLayer Labs",
+    "source": "web3.career",
+    "date": "2026-01-30",
+    "locations": [
+      "Remote"
+    ],
+    "added_at": "2026-02-03T00:00:00.000000",
+    "location": "Remote",
+    "tags": [
+      "Developer Relations",
+      "Web3",
+      "Community"
+    ]
+  },
+  {
+    "title": "Developer Advocate - Web3",
+    "url": "https://web3.career/developer-advocate-layerzerolabs/102400",
+    "description": "LayerZero Labs is hiring a Developer Advocate to support cross-chain protocol adoption. Create tutorials, build demo applications, participate in hackathons, and engage with the omnichain developer community.",
+    "type": "job_listing",
+    "company": "LayerZero Labs",
+    "source": "web3.career",
+    "date": "2026-01-29",
+    "locations": [
+      "Remote"
+    ],
+    "added_at": "2026-02-03T00:00:00.000000",
+    "location": "Remote",
+    "tags": [
+      "Developer Advocacy",
+      "Web3",
+      "Cross-chain"
+    ]
+  },
+  {
+    "title": "Head of Developer Relations",
+    "url": "https://web3.career/head-developer-relations-token-metrics/102350",
+    "description": "Token Metrics seeks a Head of Developer Relations to lead DevRel strategy for their AI-powered crypto analytics platform. Build developer programs, create SDK documentation, and foster integrations.",
+    "type": "job_listing",
+    "company": "Token Metrics",
+    "source": "web3.career",
+    "date": "2026-01-27",
+    "locations": [
+      "Remote"
+    ],
+    "added_at": "2026-02-03T00:00:00.000000",
+    "location": "Remote",
+    "tags": [
+      "Developer Relations",
+      "Crypto",
+      "AI",
+      "Leadership"
+    ]
+  },
+  {
+    "title": "Developer Relations Engineer",
+    "url": "https://web3.career/developer-relations-engineer-polymarket/102290",
+    "description": "Polymarket is hiring a Developer Relations Engineer to support developers building on their prediction market platform. Create technical documentation, sample code, and developer tools.",
+    "type": "job_listing",
+    "company": "Polymarket",
+    "source": "web3.career",
+    "date": "2026-01-26",
+    "locations": [
+      "New York, US",
+      "Remote"
+    ],
+    "added_at": "2026-02-03T00:00:00.000000",
+    "location": "New York, US / Remote",
+    "tags": [
+      "Developer Relations",
+      "Web3",
+      "Prediction Markets"
+    ]
+  },
+  {
+    "title": "Senior Developer Advocate",
+    "url": "https://web3.career/senior-developer-advocate-ripple/102250",
+    "description": "Ripple seeks a Senior Developer Advocate to drive XRPL developer adoption. Build demo apps, write technical guides, deliver conference talks, and support the open-source XRP Ledger ecosystem.",
+    "type": "job_listing",
+    "company": "Ripple",
+    "source": "web3.career",
+    "date": "2026-01-24",
+    "locations": [
+      "San Francisco, US",
+      "Remote"
+    ],
+    "added_at": "2026-02-03T00:00:00.000000",
+    "location": "San Francisco, US / Remote",
+    "tags": [
+      "Developer Advocacy",
+      "Blockchain",
+      "Fintech"
+    ]
+  },
+  {
+    "title": "Developer Community Manager",
+    "url": "https://web3.career/developer-community-manager-starknet/102210",
+    "description": "Starknet Foundation is looking for a Developer Community Manager to grow the Starknet developer ecosystem. Organize hackathons, manage community channels, and create onboarding resources for Cairo developers.",
+    "type": "job_listing",
+    "company": "Starknet Foundation",
+    "source": "web3.career",
+    "date": "2026-01-22",
+    "locations": [
+      "Remote"
+    ],
+    "added_at": "2026-02-03T00:00:00.000000",
+    "location": "Remote",
+    "tags": [
+      "Community Management",
+      "Web3",
+      "L2"
+    ]
+  },
+  {
+    "title": "Developer Advocate",
+    "url": "https://web3.career/developer-advocate-celestia/102180",
+    "description": "Celestia is hiring a Developer Advocate to promote modular blockchain architecture. Create content explaining data availability layers, build example rollups, and engage with the modular ecosystem.",
+    "type": "job_listing",
+    "company": "Celestia",
+    "source": "web3.career",
+    "date": "2026-01-20",
+    "locations": [
+      "Remote"
+    ],
+    "added_at": "2026-02-03T00:00:00.000000",
+    "location": "Remote",
+    "tags": [
+      "Developer Advocacy",
+      "Blockchain",
+      "Modular"
+    ]
+  },
+  {
+    "title": "Developer Relations Lead",
+    "url": "https://web3.career/developer-relations-lead-eigenlayer/102150",
+    "description": "EigenLayer is seeking a Developer Relations Lead to build and manage the restaking developer ecosystem. Create documentation, run workshops, support AVS builders, and drive protocol adoption.",
+    "type": "job_listing",
+    "company": "EigenLayer",
+    "source": "web3.career",
+    "date": "2026-01-18",
+    "locations": [
+      "Remote",
+      "US"
+    ],
+    "added_at": "2026-02-03T00:00:00.000000",
+    "location": "Remote, US",
+    "tags": [
+      "Developer Relations",
+      "Web3",
+      "Restaking",
+      "Leadership"
+    ]
+  },
+  {
+    "title": "Senior Developer Advocate",
+    "url": "https://startup.jobs/senior-developer-advocate-mongodb-5987654",
+    "description": "MongoDB is looking for a Senior Developer Advocate to create compelling content, deliver technical talks, and build sample applications that showcase MongoDB Atlas capabilities for modern app development.",
+    "type": "job_listing",
+    "company": "MongoDB",
+    "source": "startup.jobs",
+    "date": "2026-01-31",
+    "locations": [
+      "New York, US",
+      "Remote"
+    ],
+    "added_at": "2026-02-03T00:00:00.000000",
+    "location": "New York, US / Remote",
+    "tags": [
+      "Developer Advocacy",
+      "Database",
+      "Cloud"
+    ]
+  },
+  {
+    "title": "Developer Relations Engineer",
+    "url": "https://startup.jobs/developer-relations-engineer-nexla-5987321",
+    "description": "Nexla is hiring a Developer Relations Engineer to support data integration developers. Create technical content, build connectors, contribute to open source projects, and grow the developer community.",
+    "type": "job_listing",
+    "company": "Nexla",
+    "source": "startup.jobs",
+    "date": "2026-01-30",
+    "locations": [
+      "San Francisco, US",
+      "Remote"
+    ],
+    "added_at": "2026-02-03T00:00:00.000000",
+    "location": "San Francisco, US / Remote",
+    "tags": [
+      "Developer Relations",
+      "Data Integration",
+      "Open Source"
+    ]
+  },
+  {
+    "title": "Developer Advocate",
+    "url": "https://startup.jobs/developer-advocate-neo4j-5986890",
+    "description": "Neo4j seeks a Developer Advocate to promote graph database technology. Write blog posts, create video tutorials, speak at conferences, and help developers build graph-powered applications.",
+    "type": "job_listing",
+    "company": "Neo4j",
+    "source": "startup.jobs",
+    "date": "2026-01-29",
+    "locations": [
+      "Remote"
+    ],
+    "added_at": "2026-02-03T00:00:00.000000",
+    "location": "Remote",
+    "tags": [
+      "Developer Advocacy",
+      "Graph Database",
+      "Open Source"
+    ]
+  },
+  {
+    "title": "Senior Developer Advocate - Media",
+    "url": "https://startup.jobs/senior-developer-advocate-cloudinary-5986550",
+    "description": "Cloudinary is looking for a Senior Developer Advocate focused on media APIs. Create demos showcasing image and video transformation capabilities, write technical guides, and engage at developer events.",
+    "type": "job_listing",
+    "company": "Cloudinary",
+    "source": "startup.jobs",
+    "date": "2026-01-28",
+    "locations": [
+      "Remote",
+      "US"
+    ],
+    "added_at": "2026-02-03T00:00:00.000000",
+    "location": "Remote, US",
+    "tags": [
+      "Developer Advocacy",
+      "Media",
+      "API"
+    ]
+  },
+  {
+    "title": "Developer Relations Manager",
+    "url": "https://startup.jobs/developer-relations-manager-temporal-5986200",
+    "description": "Temporal is seeking a Developer Relations Manager to grow the workflow orchestration developer community. Lead developer programs, create educational content, and drive adoption of durable execution patterns.",
+    "type": "job_listing",
+    "company": "Temporal",
+    "source": "startup.jobs",
+    "date": "2026-01-27",
+    "locations": [
+      "Remote"
+    ],
+    "added_at": "2026-02-03T00:00:00.000000",
+    "location": "Remote",
+    "tags": [
+      "Developer Relations",
+      "Workflow",
+      "Infrastructure"
+    ]
+  },
+  {
+    "title": "Developer Advocate - AI/ML",
+    "url": "https://startup.jobs/developer-advocate-pinecone-5985900",
+    "description": "Pinecone is hiring a Developer Advocate focused on AI/ML use cases. Build RAG applications, create vector search tutorials, engage with the AI developer community, and showcase embedding workflows.",
+    "type": "job_listing",
+    "company": "Pinecone",
+    "source": "startup.jobs",
+    "date": "2026-01-26",
+    "locations": [
+      "Remote",
+      "US"
+    ],
+    "added_at": "2026-02-03T00:00:00.000000",
+    "location": "Remote, US",
+    "tags": [
+      "Developer Advocacy",
+      "AI/ML",
+      "Vector Database"
+    ]
+  },
+  {
+    "title": "Head of Developer Relations",
+    "url": "https://startup.jobs/head-developer-relations-okta-5985600",
+    "description": "Okta is looking for a Head of Developer Relations to lead the identity platform's DevRel strategy. Manage a team of advocates, define KPIs, build community programs, and drive developer-first growth.",
+    "type": "job_listing",
+    "company": "Okta",
+    "source": "startup.jobs",
+    "date": "2026-01-25",
+    "locations": [
+      "San Francisco, US",
+      "Remote"
+    ],
+    "added_at": "2026-02-03T00:00:00.000000",
+    "location": "San Francisco, US / Remote",
+    "tags": [
+      "Developer Relations",
+      "Identity",
+      "Security",
+      "Leadership"
+    ]
+  },
+  {
+    "title": "Developer Advocate - Data & AI",
+    "url": "https://startup.jobs/developer-advocate-databricks-5985300",
+    "description": "Databricks seeks a Developer Advocate to promote their lakehouse platform. Create content on data engineering and AI workflows, build demo notebooks, and speak at data community events.",
+    "type": "job_listing",
+    "company": "Databricks",
+    "source": "startup.jobs",
+    "date": "2026-01-24",
+    "locations": [
+      "Remote",
+      "US"
+    ],
+    "added_at": "2026-02-03T00:00:00.000000",
+    "location": "Remote, US",
+    "tags": [
+      "Developer Advocacy",
+      "Data Engineering",
+      "AI/ML"
+    ]
+  },
+  {
+    "title": "Developer Relations Engineer",
+    "url": "https://startup.jobs/developer-relations-engineer-coveo-5985000",
+    "description": "Coveo is hiring a Developer Relations Engineer to support search and AI relevance developers. Create integration guides, build sample projects, and contribute to developer documentation.",
+    "type": "job_listing",
+    "company": "Coveo",
+    "source": "startup.jobs",
+    "date": "2026-01-23",
+    "locations": [
+      "Montreal, Canada",
+      "Remote"
+    ],
+    "added_at": "2026-02-03T00:00:00.000000",
+    "location": "Montreal, Canada / Remote",
+    "tags": [
+      "Developer Relations",
+      "Search",
+      "AI"
+    ]
+  },
+  {
+    "title": "Senior Developer Advocate - Observability",
+    "url": "https://startup.jobs/senior-developer-advocate-elastic-5984700",
+    "description": "Elastic is looking for a Senior Developer Advocate focused on observability and security use cases. Build demos with Elasticsearch, create OpenTelemetry tutorials, and engage at DevOps conferences.",
+    "type": "job_listing",
+    "company": "Elastic",
+    "source": "startup.jobs",
+    "date": "2026-01-22",
+    "locations": [
+      "Remote"
+    ],
+    "added_at": "2026-02-03T00:00:00.000000",
+    "location": "Remote",
+    "tags": [
+      "Developer Advocacy",
+      "Observability",
+      "Search"
+    ]
+  },
+  {
+    "title": "Developer Advocate",
+    "url": "https://startup.jobs/developer-advocate-jfrog-5984400",
+    "description": "JFrog seeks a Developer Advocate to promote DevOps and software supply chain practices. Create CI/CD tutorials, build Artifactory integrations, and speak at DevOps meetups and conferences.",
+    "type": "job_listing",
+    "company": "JFrog",
+    "source": "startup.jobs",
+    "date": "2026-01-21",
+    "locations": [
+      "Remote",
+      "US"
+    ],
+    "added_at": "2026-02-03T00:00:00.000000",
+    "location": "Remote, US",
+    "tags": [
+      "Developer Advocacy",
+      "DevOps",
+      "Supply Chain"
+    ]
+  },
+  {
+    "title": "Developer Relations Manager - APIs",
+    "url": "https://startup.jobs/developer-relations-manager-vonage-5984100",
+    "description": "Vonage is hiring a Developer Relations Manager to drive adoption of communication APIs. Lead a team creating voice, video, and messaging tutorials. Manage developer programs and community engagement.",
+    "type": "job_listing",
+    "company": "Vonage",
+    "source": "startup.jobs",
+    "date": "2026-01-20",
+    "locations": [
+      "Remote",
+      "London, UK"
+    ],
+    "added_at": "2026-02-03T00:00:00.000000",
+    "location": "Remote / London, UK",
+    "tags": [
+      "Developer Relations",
+      "Communications",
+      "API",
+      "Leadership"
+    ]
+  },
+  {
+    "title": "Developer Advocate - Platform",
+    "url": "https://startup.jobs/developer-advocate-hashicorp-5983800",
+    "description": "HashiCorp is looking for a Developer Advocate to support the infrastructure automation ecosystem. Create Terraform and Vault tutorials, engage with the HashiCorp community, and present at infrastructure events.",
+    "type": "job_listing",
+    "company": "HashiCorp",
+    "source": "startup.jobs",
+    "date": "2026-01-19",
+    "locations": [
+      "Remote"
+    ],
+    "added_at": "2026-02-03T00:00:00.000000",
+    "location": "Remote",
+    "tags": [
+      "Developer Advocacy",
+      "Infrastructure",
+      "Cloud"
+    ]
+  },
+  {
+    "title": "Developer Relations Lead - Open Source",
+    "url": "https://startup.jobs/developer-relations-lead-grafana-5983500",
+    "description": "Grafana Labs is seeking a Developer Relations Lead to grow the open-source observability community. Drive contributor programs, create content around Grafana, Loki, and Tempo, and build developer education initiatives.",
+    "type": "job_listing",
+    "company": "Grafana Labs",
+    "source": "startup.jobs",
+    "date": "2026-01-18",
+    "locations": [
+      "Remote"
+    ],
+    "added_at": "2026-02-03T00:00:00.000000",
+    "location": "Remote",
+    "tags": [
+      "Developer Relations",
+      "Open Source",
+      "Observability",
+      "Leadership"
+    ]
+  },
+  {
+    "title": "Developer Advocate - Kubernetes",
+    "url": "https://startup.jobs/developer-advocate-kubernetes-d2iq-5983200",
+    "description": "D2iQ is hiring a Developer Advocate focused on Kubernetes and cloud-native technologies. Create hands-on labs, write technical blog posts, and support the container orchestration community.",
+    "type": "job_listing",
+    "company": "D2iQ",
+    "source": "startup.jobs",
+    "date": "2026-01-17",
+    "locations": [
+      "Remote",
+      "US"
+    ],
+    "added_at": "2026-02-03T00:00:00.000000",
+    "location": "Remote, US",
+    "tags": [
+      "Developer Advocacy",
+      "Kubernetes",
+      "Cloud Native"
+    ]
+  },
+  {
+    "title": "Senior Developer Advocate - Serverless",
+    "url": "https://startup.jobs/senior-developer-advocate-serverless-vercel-5982900",
+    "description": "Vercel is looking for a Senior Developer Advocate to champion serverless and edge computing. Build Next.js demos, create deployment guides, and engage with the frontend developer community.",
+    "type": "job_listing",
+    "company": "Vercel",
+    "source": "startup.jobs",
+    "date": "2026-01-16",
+    "locations": [
+      "Remote"
+    ],
+    "added_at": "2026-02-03T00:00:00.000000",
+    "location": "Remote",
+    "tags": [
+      "Developer Advocacy",
+      "Serverless",
+      "Frontend"
+    ]
+  },
+  {
+    "title": "Developer Community Lead",
+    "url": "https://startup.jobs/developer-community-lead-supabase-5982600",
+    "description": "Supabase is hiring a Developer Community Lead to nurture the open-source Firebase alternative community. Moderate Discord, organize community events, support contributors, and create onboarding resources.",
+    "type": "job_listing",
+    "company": "Supabase",
+    "source": "startup.jobs",
+    "date": "2026-01-15",
+    "locations": [
+      "Remote"
+    ],
+    "added_at": "2026-02-03T00:00:00.000000",
+    "location": "Remote",
+    "tags": [
+      "Community Management",
+      "Open Source",
+      "Database"
+    ]
+  },
+  {
+    "title": "Developer Advocate - Security",
+    "url": "https://startup.jobs/developer-advocate-snyk-5982300",
+    "description": "Snyk seeks a Developer Advocate to promote developer-first security. Create secure coding tutorials, build CI/CD security pipeline demos, and engage with the application security community.",
+    "type": "job_listing",
+    "company": "Snyk",
+    "source": "startup.jobs",
+    "date": "2026-01-14",
+    "locations": [
+      "Remote",
+      "London, UK"
+    ],
+    "added_at": "2026-02-03T00:00:00.000000",
+    "location": "Remote / London, UK",
+    "tags": [
+      "Developer Advocacy",
+      "Security",
+      "DevSecOps"
+    ]
+  },
+  {
+    "title": "Developer Relations Program Manager",
+    "url": "https://startup.jobs/devrel-program-manager-stripe-5982000",
+    "description": "Stripe is looking for a Developer Relations Program Manager to scale developer programs. Manage hackathons, coordinate ambassador programs, optimize developer onboarding, and measure community health metrics.",
+    "type": "job_listing",
+    "company": "Stripe",
+    "source": "startup.jobs",
+    "date": "2026-01-13",
+    "locations": [
+      "San Francisco, US",
+      "Remote"
+    ],
+    "added_at": "2026-02-03T00:00:00.000000",
+    "location": "San Francisco, US / Remote",
+    "tags": [
+      "Developer Relations",
+      "Program Management",
+      "Payments"
+    ]
+  },
+  {
+    "title": "Developer Advocate - AI Agents",
+    "url": "https://startup.jobs/developer-advocate-langchain-5981700",
+    "description": "LangChain is hiring a Developer Advocate focused on AI agent frameworks. Build agent examples, create LangGraph tutorials, write technical documentation, and engage with the AI builder community.",
+    "type": "job_listing",
+    "company": "LangChain",
+    "source": "startup.jobs",
+    "date": "2026-01-12",
+    "locations": [
+      "Remote"
+    ],
+    "added_at": "2026-02-03T00:00:00.000000",
+    "location": "Remote",
+    "tags": [
+      "Developer Advocacy",
+      "AI Agents",
+      "LLM"
+    ]
+  },
+  {
+    "title": "Developer Experience Engineer",
+    "url": "https://startup.jobs/developer-experience-engineer-fly-io-5981400",
+    "description": "Fly.io is seeking a Developer Experience Engineer to improve the developer journey. Optimize CLI tools, improve documentation, build starter templates, and gather developer feedback to improve the platform.",
+    "type": "job_listing",
+    "company": "Fly.io",
+    "source": "startup.jobs",
+    "date": "2026-01-11",
+    "locations": [
+      "Remote"
+    ],
+    "added_at": "2026-02-03T00:00:00.000000",
+    "location": "Remote",
+    "tags": [
+      "Developer Experience",
+      "Infrastructure",
+      "Cloud"
+    ]
+  },
+  {
+    "title": "Developer Advocate - Blockchain",
+    "url": "https://web3.career/developer-advocate-avalanche/102100",
+    "description": "Ava Labs is hiring a Developer Advocate to grow the Avalanche developer ecosystem. Create subnet tutorials, support hackathon participants, write technical documentation, and build sample dApps.",
+    "type": "job_listing",
+    "company": "Ava Labs",
+    "source": "web3.career",
+    "date": "2026-01-15",
+    "locations": [
+      "New York, US",
+      "Remote"
+    ],
+    "added_at": "2026-02-03T00:00:00.000000",
+    "location": "New York, US / Remote",
+    "tags": [
+      "Developer Advocacy",
+      "Blockchain",
+      "L1"
+    ]
+  },
+  {
+    "title": "Head of Developer Education",
+    "url": "https://web3.career/head-developer-education-chainlink/102050",
+    "description": "Chainlink Labs seeks a Head of Developer Education to create comprehensive learning paths for oracle integration. Design courses, build hands-on labs, and manage educational content strategy.",
+    "type": "job_listing",
+    "company": "Chainlink Labs",
+    "source": "web3.career",
+    "date": "2026-01-13",
+    "locations": [
+      "Remote"
+    ],
+    "added_at": "2026-02-03T00:00:00.000000",
+    "location": "Remote",
+    "tags": [
+      "Developer Education",
+      "Web3",
+      "Oracles",
+      "Leadership"
+    ]
+  },
+  {
+    "title": "Developer Relations Engineer",
+    "url": "https://web3.career/devrel-engineer-alchemy/102000",
+    "description": "Alchemy is hiring a Developer Relations Engineer to support Web3 developers building on their platform. Create SDK guides, build demo apps, improve API documentation, and engage on developer forums.",
+    "type": "job_listing",
+    "company": "Alchemy",
+    "source": "web3.career",
+    "date": "2026-01-10",
+    "locations": [
+      "San Francisco, US",
+      "Remote"
+    ],
+    "added_at": "2026-02-03T00:00:00.000000",
+    "location": "San Francisco, US / Remote",
+    "tags": [
+      "Developer Relations",
+      "Web3",
+      "Infrastructure"
+    ]
+  },
+  {
+    "title": "Developer Advocate - API Platform",
+    "url": "https://startup.jobs/developer-advocate-postman-5981100",
+    "description": "Postman is looking for a Developer Advocate to champion API-first development. Create Postman collections, write API testing guides, host webinars, and engage with the API developer community.",
+    "type": "job_listing",
+    "company": "Postman",
+    "source": "startup.jobs",
+    "date": "2026-01-10",
+    "locations": [
+      "Remote",
+      "San Francisco, US"
+    ],
+    "added_at": "2026-02-03T00:00:00.000000",
+    "location": "Remote / San Francisco, US",
+    "tags": [
+      "Developer Advocacy",
+      "API",
+      "Testing"
+    ]
+  },
+  {
+    "title": "Developer Relations Lead - DevTools",
+    "url": "https://startup.jobs/devrel-lead-linear-5980800",
+    "description": "Linear is seeking a Developer Relations Lead to grow their developer tools ecosystem. Build integrations, create API documentation, foster the plugin community, and drive adoption among engineering teams.",
+    "type": "job_listing",
+    "company": "Linear",
+    "source": "startup.jobs",
+    "date": "2026-01-09",
+    "locations": [
+      "Remote"
+    ],
+    "added_at": "2026-02-03T00:00:00.000000",
+    "location": "Remote",
+    "tags": [
+      "Developer Relations",
+      "DevTools",
+      "Leadership"
+    ]
+  },
+  {
+    "title": "Developer Advocate - Real-time",
+    "url": "https://startup.jobs/developer-advocate-ably-5980500",
+    "description": "Ably is hiring a Developer Advocate to promote real-time messaging and event-driven architectures. Build live collaboration demos, create WebSocket tutorials, and speak at developer events.",
+    "type": "job_listing",
+    "company": "Ably",
+    "source": "startup.jobs",
+    "date": "2026-01-08",
+    "locations": [
+      "Remote",
+      "London, UK"
+    ],
+    "added_at": "2026-02-03T00:00:00.000000",
+    "location": "Remote / London, UK",
+    "tags": [
+      "Developer Advocacy",
+      "Real-time",
+      "Messaging"
+    ]
+  }
+]

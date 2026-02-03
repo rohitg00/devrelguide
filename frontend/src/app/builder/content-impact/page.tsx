@@ -50,7 +50,7 @@ export default function ContentImpactBuilder() {
             </Button>
           </Link>
           <h1 className="text-3xl font-bold">Content Impact Builder</h1>
-          <p className="text-gray-600 mt-1">
+          <p className="text-muted-foreground mt-1">
             Measure and analyze the performance and impact of your content across different channels and audience segments.
           </p>
         </div>
@@ -108,7 +108,7 @@ export default function ContentImpactBuilder() {
                       id="blog" 
                       checked={contentTypes.blog}
                       onChange={() => handleContentTypeChange('blog')}
-                      className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+                      className="h-4 w-4 rounded border-border text-primary focus:ring-primary"
                     />
                     <Label htmlFor="blog">Blog Posts</Label>
                   </div>
@@ -118,7 +118,7 @@ export default function ContentImpactBuilder() {
                       id="docs" 
                       checked={contentTypes.docs}
                       onChange={() => handleContentTypeChange('docs')}
-                      className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+                      className="h-4 w-4 rounded border-border text-primary focus:ring-primary"
                     />
                     <Label htmlFor="docs">Documentation</Label>
                   </div>
@@ -128,7 +128,7 @@ export default function ContentImpactBuilder() {
                       id="videos" 
                       checked={contentTypes.videos}
                       onChange={() => handleContentTypeChange('videos')}
-                      className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+                      className="h-4 w-4 rounded border-border text-primary focus:ring-primary"
                     />
                     <Label htmlFor="videos">Videos</Label>
                   </div>
@@ -138,7 +138,7 @@ export default function ContentImpactBuilder() {
                       id="tutorials" 
                       checked={contentTypes.tutorials}
                       onChange={() => handleContentTypeChange('tutorials')}
-                      className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+                      className="h-4 w-4 rounded border-border text-primary focus:ring-primary"
                     />
                     <Label htmlFor="tutorials">Tutorials</Label>
                   </div>
@@ -148,7 +148,7 @@ export default function ContentImpactBuilder() {
                       id="social" 
                       checked={contentTypes.social}
                       onChange={() => handleContentTypeChange('social')}
-                      className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+                      className="h-4 w-4 rounded border-border text-primary focus:ring-primary"
                     />
                     <Label htmlFor="social">Social Media</Label>
                   </div>
@@ -167,18 +167,18 @@ export default function ContentImpactBuilder() {
                   onChange={(e) => setEngagementThreshold(Number(e.target.value))}
                   className="w-full"
                 />
-                <div className="flex justify-between text-xs text-gray-500">
+                <div className="flex justify-between text-xs text-muted-foreground">
                   <span>Low</span>
                   <span>High</span>
                 </div>
               </div>
               
-              <div className="mt-6 pt-6 border-t border-gray-200">
+              <div className="mt-6 pt-6 border-t border-border">
                 <div className="flex items-center text-sm text-blue-600 mb-2">
                   <HelpCircle className="h-4 w-4 mr-1" />
                   <span>Data requirements</span>
                 </div>
-                <p className="text-xs text-gray-600">
+                <p className="text-xs text-muted-foreground">
                   Your data should include content types, dates, views, engagement metrics, and conversion rates.
                   <a href="#" className="block text-blue-600 mt-1 hover:underline">View data format guide</a>
                 </p>
@@ -228,7 +228,7 @@ export default function ContentImpactBuilder() {
                   </span>
                   <Button variant="outline" size="sm" className="text-xs">Connect</Button>
                 </div>
-                <div className="border-t border-gray-100 mt-3 pt-3">
+                <div className="border-t border-border mt-3 pt-3">
                   <Button className="w-full" onClick={handleDataImport}>
                     Generate Analysis
                   </Button>
@@ -267,20 +267,20 @@ export default function ContentImpactBuilder() {
                 </TabsList>
                 
                 <TabsContent value="data-import">
-                  <div className="h-96 flex flex-col items-center justify-center border rounded-md bg-gray-50 p-8">
+                  <div className="h-96 flex flex-col items-center justify-center border rounded-md bg-muted/50 p-8">
                     <div className="text-center max-w-md">
                       <div className="bg-blue-50 rounded-full p-4 inline-block mb-4">
                         <Upload className="h-8 w-8 text-blue-500" />
                       </div>
                       <h3 className="text-lg font-medium mb-2">Import Your Content Analytics Data</h3>
-                      <p className="text-gray-600 mb-6">
+                      <p className="text-muted-foreground mb-6">
                         Connect data sources or upload your content analytics data to visualize performance and generate insights.
                       </p>
                       
                       <div className="space-y-4">
-                        <div className="border border-gray-200 rounded-md p-4 flex flex-col items-center">
-                          <FileText className="h-6 w-6 text-gray-500 mb-2" />
-                          <p className="text-sm text-gray-600 mb-2">Upload a CSV file with your content analytics data</p>
+                        <div className="border border-border rounded-md p-4 flex flex-col items-center">
+                          <FileText className="h-6 w-6 text-muted-foreground mb-2" />
+                          <p className="text-sm text-muted-foreground mb-2">Upload a CSV file with your content analytics data</p>
                           <div className="relative w-full">
                             <Input type="file" accept=".csv" className="cursor-pointer" />
                           </div>
@@ -288,7 +288,7 @@ export default function ContentImpactBuilder() {
                         </div>
                         
                         <div className="text-center">
-                          <span className="text-sm text-gray-500">Or</span>
+                          <span className="text-sm text-muted-foreground">Or</span>
                         </div>
                         
                         <div className="space-y-2">
@@ -313,19 +313,19 @@ export default function ContentImpactBuilder() {
                     <div className="h-96 border rounded-md bg-white">
                       <div className="p-4 h-full flex items-center justify-center">
                         <div className="text-center">
-                          <p className="text-gray-500 mb-2">Your data visualization will appear here</p>
-                          {visualizationType === 'bar' && <BarChart className="w-16 h-16 mx-auto text-gray-300" />}
-                          {visualizationType === 'pie' && <PieChart className="w-16 h-16 mx-auto text-gray-300" />}
-                          {visualizationType === 'line' && <LineChart className="w-16 h-16 mx-auto text-gray-300" />}
-                          <p className="mt-2 text-gray-400 text-sm">Customize visualization settings in the left panel</p>
+                          <p className="text-muted-foreground mb-2">Your data visualization will appear here</p>
+                          {visualizationType === 'bar' && <BarChart className="w-16 h-16 mx-auto text-muted-foreground" />}
+                          {visualizationType === 'pie' && <PieChart className="w-16 h-16 mx-auto text-muted-foreground" />}
+                          {visualizationType === 'line' && <LineChart className="w-16 h-16 mx-auto text-muted-foreground" />}
+                          <p className="mt-2 text-muted-foreground text-sm">Customize visualization settings in the left panel</p>
                         </div>
                       </div>
                     </div>
                   ) : (
-                    <div className="h-96 flex items-center justify-center border rounded-md bg-gray-50">
+                    <div className="h-96 flex items-center justify-center border rounded-md bg-muted/50">
                       <div className="text-center">
-                        <AlertCircle className="h-8 w-8 text-gray-400 mx-auto mb-2" />
-                        <p className="text-gray-500">Please import your data first</p>
+                        <AlertCircle className="h-8 w-8 text-muted-foreground mx-auto mb-2" />
+                        <p className="text-muted-foreground">Please import your data first</p>
                       </div>
                     </div>
                   )}
@@ -335,24 +335,24 @@ export default function ContentImpactBuilder() {
                   {isDataImported ? (
                     <div className="h-96 border rounded-md p-4 overflow-auto">
                       <div className="space-y-4">
-                        <div className="p-3 bg-gray-50 border border-gray-200 rounded-md">
-                          <h4 className="font-medium text-gray-800 mb-1">Insights Generated Based on Your Data</h4>
-                          <p className="text-sm text-gray-600">Once your data is processed, AI-powered insights about your content performance will appear here.</p>
+                        <div className="p-3 bg-muted/50 border border-border rounded-md">
+                          <h4 className="font-medium text-foreground mb-1">Insights Generated Based on Your Data</h4>
+                          <p className="text-sm text-muted-foreground">Once your data is processed, AI-powered insights about your content performance will appear here.</p>
                         </div>
                         
-                        <div className="flex items-center justify-center h-64 border border-dashed border-gray-200 rounded-md">
+                        <div className="flex items-center justify-center h-64 border border-dashed border-border rounded-md">
                           <div className="text-center">
-                            <HelpCircle className="h-8 w-8 text-gray-300 mx-auto mb-2" />
-                            <p className="text-gray-400">Insights will be generated from your data</p>
+                            <HelpCircle className="h-8 w-8 text-muted-foreground mx-auto mb-2" />
+                            <p className="text-muted-foreground">Insights will be generated from your data</p>
                           </div>
                         </div>
                       </div>
                     </div>
                   ) : (
-                    <div className="h-96 flex items-center justify-center border rounded-md bg-gray-50">
+                    <div className="h-96 flex items-center justify-center border rounded-md bg-muted/50">
                       <div className="text-center">
-                        <AlertCircle className="h-8 w-8 text-gray-400 mx-auto mb-2" />
-                        <p className="text-gray-500">Please import your data first</p>
+                        <AlertCircle className="h-8 w-8 text-muted-foreground mx-auto mb-2" />
+                        <p className="text-muted-foreground">Please import your data first</p>
                       </div>
                     </div>
                   )}
@@ -360,7 +360,7 @@ export default function ContentImpactBuilder() {
               </Tabs>
             </CardContent>
             <CardFooter className="border-t pt-4">
-              <div className="text-xs text-gray-500 flex items-center">
+              <div className="text-xs text-muted-foreground flex items-center">
                 <Info className="h-3 w-3 mr-1" />
                 Connect multiple data sources for comprehensive content impact analysis across platforms
               </div>
@@ -391,7 +391,7 @@ export default function ContentImpactBuilder() {
                   </div>
                 ) : (
                   <div className="py-8 text-center">
-                    <p className="text-gray-400 text-sm">Import data to see metrics</p>
+                    <p className="text-muted-foreground text-sm">Import data to see metrics</p>
                   </div>
                 )}
               </CardContent>
@@ -405,11 +405,11 @@ export default function ContentImpactBuilder() {
               <CardContent>
                 {isDataImported ? (
                   <div className="space-y-2">
-                    <p className="text-gray-500 text-sm">Your top performing content will be listed here based on your imported data</p>
+                    <p className="text-muted-foreground text-sm">Your top performing content will be listed here based on your imported data</p>
                   </div>
                 ) : (
                   <div className="py-8 text-center">
-                    <p className="text-gray-400 text-sm">Import data to see top content</p>
+                    <p className="text-muted-foreground text-sm">Import data to see top content</p>
                   </div>
                 )}
               </CardContent>
@@ -423,11 +423,11 @@ export default function ContentImpactBuilder() {
               <CardContent>
                 {isDataImported ? (
                   <div className="space-y-2">
-                    <p className="text-gray-500 text-sm">This section will highlight content that could be improved based on your data analysis</p>
+                    <p className="text-muted-foreground text-sm">This section will highlight content that could be improved based on your data analysis</p>
                   </div>
                 ) : (
                   <div className="py-8 text-center">
-                    <p className="text-gray-400 text-sm">Import data to see improvement areas</p>
+                    <p className="text-muted-foreground text-sm">Import data to see improvement areas</p>
                   </div>
                 )}
               </CardContent>

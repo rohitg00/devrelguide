@@ -93,40 +93,33 @@ function getNodeColor(group: string): string {
 }
 
 // Function to process the data for the visualization
-function processData(data: CustomData): ProcessedNetworkData {
+function processData(data: any): ProcessedNetworkData {
   return {
-    nodes: data.nodes.map(node => {
-      // Create a short label from the name (first letter of each word or first 2 characters)
+    nodes: (data.nodes || []).map((node: any) => {
+      const name = node.name || '';
       let shortLabel = '';
-      if (node.name.includes(' ')) {
-        // For multi-word names, use first letter of each word
-        shortLabel = node.name
-          .split(' ')
-          .map(word => word.charAt(0))
-          .join('')
-          .toUpperCase();
+      if (name.includes(' ')) {
+        shortLabel = name.split(' ').map((word: string) => word.charAt(0)).join('').toUpperCase();
       } else {
-        // For single words, use first 2-3 characters
-        shortLabel = node.name.substring(0, Math.min(3, node.name.length)).toUpperCase();
+        shortLabel = name.substring(0, Math.min(3, name.length)).toUpperCase();
       }
-        
       return {
-        id: node.id,
-        radius: (node.size || 10) * 1.5, // Increase node size by 50%
-        color: getNodeColor(node.group),
+        id: String(node.id),
+        radius: (node.size || 10) * 1.5,
+        color: getNodeColor(node.group || node.category || ''),
         borderColor: '#ffffff',
         borderWidth: 2,
-        name: node.name,
-        group: node.group,
-        shortLabel // Add short label
+        name: name,
+        group: node.group || node.category || '',
+        shortLabel
       };
     }),
-    links: data.links.map(link => ({
-      source: link.source,
-      target: link.target,
-      distance: Math.max(15, 25 / (link.value || 1)), // Shorter distances to make graph more compact
+    links: (data.links || []).map((link: any) => ({
+      source: String(link.source),
+      target: String(link.target),
+      distance: Math.max(15, 25 / (link.value || 1)),
       color: '#aaaaaa',
-      thickness: Math.max(1, (link.value || 1) * 0.8) // Thicker links for better visibility
+      thickness: Math.max(1, (link.value || 1) * 0.8)
     }))
   };
 }
@@ -194,7 +187,7 @@ export function CommunityGraph({ customData }: CommunityGraphProps) {
     <div ref={containerRef} className="w-full h-full relative">
       {loading ? (
         <div className="absolute inset-0 flex items-center justify-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-foreground"></div>
         </div>
       ) : error ? (
         <div className="absolute inset-0 flex items-center justify-center text-red-500">
@@ -204,20 +197,20 @@ export function CommunityGraph({ customData }: CommunityGraphProps) {
         <div className="w-full h-full relative">
           {/* Zoom controls */}
           <div className="absolute top-2 right-2 z-10 flex flex-col gap-1">
-            <button 
-              className="bg-white/80 hover:bg-white p-1 rounded shadow"
+            <button
+              className="bg-card/80 hover:bg-card p-1 rounded shadow"
               onClick={() => setZoomLevel(prev => Math.min(prev + 0.1, 2))}
             >
               +
             </button>
-            <button 
-              className="bg-white/80 hover:bg-white p-1 rounded shadow"
+            <button
+              className="bg-card/80 hover:bg-card p-1 rounded shadow"
               onClick={() => setZoomLevel(prev => Math.max(prev - 0.1, 0.5))}
             >
               -
             </button>
-        <button 
-              className="bg-white/80 hover:bg-white p-1 rounded shadow text-xs"
+        <button
+              className="bg-card/80 hover:bg-card p-1 rounded shadow text-xs"
               onClick={() => setZoomLevel(1)}
         >
               Reset
@@ -259,12 +252,12 @@ export function CommunityGraph({ customData }: CommunityGraphProps) {
                   );
                   
                   return (
-                    <div className="bg-white p-3 shadow-lg rounded-md border text-sm">
+                    <div className="bg-card p-3 shadow-lg rounded-md border text-sm">
                       <strong className="text-base">{typedNode.name}</strong>
                       <div className="mt-1">Group: <span className="font-medium capitalize">{typedNode.group}</span></div>
                       <div>Connections: {connections.length}</div>
                       {connections.length > 0 && (
-                        <div className="mt-1 text-xs text-gray-600">
+                        <div className="mt-1 text-xs text-muted-foreground">
                           Connected to: {connections.map(link => {
                             const connectedId = link.source === typedNode.id ? link.target : link.source;
                             const connectedNode = data.nodes.find(n => n.id === connectedId);
@@ -272,7 +265,7 @@ export function CommunityGraph({ customData }: CommunityGraphProps) {
                           }).join(', ')}
                         </div>
                       )}
-                      <div className="mt-2 text-xs text-blue-600">Click to focus</div>
+                      <div className="mt-2 text-xs text-secondary">Click to focus</div>
                     </div>
                   );
                 }}
@@ -310,7 +303,7 @@ export function CommunityGraph({ customData }: CommunityGraphProps) {
           </div>
         </div>
       )}
-      <div className="absolute bottom-2 right-2 bg-white bg-opacity-90 rounded-md p-3 shadow-md">
+      <div className="absolute bottom-2 right-2 bg-card/90 rounded-md p-3 shadow-md">
         <div className="text-sm font-medium mb-2">Legend:</div>
         <div className="grid grid-cols-2 gap-x-4 gap-y-2">
           {['center', 'community', 'partner', 'developer', 'project'].map(group => (
@@ -326,7 +319,7 @@ export function CommunityGraph({ customData }: CommunityGraphProps) {
       </div>
       
       {/* Add a note about the labels */}
-      <div className="absolute bottom-2 left-2 bg-white bg-opacity-90 rounded-md p-2 shadow-md text-xs">
+      <div className="absolute bottom-2 left-2 bg-card/90 rounded-md p-2 shadow-md text-xs">
         <p>Node labels show initials. Hover for full details.</p>
       </div>
     </div>

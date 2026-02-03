@@ -120,7 +120,7 @@ export function UnderUsedCharts() {
               if (active && payload && payload.length) {
                 const data = payload[0].payload;
                 return (
-                  <div className="bg-white p-2 border rounded shadow">
+                  <div className="bg-card p-2 border rounded shadow">
                     <p className="font-semibold">{data.category}</p>
                     <p>Value: {data.value}</p>
                     {data.impact && <p>Impact: {data.impact.toFixed(2)}</p>}

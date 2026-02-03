@@ -26,7 +26,7 @@ export default function ROIBuilder() {
             </Button>
           </Link>
           <h1 className="text-3xl font-bold">Program ROI Builder</h1>
-          <p className="text-gray-600 mt-1">
+          <p className="text-muted-foreground mt-1">
             Build a visualization that demonstrates the return on investment of your DevRel initiatives.
           </p>
         </div>
@@ -113,7 +113,7 @@ export default function ROIBuilder() {
                         }}
                       />
                     </div>
-                    <p className="text-xs text-gray-500">Used to calculate Net Present Value (NPV)</p>
+                    <p className="text-xs text-muted-foreground">Used to calculate Net Present Value (NPV)</p>
                   </div>
                 </TabsContent>
                 
@@ -131,7 +131,7 @@ export default function ROIBuilder() {
                         <div className="flex items-center justify-between mb-2">
                           <Label>Personnel</Label>
                           <Button variant="ghost" size="icon" className="h-6 w-6">
-                            <Trash2 className="h-4 w-4 text-gray-400" />
+                            <Trash2 className="h-4 w-4 text-muted-foreground" />
                           </Button>
                         </div>
                         <div className="grid grid-cols-12 gap-2">
@@ -148,7 +148,7 @@ export default function ROIBuilder() {
                         <div className="flex items-center justify-between mb-2">
                           <Label>Events</Label>
                           <Button variant="ghost" size="icon" className="h-6 w-6">
-                            <Trash2 className="h-4 w-4 text-gray-400" />
+                            <Trash2 className="h-4 w-4 text-muted-foreground" />
                           </Button>
                         </div>
                         <div className="grid grid-cols-12 gap-2">
@@ -165,7 +165,7 @@ export default function ROIBuilder() {
                         <div className="flex items-center justify-between mb-2">
                           <Label>Content</Label>
                           <Button variant="ghost" size="icon" className="h-6 w-6">
-                            <Trash2 className="h-4 w-4 text-gray-400" />
+                            <Trash2 className="h-4 w-4 text-muted-foreground" />
                           </Button>
                         </div>
                         <div className="grid grid-cols-12 gap-2">
@@ -182,7 +182,7 @@ export default function ROIBuilder() {
                         <div className="flex items-center justify-between mb-2">
                           <Label>Tools</Label>
                           <Button variant="ghost" size="icon" className="h-6 w-6">
-                            <Trash2 className="h-4 w-4 text-gray-400" />
+                            <Trash2 className="h-4 w-4 text-muted-foreground" />
                           </Button>
                         </div>
                         <div className="grid grid-cols-12 gap-2">
@@ -217,7 +217,7 @@ export default function ROIBuilder() {
                         <div className="flex items-center justify-between mb-2">
                           <Label>Direct Revenue</Label>
                           <Button variant="ghost" size="icon" className="h-6 w-6">
-                            <Trash2 className="h-4 w-4 text-gray-400" />
+                            <Trash2 className="h-4 w-4 text-muted-foreground" />
                           </Button>
                         </div>
                         <div className="grid grid-cols-12 gap-2">
@@ -234,7 +234,7 @@ export default function ROIBuilder() {
                         <div className="flex items-center justify-between mb-2">
                           <Label>Customer Success</Label>
                           <Button variant="ghost" size="icon" className="h-6 w-6">
-                            <Trash2 className="h-4 w-4 text-gray-400" />
+                            <Trash2 className="h-4 w-4 text-muted-foreground" />
                           </Button>
                         </div>
                         <div className="grid grid-cols-12 gap-2">
@@ -251,7 +251,7 @@ export default function ROIBuilder() {
                         <div className="flex items-center justify-between mb-2">
                           <Label>Product</Label>
                           <Button variant="ghost" size="icon" className="h-6 w-6">
-                            <Trash2 className="h-4 w-4 text-gray-400" />
+                            <Trash2 className="h-4 w-4 text-muted-foreground" />
                           </Button>
                         </div>
                         <div className="grid grid-cols-12 gap-2">
@@ -268,7 +268,7 @@ export default function ROIBuilder() {
                         <div className="flex items-center justify-between mb-2">
                           <Label>Retention</Label>
                           <Button variant="ghost" size="icon" className="h-6 w-6">
-                            <Trash2 className="h-4 w-4 text-gray-400" />
+                            <Trash2 className="h-4 w-4 text-muted-foreground" />
                           </Button>
                         </div>
                         <div className="grid grid-cols-12 gap-2">
@@ -320,13 +320,13 @@ export default function ROIBuilder() {
                   <CardContent className="p-6">
                     <div className="flex flex-col items-center text-center">
                       <div className="mb-2">
-                        <div className="rounded-full bg-green-100 p-3">
-                          <Calculator className="h-6 w-6 text-green-600" />
+                        <div className="rounded-full bg-secondary/10 p-3">
+                          <Calculator className="h-6 w-6 text-secondary" />
                         </div>
                       </div>
-                      <div className="text-sm text-gray-500 mb-1">ROI</div>
-                      <div className="text-3xl font-bold text-green-600">86.7%</div>
-                      <div className="text-xs text-gray-500 mt-1">Net Benefit: $520,000</div>
+                      <div className="text-sm text-muted-foreground mb-1">ROI</div>
+                      <div className="text-3xl font-bold text-secondary">86.7%</div>
+                      <div className="text-xs text-muted-foreground mt-1">Net Benefit: $520,000</div>
                     </div>
                   </CardContent>
                 </Card>
@@ -339,9 +339,9 @@ export default function ROIBuilder() {
                           <DollarSign className="h-6 w-6 text-blue-600" />
                         </div>
                       </div>
-                      <div className="text-sm text-gray-500 mb-1">NPV</div>
+                      <div className="text-sm text-muted-foreground mb-1">NPV</div>
                       <div className="text-3xl font-bold text-blue-600">$472,727</div>
-                      <div className="text-xs text-gray-500 mt-1">Discount Rate: 10%</div>
+                      <div className="text-xs text-muted-foreground mt-1">Discount Rate: 10%</div>
                     </div>
                   </CardContent>
                 </Card>
@@ -354,25 +354,25 @@ export default function ROIBuilder() {
                           <TrendingUp className="h-6 w-6 text-purple-600" />
                         </div>
                       </div>
-                      <div className="text-sm text-gray-500 mb-1">Payback Period</div>
+                      <div className="text-sm text-muted-foreground mb-1">Payback Period</div>
                       <div className="text-3xl font-bold text-purple-600">6.4 mo</div>
-                      <div className="text-xs text-gray-500 mt-1">Break-even point</div>
+                      <div className="text-xs text-muted-foreground mt-1">Break-even point</div>
                     </div>
                   </CardContent>
                 </Card>
               </div>
               
-              <div className="h-80 border rounded-md bg-gray-50 p-6 mb-4">
+              <div className="h-80 border rounded-md bg-muted/50 p-6 mb-4">
                 <div className="flex flex-col h-full">
                   <div className="flex justify-between mb-2">
                     <h3 className="font-medium text-sm">Cumulative Cash Flow</h3>
                     <div className="flex items-center text-sm space-x-4">
                       <div className="flex items-center">
-                        <div className="w-3 h-3 rounded-full bg-red-500 mr-2"></div>
+                        <div className="w-3 h-3 rounded-full bg-destructive mr-2"></div>
                         <span>Costs</span>
                       </div>
                       <div className="flex items-center">
-                        <div className="w-3 h-3 rounded-full bg-green-500 mr-2"></div>
+                        <div className="w-3 h-3 rounded-full bg-secondary mr-2"></div>
                         <span>Benefits</span>
                       </div>
                       <div className="flex items-center">
@@ -388,8 +388,8 @@ export default function ROIBuilder() {
                       <BarChart className="w-20 h-20 text-primary absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
 
                       {/* X-axis */}
-                      <div className="absolute bottom-0 left-10 right-0 h-[1px] bg-gray-200"></div>
-                      <div className="absolute bottom-[-20px] left-10 right-0 flex justify-between text-xs text-gray-500">
+                      <div className="absolute bottom-0 left-10 right-0 h-[1px] bg-muted"></div>
+                      <div className="absolute bottom-[-20px] left-10 right-0 flex justify-between text-xs text-muted-foreground">
                         <span>Q1</span>
                         <span>Q2</span>
                         <span>Q3</span>
@@ -397,8 +397,8 @@ export default function ROIBuilder() {
                       </div>
                       
                       {/* Y-axis */}
-                      <div className="absolute top-0 bottom-0 left-10 w-[1px] bg-gray-200"></div>
-                      <div className="absolute top-0 bottom-0 left-0 flex flex-col justify-between text-xs text-gray-500">
+                      <div className="absolute top-0 bottom-0 left-10 w-[1px] bg-muted"></div>
+                      <div className="absolute top-0 bottom-0 left-0 flex flex-col justify-between text-xs text-muted-foreground">
                         <span>$1.2M</span>
                         <span>$800K</span>
                         <span>$400K</span>
@@ -416,9 +416,9 @@ export default function ROIBuilder() {
                   <div className="h-44 flex items-center justify-center">
                     <div className="relative w-32 h-32">
                       <div className="absolute inset-0 rounded-full border-8 border-blue-500 border-r-transparent border-b-transparent rotate-45"></div>
-                      <div className="absolute inset-0 rounded-full border-8 border-green-500 border-l-transparent border-b-transparent rotate-[135deg]"></div>
+                      <div className="absolute inset-0 rounded-full border-8 border-secondary border-l-transparent border-b-transparent rotate-[135deg]"></div>
                       <div className="absolute inset-0 rounded-full border-8 border-yellow-500 border-l-transparent border-t-transparent rotate-[225deg]"></div>
-                      <div className="absolute inset-0 rounded-full border-8 border-red-500 border-r-transparent border-t-transparent rotate-[315deg]"></div>
+                      <div className="absolute inset-0 rounded-full border-8 border-destructive border-r-transparent border-t-transparent rotate-[315deg]"></div>
                     </div>
                   </div>
                   <div className="grid grid-cols-2 gap-2 text-xs">
@@ -427,7 +427,7 @@ export default function ROIBuilder() {
                       <span>Personnel (60%)</span>
                     </div>
                     <div className="flex items-center">
-                      <div className="w-2 h-2 rounded-full bg-green-500 mr-1"></div>
+                      <div className="w-2 h-2 rounded-full bg-secondary mr-1"></div>
                       <span>Events (20%)</span>
                     </div>
                     <div className="flex items-center">
@@ -435,7 +435,7 @@ export default function ROIBuilder() {
                       <span>Content (13%)</span>
                     </div>
                     <div className="flex items-center">
-                      <div className="w-2 h-2 rounded-full bg-red-500 mr-1"></div>
+                      <div className="w-2 h-2 rounded-full bg-destructive mr-1"></div>
                       <span>Tools (7%)</span>
                     </div>
                   </div>
@@ -481,18 +481,18 @@ export default function ROIBuilder() {
                 <CardDescription>Impact of varying input parameters</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="h-64 flex items-center justify-center border rounded-md bg-gray-50">
+                <div className="h-64 flex items-center justify-center border rounded-md bg-muted/50">
                   <div className="w-full p-4 relative">
                     <TrendingUp className="w-16 h-16 text-primary absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
-                    <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gray-200"></div>
-                    <div className="absolute left-0 top-0 bottom-0 w-[1px] bg-gray-200"></div>
+                    <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-muted"></div>
+                    <div className="absolute left-0 top-0 bottom-0 w-[1px] bg-muted"></div>
                   </div>
                 </div>
                 <div className="mt-4 text-sm">
-                  <p className="text-gray-600">This sensitivity analysis shows how changes in key parameters affect the overall ROI. The steeper the line, the more sensitive the ROI is to that factor.</p>
+                  <p className="text-muted-foreground">This sensitivity analysis shows how changes in key parameters affect the overall ROI. The steeper the line, the more sensitive the ROI is to that factor.</p>
                   <div className="flex flex-wrap gap-2 mt-3">
                     <Badge variant="outline" className="bg-blue-50 text-blue-700">Customer Acquisition +/-20%</Badge>
-                    <Badge variant="outline" className="bg-green-50 text-green-700">Personnel Costs +/-15%</Badge>
+                    <Badge variant="outline" className="bg-secondary/10 text-secondary">Personnel Costs +/-15%</Badge>
                     <Badge variant="outline" className="bg-purple-50 text-purple-700">Event Costs +/-30%</Badge>
                     <Badge variant="outline" className="bg-yellow-50 text-yellow-700">Discount Rate +/-5%</Badge>
                   </div>

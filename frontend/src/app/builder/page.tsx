@@ -63,27 +63,27 @@ export default function BuilderHome() {
     {
       title: 'Developer Feedback',
       description: 'Analyze and visualize feedback from your developer community to identify trends and areas for improvement.',
-      icon: <MessageSquare className="w-10 h-10 text-gray-400" />
+      icon: <MessageSquare className="w-10 h-10 text-muted-foreground/60" />
     },
     {
       title: 'Adoption Funnel',
       description: 'Track how developers move through your product adoption funnel from awareness to advocacy.',
-      icon: <LineChart className="w-10 h-10 text-gray-400" />
+      icon: <LineChart className="w-10 h-10 text-muted-foreground/60" />
     },
     {
       title: 'Ecosystem Health',
       description: 'Monitor the overall health of your developer ecosystem with composite metrics.',
-      icon: <Share2 className="w-10 h-10 text-gray-400" />
+      icon: <Share2 className="w-10 h-10 text-muted-foreground/60" />
     },
     {
       title: 'Strategic Alignment',
       description: 'Visualize how your DevRel initiatives align with overall business objectives and strategy.',
-      icon: <Target className="w-10 h-10 text-gray-400" />
+      icon: <Target className="w-10 h-10 text-muted-foreground/60" />
     },
     {
       title: 'Resource Allocation',
       description: 'Analyze and optimize how your DevRel resources are allocated across different initiatives.',
-      icon: <PanelTop className="w-10 h-10 text-gray-400" />
+      icon: <PanelTop className="w-10 h-10 text-muted-foreground/60" />
     }
   ];
 
@@ -92,7 +92,7 @@ export default function BuilderHome() {
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold mb-4">DevRel Visualization Builder</h1>
-          <p className="text-xl text-gray-600">
+          <p className="text-xl text-muted-foreground">
             Create customized visualizations to represent your developer relations program.
           </p>
         </div>
@@ -123,9 +123,9 @@ export default function BuilderHome() {
               <CardHeader>
                 <div className="flex justify-between items-center mb-4">
                   {builder.icon}
-                  <Badge variant="outline" className="bg-gray-100">Coming Soon</Badge>
+                  <Badge variant="outline" className="bg-muted">Coming Soon</Badge>
                 </div>
-                <CardTitle className="text-gray-600">{builder.title}</CardTitle>
+                <CardTitle className="text-muted-foreground">{builder.title}</CardTitle>
                 <CardDescription>{builder.description}</CardDescription>
               </CardHeader>
               <CardFooter className="mt-auto">
@@ -138,10 +138,10 @@ export default function BuilderHome() {
         </div>
 
         <div className="mt-12 text-center">
-          <p className="text-gray-500 mb-4">
+          <p className="text-muted-foreground mb-4">
             Looking for more customization options? Let us know what you need!
           </p>
-          <p className="text-sm text-gray-400">
+          <p className="text-sm text-muted-foreground/60">
             All visualizations can be exported as images or embedded in your documentation.
           </p>
         </div>

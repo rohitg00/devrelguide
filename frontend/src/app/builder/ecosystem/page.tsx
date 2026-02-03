@@ -17,7 +17,7 @@ export default function EcosystemBuilder() {
             </Button>
           </Link>
           <h1 className="text-3xl font-bold">DevRel Ecosystem Builder</h1>
-          <p className="text-gray-600 mt-1">
+          <p className="text-muted-foreground mt-1">
             Create a custom visualization of your DevRel ecosystem and the relationships between different entities.
           </p>
         </div>

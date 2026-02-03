@@ -167,7 +167,7 @@ export function DevRelFramework() {
                 if (active && payload && payload.length) {
                   const data = payload[0].payload as FrameworkNode
                   return (
-                    <div className="bg-white p-2 border rounded shadow">
+                    <div className="bg-card p-2 border rounded shadow">
                       <p className="font-semibold">{data.name}</p>
                       <p>Category: {data.category}</p>
                       <p>Size: {data.size}</p>

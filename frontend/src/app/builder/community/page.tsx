@@ -17,7 +17,7 @@ export default function CommunityGraphBuilder() {
             </Button>
           </Link>
           <h1 className="text-3xl font-bold">Community Graph Builder</h1>
-          <p className="text-gray-600 mt-1">
+          <p className="text-muted-foreground mt-1">
             Create a custom network graph showing your communities and their connections.
           </p>
         </div>

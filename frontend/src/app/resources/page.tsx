@@ -1,8 +1,13 @@
 'use client'
 
-import { ResourceContainer } from '@/components/ui/resource-container'
+import dynamic from 'next/dynamic'
 import { DevRelGuide } from '@/components/ui/devrel-guide'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+
+const ResourceContainer = dynamic(
+  () => import('@/components/ui/resource-container').then(mod => mod.ResourceContainer),
+  { ssr: false }
+)
 
 export default function ResourcesPage() {
   return (

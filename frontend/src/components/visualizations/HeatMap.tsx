@@ -84,7 +84,7 @@ export function HeatMap() {
         // Use non-null assertion since we already checked wrapper exists
         const tooltip = d3.select(wrapperRef.current!)
           .append('div')
-          .attr('class', 'absolute bg-white p-2 rounded shadow-lg pointer-events-none')
+          .attr('class', 'absolute bg-card p-2 rounded shadow-lg pointer-events-none')
           .style('opacity', 0)
 
         tooltip.html(`
@@ -103,7 +103,7 @@ export function HeatMap() {
           .duration(200)
           .attr('stroke', 'none')
 
-        d3.selectAll('.absolute.bg-white').remove()
+        d3.selectAll('.absolute.bg-card').remove()
       })
 
     const legend = svg.append('g')

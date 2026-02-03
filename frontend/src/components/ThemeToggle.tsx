@@ -2,35 +2,22 @@
 
 import React from 'react'
 import { useTheme } from '@/context/ThemeContext'
-import { Moon, Sun } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
+import { Sun, Moon } from 'lucide-react'
 
 export function ThemeToggle() {
   const { theme, toggleTheme } = useTheme()
-  
+
   return (
-    <TooltipProvider>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Button 
-            variant="ghost" 
-            size="icon" 
-            onClick={toggleTheme}
-            className="rounded-full"
-            aria-label="Toggle theme"
-          >
-            {theme === 'light' ? (
-              <Sun size={20} className="transition-all" />
-            ) : (
-              <Moon size={20} className="transition-all" />
-            )}
-          </Button>
-        </TooltipTrigger>
-        <TooltipContent>
-          <p>Switch to {theme === 'light' ? 'dark' : 'light'} mode</p>
-        </TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
+    <button
+      onClick={toggleTheme}
+      className="p-2 text-foreground/70 hover:text-foreground transition-colors"
+      aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+    >
+      {theme === 'dark' ? (
+        <Sun className="h-4 w-4" />
+      ) : (
+        <Moon className="h-4 w-4" />
+      )}
+    </button>
   )
-} 
+}

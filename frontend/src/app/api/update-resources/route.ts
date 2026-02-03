@@ -1,39 +1,30 @@
-import { NextResponse } from 'next/server';
+import { NextResponse } from 'next/server'
+import { readJsonData } from '@/lib/data'
+
+export const dynamic = 'force-dynamic'
 
 export async function POST() {
   try {
-    console.log('Starting resource update...');
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/resources/update`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': `Basic ${Buffer.from(`${process.env.API_USERNAME}:${process.env.API_PASSWORD}`).toString('base64')}`,
-      },
-    });
+    const devrelResources = await readJsonData<Record<string, unknown>>('devrel_resources.json')
 
-    if (!response.ok) {
-      const error = await response.text();
-      console.error('Error updating resources:', error);
-      return NextResponse.json(
-        { error: 'Failed to update resources', detail: error },
-        { status: response.status }
-      );
-    }
-
-    const result = await response.json();
-    console.log('Update successful:', result);
+    const blogPosts = Array.isArray(devrelResources.blog_posts) ? devrelResources.blog_posts : []
+    const githubPrograms = Array.isArray(devrelResources.github_programs) ? devrelResources.github_programs : []
+    const jobListings = Array.isArray(devrelResources.job_listings) ? devrelResources.job_listings : []
 
     return NextResponse.json({
       status: 'success',
-      message: 'Resources updated successfully',
-      counts: result.counts || {}
-    });
+      message: 'Resources loaded from local data',
+      counts: {
+        blog_posts: blogPosts.length,
+        github_programs: githubPrograms.length,
+        job_listings: jobListings.length,
+      },
+    })
   } catch (error) {
-    console.error('Error in update-resources route:', error);
+    console.error('Error in update-resources route:', error)
     return NextResponse.json(
       { error: 'Internal server error', detail: error instanceof Error ? error.message : 'Unknown error' },
       { status: 500 }
-    );
+    )
   }
 }

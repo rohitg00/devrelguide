@@ -169,31 +169,22 @@ export function ResourceCard({ resource, className }: ResourceCardProps) {
       className={cn(
         'w-full h-full flex flex-col overflow-hidden group transition-all duration-300',
         'hover:shadow-lg hover:scale-[1.02]',
-        resource.type === 'github' 
-          ? 'bg-[#2A332C] hover:border-[#83C167] text-white'
-          : 'bg-gradient-to-br from-white to-[#F7F9F7] hover:border-[#83C167]',
-        'dark:from-gray-900 dark:to-gray-800',
+        'bg-card hover:border-secondary',
         className
       )}
     >
       <CardHeader className={cn(
         "space-y-2 flex-shrink-0 p-4 sm:p-6 pb-2",
-        resource.type === 'github' && "border-b border-[#3D4D40]"
+        resource.type === 'github' && "border-b border-border"
       )}>
         <div className="flex items-start justify-between gap-2">
-          <CardTitle className={cn(
-            "text-base sm:text-lg line-clamp-2 font-semibold break-words max-w-[calc(100%-2.5rem)]",
-            resource.type === 'github' ? 'text-[#B4D5A7]' : 'text-foreground'
-          )}>
+          <CardTitle className="text-base sm:text-lg line-clamp-2 font-semibold break-words max-w-[calc(100%-2.5rem)] text-foreground">
             {decodeAndSanitize(resource.title || resource.name || 'Untitled Resource')}
           </CardTitle>
           <Button
             variant="ghost"
             size="icon"
-            className={cn(
-              "flex-shrink-0 h-8 w-8 opacity-70 hover:opacity-100 transition-opacity",
-              resource.type === 'github' ? 'hover:text-[#83C167]' : 'hover:text-[#568C3F]'
-            )}
+            className="flex-shrink-0 h-8 w-8 opacity-70 hover:opacity-100 transition-opacity hover:text-secondary"
             asChild
           >
             <a
@@ -212,37 +203,37 @@ export function ResourceCard({ resource, className }: ResourceCardProps) {
           {resource.type === 'github' && (
             <>
               {resource.stars !== undefined && (
-                <span className="flex items-center gap-1 min-w-0 bg-[#6E2FD5] text-white px-2 py-0.5 rounded-full">
+                <span className="flex items-center gap-1 min-w-0 bg-primary/90 text-primary-foreground px-2 py-0.5 rounded-full">
                   <Star className="h-3.5 w-3.5 flex-shrink-0" />
                   <span className="truncate">{resource.stars.toLocaleString()}</span>
                 </span>
               )}
               {resource.author && (
-                <span className="flex items-center gap-1 min-w-0 bg-[#6E2FD5] text-white px-2 py-0.5 rounded-full">
+                <span className="flex items-center gap-1 min-w-0 bg-primary/90 text-primary-foreground px-2 py-0.5 rounded-full">
                   <User className="h-3.5 w-3.5 flex-shrink-0" />
                   <span className="truncate">{resource.author}</span>
                 </span>
               )}
               {resource.language && (
-                <span className="flex items-center gap-1 min-w-0 bg-[#6E2FD5] text-white px-2 py-0.5 rounded-full">
-                  <span className="h-2 w-2 rounded-full bg-[#83C167]" />
+                <span className="flex items-center gap-1 min-w-0 bg-primary/90 text-primary-foreground px-2 py-0.5 rounded-full">
+                  <span className="h-2 w-2 rounded-full bg-secondary" />
                   <span className="truncate">{resource.language}</span>
                 </span>
               )}
               {resource.forks_count !== undefined && (
-                <span className="flex items-center gap-1 min-w-0 bg-[#6E2FD5] text-white px-2 py-0.5 rounded-full">
+                <span className="flex items-center gap-1 min-w-0 bg-primary/90 text-primary-foreground px-2 py-0.5 rounded-full">
                   <GitFork className="h-3.5 w-3.5 flex-shrink-0" />
                   <span className="truncate">{resource.forks_count.toLocaleString()}</span>
                 </span>
               )}
               {resource.open_issues_count !== undefined && (
-                <span className="flex items-center gap-1 min-w-0 bg-[#6E2FD5] text-white px-2 py-0.5 rounded-full">
+                <span className="flex items-center gap-1 min-w-0 bg-primary/90 text-primary-foreground px-2 py-0.5 rounded-full">
                   <AlertCircle className="h-3.5 w-3.5 flex-shrink-0" />
                   <span className="truncate">{resource.open_issues_count.toLocaleString()}</span>
                 </span>
               )}
               {resource.updated_at && (
-                <span className="flex items-center gap-1 min-w-0 bg-[#6E2FD5] text-white px-2 py-0.5 rounded-full">
+                <span className="flex items-center gap-1 min-w-0 bg-primary/90 text-primary-foreground px-2 py-0.5 rounded-full">
                   <Calendar className="h-3.5 w-3.5 flex-shrink-0" />
                   <span className="truncate">Updated {formatDate(resource.updated_at)}</span>
                 </span>
@@ -253,13 +244,13 @@ export function ResourceCard({ resource, className }: ResourceCardProps) {
           {resource.type === 'blog_post' && (
             <>
               {resource.source && (
-                <span className="flex items-center gap-1 min-w-0 bg-[#6E2FD5] text-white px-2 py-0.5 rounded-full">
+                <span className="flex items-center gap-1 min-w-0 bg-primary/90 text-primary-foreground px-2 py-0.5 rounded-full">
                   <Tag className="h-3.5 w-3.5 flex-shrink-0" />
                   <span className="truncate">{resource.source}</span>
                 </span>
               )}
               {(resource.date || resource.published_date) && (
-                <span className="flex items-center gap-1 min-w-0 bg-[#6E2FD5] text-white px-2 py-0.5 rounded-full">
+                <span className="flex items-center gap-1 min-w-0 bg-primary/90 text-primary-foreground px-2 py-0.5 rounded-full">
                   <Calendar className="h-3.5 w-3.5 flex-shrink-0" />
                   <span className="truncate">{formatDate(resource.date || resource.published_date)}</span>
                 </span>
@@ -270,7 +261,7 @@ export function ResourceCard({ resource, className }: ResourceCardProps) {
           {(resource.type === 'job' || resource.type === 'job_listing') && (
             <>
               {resource.company && (
-                <span className="flex items-center gap-1 min-w-0 bg-[#6E2FD5] text-white px-2 py-0.5 rounded-full">
+                <span className="flex items-center gap-1 min-w-0 bg-primary/90 text-primary-foreground px-2 py-0.5 rounded-full">
                   <Building className="h-3.5 w-3.5 flex-shrink-0" />
                   <span className="truncate">{resource.company}</span>
                 </span>
@@ -278,7 +269,7 @@ export function ResourceCard({ resource, className }: ResourceCardProps) {
               
               {/* Show country extracted from location */}
               {resource.location && (
-                <span className="flex items-center gap-1 min-w-0 bg-[#6E2FD5] text-white px-2 py-0.5 rounded-full">
+                <span className="flex items-center gap-1 min-w-0 bg-primary/90 text-primary-foreground px-2 py-0.5 rounded-full">
                   <Globe className="h-3.5 w-3.5 flex-shrink-0" />
                   <span className="truncate">{extractCountry(resource.location)}</span>
                 </span>
@@ -286,7 +277,7 @@ export function ResourceCard({ resource, className }: ResourceCardProps) {
               
               {/* Show remote status */}
               {isRemote(resource) && (
-                <span className="flex items-center gap-1 min-w-0 bg-[#6E2FD5] text-white px-2 py-0.5 rounded-full">
+                <span className="flex items-center gap-1 min-w-0 bg-primary/90 text-primary-foreground px-2 py-0.5 rounded-full">
                   <LaptopIcon className="h-3.5 w-3.5 flex-shrink-0" />
                   <span className="truncate">Remote</span>
                 </span>
@@ -294,7 +285,7 @@ export function ResourceCard({ resource, className }: ResourceCardProps) {
               
               {/* Show month posted */}
               {(resource.date || resource.published_date || resource.added_at) && (
-                <span className="flex items-center gap-1 min-w-0 bg-[#6E2FD5] text-white px-2 py-0.5 rounded-full">
+                <span className="flex items-center gap-1 min-w-0 bg-primary/90 text-primary-foreground px-2 py-0.5 rounded-full">
                   <Clock className="h-3.5 w-3.5 flex-shrink-0" />
                   <span className="truncate">{getMonthPosted(resource.date || resource.published_date || resource.added_at)}</span>
                 </span>
@@ -304,15 +295,9 @@ export function ResourceCard({ resource, className }: ResourceCardProps) {
         </div>
       </CardHeader>
 
-      <CardContent className={cn(
-        "flex-grow p-4 sm:p-6 pt-2",
-        resource.type === 'github' ? 'text-gray-300' : ''
-      )}>
+      <CardContent className="flex-grow p-4 sm:p-6 pt-2">
         {resource.description || resource.excerpt ? (
-          <p className={cn(
-            "text-sm line-clamp-3 mb-4",
-            resource.type === 'github' ? 'text-gray-300' : 'text-muted-foreground'
-          )}>
+          <p className="text-sm line-clamp-3 mb-4 text-muted-foreground">
             {decodeAndSanitize(resource.description || resource.excerpt)}
           </p>
         ) : (
@@ -340,7 +325,7 @@ export function ResourceCard({ resource, className }: ResourceCardProps) {
                 {resource.tags.slice(0, 4).map((tag, index) => (
                   <span
                     key={index}
-                    className="text-xs px-2 py-0.5 rounded-full bg-[#EDF3EB] text-[#568C3F]"
+                    className="text-xs px-2 py-0.5 rounded-full bg-secondary/10 text-secondary"
                   >
                     {tag}
                   </span>
@@ -354,7 +339,7 @@ export function ResourceCard({ resource, className }: ResourceCardProps) {
                 ).map((skill, index) => (
                   <span
                     key={index}
-                    className="flex items-center gap-1 text-xs px-2 py-0.5 rounded-full bg-[#6E2FD5] text-white"
+                    className="flex items-center gap-1 text-xs px-2 py-0.5 rounded-full bg-primary/90 text-primary-foreground"
                   >
                     <CheckCircle2 className="h-3 w-3 flex-shrink-0" />
                     {skill.charAt(0).toUpperCase() + skill.slice(1)}
@@ -374,8 +359,8 @@ export function ResourceCard({ resource, className }: ResourceCardProps) {
                 className={cn(
                   "text-xs px-2 py-0.5 rounded-full",
                   resource.type === 'github' 
-                    ? 'bg-[#3D4D40] text-[#B4D5A7]'
-                    : 'bg-[#EDF3EB] text-[#568C3F]'
+                    ? 'bg-secondary/10 text-secondary'
+                    : 'bg-secondary/10 text-secondary'
                 )}
               >
                 {tag}

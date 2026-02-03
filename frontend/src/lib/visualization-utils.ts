@@ -12,13 +12,6 @@ export interface FetchVisualizationOptions {
 
 // Check if API is available (for development purposes)
 const isApiAvailable = () => {
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL
-  // If no API URL is set or it's set to a localhost port that's not the same as the frontend,
-  // assume the API is not available
-  if (!apiUrl || (apiUrl.includes('localhost:8001') && window.location.port !== '8001')) {
-    console.log('API server appears to be unavailable, using fallback data')
-    return false
-  }
   return true
 }
 
@@ -73,15 +66,8 @@ export function useFetchVisualization<T>({
 
       try {
         // Get API URL from environment variable or use default
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL || ''
-        
-        // Add the API URL if the endpoint doesn't start with http
-        const fullUrl = endpoint.startsWith('http') 
-          ? endpoint 
-          : `${apiUrl}${endpoint.startsWith('/') ? endpoint : `/${endpoint}`}`
-        
-        console.log(`Fetching data from: ${fullUrl}`)
-        
+        const fullUrl = endpoint.startsWith('/') ? endpoint : `/${endpoint}`
+
         const response = await fetch(fullUrl, {
           method: 'GET',
           headers: {

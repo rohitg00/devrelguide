@@ -12,7 +12,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Plus, Trash2, Save, Download, Copy, Edit, X } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { DevRelEcosystem } from '../visualizations/DevRelEcosystem';
-import html2canvas from 'html2canvas';
+import { toPng } from '@/lib/export-image';
 import { fallbackData } from '@/lib/visualization-utils';
 import { Badge } from '@/components/ui/badge';
 
@@ -219,9 +219,9 @@ export function EcosystemCustomizer() {
     if (!visualizationRef.current) return;
     
     try {
-      const canvas = await html2canvas(visualizationRef.current, {
-        backgroundColor: '#ffffff',
-        scale: 2 // Higher quality
+      const canvas = await toPng(visualizationRef.current, {
+        backgroundColor: '#003366',
+        scale: 2
       });
       
       const image = canvas.toDataURL('image/png');
@@ -356,22 +356,22 @@ export function EcosystemCustomizer() {
               </Dialog>
             </div>
             
-            <div className="max-h-[400px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-gray-300">
+            <div className="max-h-[400px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-muted-foreground/30">
               {data.nodes.length === 0 ? (
                 <div className="text-center py-12 border-2 border-dashed rounded-lg">
-                  <p className="text-gray-500">No nodes added yet</p>
-                  <p className="text-sm text-gray-400 mt-1">Use the 'Add Node' button to create nodes</p>
+                  <p className="text-muted-foreground">No nodes added yet</p>
+                  <p className="text-sm text-muted-foreground/60 mt-1">Use the 'Add Node' button to create nodes</p>
                 </div>
               ) : (
                 <div className="space-y-3">
                   {data.nodes.map(node => (
                     <div 
                       key={node.id} 
-                      className="flex items-center justify-between p-3 border rounded-md hover:bg-gray-50 transition-colors shadow-sm"
+                      className="flex items-center justify-between p-3 border rounded-md hover:bg-muted/50 transition-colors shadow-sm"
                     >
                       <div className="flex items-center space-x-3">
-                        <div 
-                          className="w-4 h-4 rounded-full flex-shrink-0 border border-white shadow-sm" 
+                        <div
+                          className="w-4 h-4 rounded-full flex-shrink-0 border border-border shadow-sm" 
                           style={{ backgroundColor: pillars.find(p => p.id === node.pillar)?.color }}
                         />
                         <div>
@@ -390,7 +390,7 @@ export function EcosystemCustomizer() {
                         <Button 
                           variant="ghost" 
                           size="sm" 
-                          className="h-8 w-8 p-0 text-gray-500 hover:text-primary"
+                          className="h-8 w-8 p-0 text-muted-foreground hover:text-primary"
                           onClick={() => openEditNodeDialog(node)}
                         >
                           <Edit className="h-4 w-4" />
@@ -398,7 +398,7 @@ export function EcosystemCustomizer() {
                         <Button 
                           variant="ghost" 
                           size="sm"
-                          className="h-8 w-8 p-0 text-gray-500 hover:text-red-500"
+                          className="h-8 w-8 p-0 text-muted-foreground hover:text-red-500"
                           onClick={() => handleDeleteNode(node.id)}
                         >
                           <Trash2 className="h-4 w-4" />
@@ -507,11 +507,11 @@ export function EcosystemCustomizer() {
               </Dialog>
             </div>
             
-            <div className="max-h-[400px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-gray-300">
+            <div className="max-h-[400px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-muted-foreground/30">
               {data.links.length === 0 ? (
                 <div className="text-center py-12 border-2 border-dashed rounded-lg">
-                  <p className="text-gray-500">No connections added yet</p>
-                  <p className="text-sm text-gray-400 mt-1">Use the 'Add Connection' button to create links between nodes</p>
+                  <p className="text-muted-foreground">No connections added yet</p>
+                  <p className="text-sm text-muted-foreground/60 mt-1">Use the 'Add Connection' button to create links between nodes</p>
                 </div>
               ) : (
                 <div className="space-y-3">
@@ -524,7 +524,7 @@ export function EcosystemCustomizer() {
                     return (
                       <div 
                         key={`${link.source}-${link.target}-${index}`} 
-                        className="flex items-center justify-between p-3 border rounded-md hover:bg-gray-50 transition-colors shadow-sm"
+                        className="flex items-center justify-between p-3 border rounded-md hover:bg-muted/50 transition-colors shadow-sm"
                       >
                         <div className="flex items-center gap-2">
                           <div 
@@ -532,7 +532,7 @@ export function EcosystemCustomizer() {
                             style={{ backgroundColor: pillars.find(p => p.id === sourceNode.pillar)?.color }}
                           />
                           <span className="font-medium">{sourceNode.name}</span>
-                          <svg className="h-4 w-4 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <svg className="h-4 w-4 text-muted-foreground/60" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                             <path d="M5 12h14m-7-7l7 7-7 7" strokeLinecap="round" strokeLinejoin="round"/>
                           </svg>
                           <div 
@@ -548,7 +548,7 @@ export function EcosystemCustomizer() {
                           <Button 
                             variant="ghost" 
                             size="sm" 
-                            className="h-8 w-8 p-0 text-gray-500 hover:text-primary"
+                            className="h-8 w-8 p-0 text-muted-foreground hover:text-primary"
                             onClick={() => openEditLinkDialog(link)}
                           >
                             <Edit className="h-4 w-4" />
@@ -556,7 +556,7 @@ export function EcosystemCustomizer() {
                           <Button 
                             variant="ghost" 
                             size="sm"
-                            className="h-8 w-8 p-0 text-gray-500 hover:text-red-500"
+                            className="h-8 w-8 p-0 text-muted-foreground hover:text-red-500"
                             onClick={() => handleDeleteLink(link.source, link.target)}
                           >
                             <Trash2 className="h-4 w-4" />
@@ -610,7 +610,7 @@ export function EcosystemCustomizer() {
           <Button 
             variant="outline" 
             onClick={handleReset}
-            className="border-gray-300"
+            className="border-border"
           >
             Reset to Default
           </Button>
@@ -634,7 +634,7 @@ export function EcosystemCustomizer() {
         <h3 className="text-xl font-semibold mb-4 text-primary">Preview</h3>
         <div 
           ref={visualizationRef} 
-          className="bg-white rounded-lg border-2 p-4 h-[500px] overflow-hidden shadow-inner"
+          className="bg-card rounded-lg border-2 p-4 h-[500px] overflow-hidden shadow-inner"
         >
           <DevRelEcosystem customData={data} />
         </div>

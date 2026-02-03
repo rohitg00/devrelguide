@@ -184,7 +184,7 @@ export function EngagementMetrics() {
                 if (active && payload && payload.length) {
                   const raw = payload[0].payload.raw
                   return (
-                    <div className="bg-white p-2 border rounded shadow">
+                    <div className="bg-card p-2 border rounded shadow">
                       <p className="font-semibold">{label}</p>
                       <div className="grid grid-cols-2 gap-2">
                         <div>
@@ -220,7 +220,7 @@ export function EngagementMetrics() {
           </ComposedChart>
         </ResponsiveContainer>
       </div>
-      <div className="mt-4 text-sm text-gray-600 overflow-hidden">
+      <div className="mt-4 text-sm text-muted-foreground overflow-hidden">
         <p className="mb-2 line-clamp-2">This visualization combines multiple engagement metrics in a novel way:</p>
         <ul className="list-disc ml-6 mt-2 space-y-1">
           <li className="line-clamp-1">Stacked bars show growth metrics (normalized)</li>

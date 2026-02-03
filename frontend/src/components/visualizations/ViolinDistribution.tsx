@@ -86,7 +86,7 @@ export function ViolinDistribution() {
               if (active && payload && payload.length) {
                 const data = payload[0].payload as DataPoint;
                 return (
-                  <div className="bg-white p-2 border rounded shadow-lg text-xs sm:text-sm">
+                  <div className="bg-card p-2 border rounded shadow-lg text-xs sm:text-sm">
                     <p className="font-semibold">{data.channel}</p>
                     <p>Engagement Level: {Math.round(data.engagement)}</p>
                     <p>Frequency: {Math.round(data.frequency)}</p>
@@ -109,7 +109,7 @@ export function ViolinDistribution() {
           </div>
         ))}
       </div>
-      <div className="text-xs sm:text-sm text-gray-600 mt-2 sm:mt-4 text-center px-2">
+      <div className="text-xs sm:text-sm text-muted-foreground mt-2 sm:mt-4 text-center px-2">
         Distribution of developer engagement across different channels,
         showing engagement patterns and frequency density
       </div>

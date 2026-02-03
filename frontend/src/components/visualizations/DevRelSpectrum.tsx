@@ -126,7 +126,7 @@ export function DevRelSpectrum() {
                 const node = nodes.find(n => n.name === payload[0].payload.name)
                 if (!node) return null
                 return (
-                  <div className="tooltip bg-white p-2 border rounded shadow">
+                  <div className="tooltip bg-card p-2 border rounded shadow">
                     <p className="text-xs sm:text-sm font-semibold line-clamp-1">{node.name}</p>
                     <p className="text-xs line-clamp-1">Category: {node.category}</p>
                     <p className="text-xs line-clamp-2">{node.description}</p>

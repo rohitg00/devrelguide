@@ -66,7 +66,7 @@ export function MarketImpactFlow() {
               content={({ active, payload, label }) => {
                 if (active && payload && payload.length) {
                   return (
-                    <div className="bg-white p-2 border rounded shadow">
+                    <div className="bg-card p-2 border rounded shadow">
                       <p className="font-semibold">{label}</p>
                       {payload.map((entry, index) => (
                         <p key={index} style={{ color: entry.color }}>

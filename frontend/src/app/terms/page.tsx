@@ -4,8 +4,8 @@ export default function TermsOfService() {
   return (
     <div className="container mx-auto px-4 py-16 max-w-4xl">
       <h1 className="text-3xl font-bold mb-8">Terms of Service</h1>
-      <div className="prose prose-slate max-w-none">
-        <p className="text-gray-600 mb-6">Last updated: December 20, 2024</p>
+      <div className="prose dark:prose-invert max-w-none">
+        <p className="text-muted-foreground mb-6">Last updated: December 20, 2024</p>
 
         <section className="mb-8">
           <h2 className="text-2xl font-semibold mb-4">1. Acceptance of Terms</h2>
@@ -73,7 +73,7 @@ export default function TermsOfService() {
           <p className="mb-4">
             If you have any questions about these Terms of Service, please contact us at:
             <br />
-            <a href="mailto:legal@devrel.com" className="text-blue-600 hover:text-blue-800">
+            <a href="mailto:legal@devrel.com" className="text-secondary hover:text-secondary/80">
               legal@devrel.com
             </a>
           </p>

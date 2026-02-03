@@ -53,7 +53,7 @@ export default function CommunityEngagementBuilder() {
             </Button>
           </Link>
           <h1 className="text-3xl font-bold">Community Engagement Builder</h1>
-          <p className="text-gray-600 mt-1">
+          <p className="text-muted-foreground mt-1">
             Track and visualize community engagement patterns across various platforms and activities.
           </p>
         </div>
@@ -111,7 +111,7 @@ export default function CommunityEngagementBuilder() {
                       id="platform-github" 
                       checked={platforms.github}
                       onChange={() => handlePlatformChange('github')}
-                      className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+                      className="h-4 w-4 rounded border-border text-primary focus:ring-primary"
                     />
                     <Label htmlFor="platform-github" className="flex items-center">
                       <Github className="h-4 w-4 mr-2" />
@@ -124,7 +124,7 @@ export default function CommunityEngagementBuilder() {
                       id="platform-discourse" 
                       checked={platforms.discourse}
                       onChange={() => handlePlatformChange('discourse')}
-                      className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+                      className="h-4 w-4 rounded border-border text-primary focus:ring-primary"
                     />
                     <Label htmlFor="platform-discourse" className="flex items-center">
                       <MessageCircle className="h-4 w-4 mr-2" />
@@ -137,7 +137,7 @@ export default function CommunityEngagementBuilder() {
                       id="platform-slack" 
                       checked={platforms.slack}
                       onChange={() => handlePlatformChange('slack')}
-                      className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+                      className="h-4 w-4 rounded border-border text-primary focus:ring-primary"
                     />
                     <Label htmlFor="platform-slack" className="flex items-center">
                       <MessageSquare className="h-4 w-4 mr-2" />
@@ -150,7 +150,7 @@ export default function CommunityEngagementBuilder() {
                       id="platform-twitter" 
                       checked={platforms.twitter}
                       onChange={() => handlePlatformChange('twitter')}
-                      className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+                      className="h-4 w-4 rounded border-border text-primary focus:ring-primary"
                     />
                     <Label htmlFor="platform-twitter" className="flex items-center">
                       <Twitter className="h-4 w-4 mr-2" />
@@ -163,7 +163,7 @@ export default function CommunityEngagementBuilder() {
                       id="platform-stackoverflow" 
                       checked={platforms.stackoverflow}
                       onChange={() => handlePlatformChange('stackoverflow')}
-                      className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+                      className="h-4 w-4 rounded border-border text-primary focus:ring-primary"
                     />
                     <Label htmlFor="platform-stackoverflow" className="flex items-center">
                       <Globe className="h-4 w-4 mr-2" />
@@ -182,7 +182,7 @@ export default function CommunityEngagementBuilder() {
                       id="type-questions" 
                       checked={activityTypes.questions}
                       onChange={() => handleActivityTypeChange('questions')}
-                      className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+                      className="h-4 w-4 rounded border-border text-primary focus:ring-primary"
                     />
                     <Label htmlFor="type-questions">Questions</Label>
                   </div>
@@ -192,7 +192,7 @@ export default function CommunityEngagementBuilder() {
                       id="type-discussions" 
                       checked={activityTypes.discussions}
                       onChange={() => handleActivityTypeChange('discussions')}
-                      className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+                      className="h-4 w-4 rounded border-border text-primary focus:ring-primary"
                     />
                     <Label htmlFor="type-discussions">Discussions</Label>
                   </div>
@@ -202,7 +202,7 @@ export default function CommunityEngagementBuilder() {
                       id="type-contributions" 
                       checked={activityTypes.contributions}
                       onChange={() => handleActivityTypeChange('contributions')}
-                      className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+                      className="h-4 w-4 rounded border-border text-primary focus:ring-primary"
                     />
                     <Label htmlFor="type-contributions">Contributions</Label>
                   </div>
@@ -212,7 +212,7 @@ export default function CommunityEngagementBuilder() {
                       id="type-mentions" 
                       checked={activityTypes.mentions}
                       onChange={() => handleActivityTypeChange('mentions')}
-                      className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+                      className="h-4 w-4 rounded border-border text-primary focus:ring-primary"
                     />
                     <Label htmlFor="type-mentions">Mentions</Label>
                   </div>
@@ -231,7 +231,7 @@ export default function CommunityEngagementBuilder() {
                   onChange={(e) => setEngagementThreshold(Number(e.target.value))}
                   className="w-full"
                 />
-                <div className="flex justify-between text-xs text-gray-500">
+                <div className="flex justify-between text-xs text-muted-foreground">
                   <span>Low</span>
                   <span>High</span>
                 </div>
@@ -250,7 +250,7 @@ export default function CommunityEngagementBuilder() {
             </CardHeader>
             <CardContent>
               <div className="relative">
-                <Search className="absolute left-2 top-2.5 h-4 w-4 text-gray-400" />
+                <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
                 <Input placeholder="Search users or topics" className="pl-8" />
               </div>
               <div className="mt-4 space-y-2">
@@ -272,10 +272,10 @@ export default function CommunityEngagementBuilder() {
                   </div>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center">
-                      <div className="h-6 w-6 rounded-full bg-green-100 flex items-center justify-center text-xs text-green-700 font-bold mr-2">T</div>
+                      <div className="h-6 w-6 rounded-full bg-secondary/10 flex items-center justify-center text-xs text-secondary font-bold mr-2">T</div>
                       <span className="text-sm">techguru</span>
                     </div>
-                    <Badge className="bg-green-100 text-green-700 hover:bg-green-100">65</Badge>
+                    <Badge className="bg-secondary/10 text-secondary hover:bg-secondary/10">65</Badge>
                   </div>
                 </div>
               </div>
@@ -314,7 +314,7 @@ export default function CommunityEngagementBuilder() {
                   <TabsTrigger value="members">Members</TabsTrigger>
                 </TabsList>
                 <TabsContent value="graph">
-                  <div className="h-96 border rounded-md bg-gray-50 flex items-center justify-center">
+                  <div className="h-96 border rounded-md bg-muted/50 flex items-center justify-center">
                     <div className="relative w-full h-full">
                       {/* Network graph visualization */}
                       <div className="absolute inset-0 flex items-center justify-center">
@@ -327,10 +327,10 @@ export default function CommunityEngagementBuilder() {
                       </div>
                       
                       {/* GitHub node */}
-                      <div className="absolute top-1/4 left-1/4 w-12 h-12 rounded-full bg-gray-100 border-2 border-gray-300 flex items-center justify-center">
-                        <Github className="h-6 w-6 text-gray-700" />
+                      <div className="absolute top-1/4 left-1/4 w-12 h-12 rounded-full bg-muted border-2 border-border flex items-center justify-center">
+                        <Github className="h-6 w-6 text-foreground" />
                       </div>
-                      <div className="absolute top-[28%] left-[32%] w-24 h-[2px] bg-gray-300 rotate-45"></div>
+                      <div className="absolute top-[28%] left-[32%] w-24 h-[2px] bg-muted rotate-45"></div>
                       
                       {/* Discourse node */}
                       <div className="absolute top-1/4 right-1/4 w-12 h-12 rounded-full bg-blue-100 border-2 border-blue-300 flex items-center justify-center">
@@ -339,10 +339,10 @@ export default function CommunityEngagementBuilder() {
                       <div className="absolute top-[28%] right-[32%] w-24 h-[2px] bg-blue-300 -rotate-45"></div>
                       
                       {/* Slack node */}
-                      <div className="absolute bottom-1/4 left-1/4 w-12 h-12 rounded-full bg-green-100 border-2 border-green-300 flex items-center justify-center">
-                        <MessageSquare className="h-6 w-6 text-green-700" />
+                      <div className="absolute bottom-1/4 left-1/4 w-12 h-12 rounded-full bg-secondary/10 border-2 border-secondary flex items-center justify-center">
+                        <MessageSquare className="h-6 w-6 text-secondary" />
                       </div>
-                      <div className="absolute bottom-[28%] left-[32%] w-24 h-[2px] bg-green-300 -rotate-45"></div>
+                      <div className="absolute bottom-[28%] left-[32%] w-24 h-[2px] bg-secondary -rotate-45"></div>
                       
                       {/* Twitter node */}
                       <div className="absolute bottom-1/4 right-1/4 w-12 h-12 rounded-full bg-purple-100 border-2 border-purple-300 flex items-center justify-center">
@@ -353,7 +353,7 @@ export default function CommunityEngagementBuilder() {
                       {/* Small nodes */}
                       {Array(12).fill(0).map((_, i) => (
                         <div key={i} 
-                             className={`absolute w-4 h-4 rounded-full bg-gray-${200 + (i % 3) * 100} border border-gray-400`}
+                             className={`absolute w-4 h-4 rounded-full bg-muted border border-border`}
                              style={{
                                top: `${Math.random() * 80 + 10}%`,
                                left: `${Math.random() * 80 + 10}%`,
@@ -367,12 +367,12 @@ export default function CommunityEngagementBuilder() {
                   <div className="h-96 border rounded-md overflow-auto">
                     <table className="min-w-full">
                       <thead>
-                        <tr className="border-b bg-gray-50">
-                          <th className="py-2 px-4 text-left text-sm font-medium text-gray-600">Activity</th>
-                          <th className="py-2 px-4 text-left text-sm font-medium text-gray-600">Platform</th>
-                          <th className="py-2 px-4 text-left text-sm font-medium text-gray-600">User</th>
-                          <th className="py-2 px-4 text-left text-sm font-medium text-gray-600">Date</th>
-                          <th className="py-2 px-4 text-left text-sm font-medium text-gray-600">Engagement</th>
+                        <tr className="border-b bg-muted/50">
+                          <th className="py-2 px-4 text-left text-sm font-medium text-muted-foreground">Activity</th>
+                          <th className="py-2 px-4 text-left text-sm font-medium text-muted-foreground">Platform</th>
+                          <th className="py-2 px-4 text-left text-sm font-medium text-muted-foreground">User</th>
+                          <th className="py-2 px-4 text-left text-sm font-medium text-muted-foreground">Date</th>
+                          <th className="py-2 px-4 text-left text-sm font-medium text-muted-foreground">Engagement</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -384,7 +384,7 @@ export default function CommunityEngagementBuilder() {
                           <td className="py-2 px-4">janedev</td>
                           <td className="py-2 px-4">Yesterday</td>
                           <td className="py-2 px-4">
-                            <Badge className="bg-green-100 text-green-700 hover:bg-green-100">High</Badge>
+                            <Badge className="bg-secondary/10 text-secondary hover:bg-secondary/10">High</Badge>
                           </td>
                         </tr>
                         <tr className="border-b">
@@ -395,7 +395,7 @@ export default function CommunityEngagementBuilder() {
                           <td className="py-2 px-4">techguru</td>
                           <td className="py-2 px-4">2 days ago</td>
                           <td className="py-2 px-4">
-                            <Badge className="bg-green-100 text-green-700 hover:bg-green-100">High</Badge>
+                            <Badge className="bg-secondary/10 text-secondary hover:bg-secondary/10">High</Badge>
                           </td>
                         </tr>
                         <tr className="border-b">
@@ -428,7 +428,7 @@ export default function CommunityEngagementBuilder() {
                           <td className="py-2 px-4">openhacker</td>
                           <td className="py-2 px-4">1 week ago</td>
                           <td className="py-2 px-4">
-                            <Badge className="bg-green-100 text-green-700 hover:bg-green-100">High</Badge>
+                            <Badge className="bg-secondary/10 text-secondary hover:bg-secondary/10">High</Badge>
                           </td>
                         </tr>
                       </tbody>
@@ -559,75 +559,75 @@ export default function CommunityEngagementBuilder() {
                 <TabsContent value="members">
                   <div className="h-96 border rounded-md overflow-auto">
                     <div className="p-4 grid grid-cols-1 md:grid-cols-3 gap-4">
-                      <div className="border rounded-md p-3 hover:bg-gray-50">
+                      <div className="border rounded-md p-3 hover:bg-muted/50">
                         <div className="flex items-center mb-2">
                           <div className="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center text-sm text-blue-700 font-bold mr-2">J</div>
                           <div>
                             <div className="font-medium">janedev</div>
-                            <div className="text-xs text-gray-500">Active Contributor</div>
+                            <div className="text-xs text-muted-foreground">Active Contributor</div>
                           </div>
                         </div>
-                        <div className="flex items-center text-sm text-gray-600 space-x-2">
+                        <div className="flex items-center text-sm text-muted-foreground space-x-2">
                           <span className="flex items-center"><Github className="h-3 w-3 mr-1" />24</span>
                           <span className="flex items-center"><MessageCircle className="h-3 w-3 mr-1" />36</span>
                           <span className="flex items-center"><MessageSquare className="h-3 w-3 mr-1" />19</span>
                         </div>
                       </div>
                       
-                      <div className="border rounded-md p-3 hover:bg-gray-50">
+                      <div className="border rounded-md p-3 hover:bg-muted/50">
                         <div className="flex items-center mb-2">
                           <div className="h-8 w-8 rounded-full bg-purple-100 flex items-center justify-center text-sm text-purple-700 font-bold mr-2">D</div>
                           <div>
                             <div className="font-medium">devsmith</div>
-                            <div className="text-xs text-gray-500">Community Leader</div>
+                            <div className="text-xs text-muted-foreground">Community Leader</div>
                           </div>
                         </div>
-                        <div className="flex items-center text-sm text-gray-600 space-x-2">
+                        <div className="flex items-center text-sm text-muted-foreground space-x-2">
                           <span className="flex items-center"><Github className="h-3 w-3 mr-1" />18</span>
                           <span className="flex items-center"><MessageCircle className="h-3 w-3 mr-1" />42</span>
                           <span className="flex items-center"><MessageSquare className="h-3 w-3 mr-1" />31</span>
                         </div>
                       </div>
                       
-                      <div className="border rounded-md p-3 hover:bg-gray-50">
+                      <div className="border rounded-md p-3 hover:bg-muted/50">
                         <div className="flex items-center mb-2">
-                          <div className="h-8 w-8 rounded-full bg-green-100 flex items-center justify-center text-sm text-green-700 font-bold mr-2">T</div>
+                          <div className="h-8 w-8 rounded-full bg-secondary/10 flex items-center justify-center text-sm text-secondary font-bold mr-2">T</div>
                           <div>
                             <div className="font-medium">techguru</div>
-                            <div className="text-xs text-gray-500">Moderator</div>
+                            <div className="text-xs text-muted-foreground">Moderator</div>
                           </div>
                         </div>
-                        <div className="flex items-center text-sm text-gray-600 space-x-2">
+                        <div className="flex items-center text-sm text-muted-foreground space-x-2">
                           <span className="flex items-center"><Github className="h-3 w-3 mr-1" />12</span>
                           <span className="flex items-center"><MessageCircle className="h-3 w-3 mr-1" />54</span>
                           <span className="flex items-center"><Twitter className="h-3 w-3 mr-1" />28</span>
                         </div>
                       </div>
                       
-                      <div className="border rounded-md p-3 hover:bg-gray-50">
+                      <div className="border rounded-md p-3 hover:bg-muted/50">
                         <div className="flex items-center mb-2">
-                          <div className="h-8 w-8 rounded-full bg-red-100 flex items-center justify-center text-sm text-red-700 font-bold mr-2">C</div>
+                          <div className="h-8 w-8 rounded-full bg-destructive/10 flex items-center justify-center text-sm text-destructive font-bold mr-2">C</div>
                           <div>
                             <div className="font-medium">codemaster</div>
-                            <div className="text-xs text-gray-500">Regular User</div>
+                            <div className="text-xs text-muted-foreground">Regular User</div>
                           </div>
                         </div>
-                        <div className="flex items-center text-sm text-gray-600 space-x-2">
+                        <div className="flex items-center text-sm text-muted-foreground space-x-2">
                           <span className="flex items-center"><Github className="h-3 w-3 mr-1" />8</span>
                           <span className="flex items-center"><Twitter className="h-3 w-3 mr-1" />45</span>
                           <span className="flex items-center"><MessageSquare className="h-3 w-3 mr-1" />12</span>
                         </div>
                       </div>
                       
-                      <div className="border rounded-md p-3 hover:bg-gray-50">
+                      <div className="border rounded-md p-3 hover:bg-muted/50">
                         <div className="flex items-center mb-2">
                           <div className="h-8 w-8 rounded-full bg-yellow-100 flex items-center justify-center text-sm text-yellow-700 font-bold mr-2">O</div>
                           <div>
                             <div className="font-medium">openhacker</div>
-                            <div className="text-xs text-gray-500">Core Contributor</div>
+                            <div className="text-xs text-muted-foreground">Core Contributor</div>
                           </div>
                         </div>
-                        <div className="flex items-center text-sm text-gray-600 space-x-2">
+                        <div className="flex items-center text-sm text-muted-foreground space-x-2">
                           <span className="flex items-center"><Github className="h-3 w-3 mr-1" />32</span>
                           <span className="flex items-center"><MessageCircle className="h-3 w-3 mr-1" />16</span>
                           <span className="flex items-center"><MessageSquare className="h-3 w-3 mr-1" />7</span>
@@ -648,18 +648,18 @@ export default function CommunityEngagementBuilder() {
               <CardContent>
                 <div className="flex flex-col items-center py-4">
                   <div className="text-4xl font-bold text-primary mb-1">12,456</div>
-                  <p className="text-sm text-gray-500">Total interactions</p>
-                  <div className="flex items-center mt-2 text-green-600 text-sm">
+                  <p className="text-sm text-muted-foreground">Total interactions</p>
+                  <div className="flex items-center mt-2 text-secondary text-sm">
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M8 4V12M8 4L5 7M8 4L11 7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                     <span className="ml-1">24% vs previous period</span>
                   </div>
                 </div>
-                <div className="h-1 w-full bg-gray-200 mt-2">
+                <div className="h-1 w-full bg-muted mt-2">
                   <div className="h-1 bg-primary" style={{ width: '68%' }}></div>
                 </div>
-                <div className="flex justify-between mt-1 text-xs text-gray-500">
+                <div className="flex justify-between mt-1 text-xs text-muted-foreground">
                   <span>Target: 18,000</span>
                   <span>68%</span>
                 </div>
@@ -673,18 +673,18 @@ export default function CommunityEngagementBuilder() {
               <CardContent>
                 <div className="flex flex-col items-center py-4">
                   <div className="text-4xl font-bold text-primary mb-1">3,245</div>
-                  <p className="text-sm text-gray-500">Unique contributors</p>
-                  <div className="flex items-center mt-2 text-green-600 text-sm">
+                  <p className="text-sm text-muted-foreground">Unique contributors</p>
+                  <div className="flex items-center mt-2 text-secondary text-sm">
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M8 4V12M8 4L5 7M8 4L11 7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                     <span className="ml-1">12% vs previous period</span>
                   </div>
                 </div>
-                <div className="h-1 w-full bg-gray-200 mt-2">
+                <div className="h-1 w-full bg-muted mt-2">
                   <div className="h-1 bg-primary" style={{ width: '54%' }}></div>
                 </div>
-                <div className="flex justify-between mt-1 text-xs text-gray-500">
+                <div className="flex justify-between mt-1 text-xs text-muted-foreground">
                   <span>Target: 6,000</span>
                   <span>54%</span>
                 </div>
@@ -698,18 +698,18 @@ export default function CommunityEngagementBuilder() {
               <CardContent>
                 <div className="flex flex-col items-center py-4">
                   <div className="text-4xl font-bold text-primary mb-1">4.2h</div>
-                  <p className="text-sm text-gray-500">Across all platforms</p>
-                  <div className="flex items-center mt-2 text-green-600 text-sm">
+                  <p className="text-sm text-muted-foreground">Across all platforms</p>
+                  <div className="flex items-center mt-2 text-secondary text-sm">
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M8 4V12M8 4L5 7M8 4L11 7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                     <span className="ml-1">18% vs previous period</span>
                   </div>
                 </div>
-                <div className="h-1 w-full bg-gray-200 mt-2">
-                  <div className="h-1 bg-green-500" style={{ width: '82%' }}></div>
+                <div className="h-1 w-full bg-muted mt-2">
+                  <div className="h-1 bg-secondary" style={{ width: '82%' }}></div>
                 </div>
-                <div className="flex justify-between mt-1 text-xs text-gray-500">
+                <div className="flex justify-between mt-1 text-xs text-muted-foreground">
                   <span>Target: 5.0h</span>
                   <span>82%</span>
                 </div>

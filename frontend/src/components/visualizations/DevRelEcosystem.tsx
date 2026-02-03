@@ -80,9 +80,9 @@ export function DevRelEcosystem({ customData }: DevRelEcosystemProps) {
     // Format nodes for Nivo
     const nodes = displayData.nodes.map(node => ({
       id: node.id.toString(),
-      nodeColor: categoryColors[node.pillar as keyof typeof categoryColors] || categoryColors.default,
+      nodeColor: categoryColors[(node.pillar || (node as any).type) as keyof typeof categoryColors] || categoryColors.default,
       label: node.name,
-      category: node.pillar || 'community'
+      category: node.pillar || (node as any).type || 'community'
     }));
     
     // Format links for Nivo
@@ -135,17 +135,17 @@ export function DevRelEcosystem({ customData }: DevRelEcosystemProps) {
           animate={true}
           motionConfig="gentle"
           nodeTooltip={({ node }) => (
-            <div className="bg-white p-3 shadow-lg rounded-lg border border-gray-200">
+            <div className="bg-card p-3 shadow-lg rounded-lg border border-border">
               <p className="font-semibold text-sm">{node.label}</p>
-              <p className="text-xs text-gray-600">Category: <span className="font-medium">{node.category}</span></p>
+              <p className="text-xs text-muted-foreground">Category: <span className="font-medium">{node.category}</span></p>
             </div>
           )}
           linkTooltip={({ link }) => (
-            <div className="bg-white p-3 shadow-lg rounded-lg border border-gray-200">
+            <div className="bg-card p-3 shadow-lg rounded-lg border border-border">
               <p className="font-semibold text-sm">Connection</p>
-              <p className="text-xs text-gray-600">From: <span className="font-medium">{link.source.label}</span></p>
-              <p className="text-xs text-gray-600">To: <span className="font-medium">{link.target.label}</span></p>
-              <p className="text-xs text-gray-600">Strength: <span className="font-medium">{link.value}</span></p>
+              <p className="text-xs text-muted-foreground">From: <span className="font-medium">{link.source.label}</span></p>
+              <p className="text-xs text-muted-foreground">To: <span className="font-medium">{link.target.label}</span></p>
+              <p className="text-xs text-muted-foreground">Strength: <span className="font-medium">{link.value}</span></p>
             </div>
           )}
         />
@@ -154,8 +154,8 @@ export function DevRelEcosystem({ customData }: DevRelEcosystemProps) {
       <div className="mt-3 flex flex-wrap gap-3 justify-center">
         {Object.entries(categoryColors).filter(([key]) => key !== 'default').map(([category, color]) => (
           <div key={category} className="inline-flex items-center">
-            <div 
-              className="w-4 h-4 rounded-full mr-1 border border-gray-200" 
+            <div
+              className="w-4 h-4 rounded-full mr-1 border border-border"
               style={{ backgroundColor: color }}
             />
             <span className="text-xs font-medium capitalize">{category}</span>

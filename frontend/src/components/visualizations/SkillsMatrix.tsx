@@ -83,7 +83,7 @@ const SkillsMatrix: React.FC = () => {
     // Create tooltip
     const tooltip = select(containerRef.current)
       .append('div')
-      .attr('class', 'absolute hidden bg-white p-2 rounded shadow-lg text-sm')
+      .attr('class', 'absolute hidden bg-card p-2 rounded shadow-lg text-sm')
       .style('pointer-events', 'none');
 
     // Add cells with hover effects
@@ -111,8 +111,8 @@ const SkillsMatrix: React.FC = () => {
             .style('top', `${event.pageY - 10}px`)
             .html(`
               <div class="font-medium">${d.role}</div>
-              <div class="text-gray-600">${d.skill}</div>
-              <div class="text-gray-600">${d.category}</div>
+              <div class="text-muted-foreground">${d.skill}</div>
+              <div class="text-muted-foreground">${d.category}</div>
               <div class="font-bold">${d.value}%</div>
             `)
             .classed('hidden', false);
@@ -198,9 +198,9 @@ const SkillsMatrix: React.FC = () => {
   }, []);
 
   return (
-    <div ref={containerRef} className="relative w-full bg-white p-6 rounded-xl shadow-lg">
-      <div className="text-xl font-semibold mb-4 text-gray-800">DevRel Skills Distribution</div>
-      <div className="text-sm text-gray-600 mb-6">
+    <div ref={containerRef} className="relative w-full bg-card p-6 rounded-xl shadow-lg">
+      <div className="text-xl font-semibold mb-4 text-foreground">DevRel Skills Distribution</div>
+      <div className="text-sm text-muted-foreground mb-6">
         Explore the distribution of skills across different DevRel roles and categories
       </div>
       <svg
