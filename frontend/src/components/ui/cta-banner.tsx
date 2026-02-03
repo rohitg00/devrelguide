@@ -12,21 +12,21 @@ export function CTABanner() {
   if (!isVisible) return null
 
   return (
-    <motion.div 
+    <motion.div
       className="fixed bottom-0 left-0 right-0 md:bottom-4 md:right-4 md:left-auto z-50 p-4 md:p-0"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="relative bg-white/90 backdrop-blur-sm border border-gray-200 rounded-lg shadow-lg p-4 max-w-sm mx-auto md:mx-0">
+      <div className="relative bg-card border border-white/20 p-4 max-w-sm mx-auto md:mx-0">
         <button
           onClick={() => setIsVisible(false)}
-          className="absolute top-2 right-2 text-gray-400 hover:text-gray-600"
+          className="absolute top-2 right-2 text-white/40 hover:text-white"
           aria-label="Close banner"
         >
           <X className="h-4 w-4" />
         </button>
-        <p className="text-sm text-gray-600 mb-3 pr-6">
+        <p className="text-sm text-white/60 mb-3 pr-6 font-mono">
           Looking for expert guidance with your DevRel initiatives?
         </p>
         <Link href="/contact">

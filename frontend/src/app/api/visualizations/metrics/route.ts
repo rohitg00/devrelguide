@@ -1,40 +1,33 @@
 import { NextResponse } from 'next/server'
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
-const API_USERNAME = process.env.NEXT_PUBLIC_API_USERNAME
-const API_PASSWORD = process.env.NEXT_PUBLIC_API_PASSWORD
-
-if (!API_USERNAME || !API_PASSWORD) {
-  console.error('API credentials not configured')
-  throw new Error('API credentials not configured')
-}
+const API_KEY = process.env.API_KEY
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
+function apiHeaders(): Record<string, string> {
+  const h: Record<string, string> = {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+  }
+  if (API_KEY) h['X-API-Key'] = API_KEY
+  return h
+}
+
 export async function GET() {
   try {
-    console.log('Fetching metrics data from:', `${API_URL}/api/visualizations/metrics`)
     const response = await fetch(`${API_URL}/api/visualizations/metrics`, {
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': `Basic ${Buffer.from(`${API_USERNAME}:${API_PASSWORD}`).toString('base64')}`
-      },
-      credentials: 'omit',
+      headers: apiHeaders(),
       cache: 'no-store',
       next: { revalidate: 0 }
     })
 
     if (!response.ok) {
-      console.error('Error response status:', response.status)
-      const errorText = await response.text()
-      console.error('Error response body:', errorText)
       throw new Error(`Failed to fetch metrics data: ${response.status}`)
     }
 
     const data = await response.json()
-    console.log('Metrics data fetched successfully')
 
     if (!data.data || !data.metadata) {
       throw new Error('Invalid metrics data format')
@@ -43,10 +36,6 @@ export async function GET() {
     return NextResponse.json(data, {
       headers: {
         'Cache-Control': 'no-store, must-revalidate',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-        'Access-Control-Allow-Credentials': 'true'
       }
     })
   } catch (error) {
@@ -61,16 +50,9 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const body = await request.json()
-    console.log('Appending metrics data:', body)
 
-    // Get existing data first
     const existingResponse = await fetch(`${API_URL}/api/visualizations/metrics`, {
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': `Basic ${Buffer.from(`${API_USERNAME}:${API_PASSWORD}`).toString('base64')}`
-      },
-      credentials: 'omit'
+      headers: apiHeaders(),
     })
 
     if (!existingResponse.ok) {
@@ -79,7 +61,6 @@ export async function POST(request: Request) {
 
     const existingData = await existingResponse.json()
 
-    // Merge new data with existing data
     const mergedData = {
       metadata: {
         ...existingData.metadata,
@@ -93,14 +74,9 @@ export async function POST(request: Request) {
       }
     }
 
-    // Send merged data to append endpoint
     const response = await fetch(`${API_URL}/api/visualizations/metrics/append`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Basic ${Buffer.from(`${API_USERNAME}:${API_PASSWORD}`).toString('base64')}`
-      },
-      credentials: 'omit',
+      headers: apiHeaders(),
       body: JSON.stringify(mergedData)
     })
 
@@ -109,16 +85,8 @@ export async function POST(request: Request) {
     }
 
     const result = await response.json()
-    console.log('Metrics data appended successfully')
 
-    return NextResponse.json(result, {
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-        'Access-Control-Allow-Credentials': 'true'
-      }
-    })
+    return NextResponse.json(result)
   } catch (error) {
     console.error('Error appending metrics data:', error)
     return NextResponse.json(
@@ -131,10 +99,8 @@ export async function POST(request: Request) {
 export async function OPTIONS() {
   return NextResponse.json({}, {
     headers: {
-      'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-      'Access-Control-Allow-Credentials': 'true'
+      'Access-Control-Allow-Headers': 'Content-Type, X-API-Key',
     }
   })
 }

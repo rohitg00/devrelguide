@@ -1,108 +1,43 @@
 import { NextResponse } from 'next/server'
-import { mdToPdf } from 'md-to-pdf'
+import { marked } from 'marked'
 import fs from 'fs/promises'
 import path from 'path'
 
 export async function POST() {
   try {
-    // Read the markdown file
     const markdownPath = path.join(process.cwd(), 'public', 'content', 'devrel-whitepaper.md')
     const markdown = await fs.readFile(markdownPath, 'utf-8')
 
-    // Create styles file
-    const stylesPath = path.join(process.cwd(), 'public', 'generated', 'styles.css')
-    const styles = `
-      body {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-        line-height: 1.6;
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 20px;
-      }
-      h1 { font-size: 2.5em; color: #2563eb; margin-bottom: 1em; }
-      h2 { font-size: 2em; color: #1e40af; margin-top: 1.5em; }
-      h3 { font-size: 1.5em; color: #1e40af; }
-      p { margin-bottom: 1em; }
-      ul { margin-bottom: 1em; padding-left: 2em; }
-      li { margin-bottom: 0.5em; }
-      pre {
-        background: #f8fafc;
-        padding: 1em;
-        border-radius: 5px;
-        overflow-x: auto;
-        margin: 1em 0;
-        border: 1px solid #e2e8f0;
-      }
-      code {
-        font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
-        font-size: 0.9em;
-        background: #f8fafc;
-        padding: 0.2em 0.4em;
-        border-radius: 3px;
-        border: 1px solid #e2e8f0;
-      }
-      blockquote {
-        border-left: 4px solid #2563eb;
-        padding-left: 1em;
-        margin: 1em 0;
-        color: #475569;
-      }
-      img {
-        max-width: 100%;
-        height: auto;
-        margin: 1em 0;
-        border-radius: 5px;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-      }
-      a {
-        color: #2563eb;
-        text-decoration: none;
-      }
-      a:hover {
-        text-decoration: underline;
-      }
-      table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 1em 0;
-      }
-      th, td {
-        border: 1px solid #e2e8f0;
-        padding: 0.5em;
-        text-align: left;
-      }
-      th {
-        background: #f8fafc;
-      }
-    `
-    await fs.writeFile(stylesPath, styles)
+    const html = await marked(markdown, { gfm: true, breaks: true })
 
-    // Convert markdown to PDF
-    const pdf = await mdToPdf(
-      { content: markdown },
-      {
-        dest: path.join(process.cwd(), 'public', 'generated', 'DevRel-Whitepaper-2024.pdf'),
-        stylesheet: stylesPath,
-        css: `pre, code { background: #f8fafc !important; }`,
-        pdf_options: {
-          format: 'A4',
-          margin: '30mm 20mm',
-          printBackground: true,
-        },
-        marked_options: {
-          gfm: true,
-          breaks: true,
-          highlight: null
-        }
-      }
-    )
+    const fullHtml = `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>DevRel Whitepaper</title>
+<style>
+body { font-family: 'Roboto Mono', monospace; line-height: 1.6; max-width: 800px; margin: 0 auto; padding: 20px; background: #003366; color: #fff; }
+h1 { font-size: 2em; color: #FF3333; }
+h2 { font-size: 1.5em; color: #00FFFF; margin-top: 1.5em; }
+h3 { font-size: 1.25em; color: #00FFFF; }
+a { color: #00FFFF; }
+pre { background: rgba(255,255,255,0.05); padding: 1em; border: 1px solid rgba(255,255,255,0.15); overflow-x: auto; }
+code { font-family: 'Roboto Mono', monospace; font-size: 0.9em; }
+blockquote { border-left: 3px solid #FF3333; padding-left: 1em; color: rgba(255,255,255,0.7); }
+table { width: 100%; border-collapse: collapse; }
+th, td { border: 1px solid rgba(255,255,255,0.2); padding: 0.5em; }
+</style>
+</head>
+<body>${html}</body>
+</html>`
 
-    // Clean up the styles file
-    await fs.unlink(stylesPath)
+    const outputPath = path.join(process.cwd(), 'public', 'generated')
+    await fs.mkdir(outputPath, { recursive: true })
+    await fs.writeFile(path.join(outputPath, 'DevRel-Whitepaper-2024.html'), fullHtml)
 
-    return NextResponse.json({ success: true })
+    return NextResponse.json({ success: true, format: 'html' })
   } catch (error) {
-    console.error('Error generating PDF:', error)
-    return NextResponse.json({ error: 'Failed to generate PDF' }, { status: 500 })
+    console.error('Error generating document:', error)
+    return NextResponse.json({ error: 'Failed to generate document' }, { status: 500 })
   }
 }

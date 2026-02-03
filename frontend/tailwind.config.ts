@@ -2,7 +2,6 @@ import type { Config } from "tailwindcss";
 import { fontFamily } from "tailwindcss/defaultTheme";
 
 export default {
-  darkMode: ["class"],
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -61,11 +60,13 @@ export default {
       },
       borderRadius: {
         lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+        md: "calc(var(--radius))",
+        sm: "calc(var(--radius))",
       },
       fontFamily: {
-        sans: ["var(--font-sans)", ...fontFamily.sans],
+        sans: ["var(--font-mono)", ...fontFamily.mono],
+        mono: ["var(--font-mono)", ...fontFamily.mono],
+        hand: ["var(--font-hand)", "cursive"],
       },
       keyframes: {
         "accordion-down": {
@@ -76,46 +77,36 @@ export default {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        "drafting-reveal": {
+          from: { strokeDashoffset: "1000" },
+          to: { strokeDashoffset: "0" },
+        },
+        "coordinate-pulse": {
+          "0%, 100%": { opacity: "0.4" },
+          "50%": { opacity: "1" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "drafting-reveal": "drafting-reveal 2s ease-out forwards",
+        "coordinate-pulse": "coordinate-pulse 2s ease-in-out infinite",
       },
       typography: {
         DEFAULT: {
           css: {
             maxWidth: 'none',
-            color: 'var(--tw-prose-body)',
+            color: 'hsl(0 0% 100%)',
             fontSize: '1rem',
             lineHeight: '1.75',
-            p: {
-              marginTop: '1.25em',
-              marginBottom: '1.25em',
-            },
-            h1: {
-              fontSize: '2.25rem',
-              marginTop: '0',
-              marginBottom: '0.8888889em',
-              lineHeight: '1.1111111',
-            },
-            h2: {
-              fontSize: '1.875rem',
-              marginTop: '2em',
-              marginBottom: '1em',
-              lineHeight: '1.3333333',
-            },
-            h3: {
-              fontSize: '1.5rem',
-              marginTop: '1.6em',
-              marginBottom: '0.6em',
-              lineHeight: '1.6',
-            },
-            'code::before': {
-              content: '""',
-            },
-            'code::after': {
-              content: '""',
-            },
+            a: { color: 'hsl(180 100% 50%)' },
+            h1: { color: 'hsl(0 0% 100%)' },
+            h2: { color: 'hsl(0 0% 100%)' },
+            h3: { color: 'hsl(0 0% 100%)' },
+            strong: { color: 'hsl(0 0% 100%)' },
+            code: { color: 'hsl(180 100% 50%)' },
+            'code::before': { content: '""' },
+            'code::after': { content: '""' },
           },
         },
       },

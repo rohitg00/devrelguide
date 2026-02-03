@@ -12,7 +12,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Plus, Trash2, Save, Download, Copy, Edit, X } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { DevRelEcosystem } from '../visualizations/DevRelEcosystem';
-import html2canvas from 'html2canvas';
+import { toPng } from '@/lib/export-image';
 import { fallbackData } from '@/lib/visualization-utils';
 import { Badge } from '@/components/ui/badge';
 
@@ -219,9 +219,9 @@ export function EcosystemCustomizer() {
     if (!visualizationRef.current) return;
     
     try {
-      const canvas = await html2canvas(visualizationRef.current, {
-        backgroundColor: '#ffffff',
-        scale: 2 // Higher quality
+      const canvas = await toPng(visualizationRef.current, {
+        backgroundColor: '#003366',
+        scale: 2
       });
       
       const image = canvas.toDataURL('image/png');

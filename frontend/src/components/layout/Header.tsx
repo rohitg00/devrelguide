@@ -6,60 +6,54 @@ import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import { Menu, X } from 'lucide-react'
-import { ThemeToggle } from '@/components/ThemeToggle'
 
 const Header = () => {
   const pathname = usePathname()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  
+
   const navLinks = [
-    { href: '/', label: 'Home' },
-    { href: '/whitepaper', label: 'Free Whitepaper', isNew: true },
-    { href: '/resources', label: 'Resources' },
-    { href: '/visualizations', label: 'Visualizations' },
-    { href: '/programs', label: 'DevRel Programs', isNew: true },
-    { href: '/builder', label: 'Visualization Builder', isNew: true },
-    { href: '/demo/spline', label: '3D Demo', isNew: true },
-    { href: '/contact', label: 'Contact Us' }
+    { href: '/', label: 'HOME' },
+    { href: '/whitepaper', label: 'WHITEPAPER', isNew: true },
+    { href: '/resources', label: 'RESOURCES' },
+    { href: '/visualizations', label: 'VISUALIZATIONS' },
+    { href: '/programs', label: 'PROGRAMS', isNew: true },
+    { href: '/builder', label: 'BUILDER', isNew: true },
+    { href: '/contact', label: 'CONTACT' }
   ]
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-background/85 backdrop-blur">
       <div className="container flex h-16 items-center justify-between">
         <Link href="/" className="flex items-center space-x-2">
           <Image src="/Icon.svg" alt="DevRel Guide" width={32} height={32} style={{ width: 32, height: 32 }} priority />
-          <span className="font-bold text-xl bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+          <span className="font-mono font-bold text-xl text-white uppercase tracking-wider">
             DevRel Guide
           </span>
         </Link>
 
-        {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-6">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
               className={cn(
-                "text-sm font-medium transition-colors hover:text-primary",
-                pathname === link.href ? "text-primary" : "text-muted-foreground"
+                "text-xs font-mono font-medium tracking-widest uppercase transition-colors hover:text-secondary",
+                pathname === link.href ? "text-secondary" : "text-white/70"
               )}
             >
               <span className="flex items-center gap-2">
                 {link.label}
                 {link.isNew && (
-                  <span className="bg-primary/10 text-primary text-xs px-2 py-1 rounded-full">New</span>
+                  <span className="bg-primary text-white text-[9px] px-1.5 py-0.5 font-mono uppercase tracking-wider -rotate-2">NEW</span>
                 )}
               </span>
             </Link>
           ))}
-          <ThemeToggle />
         </nav>
 
-        {/* Mobile Menu Button */}
         <div className="md:hidden flex items-center gap-2">
-          <ThemeToggle />
           <button
-            className="p-2"
+            className="p-2 text-white/70 hover:text-white"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -72,24 +66,23 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Mobile Navigation */}
       {isMenuOpen && (
         <div className="md:hidden">
-          <nav className="flex flex-col p-4 space-y-4 bg-background border-t">
+          <nav className="flex flex-col p-4 space-y-4 bg-background border-t border-white/10">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 className={cn(
-                  "text-sm font-medium transition-colors hover:text-primary p-2",
-                  pathname === link.href ? "text-primary bg-primary/10 rounded-lg" : "text-muted-foreground"
+                  "text-xs font-mono font-medium tracking-widest uppercase transition-colors hover:text-secondary p-2",
+                  pathname === link.href ? "text-secondary border-l-2 border-secondary pl-4" : "text-white/70"
                 )}
                 onClick={() => setIsMenuOpen(false)}
               >
                 <span className="flex items-center gap-2">
                   {link.label}
                   {link.isNew && (
-                    <span className="bg-primary/10 text-primary text-xs px-2 py-1 rounded-full">New</span>
+                    <span className="bg-primary text-white text-[9px] px-1.5 py-0.5 font-mono uppercase tracking-wider -rotate-2">NEW</span>
                   )}
                 </span>
               </Link>

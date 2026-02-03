@@ -2,22 +2,22 @@ import { NextResponse } from 'next/server'
 import type { Resource } from '../../../types/api'
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || ''
+const API_KEY = process.env.API_KEY
 
 export async function GET() {
   try {
+    const headers: Record<string, string> = {
+      'Accept': 'application/json',
+    }
+    if (API_KEY) headers['X-API-Key'] = API_KEY
+
     const [resourcesResponse, jobsResponse] = await Promise.all([
       fetch(`${API_URL}/api/resources`, {
-        headers: {
-          'Authorization': `Basic ${btoa(`${process.env.NEXT_PUBLIC_API_USERNAME}:${process.env.NEXT_PUBLIC_API_PASSWORD}`)}`,
-          'Accept': 'application/json',
-        },
+        headers,
         cache: 'no-store',
       }),
       fetch(`${API_URL}/api/jobs`, {
-        headers: {
-          'Authorization': `Basic ${btoa(`${process.env.NEXT_PUBLIC_API_USERNAME}:${process.env.NEXT_PUBLIC_API_PASSWORD}`)}`,
-          'Accept': 'application/json',
-        },
+        headers,
         cache: 'no-store',
       })
     ])
@@ -31,7 +31,6 @@ export async function GET() {
       jobsResponse.json()
     ])
 
-    // Group resources by type
     const groupedResources = {
       github: resources.filter((r: Resource) => r.type === 'github'),
       blogs: resources.filter((r: Resource) => r.type === 'blog'),

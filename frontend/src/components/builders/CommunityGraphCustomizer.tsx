@@ -11,7 +11,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Plus, Trash2, Edit, Download } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { CommunityGraph } from '../visualizations/CommunityGraph';
-import html2canvas from 'html2canvas';
+import { toPng } from '@/lib/export-image';
 import { Badge } from '@/components/ui/badge';
 
 // Types for community graph data
@@ -223,9 +223,9 @@ export function CommunityGraphCustomizer() {
     if (!visualizationRef.current) return;
     
     try {
-      const canvas = await html2canvas(visualizationRef.current, {
-        backgroundColor: '#ffffff',
-        scale: 2 // Higher quality
+      const canvas = await toPng(visualizationRef.current, {
+        backgroundColor: '#003366',
+        scale: 2
       });
       
       const image = canvas.toDataURL('image/png');

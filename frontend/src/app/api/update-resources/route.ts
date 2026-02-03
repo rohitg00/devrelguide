@@ -1,20 +1,23 @@
 import { NextResponse } from 'next/server';
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
+const API_KEY = process.env.API_KEY
+
 export async function POST() {
   try {
-    console.log('Starting resource update...');
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/resources/update`, {
+    const headers: Record<string, string> = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    }
+    if (API_KEY) headers['X-API-Key'] = API_KEY
+
+    const response = await fetch(`${API_URL}/api/resources/update`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': `Basic ${Buffer.from(`${process.env.API_USERNAME}:${process.env.API_PASSWORD}`).toString('base64')}`,
-      },
+      headers,
     });
 
     if (!response.ok) {
       const error = await response.text();
-      console.error('Error updating resources:', error);
       return NextResponse.json(
         { error: 'Failed to update resources', detail: error },
         { status: response.status }
@@ -22,7 +25,6 @@ export async function POST() {
     }
 
     const result = await response.json();
-    console.log('Update successful:', result);
 
     return NextResponse.json({
       status: 'success',
