@@ -36,8 +36,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${robotoMono.variable} ${architectsDaughter.variable} font-mono antialiased`} suppressHydrationWarning>
-      <body className="min-h-screen bg-background">
+    <html lang="en" className={`${robotoMono.variable} ${architectsDaughter.variable} font-mono antialiased dark`} suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark'){document.documentElement.classList.remove('light','dark');document.documentElement.classList.add(t)}}catch(e){}})()`,
+          }}
+        />
+      </head>
+      <body className="min-h-screen bg-background text-foreground">
         <ThemeProvider>
           <div className="min-h-screen flex flex-col">
             <Layout>
