@@ -182,7 +182,7 @@ export function DeveloperJourney({ customData, showLabels = true }: DeveloperJou
   );
   
   // Use custom data if provided, otherwise use fetched data
-  const data = customData || fetchedData || sampleData;
+  const data = customData || (fetchedData?.stages ? fetchedData : null) || sampleData;
   
   // Transform data for treemap
   const treeMapData = useMemo(() => transformToTreemapData(data), [data]);

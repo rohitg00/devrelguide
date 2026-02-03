@@ -119,21 +119,9 @@ export function ResourceContainer() {
   const handleRefresh = async () => {
     try {
       setUpdating(true)
-      
-      // First trigger a refresh of the data
-      const refreshResponse = await fetch('/api/resources/refresh', {
-        method: 'POST',
-      })
-      
-      if (!refreshResponse.ok) {
-        throw new Error('Failed to refresh resources')
-      }
-      
-      // Then fetch the updated data
       await fetchResources()
     } catch (err) {
       console.error('Error refreshing resources:', err)
-      setError('Failed to refresh resources. Please try again.')
     } finally {
       setUpdating(false)
     }

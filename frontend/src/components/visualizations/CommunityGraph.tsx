@@ -93,40 +93,33 @@ function getNodeColor(group: string): string {
 }
 
 // Function to process the data for the visualization
-function processData(data: CustomData): ProcessedNetworkData {
+function processData(data: any): ProcessedNetworkData {
   return {
-    nodes: data.nodes.map(node => {
-      // Create a short label from the name (first letter of each word or first 2 characters)
+    nodes: (data.nodes || []).map((node: any) => {
+      const name = node.name || '';
       let shortLabel = '';
-      if (node.name.includes(' ')) {
-        // For multi-word names, use first letter of each word
-        shortLabel = node.name
-          .split(' ')
-          .map(word => word.charAt(0))
-          .join('')
-          .toUpperCase();
+      if (name.includes(' ')) {
+        shortLabel = name.split(' ').map((word: string) => word.charAt(0)).join('').toUpperCase();
       } else {
-        // For single words, use first 2-3 characters
-        shortLabel = node.name.substring(0, Math.min(3, node.name.length)).toUpperCase();
+        shortLabel = name.substring(0, Math.min(3, name.length)).toUpperCase();
       }
-        
       return {
-        id: node.id,
-        radius: (node.size || 10) * 1.5, // Increase node size by 50%
-        color: getNodeColor(node.group),
+        id: String(node.id),
+        radius: (node.size || 10) * 1.5,
+        color: getNodeColor(node.group || node.category || ''),
         borderColor: '#ffffff',
         borderWidth: 2,
-        name: node.name,
-        group: node.group,
-        shortLabel // Add short label
+        name: name,
+        group: node.group || node.category || '',
+        shortLabel
       };
     }),
-    links: data.links.map(link => ({
-      source: link.source,
-      target: link.target,
-      distance: Math.max(15, 25 / (link.value || 1)), // Shorter distances to make graph more compact
+    links: (data.links || []).map((link: any) => ({
+      source: String(link.source),
+      target: String(link.target),
+      distance: Math.max(15, 25 / (link.value || 1)),
       color: '#aaaaaa',
-      thickness: Math.max(1, (link.value || 1) * 0.8) // Thicker links for better visibility
+      thickness: Math.max(1, (link.value || 1) * 0.8)
     }))
   };
 }

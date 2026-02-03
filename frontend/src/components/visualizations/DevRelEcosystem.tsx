@@ -80,9 +80,9 @@ export function DevRelEcosystem({ customData }: DevRelEcosystemProps) {
     // Format nodes for Nivo
     const nodes = displayData.nodes.map(node => ({
       id: node.id.toString(),
-      nodeColor: categoryColors[node.pillar as keyof typeof categoryColors] || categoryColors.default,
+      nodeColor: categoryColors[(node.pillar || (node as any).type) as keyof typeof categoryColors] || categoryColors.default,
       label: node.name,
-      category: node.pillar || 'community'
+      category: node.pillar || (node as any).type || 'community'
     }));
     
     // Format links for Nivo

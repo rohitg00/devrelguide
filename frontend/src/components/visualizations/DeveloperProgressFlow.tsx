@@ -80,7 +80,10 @@ export function DeveloperProgressFlow() {
   });
 
   // Use either API data or generate static data if no API data
-  const data = useMemo(() => apiData || generateSankeyData(), [apiData]);
+  const data = useMemo(() => {
+    const d = apiData || generateSankeyData();
+    return d && d.nodes && d.links ? d : generateSankeyData();
+  }, [apiData]);
 
   const CustomTooltip = ({
     active,
@@ -239,7 +242,7 @@ export function DeveloperProgressFlow() {
         <div className="bg-card p-3 rounded-lg border border-border">
           <h5 className="font-medium text-center mb-2 text-sm">Developer Stages</h5>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 text-xs">
-            {data.nodes.map((node, index) => (
+            {(data.nodes || []).map((node, index) => (
               <div key={index} className="flex items-center gap-1">
                 <div 
                   className="w-3 h-3 rounded-full" 
