@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1263.175 538" width="1263.175" height="538" style="--bg:#0f172a;--fg:#e2e8f0;--line:#38bdf8;--accent:#7dd3fc;--muted:#94a3b8;--surface:#1e293b;--border:#1e3a5f;background:var(--bg)">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap');
+  text { font-family: 'Inter', system-ui, sans-serif; }
+  svg {
+    /* Derived from --bg and --fg (overridable via --line, --accent, etc.) */
+    --_text:          var(--fg);
+    --_text-sec:      var(--muted, color-mix(in srgb, var(--fg) 60%, var(--bg)));
+    --_text-muted:    var(--muted, color-mix(in srgb, var(--fg) 40%, var(--bg)));
+    --_text-faint:    color-mix(in srgb, var(--fg) 25%, var(--bg));
+    --_line:          var(--line, color-mix(in srgb, var(--fg) 30%, var(--bg)));
+    --_arrow:         var(--accent, color-mix(in srgb, var(--fg) 50%, var(--bg)));
+    --_node-fill:     var(--surface, color-mix(in srgb, var(--fg) 3%, var(--bg)));
+    --_node-stroke:   var(--border, color-mix(in srgb, var(--fg) 20%, var(--bg)));
+    --_group-fill:    var(--bg);
+    --_group-hdr:     color-mix(in srgb, var(--fg) 5%, var(--bg));
+    --_inner-stroke:  color-mix(in srgb, var(--fg) 12%, var(--bg));
+    --_key-badge:     color-mix(in srgb, var(--fg) 10%, var(--bg));
+  }
+</style>
+<defs>
+  <marker id="arrowhead" markerWidth="8" markerHeight="4.8" refX="8" refY="2.4" orient="auto">
+    <polygon points="0 0, 8 2.4, 0 4.8" fill="var(--_arrow)" />
+  </marker>
+  <marker id="arrowhead-start" markerWidth="8" markerHeight="4.8" refX="0" refY="2.4" orient="auto-start-reverse">
+    <polygon points="8 0, 0 2.4, 8 4.8" fill="var(--_arrow)" />
+  </marker>
+</defs>
+<rect x="40" y="40" width="617.675" height="285" rx="0" ry="0" fill="var(--_group-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+<rect x="40" y="40" width="617.675" height="28" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+<text x="52" y="54" dy="0.35em" font-size="12" font-weight="600" fill="var(--_text-sec)">&quot;A2A Protocol — Agent Collaboration&quot;</text>
+<rect x="677.675" y="213" width="545.5" height="112" rx="0" ry="0" fill="var(--_group-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+<rect x="677.675" y="213" width="545.5" height="28" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+<text x="689.675" y="227" dy="0.35em" font-size="12" font-weight="600" fill="var(--_text-sec)">&quot;Orchestrator MCP Tools&quot;</text>
+<rect x="54.29999999999998" y="386" width="353.65" height="112" rx="0" ry="0" fill="var(--_group-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+<rect x="54.29999999999998" y="386" width="353.65" height="28" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+<text x="66.29999999999998" y="400" dy="0.35em" font-size="12" font-weight="600" fill="var(--_text-sec)">&quot;Research MCP Tools&quot;</text>
+<rect x="427.95" y="386" width="375.1" height="112" rx="0" ry="0" fill="var(--_group-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+<rect x="427.95" y="386" width="375.1" height="28" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+<text x="439.95" y="400" dy="0.35em" font-size="12" font-weight="600" fill="var(--_text-sec)">&quot;Analytics MCP Tools&quot;</text>
+<polyline points="537.4499999999999,132 537.4499999999999,152 145.92499999999998,152 145.92499999999998,269" fill="none" stroke="var(--_line)" stroke-width="0.75" marker-end="url(#arrowhead)" marker-start="url(#arrowhead-start)" />
+<polyline points="537.4499999999999,132 537.4499999999999,269" fill="none" stroke="var(--_line)" stroke-width="0.75" marker-end="url(#arrowhead)" marker-start="url(#arrowhead-start)" />
+<polyline points="537.4499999999999,132 537.4499999999999,152 606.7125,152 606.7125,287 699.675,287" fill="none" stroke="var(--_line)" stroke-width="0.75" stroke-dasharray="4 4" marker-end="url(#arrowhead)" />
+<polyline points="145.92499999999998,305 145.92499999999998,442" fill="none" stroke="var(--_line)" stroke-width="0.75" stroke-dasharray="4 4" marker-end="url(#arrowhead)" />
+<polyline points="537.4499999999999,305 537.4499999999999,442" fill="none" stroke="var(--_line)" stroke-width="0.75" stroke-dasharray="4 4" marker-end="url(#arrowhead)" />
+<rect x="123.62499999999999" y="187" width="44.6" height="27" rx="4" ry="4" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="0.5" />
+<text x="145.92499999999998" y="200.5" text-anchor="middle" dy="0.35em" font-size="11" font-weight="400" fill="var(--_text-muted)">&quot;A2A&quot;</text>
+<rect x="515.15" y="187" width="44.6" height="27" rx="4" ry="4" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="0.5" />
+<text x="537.4499999999999" y="200.5" text-anchor="middle" dy="0.35em" font-size="11" font-weight="400" fill="var(--_text-muted)">&quot;A2A&quot;</text>
+<rect x="584.4125" y="187" width="44.6" height="27" rx="4" ry="4" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="0.5" />
+<text x="606.7125" y="200.5" text-anchor="middle" dy="0.35em" font-size="11" font-weight="400" fill="var(--_text-muted)">&quot;MCP&quot;</text>
+<rect x="123.62499999999999" y="360" width="44.6" height="27" rx="4" ry="4" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="0.5" />
+<text x="145.92499999999998" y="373.5" text-anchor="middle" dy="0.35em" font-size="11" font-weight="400" fill="var(--_text-muted)">&quot;MCP&quot;</text>
+<rect x="515.15" y="360" width="44.6" height="27" rx="4" ry="4" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="0.5" />
+<text x="537.4499999999999" y="373.5" text-anchor="middle" dy="0.35em" font-size="11" font-weight="400" fill="var(--_text-muted)">&quot;MCP&quot;</text>
+<rect x="439.2249999999999" y="96" width="196.45000000000002" height="36" rx="0" ry="0" fill="#0369a1" stroke="#38bdf8" stroke-width="0.75" />
+<rect x="61.99999999999997" y="269" width="167.85000000000002" height="36" rx="0" ry="0" fill="#1e3a5f" stroke="#38bdf8" stroke-width="0.75" />
+<rect x="449.94999999999993" y="269" width="175" height="36" rx="0" ry="0" fill="#1e3a5f" stroke="#38bdf8" stroke-width="0.75" />
+<rect x="699.675" y="269" width="132.10000000000002" height="36" rx="0" ry="0" fill="#0f172a" stroke="#1e3a5f" stroke-width="0.75" />
+<rect x="855.775" y="269" width="160.70000000000002" height="36" rx="0" ry="0" fill="#0f172a" stroke="#1e3a5f" stroke-width="0.75" />
+<rect x="1040.4750000000001" y="269" width="160.70000000000002" height="36" rx="0" ry="0" fill="#0f172a" stroke="#1e3a5f" stroke-width="0.75" />
+<rect x="76.29999999999998" y="442" width="139.25" height="36" rx="0" ry="0" fill="#0f172a" stroke="#1e3a5f" stroke-width="0.75" />
+<rect x="239.54999999999995" y="442" width="146.4" height="36" rx="0" ry="0" fill="#0f172a" stroke="#1e3a5f" stroke-width="0.75" />
+<rect x="449.94999999999993" y="442" width="175" height="36" rx="0" ry="0" fill="#0f172a" stroke="#1e3a5f" stroke-width="0.75" />
+<rect x="648.95" y="442" width="132.10000000000002" height="36" rx="0" ry="0" fill="#0f172a" stroke="#1e3a5f" stroke-width="0.75" />
+<text x="537.4499999999999" y="114" text-anchor="middle" dy="0.35em" font-size="13" font-weight="500" fill="#e2e8f0">&quot;🎯 Orchestrator Agent&quot;</text>
+<text x="145.92499999999998" y="287" text-anchor="middle" dy="0.35em" font-size="13" font-weight="500" fill="#e2e8f0">&quot;🔍 Research Agent&quot;</text>
+<text x="537.4499999999999" y="287" text-anchor="middle" dy="0.35em" font-size="13" font-weight="500" fill="#e2e8f0">&quot;📊 Analytics Agent&quot;</text>
+<text x="765.7249999999999" y="287" text-anchor="middle" dy="0.35em" font-size="13" font-weight="500" fill="#94a3b8">&quot;👤 User Data&quot;</text>
+<text x="936.125" y="287" text-anchor="middle" dy="0.35em" font-size="13" font-weight="500" fill="#94a3b8">&quot;📋 Task Tracking&quot;</text>
+<text x="1120.825" y="287" text-anchor="middle" dy="0.35em" font-size="13" font-weight="500" fill="#94a3b8">&quot;🔔 Notifications&quot;</text>
+<text x="145.92499999999998" y="460" text-anchor="middle" dy="0.35em" font-size="13" font-weight="500" fill="#94a3b8">&quot;🔍 Web Search&quot;</text>
+<text x="312.74999999999994" y="460" text-anchor="middle" dy="0.35em" font-size="13" font-weight="500" fill="#94a3b8">&quot;📚 Document DB&quot;</text>
+<text x="537.4499999999999" y="460" text-anchor="middle" dy="0.35em" font-size="13" font-weight="500" fill="#94a3b8">&quot;🗄️ Data Warehouse&quot;</text>
+<text x="715" y="460" text-anchor="middle" dy="0.35em" font-size="13" font-weight="500" fill="#94a3b8">&quot;📈 Viz Tools&quot;</text>
+</svg>

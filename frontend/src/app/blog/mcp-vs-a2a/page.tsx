@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
 import { motion } from 'framer-motion'
@@ -47,26 +48,12 @@ export default function MCPvsA2A() {
           </blockquote>
 
           <h3>The Protocol Landscape in 2026</h3>
-          <div className="bg-muted rounded-lg p-4 overflow-x-auto my-6">
-            <pre className="whitespace-pre font-mono text-sm text-muted-foreground">
-{`AI Application Layer
-    |
-    +-- MCP (Vertical: Model <-> Tools/Data)
-    |       |
-    |       +-- Tools, Resources, Prompts
-    |       +-- Streamable HTTP / stdio transports
-    |       +-- MCP Apps (interactive UIs)
-    |       +-- 10,000+ servers in registries
-    |
-    +-- A2A (Horizontal: Agent <-> Agent)
-            |
-            +-- Agent Cards, Tasks, Messages
-            +-- Google ADK integration
-            +-- SSE streaming, push notifications
-            +-- Zero Trust patterns`}
-            </pre>
+          <div className="my-8">
+            <div className="bg-muted rounded-lg p-6 overflow-x-auto flex justify-center">
+              <Image src="/blog/diagrams/protocol-landscape.svg" alt="Protocol Landscape in 2026" width={800} height={500} className="max-w-full h-auto" />
+            </div>
+            <p className="text-sm text-center text-muted-foreground mt-3">Figure 1: The two-protocol architecture powering modern AI agent systems</p>
           </div>
-          <p className="text-sm text-center text-muted-foreground -mt-4 mb-8">Figure 1: The two-protocol architecture powering modern AI agent systems</p>
 
           <p>After reading this guide, you will understand:</p>
           <ul>
@@ -119,30 +106,12 @@ export default function MCPvsA2A() {
           </ul>
 
           <h3>MCP Architecture Overview</h3>
-          <div className="bg-muted rounded-lg p-4 overflow-x-auto my-6">
-            <pre className="whitespace-pre font-mono text-sm text-muted-foreground">
-{`+----------+     +------------------+     +------------------+
-|   User   |     | MCP Host         |     | MCP Server A     |
-|          |---->| (Claude, ChatGPT,|---->| (Database Tools) |
-+----------+     |  VS Code, etc.)  |     +------------------+
-                 |                  |
-                 | +-- MCP Client --+---->+------------------+
-                 | |   (JSON-RPC)   |     | MCP Server B     |
-                 | +----------------+     | (File System)    |
-                 |                  |     +------------------+
-                 | +-- LLM --------+
-                 | |   (AI Model)  |---->+------------------+
-                 | +---------------+     | MCP Server C     |
-                 +------------------+     | (API Gateway)    |
-                                          +------------------+
-
-Transport Options:
-  - stdio (local processes)
-  - Streamable HTTP (remote, replaces SSE)
-  - Authentication: OAuth 2.1 + OIDC Discovery`}
-            </pre>
+          <div className="my-8">
+            <div className="bg-muted rounded-lg p-6 overflow-x-auto flex justify-center">
+              <Image src="/blog/diagrams/mcp-architecture.svg" alt="MCP Architecture" width={800} height={400} className="max-w-full h-auto" />
+            </div>
+            <p className="text-sm text-center text-muted-foreground mt-3">Figure 2: MCP architecture with multiple servers connected via different transports</p>
           </div>
-          <p className="text-sm text-center text-muted-foreground -mt-4 mb-8">Figure 2: MCP architecture with multiple servers connected via different transports</p>
 
           <h3>Official MCP SDKs</h3>
           <p>
@@ -166,34 +135,12 @@ Transport Options:
           </p>
 
           <h3>How MCP Apps Work</h3>
-          <div className="bg-muted rounded-lg p-4 overflow-x-auto my-6">
-            <pre className="whitespace-pre font-mono text-sm text-muted-foreground">
-{`MCP Server                    MCP Host                    User
-    |                             |                          |
-    |  Tool Registration          |                          |
-    |  (includes ui:// refs)      |                          |
-    |---------------------------->|                          |
-    |                             |                          |
-    |                             |  User triggers tool      |
-    |                             |<-------------------------|
-    |                             |                          |
-    |  Tool execution returns     |                          |
-    |  HTML content + ui:// URI   |                          |
-    |---------------------------->|                          |
-    |                             |                          |
-    |                             |  Renders in sandboxed    |
-    |                             |  iframe                  |
-    |                             |------------------------->|
-    |                             |                          |
-    |  JSON-RPC over postMessage  |  User interacts with UI  |
-    |<--------------------------->|<------------------------>|
-
-UI Resources use ui:// URI scheme
-Communication: MCP JSON-RPC over postMessage
-Security: iframe sandboxing + predeclared templates`}
-            </pre>
+          <div className="my-8">
+            <div className="bg-muted rounded-lg p-6 overflow-x-auto flex justify-center">
+              <Image src="/blog/diagrams/mcp-apps-flow.svg" alt="MCP Apps Flow" width={800} height={500} className="max-w-full h-auto" />
+            </div>
+            <p className="text-sm text-center text-muted-foreground mt-3">Figure 3: MCP Apps architecture showing UI rendering and communication flow</p>
           </div>
-          <p className="text-sm text-center text-muted-foreground -mt-4 mb-8">Figure 3: MCP Apps architecture showing UI rendering and communication flow</p>
 
           <h3>Key Design Decisions</h3>
           <ul>
@@ -214,38 +161,12 @@ Security: iframe sandboxing + predeclared templates`}
           </p>
 
           <h3>The Three Generations of MCP Transport</h3>
-          <div className="bg-muted rounded-lg p-4 overflow-x-auto my-6">
-            <pre className="whitespace-pre font-mono text-sm text-muted-foreground">
-{`Generation 1: stdio (Launch - Present)
-+--------+    stdin/stdout    +--------+
-| Client |<------------------>| Server |
-+--------+   (local process)  +--------+
-  - Local only, same machine
-  - Simple, reliable, low latency
-  - Still supported and widely used
-
-Generation 2: HTTP + SSE (2025-03-26 spec)
-+--------+    HTTP POST       +--------+
-| Client |------------------->| Server |
-+--------+<-------------------+--------+
-           Server-Sent Events
-  - Remote server support
-  - Separate endpoints for requests and events
-  - Required stateful connections
-  - DEPRECATED as of 2025-06-18
-
-Generation 3: Streamable HTTP (2025-06-18 spec - Current)
-+--------+  Single HTTP       +--------+
-| Client |<=================>| Server |
-+--------+    Endpoint        +--------+
-  - Single endpoint for everything
-  - Supports request-response AND streaming
-  - Stateless server support
-  - Better load balancing and CDN compatibility
-  - Polling SSE streams (servers can disconnect)`}
-            </pre>
+          <div className="my-8">
+            <div className="bg-muted rounded-lg p-6 overflow-x-auto flex justify-center">
+              <Image src="/blog/diagrams/transport-evolution.svg" alt="Transport Evolution" width={800} height={500} className="max-w-full h-auto" />
+            </div>
+            <p className="text-sm text-center text-muted-foreground mt-3">Figure 4: Evolution of MCP transport mechanisms</p>
           </div>
-          <p className="text-sm text-center text-muted-foreground -mt-4 mb-8">Figure 4: Evolution of MCP transport mechanisms</p>
 
           <h3>Why Streamable HTTP Won</h3>
           <p>
@@ -294,40 +215,12 @@ Generation 3: Streamable HTTP (2025-06-18 spec - Current)
           </table>
 
           <h3>A2A Interaction Flow</h3>
-          <div className="bg-muted rounded-lg p-4 overflow-x-auto my-6">
-            <pre className="whitespace-pre font-mono text-sm text-muted-foreground">
-{`Client Agent                                Remote Agent
-      |                                           |
-      |  1. Fetch Agent Card                      |
-      |  GET /.well-known/agent.json              |
-      |------------------------------------------>|
-      |  Agent Card (capabilities, auth, skills)  |
-      |<------------------------------------------|
-      |                                           |
-      |  2. Create Task                           |
-      |  POST /tasks {"message": {...}}           |
-      |------------------------------------------>|
-      |  Task {id, status: "working"}             |
-      |<------------------------------------------|
-      |                                           |
-      |  3. Stream Updates (optional)             |
-      |  GET /tasks/{id}/stream                   |
-      |------------------------------------------>|
-      |  SSE: status updates, partial results     |
-      |<~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
-      |                                           |
-      |  4. Task may request input                |
-      |  status: "input-required"                 |
-      |<------------------------------------------|
-      |  POST /tasks/{id} {"message": {...}}      |
-      |------------------------------------------>|
-      |                                           |
-      |  5. Task completes                        |
-      |  status: "completed", artifacts: [...]    |
-      |<------------------------------------------|`}
-            </pre>
+          <div className="my-8">
+            <div className="bg-muted rounded-lg p-6 overflow-x-auto flex justify-center">
+              <Image src="/blog/diagrams/a2a-interaction.svg" alt="A2A Interaction Flow" width={800} height={500} className="max-w-full h-auto" />
+            </div>
+            <p className="text-sm text-center text-muted-foreground mt-3">Figure 5: Complete A2A task lifecycle from discovery to completion</p>
           </div>
-          <p className="text-sm text-center text-muted-foreground -mt-4 mb-8">Figure 5: Complete A2A task lifecycle from discovery to completion</p>
 
           <h3>A2A Design Principles</h3>
           <ul>
@@ -344,32 +237,12 @@ Generation 3: Streamable HTTP (2025-06-18 spec - Current)
           </p>
 
           <h3>ADK + A2A Architecture</h3>
-          <div className="bg-muted rounded-lg p-4 overflow-x-auto my-6">
-            <pre className="whitespace-pre font-mono text-sm text-muted-foreground">
-{`Google Agent Development Kit (ADK)
-+--------------------------------------------------+
-|                                                  |
-|  Your Agent                                      |
-|  +--------------------------------------------+  |
-|  |                                            |  |
-|  |  MCP Tools          A2A Remote Agents      |  |
-|  |  +----------+       +------------------+   |  |
-|  |  | Database |       | Research Agent   |   |  |
-|  |  | Files    |       | Scheduling Agent |   |  |
-|  |  | APIs     |       | Analysis Agent   |   |  |
-|  |  +----------+       +------------------+   |  |
-|  |       |                      |             |  |
-|  |       v                      v             |  |
-|  |  MCP Protocol          A2A Protocol        |  |
-|  |  (tool access)         (agent collab)      |  |
-|  +--------------------------------------------+  |
-|                                                  |
-|  Deployment: Cloud Run (Zero Trust A2A)          |
-|  APIs: Interactions API -> Gemini Deep Research  |
-+--------------------------------------------------+`}
-            </pre>
+          <div className="my-8">
+            <div className="bg-muted rounded-lg p-6 overflow-x-auto flex justify-center">
+              <Image src="/blog/diagrams/adk-architecture.svg" alt="Google ADK Architecture" width={800} height={500} className="max-w-full h-auto" />
+            </div>
+            <p className="text-sm text-center text-muted-foreground mt-3">Figure 6: Google ADK supporting both MCP and A2A simultaneously</p>
           </div>
-          <p className="text-sm text-center text-muted-foreground -mt-4 mb-8">Figure 6: Google ADK supporting both MCP and A2A simultaneously</p>
 
           <h3>Key ADK Integration Features</h3>
           <ul>
@@ -508,32 +381,12 @@ agent = Agent(
           </p>
 
           <h3>The Complementary Architecture</h3>
-          <div className="bg-muted rounded-lg p-4 overflow-x-auto my-6">
-            <pre className="whitespace-pre font-mono text-sm text-muted-foreground">
-{`                    A2A Protocol (Agent Collaboration)
-    +----------------------------------------------------------+
-    |                                                          |
-    |  +------------------+  A2A   +------------------+        |
-    |  | Orchestrator     |<------>| Research Agent    |        |
-    |  | Agent            |        |                  |        |
-    |  |                  |        | Uses MCP for:    |        |
-    |  | Uses MCP for:    |        |  - Web search    |        |
-    |  |  - User data     |  A2A   |  - Document DB   |        |
-    |  |  - Task tracking |<------>+------------------+        |
-    |  |  - Notifications |        |                           |
-    |  +------------------+        | Analytics Agent   |        |
-    |                              |                  |        |
-    |                              | Uses MCP for:    |        |
-    |                              |  - Data warehouse |        |
-    |                              |  - Viz tools     |        |
-    |                              +------------------+        |
-    +----------------------------------------------------------+
-
-    MCP = Each agent's internal tool/data connections
-    A2A = Communication between agents`}
-            </pre>
+          <div className="my-8">
+            <div className="bg-muted rounded-lg p-6 overflow-x-auto flex justify-center">
+              <Image src="/blog/diagrams/complementary-architecture.svg" alt="Complementary Architecture" width={800} height={600} className="max-w-full h-auto" />
+            </div>
+            <p className="text-sm text-center text-muted-foreground mt-3">Figure 7: Dual-protocol architecture with MCP for tool access and A2A for agent collaboration</p>
           </div>
-          <p className="text-sm text-center text-muted-foreground -mt-4 mb-8">Figure 7: Dual-protocol architecture with MCP for tool access and A2A for agent collaboration</p>
 
           <h3>Real-World Example: Enterprise Support System</h3>
           <p>
@@ -580,22 +433,10 @@ agent = Agent(
           </ul>
 
           <h3>Ecosystem Comparison</h3>
-          <div className="bg-muted rounded-lg p-4 overflow-x-auto my-6">
-            <pre className="whitespace-pre font-mono text-sm text-muted-foreground">
-{`MCP Ecosystem (Feb 2026)              A2A Ecosystem (Feb 2026)
-+-------------------------------+     +-------------------------------+
-| 10,000+ servers in registries |     | Google ADK (Python + Go)      |
-| 6 official SDKs               |     | a2a-protocol.org              |
-| Claude, ChatGPT, VS Code     |     | Cloud Run Zero Trust          |
-| Cursor, Windsurf, Goose      |     | Gemini Deep Research          |
-| MCP Apps (interactive UIs)    |     | Enterprise partners           |
-| Streamable HTTP transport     |     | SSE streaming                 |
-| OAuth 2.1 + OIDC auth        |     | Push notifications            |
-| Working Groups governance     |     | Agent Cards discovery         |
-+-------------------------------+     +-------------------------------+
-
-           Both: Open standards, growing adoption, complementary`}
-            </pre>
+          <div className="my-8">
+            <div className="bg-muted rounded-lg p-6 overflow-x-auto flex justify-center">
+              <Image src="/blog/diagrams/ecosystem-comparison.svg" alt="Ecosystem Comparison" width={800} height={400} className="max-w-full h-auto" />
+            </div>
           </div>
 
           <h2>10. What&apos;s Next: The 2026 Outlook</h2>

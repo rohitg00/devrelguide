@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2084.15 268" width="2084.15" height="268" style="--bg:#0f172a;--fg:#e2e8f0;--line:#38bdf8;--accent:#7dd3fc;--muted:#94a3b8;--surface:#1e293b;--border:#1e3a5f;background:var(--bg)">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap');
+  text { font-family: 'Inter', system-ui, sans-serif; }
+  svg {
+    /* Derived from --bg and --fg (overridable via --line, --accent, etc.) */
+    --_text:          var(--fg);
+    --_text-sec:      var(--muted, color-mix(in srgb, var(--fg) 60%, var(--bg)));
+    --_text-muted:    var(--muted, color-mix(in srgb, var(--fg) 40%, var(--bg)));
+    --_text-faint:    color-mix(in srgb, var(--fg) 25%, var(--bg));
+    --_line:          var(--line, color-mix(in srgb, var(--fg) 30%, var(--bg)));
+    --_arrow:         var(--accent, color-mix(in srgb, var(--fg) 50%, var(--bg)));
+    --_node-fill:     var(--surface, color-mix(in srgb, var(--fg) 3%, var(--bg)));
+    --_node-stroke:   var(--border, color-mix(in srgb, var(--fg) 20%, var(--bg)));
+    --_group-fill:    var(--bg);
+    --_group-hdr:     color-mix(in srgb, var(--fg) 5%, var(--bg));
+    --_inner-stroke:  color-mix(in srgb, var(--fg) 12%, var(--bg));
+    --_key-badge:     color-mix(in srgb, var(--fg) 10%, var(--bg));
+  }
+</style>
+<defs>
+  <marker id="arrowhead" markerWidth="8" markerHeight="4.8" refX="8" refY="2.4" orient="auto">
+    <polygon points="0 0, 8 2.4, 0 4.8" fill="var(--_arrow)" />
+  </marker>
+  <marker id="arrowhead-start" markerWidth="8" markerHeight="4.8" refX="0" refY="2.4" orient="auto-start-reverse">
+    <polygon points="8 0, 0 2.4, 8 4.8" fill="var(--_arrow)" />
+  </marker>
+</defs>
+<polyline points="1045.65,76 1045.65,96 517.1625,96 517.1625,116" fill="none" stroke="var(--_line)" stroke-width="0.75" marker-end="url(#arrowhead)" />
+<polyline points="1045.65,76 1045.65,96 1563.4125,96 1563.4125,116" fill="none" stroke="var(--_line)" stroke-width="0.75" marker-end="url(#arrowhead)" />
+<polyline points="517.1625,152 517.1625,172 152.525,172 152.525,192" fill="none" stroke="var(--_line)" stroke-width="0.75" marker-end="url(#arrowhead)" />
+<polyline points="517.1625,152 517.1625,172 394.42500000000007,172 394.42500000000007,192" fill="none" stroke="var(--_line)" stroke-width="0.75" marker-end="url(#arrowhead)" />
+<polyline points="517.1625,152 517.1625,172 639.9,172 639.9,192" fill="none" stroke="var(--_line)" stroke-width="0.75" marker-end="url(#arrowhead)" />
+<polyline points="517.1625,152 517.1625,172 906.8249999999999,172 906.8249999999999,192" fill="none" stroke="var(--_line)" stroke-width="0.75" marker-end="url(#arrowhead)" />
+<polyline points="1563.4125,152 1563.4125,172 1180.9,172 1180.9,192" fill="none" stroke="var(--_line)" stroke-width="0.75" marker-end="url(#arrowhead)" />
+<polyline points="1563.4125,152 1563.4125,172 1429.95,172 1429.95,192" fill="none" stroke="var(--_line)" stroke-width="0.75" marker-end="url(#arrowhead)" />
+<polyline points="1563.4125,152 1563.4125,172 1696.875,172 1696.875,192" fill="none" stroke="var(--_line)" stroke-width="0.75" marker-end="url(#arrowhead)" />
+<polyline points="1563.4125,152 1563.4125,172 1953.075,172 1953.075,192" fill="none" stroke="var(--_line)" stroke-width="0.75" marker-end="url(#arrowhead)" />
+<rect x="925.9750000000001" y="40" width="239.35000000000002" height="36" rx="0" ry="0" fill="#0369a1" stroke="#38bdf8" stroke-width="0.75" />
+<rect x="340.2875" y="116" width="353.75" height="36" rx="0" ry="0" fill="#1e3a5f" stroke="#38bdf8" stroke-width="0.75" />
+<rect x="1397.2624999999998" y="116" width="332.3" height="36" rx="0" ry="0" fill="#1e3a5f" stroke="#38bdf8" stroke-width="0.75" />
+<rect x="40" y="192" width="225.05" height="36" rx="0" ry="0" fill="#1e293b" stroke="#1e3a5f" stroke-width="0.75" />
+<rect x="289.05000000000007" y="192" width="210.75000000000003" height="36" rx="0" ry="0" fill="#1e293b" stroke="#1e3a5f" stroke-width="0.75" />
+<rect x="523.8" y="192" width="232.20000000000002" height="36" rx="0" ry="0" fill="#1e293b" stroke="#1e3a5f" stroke-width="0.75" />
+<rect x="779.9999999999999" y="192" width="253.65" height="36" rx="0" ry="0" fill="#1e293b" stroke="#1e3a5f" stroke-width="0.75" />
+<rect x="1057.65" y="192" width="246.50000000000003" height="36" rx="0" ry="0" fill="#1e293b" stroke="#1e3a5f" stroke-width="0.75" />
+<rect x="1328.15" y="192" width="203.60000000000002" height="36" rx="0" ry="0" fill="#1e293b" stroke="#1e3a5f" stroke-width="0.75" />
+<rect x="1555.75" y="192" width="282.25" height="36" rx="0" ry="0" fill="#1e293b" stroke="#1e3a5f" stroke-width="0.75" />
+<rect x="1862" y="192" width="182.15" height="36" rx="0" ry="0" fill="#1e293b" stroke="#1e3a5f" stroke-width="0.75" />
+<text x="1045.65" y="58" text-anchor="middle" dy="0.35em" font-size="13" font-weight="500" fill="#e2e8f0">&quot;&lt;b&gt;AI Application Layer&lt;/b&gt;&quot;</text>
+<text x="517.1625" y="134" text-anchor="middle" dy="0.35em" font-size="13" font-weight="500" fill="#e2e8f0">&quot;&lt;b&gt;MCP&lt;/b&gt;&lt;br/&gt;Vertical: Model ↔ Tools/Data&quot;</text>
+<text x="1563.4125" y="134" text-anchor="middle" dy="0.35em" font-size="13" font-weight="500" fill="#e2e8f0">&quot;&lt;b&gt;A2A&lt;/b&gt;&lt;br/&gt;Horizontal: Agent ↔ Agent&quot;</text>
+<text x="152.525" y="210" text-anchor="middle" dy="0.35em" font-size="13" font-weight="500" fill="#cbd5e1">&quot;Tools, Resources, Prompts&quot;</text>
+<text x="394.42500000000007" y="210" text-anchor="middle" dy="0.35em" font-size="13" font-weight="500" fill="#cbd5e1">&quot;Streamable HTTP / stdio&quot;</text>
+<text x="639.9" y="210" text-anchor="middle" dy="0.35em" font-size="13" font-weight="500" fill="#cbd5e1">&quot;MCP Apps — interactive UIs&quot;</text>
+<text x="906.8249999999999" y="210" text-anchor="middle" dy="0.35em" font-size="13" font-weight="500" fill="#cbd5e1">&quot;10,000+ servers in registries&quot;</text>
+<text x="1180.9" y="210" text-anchor="middle" dy="0.35em" font-size="13" font-weight="500" fill="#cbd5e1">&quot;Agent Cards, Tasks, Messages&quot;</text>
+<text x="1429.95" y="210" text-anchor="middle" dy="0.35em" font-size="13" font-weight="500" fill="#cbd5e1">&quot;Google ADK integration&quot;</text>
+<text x="1696.875" y="210" text-anchor="middle" dy="0.35em" font-size="13" font-weight="500" fill="#cbd5e1">&quot;SSE streaming, push notifications&quot;</text>
+<text x="1953.075" y="210" text-anchor="middle" dy="0.35em" font-size="13" font-weight="500" fill="#cbd5e1">&quot;Zero Trust patterns&quot;</text>
+</svg>
