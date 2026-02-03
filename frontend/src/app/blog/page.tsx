@@ -7,10 +7,10 @@ import { motion } from 'framer-motion'
 const blogPosts = [
   {
     slug: 'mcp-vs-a2a',
-    title: 'MCP vs A2A: Understanding Context Protocols for AI Systems',
-    description: 'A deep dive into the Model Context Protocol (MCP) and Agent-to-Agent (A2A) protocol — how they differ, where they overlap, and when to use each.',
-    date: 'March 24, 2025',
-    readTime: '15 min read',
+    title: 'MCP vs A2A: The Complete Guide to AI Agent Protocols in 2026',
+    description: 'The definitive comparison of MCP and A2A — covering MCP Apps, Streamable HTTP, Google ADK integration, and how these protocols work together.',
+    date: 'Updated February 2026',
+    readTime: '20 min read',
   },
   {
     slug: 'why-devrel-is-needed',
