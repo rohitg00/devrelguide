@@ -51,8 +51,7 @@ export function CommunityInsights() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
-        const response = await fetch(`${apiUrl}/api/visualizations/community-insights`)
+        const response = await fetch('/api/visualizations/community-insights')
         if (!response.ok) {
           throw new Error('Failed to fetch community insights data')
         }

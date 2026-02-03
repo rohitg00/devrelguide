@@ -4,11 +4,9 @@ import path from 'path'
 
 export async function POST() {
   try {
-    // Path to the Python script
-    const scriptPath = path.join(process.cwd(), '..', 'backend', 'app', 'scraper', 'devrel_scraper.py')
-    
+    const scriptPath = path.join(process.cwd(), 'scripts', 'scraper', 'devrel_scraper.py')
+
     return new Promise((resolve) => {
-      // Spawn the Python script
       const pythonProcess = spawn('python3', [scriptPath])
 
       pythonProcess.stdout.on('data', (data) => {

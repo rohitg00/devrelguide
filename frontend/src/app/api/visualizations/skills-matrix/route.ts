@@ -1,38 +1,14 @@
 import { NextResponse } from 'next/server'
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
-const API_KEY = process.env.API_KEY
+import { readJsonData, writeJsonData } from '@/lib/data'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
-function apiHeaders(): Record<string, string> {
-  const h: Record<string, string> = {
-    'Content-Type': 'application/json',
-    'Accept': 'application/json',
-  }
-  if (API_KEY) h['X-API-Key'] = API_KEY
-  return h
-}
-
 export async function GET() {
   try {
-    const response = await fetch(`${API_URL}/api/visualizations/skills-matrix`, {
-      headers: apiHeaders(),
-      cache: 'no-store',
-      next: { revalidate: 0 }
-    })
-
-    if (!response.ok) {
-      throw new Error(`Failed to fetch skills matrix data: ${response.status}`)
-    }
-
-    const data = await response.json()
-
+    const data = await readJsonData('skills_matrix.json')
     return NextResponse.json(data, {
-      headers: {
-        'Cache-Control': 'no-store, must-revalidate',
-      }
+      headers: { 'Cache-Control': 'no-store, must-revalidate' },
     })
   } catch (error) {
     console.error('Error fetching skills matrix data:', error)
@@ -46,37 +22,17 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const body = await request.json()
-
-    const existingResponse = await fetch(`${API_URL}/api/visualizations/skills-matrix`, {
-      headers: apiHeaders(),
-    })
-
-    if (!existingResponse.ok) {
-      throw new Error(`Failed to fetch existing data: ${existingResponse.status}`)
-    }
-
-    const existingData = await existingResponse.json()
+    const existingData = await readJsonData<Record<string, any>>('skills_matrix.json')
 
     const mergedData = {
       ...existingData,
       ...body,
       skills: [...(existingData.skills || []), ...(body.skills || [])],
-      categories: [...(existingData.categories || []), ...(body.categories || [])]
+      categories: [...(existingData.categories || []), ...(body.categories || [])],
     }
 
-    const response = await fetch(`${API_URL}/api/visualizations/skills-matrix/append`, {
-      method: 'POST',
-      headers: apiHeaders(),
-      body: JSON.stringify(mergedData)
-    })
-
-    if (!response.ok) {
-      throw new Error(`Failed to append skills matrix data: ${response.status}`)
-    }
-
-    const result = await response.json()
-
-    return NextResponse.json(result)
+    await writeJsonData('skills_matrix.json', mergedData)
+    return NextResponse.json(mergedData)
   } catch (error) {
     console.error('Error appending skills matrix data:', error)
     return NextResponse.json(
@@ -90,7 +46,7 @@ export async function OPTIONS() {
   return NextResponse.json({}, {
     headers: {
       'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type, X-API-Key',
-    }
+      'Access-Control-Allow-Headers': 'Content-Type',
+    },
   })
 }
