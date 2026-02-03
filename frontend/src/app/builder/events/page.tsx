@@ -53,7 +53,7 @@ export default function EventImpactBuilder() {
             </Button>
           </Link>
           <h1 className="text-3xl font-bold">Event Impact Builder</h1>
-          <p className="text-gray-600 mt-1">
+          <p className="text-muted-foreground mt-1">
             Measure and display the impact of your developer events, workshops, and conferences.
           </p>
         </div>
@@ -120,7 +120,7 @@ export default function EventImpactBuilder() {
                 </Select>
               </div>
 
-              <div className="h-px bg-gray-200 my-4"></div>
+              <div className="h-px bg-muted my-4"></div>
 
               <div>
                 <h3 className="text-sm font-medium mb-2">Regions</h3>
@@ -131,7 +131,7 @@ export default function EventImpactBuilder() {
                       id="region-na" 
                       checked={regions.na}
                       onChange={() => handleRegionChange('na')}
-                      className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+                      className="h-4 w-4 rounded border-border text-primary focus:ring-primary"
                     />
                     <Label htmlFor="region-na">North America</Label>
                   </div>
@@ -141,7 +141,7 @@ export default function EventImpactBuilder() {
                       id="region-eu" 
                       checked={regions.eu}
                       onChange={() => handleRegionChange('eu')}
-                      className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+                      className="h-4 w-4 rounded border-border text-primary focus:ring-primary"
                     />
                     <Label htmlFor="region-eu">Europe</Label>
                   </div>
@@ -151,7 +151,7 @@ export default function EventImpactBuilder() {
                       id="region-apac" 
                       checked={regions.apac}
                       onChange={() => handleRegionChange('apac')}
-                      className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+                      className="h-4 w-4 rounded border-border text-primary focus:ring-primary"
                     />
                     <Label htmlFor="region-apac">Asia Pacific</Label>
                   </div>
@@ -161,14 +161,14 @@ export default function EventImpactBuilder() {
                       id="region-latam" 
                       checked={regions.latam}
                       onChange={() => handleRegionChange('latam')}
-                      className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+                      className="h-4 w-4 rounded border-border text-primary focus:ring-primary"
                     />
                     <Label htmlFor="region-latam">Latin America</Label>
                   </div>
                 </div>
               </div>
 
-              <div className="h-px bg-gray-200 my-4"></div>
+              <div className="h-px bg-muted my-4"></div>
 
               <div>
                 <h3 className="text-sm font-medium mb-2">Format</h3>
@@ -179,7 +179,7 @@ export default function EventImpactBuilder() {
                       id="format-inperson" 
                       checked={formats.inperson}
                       onChange={() => handleFormatChange('inperson')}
-                      className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+                      className="h-4 w-4 rounded border-border text-primary focus:ring-primary"
                     />
                     <Label htmlFor="format-inperson">In-Person</Label>
                   </div>
@@ -189,7 +189,7 @@ export default function EventImpactBuilder() {
                       id="format-virtual" 
                       checked={formats.virtual}
                       onChange={() => handleFormatChange('virtual')}
-                      className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+                      className="h-4 w-4 rounded border-border text-primary focus:ring-primary"
                     />
                     <Label htmlFor="format-virtual">Virtual</Label>
                   </div>
@@ -199,7 +199,7 @@ export default function EventImpactBuilder() {
                       id="format-hybrid" 
                       checked={formats.hybrid}
                       onChange={() => handleFormatChange('hybrid')}
-                      className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+                      className="h-4 w-4 rounded border-border text-primary focus:ring-primary"
                     />
                     <Label htmlFor="format-hybrid">Hybrid</Label>
                   </div>
@@ -218,14 +218,14 @@ export default function EventImpactBuilder() {
               <CardDescription>Last 3 events</CardDescription>
             </CardHeader>
             <CardContent className="space-y-2">
-              <div className="rounded-md border p-3 hover:bg-gray-50">
+              <div className="rounded-md border p-3 hover:bg-muted/50">
                 <div className="flex justify-between items-start">
                   <div>
                     <div className="font-medium">DevCon 2023</div>
-                    <div className="text-xs text-gray-500 mt-1 flex items-center">
+                    <div className="text-xs text-muted-foreground mt-1 flex items-center">
                       <Calendar className="h-3 w-3 mr-1" /> Jun 12-14, 2023
                     </div>
-                    <div className="text-xs text-gray-500 mt-1 flex items-center">
+                    <div className="text-xs text-muted-foreground mt-1 flex items-center">
                       <MapPin className="h-3 w-3 mr-1" /> San Francisco, CA
                     </div>
                   </div>
@@ -243,14 +243,14 @@ export default function EventImpactBuilder() {
                 </div>
               </div>
 
-              <div className="rounded-md border p-3 hover:bg-gray-50">
+              <div className="rounded-md border p-3 hover:bg-muted/50">
                 <div className="flex justify-between items-start">
                   <div>
                     <div className="font-medium">API Workshop</div>
-                    <div className="text-xs text-gray-500 mt-1 flex items-center">
+                    <div className="text-xs text-muted-foreground mt-1 flex items-center">
                       <Calendar className="h-3 w-3 mr-1" /> May 28, 2023
                     </div>
-                    <div className="text-xs text-gray-500 mt-1 flex items-center">
+                    <div className="text-xs text-muted-foreground mt-1 flex items-center">
                       <MapPin className="h-3 w-3 mr-1" /> Virtual
                     </div>
                   </div>
@@ -268,14 +268,14 @@ export default function EventImpactBuilder() {
                 </div>
               </div>
 
-              <div className="rounded-md border p-3 hover:bg-gray-50">
+              <div className="rounded-md border p-3 hover:bg-muted/50">
                 <div className="flex justify-between items-start">
                   <div>
                     <div className="font-medium">Spring Hackathon</div>
-                    <div className="text-xs text-gray-500 mt-1 flex items-center">
+                    <div className="text-xs text-muted-foreground mt-1 flex items-center">
                       <Calendar className="h-3 w-3 mr-1" /> Apr 15-16, 2023
                     </div>
-                    <div className="text-xs text-gray-500 mt-1 flex items-center">
+                    <div className="text-xs text-muted-foreground mt-1 flex items-center">
                       <MapPin className="h-3 w-3 mr-1" /> London, UK
                     </div>
                   </div>
@@ -320,55 +320,55 @@ export default function EventImpactBuilder() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <Card>
               <CardHeader className="pb-2">
-                <CardTitle className="text-sm font-medium text-gray-500">Total Events</CardTitle>
+                <CardTitle className="text-sm font-medium text-muted-foreground">Total Events</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="flex justify-between items-center">
                   <div className="text-3xl font-bold">42</div>
-                  <div className="flex items-center text-green-600 text-sm">
+                  <div className="flex items-center text-secondary text-sm">
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M8 4V12M8 4L5 7M8 4L11 7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                     <span className="ml-1">+8</span>
                   </div>
                 </div>
-                <div className="text-xs text-gray-500 mt-1">vs previous year</div>
+                <div className="text-xs text-muted-foreground mt-1">vs previous year</div>
               </CardContent>
             </Card>
 
             <Card>
               <CardHeader className="pb-2">
-                <CardTitle className="text-sm font-medium text-gray-500">Total Attendees</CardTitle>
+                <CardTitle className="text-sm font-medium text-muted-foreground">Total Attendees</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="flex justify-between items-center">
                   <div className="text-3xl font-bold">8,942</div>
-                  <div className="flex items-center text-green-600 text-sm">
+                  <div className="flex items-center text-secondary text-sm">
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M8 4V12M8 4L5 7M8 4L11 7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                     <span className="ml-1">+24%</span>
                   </div>
                 </div>
-                <div className="text-xs text-gray-500 mt-1">vs previous year</div>
+                <div className="text-xs text-muted-foreground mt-1">vs previous year</div>
               </CardContent>
             </Card>
 
             <Card>
               <CardHeader className="pb-2">
-                <CardTitle className="text-sm font-medium text-gray-500">Avg. Satisfaction</CardTitle>
+                <CardTitle className="text-sm font-medium text-muted-foreground">Avg. Satisfaction</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="flex justify-between items-center">
                   <div className="text-3xl font-bold">91%</div>
-                  <div className="flex items-center text-green-600 text-sm">
+                  <div className="flex items-center text-secondary text-sm">
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M8 4V12M8 4L5 7M8 4L11 7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                     <span className="ml-1">+3%</span>
                   </div>
                 </div>
-                <div className="text-xs text-gray-500 mt-1">vs previous year</div>
+                <div className="text-xs text-muted-foreground mt-1">vs previous year</div>
               </CardContent>
             </Card>
           </div>
@@ -402,7 +402,7 @@ export default function EventImpactBuilder() {
                 </TabsList>
                 
                 <TabsContent value="chart">
-                  <div className="h-80 flex items-center justify-center border rounded-md bg-gray-50">
+                  <div className="h-80 flex items-center justify-center border rounded-md bg-muted/50">
                     <div className="w-full p-6 relative">
                       {/* Chart visualization */}
                       <div className="absolute inset-0 flex items-center justify-center">
@@ -431,7 +431,7 @@ export default function EventImpactBuilder() {
                         </div>
                         
                         {/* Y axis */}
-                        <div className="absolute left-[-30px] top-0 bottom-0 flex flex-col justify-between text-xs text-gray-500">
+                        <div className="absolute left-[-30px] top-0 bottom-0 flex flex-col justify-between text-xs text-muted-foreground">
                           <span>3000</span>
                           <span>2250</span>
                           <span>1500</span>
@@ -444,9 +444,9 @@ export default function EventImpactBuilder() {
                 </TabsContent>
                 
                 <TabsContent value="map">
-                  <div className="h-80 border rounded-md bg-gray-50 p-4">
+                  <div className="h-80 border rounded-md bg-muted/50 p-4">
                     <div className="flex h-full flex-col">
-                      <div className="text-xs text-gray-500 mb-2">Event attendance by region</div>
+                      <div className="text-xs text-muted-foreground mb-2">Event attendance by region</div>
                       <div className="flex-1 relative">
                         {/* World map placeholder */}
                         <div className="absolute inset-0 flex items-center justify-center">
@@ -463,7 +463,7 @@ export default function EventImpactBuilder() {
                         </div>
                         
                         <div className="absolute top-1/4 right-1/3 transform -translate-x-1/2 -translate-y-1/2">
-                          <div className="bg-green-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-xs font-bold">
+                          <div className="bg-secondary text-white rounded-full w-8 h-8 flex items-center justify-center text-xs font-bold">
                             EU
                           </div>
                           <div className="absolute -bottom-5 left-1/2 transform -translate-x-1/2 text-xs font-medium">2,845</div>
@@ -489,18 +489,18 @@ export default function EventImpactBuilder() {
                 
                 <TabsContent value="table">
                   <div className="border rounded-md overflow-auto h-80">
-                    <table className="min-w-full divide-y divide-gray-200">
-                      <thead className="bg-gray-50">
+                    <table className="min-w-full divide-y divide-border">
+                      <thead className="bg-muted/50">
                         <tr>
-                          <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Event Name</th>
-                          <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
-                          <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
-                          <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Location</th>
-                          <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Attendees</th>
-                          <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Satisfaction</th>
+                          <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">Event Name</th>
+                          <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">Date</th>
+                          <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">Type</th>
+                          <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">Location</th>
+                          <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">Attendees</th>
+                          <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">Satisfaction</th>
                         </tr>
                       </thead>
-                      <tbody className="bg-white divide-y divide-gray-200">
+                      <tbody className="bg-background divide-y divide-border">
                         <tr>
                           <td className="px-4 py-2 whitespace-nowrap text-sm">DevCon 2023</td>
                           <td className="px-4 py-2 whitespace-nowrap text-sm">Jun 12-14, 2023</td>
@@ -562,7 +562,7 @@ export default function EventImpactBuilder() {
                     <PieChart className="w-48 h-48 text-primary opacity-10 absolute top-0 left-0" />
                     
                     <div className="absolute inset-0 rounded-full border-[25px] border-blue-500 border-r-transparent border-b-transparent border-l-transparent rotate-0"></div>
-                    <div className="absolute inset-0 rounded-full border-[25px] border-green-500 border-t-transparent border-b-transparent border-l-transparent rotate-0"></div>
+                    <div className="absolute inset-0 rounded-full border-[25px] border-secondary border-t-transparent border-b-transparent border-l-transparent rotate-0"></div>
                     <div className="absolute inset-0 rounded-full border-[25px] border-purple-500 border-t-transparent border-r-transparent border-l-transparent rotate-0"></div>
                     <div className="absolute inset-0 rounded-full border-[25px] border-yellow-500 border-t-transparent border-r-transparent border-b-transparent rotate-0"></div>
                   </div>
@@ -573,7 +573,7 @@ export default function EventImpactBuilder() {
                     <span>Conferences (35%)</span>
                   </div>
                   <div className="flex items-center">
-                    <div className="w-3 h-3 rounded-full bg-green-500 mr-1"></div>
+                    <div className="w-3 h-3 rounded-full bg-secondary mr-1"></div>
                     <span>Workshops (25%)</span>
                   </div>
                   <div className="flex items-center">
@@ -600,10 +600,10 @@ export default function EventImpactBuilder() {
                       <span className="text-sm">New Leads Generated</span>
                       <span className="text-sm font-medium">1,245</span>
                     </div>
-                    <div className="w-full bg-gray-200 rounded-full h-2">
+                    <div className="w-full bg-muted rounded-full h-2">
                       <div className="bg-blue-600 h-2 rounded-full" style={{ width: '78%' }}></div>
                     </div>
-                    <div className="flex justify-between mt-1 text-xs text-gray-500">
+                    <div className="flex justify-between mt-1 text-xs text-muted-foreground">
                       <span>Target: 1,600</span>
                       <span>78%</span>
                     </div>
@@ -614,10 +614,10 @@ export default function EventImpactBuilder() {
                       <span className="text-sm">Product Adoption</span>
                       <span className="text-sm font-medium">34%</span>
                     </div>
-                    <div className="w-full bg-gray-200 rounded-full h-2">
-                      <div className="bg-green-600 h-2 rounded-full" style={{ width: '85%' }}></div>
+                    <div className="w-full bg-muted rounded-full h-2">
+                      <div className="bg-secondary h-2 rounded-full" style={{ width: '85%' }}></div>
                     </div>
-                    <div className="flex justify-between mt-1 text-xs text-gray-500">
+                    <div className="flex justify-between mt-1 text-xs text-muted-foreground">
                       <span>Target: 40%</span>
                       <span>85%</span>
                     </div>
@@ -628,10 +628,10 @@ export default function EventImpactBuilder() {
                       <span className="text-sm">Content Engagement</span>
                       <span className="text-sm font-medium">72%</span>
                     </div>
-                    <div className="w-full bg-gray-200 rounded-full h-2">
+                    <div className="w-full bg-muted rounded-full h-2">
                       <div className="bg-purple-600 h-2 rounded-full" style={{ width: '90%' }}></div>
                     </div>
-                    <div className="flex justify-between mt-1 text-xs text-gray-500">
+                    <div className="flex justify-between mt-1 text-xs text-muted-foreground">
                       <span>Target: 80%</span>
                       <span>90%</span>
                     </div>
@@ -642,10 +642,10 @@ export default function EventImpactBuilder() {
                       <span className="text-sm">Average ROI</span>
                       <span className="text-sm font-medium">327%</span>
                     </div>
-                    <div className="w-full bg-gray-200 rounded-full h-2">
+                    <div className="w-full bg-muted rounded-full h-2">
                       <div className="bg-yellow-600 h-2 rounded-full" style={{ width: '95%' }}></div>
                     </div>
-                    <div className="flex justify-between mt-1 text-xs text-gray-500">
+                    <div className="flex justify-between mt-1 text-xs text-muted-foreground">
                       <span>Target: 300%</span>
                       <span>109%</span>
                     </div>

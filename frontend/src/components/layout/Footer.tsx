@@ -8,7 +8,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="w-full border-t border-white/10 bg-background">
+    <footer className="w-full border-t border-border/50 bg-background">
       <div className="container py-10">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="space-y-4">
@@ -21,7 +21,7 @@ const Footer = () => {
                 style={{ width: 32, height: 32 }}
                 priority
               />
-              <span className="font-mono font-bold text-xl text-white uppercase tracking-wider">
+              <span className="font-mono font-bold text-xl text-foreground uppercase tracking-wider">
                 DevRel Guide
               </span>
             </Link>
@@ -31,7 +31,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h3 className="font-hand text-lg mb-4 text-white/80">Resources</h3>
+            <h3 className="font-hand text-lg mb-4 text-muted-foreground">Resources</h3>
             <div className="w-full h-px bg-white/10 mb-4" />
             <ul className="space-y-2">
               <li>
@@ -58,7 +58,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h3 className="font-hand text-lg mb-4 text-white/80">Company</h3>
+            <h3 className="font-hand text-lg mb-4 text-muted-foreground">Company</h3>
             <div className="w-full h-px bg-white/10 mb-4" />
             <ul className="space-y-2">
               <li>
@@ -83,7 +83,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h3 className="font-hand text-lg mb-4 text-white/80">Legal</h3>
+            <h3 className="font-hand text-lg mb-4 text-muted-foreground">Legal</h3>
             <div className="w-full h-px bg-white/10 mb-4" />
             <ul className="space-y-2">
               <li>
@@ -100,7 +100,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-white/10 mt-8 pt-8">
+        <div className="border-t border-border/50 mt-8 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-xs text-muted-foreground font-mono uppercase tracking-wider">
               &copy; {currentYear} DevRel-As-Service. All rights reserved.

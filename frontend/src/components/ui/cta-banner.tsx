@@ -18,15 +18,15 @@ export function CTABanner() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="relative bg-card border border-white/20 p-4 max-w-sm mx-auto md:mx-0">
+      <div className="relative bg-card border border-border p-4 max-w-sm mx-auto md:mx-0">
         <button
           onClick={() => setIsVisible(false)}
-          className="absolute top-2 right-2 text-white/40 hover:text-white"
+          className="absolute top-2 right-2 text-muted-foreground/60 hover:text-foreground"
           aria-label="Close banner"
         >
           <X className="h-4 w-4" />
         </button>
-        <p className="text-sm text-white/60 mb-3 pr-6 font-mono">
+        <p className="text-sm text-muted-foreground mb-3 pr-6 font-mono">
           Looking for expert guidance with your DevRel initiatives?
         </p>
         <Link href="/contact">

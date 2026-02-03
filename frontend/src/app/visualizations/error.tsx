@@ -11,10 +11,10 @@ export default function VisualizationsError({
 }) {
   return (
     <div className="min-h-[60vh] flex items-center justify-center">
-      <div className="crosshair-corners border border-white/20 bg-card p-12 text-center max-w-md">
+      <div className="crosshair-corners border border-border bg-card p-12 text-center max-w-md">
         <div className="text-primary text-4xl font-mono mb-4">ERR</div>
-        <h2 className="text-xl font-mono text-white mb-2 uppercase tracking-wider">Visualization Error</h2>
-        <p className="text-white/50 font-mono text-sm mb-6">
+        <h2 className="text-xl font-mono text-foreground mb-2 uppercase tracking-wider">Visualization Error</h2>
+        <p className="text-muted-foreground font-mono text-sm mb-6">
           {error.message || 'Failed to load visualizations'}
         </p>
         <Button onClick={reset} variant="outline">

@@ -61,7 +61,7 @@ export function WhitepaperForm() {
       </CardHeader>
       <CardContent>
         {error && (
-          <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-md text-red-600 text-sm">
+          <div className="mb-4 p-3 bg-destructive/10 border border-destructive rounded-md text-destructive text-sm">
             {error}
           </div>
         )}
@@ -83,7 +83,7 @@ export function WhitepaperForm() {
           </form>
         ) : (
           <div className="space-y-4">
-            <p className="text-green-600">Thank you! Your whitepaper is ready for download.</p>
+            <p className="text-secondary">Thank you! Your whitepaper is ready for download.</p>
             <Button onClick={handleDownload} className="w-full">
               <Download className="mr-2 h-4 w-4" />
               Download Whitepaper

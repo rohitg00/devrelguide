@@ -163,7 +163,7 @@ function MetricCell({ value, type, label, trends, comparisons }: MetricCellProps
           style={{ backgroundColor: getColorForMetric(value, type) }}
         ></div>
         <span>{value}%</span>
-        <span className={`ml-2 text-xs ${trend >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+        <span className={`ml-2 text-xs ${trend >= 0 ? 'text-secondary' : 'text-destructive'}`}>
           {trend >= 0 ? '↑' : '↓'}{Math.abs(trend)}%
         </span>
       </div>
@@ -178,7 +178,7 @@ function MetricCell({ value, type, label, trends, comparisons }: MetricCellProps
             </div>
             <div>
               <div className="text-muted-foreground">Trend (30 days)</div>
-              <div className={`font-medium ${trend >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+              <div className={`font-medium ${trend >= 0 ? 'text-secondary' : 'text-destructive'}`}>
                 {trend >= 0 ? '+' : ''}{trend}%
               </div>
             </div>
@@ -197,7 +197,7 @@ function MetricCell({ value, type, label, trends, comparisons }: MetricCellProps
               <div className="font-medium">{target}%</div>
               <div className="w-full bg-muted h-1.5 rounded-full mt-1">
                 <div 
-                  className="bg-green-400 h-1.5 rounded-full" 
+                  className="bg-secondary h-1.5 rounded-full" 
                   style={{ width: `${target}%` }}
                 ></div>
               </div>

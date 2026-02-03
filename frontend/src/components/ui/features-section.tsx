@@ -64,11 +64,11 @@ export function FeaturesSection() {
     <section className="py-24">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold text-white mb-4">
+          <h2 className="text-3xl font-bold text-foreground mb-4">
             Everything You Need for{' '}
             <span className="text-primary">DevRel Success</span>
           </h2>
-          <p className="text-lg text-white/50 max-w-2xl mx-auto font-mono">
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto font-mono">
             Comprehensive tools and resources to help you build, measure, and scale your Developer Relations program.
           </p>
         </div>
@@ -86,12 +86,12 @@ export function FeaturesSection() {
               className="relative group"
               variants={item}
             >
-              <div className="crosshair-corners h-full p-8 border border-white/20 bg-card transition-colors duration-300 hover:border-secondary/40">
-                <div className="inline-flex p-3 border border-white/20 mb-6">
-                  <feature.icon className="w-6 h-6 text-white/60" strokeWidth={1.5} />
+              <div className="crosshair-corners h-full p-8 border border-border bg-card transition-colors duration-300 hover:border-secondary/40">
+                <div className="inline-flex p-3 border border-border mb-6">
+                  <feature.icon className="w-6 h-6 text-muted-foreground" strokeWidth={1.5} />
                 </div>
-                <h3 className="text-xl font-semibold mb-3 text-white">{feature.title}</h3>
-                <p className="text-white/50">{feature.description}</p>
+                <h3 className="text-xl font-semibold mb-3 text-foreground">{feature.title}</h3>
+                <p className="text-muted-foreground">{feature.description}</p>
               </div>
             </motion.div>
           ))}

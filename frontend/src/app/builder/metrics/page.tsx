@@ -23,7 +23,7 @@ export default function MetricsDashboardBuilder() {
             </Button>
           </Link>
           <h1 className="text-3xl font-bold">Metrics Dashboard Builder</h1>
-          <p className="text-gray-600 mt-1">
+          <p className="text-muted-foreground mt-1">
             Create a customizable dashboard with your most important DevRel KPIs and metrics.
           </p>
         </div>
@@ -66,73 +66,73 @@ export default function MetricsDashboardBuilder() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <Card>
               <CardHeader className="pb-2">
-                <CardTitle className="text-sm font-medium text-gray-500">Total Developers</CardTitle>
+                <CardTitle className="text-sm font-medium text-muted-foreground">Total Developers</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="flex justify-between items-center">
                   <div className="text-3xl font-bold">24,892</div>
-                  <div className="flex items-center text-green-600 text-sm">
+                  <div className="flex items-center text-secondary text-sm">
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M8 4V12M8 4L5 7M8 4L11 7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                     <span className="ml-1">14%</span>
                   </div>
                 </div>
-                <div className="text-xs text-gray-500 mt-1">vs previous period</div>
+                <div className="text-xs text-muted-foreground mt-1">vs previous period</div>
               </CardContent>
             </Card>
             
             <Card>
               <CardHeader className="pb-2">
-                <CardTitle className="text-sm font-medium text-gray-500">Active Contributors</CardTitle>
+                <CardTitle className="text-sm font-medium text-muted-foreground">Active Contributors</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="flex justify-between items-center">
                   <div className="text-3xl font-bold">3,756</div>
-                  <div className="flex items-center text-green-600 text-sm">
+                  <div className="flex items-center text-secondary text-sm">
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M8 4V12M8 4L5 7M8 4L11 7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                     <span className="ml-1">8%</span>
                   </div>
                 </div>
-                <div className="text-xs text-gray-500 mt-1">vs previous period</div>
+                <div className="text-xs text-muted-foreground mt-1">vs previous period</div>
               </CardContent>
             </Card>
             
             <Card>
               <CardHeader className="pb-2">
-                <CardTitle className="text-sm font-medium text-gray-500">Documentation Views</CardTitle>
+                <CardTitle className="text-sm font-medium text-muted-foreground">Documentation Views</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="flex justify-between items-center">
                   <div className="text-3xl font-bold">152,489</div>
-                  <div className="flex items-center text-green-600 text-sm">
+                  <div className="flex items-center text-secondary text-sm">
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M8 4V12M8 4L5 7M8 4L11 7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                     <span className="ml-1">23%</span>
                   </div>
                 </div>
-                <div className="text-xs text-gray-500 mt-1">vs previous period</div>
+                <div className="text-xs text-muted-foreground mt-1">vs previous period</div>
               </CardContent>
             </Card>
             
             <Card>
               <CardHeader className="pb-2">
-                <CardTitle className="text-sm font-medium text-gray-500">API Requests</CardTitle>
+                <CardTitle className="text-sm font-medium text-muted-foreground">API Requests</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="flex justify-between items-center">
                   <div className="text-3xl font-bold">3.4M</div>
-                  <div className="flex items-center text-red-600 text-sm">
+                  <div className="flex items-center text-destructive text-sm">
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M8 12V4M8 12L5 9M8 12L11 9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                     <span className="ml-1">2%</span>
                   </div>
                 </div>
-                <div className="text-xs text-gray-500 mt-1">vs previous period</div>
+                <div className="text-xs text-muted-foreground mt-1">vs previous period</div>
               </CardContent>
             </Card>
           </div>
@@ -159,15 +159,15 @@ export default function MetricsDashboardBuilder() {
               </div>
             </CardHeader>
             <CardContent>
-              <div className="h-80 flex items-center justify-center border rounded-md bg-gray-50">
+              <div className="h-80 flex items-center justify-center border rounded-md bg-muted/50">
                 <div className="w-full p-4">
                   <div className="h-60 relative">
                     {/* Line chart visualization */}
                     <LineChart className="w-20 h-20 text-primary absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
-                    <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gray-200"></div>
-                    <div className="absolute left-0 top-0 bottom-0 w-[1px] bg-gray-200"></div>
+                    <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-muted"></div>
+                    <div className="absolute left-0 top-0 bottom-0 w-[1px] bg-muted"></div>
                     {/* X-axis labels */}
-                    <div className="absolute bottom-[-20px] left-0 right-0 flex justify-between text-xs text-gray-500">
+                    <div className="absolute bottom-[-20px] left-0 right-0 flex justify-between text-xs text-muted-foreground">
                       <span>Jan</span>
                       <span>Feb</span>
                       <span>Mar</span>
@@ -179,7 +179,7 @@ export default function MetricsDashboardBuilder() {
                       <span>Sep</span>
                     </div>
                     {/* Y-axis labels */}
-                    <div className="absolute left-[-35px] top-0 bottom-0 flex flex-col justify-between text-xs text-gray-500">
+                    <div className="absolute left-[-35px] top-0 bottom-0 flex flex-col justify-between text-xs text-muted-foreground">
                       <span>100K</span>
                       <span>75K</span>
                       <span>50K</span>
@@ -190,19 +190,19 @@ export default function MetricsDashboardBuilder() {
                   <div className="flex justify-center mt-6 space-x-4">
                     <div className="flex items-center">
                       <div className="w-3 h-3 rounded-full bg-blue-500 mr-2"></div>
-                      <span className="text-xs text-gray-600">Documentation</span>
+                      <span className="text-xs text-muted-foreground">Documentation</span>
                     </div>
                     <div className="flex items-center">
                       <div className="w-3 h-3 rounded-full bg-purple-500 mr-2"></div>
-                      <span className="text-xs text-gray-600">Github</span>
+                      <span className="text-xs text-muted-foreground">Github</span>
                     </div>
                     <div className="flex items-center">
-                      <div className="w-3 h-3 rounded-full bg-green-500 mr-2"></div>
-                      <span className="text-xs text-gray-600">Forums</span>
+                      <div className="w-3 h-3 rounded-full bg-secondary mr-2"></div>
+                      <span className="text-xs text-muted-foreground">Forums</span>
                     </div>
                     <div className="flex items-center">
                       <div className="w-3 h-3 rounded-full bg-orange-500 mr-2"></div>
-                      <span className="text-xs text-gray-600">Discord</span>
+                      <span className="text-xs text-muted-foreground">Discord</span>
                     </div>
                   </div>
                 </div>
@@ -226,16 +226,16 @@ export default function MetricsDashboardBuilder() {
                 </Select>
               </CardHeader>
               <CardContent>
-                <div className="h-60 flex items-center justify-center border rounded-md bg-gray-50">
+                <div className="h-60 flex items-center justify-center border rounded-md bg-muted/50">
                   <div className="w-full p-4 relative">
                     <BarChart2 className="w-16 h-16 text-primary absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
-                    <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gray-200"></div>
-                    <div className="absolute left-0 top-0 bottom-0 w-[1px] bg-gray-200"></div>
+                    <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-muted"></div>
+                    <div className="absolute left-0 top-0 bottom-0 w-[1px] bg-muted"></div>
                   </div>
                 </div>
                 <div className="mt-4 flex items-center justify-between">
                   <div className="text-sm">Month-over-month growth</div>
-                  <div className="text-sm font-bold text-green-600">+16.8%</div>
+                  <div className="text-sm font-bold text-secondary">+16.8%</div>
                 </div>
               </CardContent>
             </Card>
@@ -255,7 +255,7 @@ export default function MetricsDashboardBuilder() {
                 </Select>
               </CardHeader>
               <CardContent>
-                <div className="h-60 flex items-center justify-center border rounded-md bg-gray-50">
+                <div className="h-60 flex items-center justify-center border rounded-md bg-muted/50">
                   <div className="w-full p-4 relative">
                     <PieChart className="w-16 h-16 text-primary absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
                   </div>
@@ -278,66 +278,66 @@ export default function MetricsDashboardBuilder() {
             </CardHeader>
             <CardContent className="px-2">
               <div className="space-y-4">
-                <div className="flex items-center justify-between p-2 hover:bg-gray-50 rounded-md">
+                <div className="flex items-center justify-between p-2 hover:bg-muted/50 rounded-md">
                   <div className="flex items-center">
                     <div className="rounded-full bg-blue-100 p-2 mr-3">
                       <Activity className="h-4 w-4 text-blue-600" />
                     </div>
                     <div>
                       <div className="font-medium">Conferences</div>
-                      <div className="text-sm text-gray-500">6 events</div>
+                      <div className="text-sm text-muted-foreground">6 events</div>
                     </div>
                   </div>
                   <div className="text-xl font-bold">24</div>
                 </div>
                 
-                <div className="flex items-center justify-between p-2 hover:bg-gray-50 rounded-md">
+                <div className="flex items-center justify-between p-2 hover:bg-muted/50 rounded-md">
                   <div className="flex items-center">
                     <div className="rounded-full bg-purple-100 p-2 mr-3">
                       <Activity className="h-4 w-4 text-purple-600" />
                     </div>
                     <div>
                       <div className="font-medium">Workshops</div>
-                      <div className="text-sm text-gray-500">12 events</div>
+                      <div className="text-sm text-muted-foreground">12 events</div>
                     </div>
                   </div>
                   <div className="text-xl font-bold">36</div>
                 </div>
                 
-                <div className="flex items-center justify-between p-2 hover:bg-gray-50 rounded-md">
+                <div className="flex items-center justify-between p-2 hover:bg-muted/50 rounded-md">
                   <div className="flex items-center">
-                    <div className="rounded-full bg-green-100 p-2 mr-3">
-                      <Activity className="h-4 w-4 text-green-600" />
+                    <div className="rounded-full bg-secondary/10 p-2 mr-3">
+                      <Activity className="h-4 w-4 text-secondary" />
                     </div>
                     <div>
                       <div className="font-medium">Blog Posts</div>
-                      <div className="text-sm text-gray-500">28 articles</div>
+                      <div className="text-sm text-muted-foreground">28 articles</div>
                     </div>
                   </div>
                   <div className="text-xl font-bold">48</div>
                 </div>
                 
-                <div className="flex items-center justify-between p-2 hover:bg-gray-50 rounded-md">
+                <div className="flex items-center justify-between p-2 hover:bg-muted/50 rounded-md">
                   <div className="flex items-center">
                     <div className="rounded-full bg-yellow-100 p-2 mr-3">
                       <Activity className="h-4 w-4 text-yellow-600" />
                     </div>
                     <div>
                       <div className="font-medium">Webinars</div>
-                      <div className="text-sm text-gray-500">8 sessions</div>
+                      <div className="text-sm text-muted-foreground">8 sessions</div>
                     </div>
                   </div>
                   <div className="text-xl font-bold">16</div>
                 </div>
                 
-                <div className="flex items-center justify-between p-2 hover:bg-gray-50 rounded-md">
+                <div className="flex items-center justify-between p-2 hover:bg-muted/50 rounded-md">
                   <div className="flex items-center">
-                    <div className="rounded-full bg-red-100 p-2 mr-3">
-                      <Activity className="h-4 w-4 text-red-600" />
+                    <div className="rounded-full bg-destructive/10 p-2 mr-3">
+                      <Activity className="h-4 w-4 text-destructive" />
                     </div>
                     <div>
                       <div className="font-medium">Forums</div>
-                      <div className="text-sm text-gray-500">104 responses</div>
+                      <div className="text-sm text-muted-foreground">104 responses</div>
                     </div>
                   </div>
                   <div className="text-xl font-bold">104</div>
@@ -356,23 +356,23 @@ export default function MetricsDashboardBuilder() {
             </CardHeader>
             <CardContent className="px-2">
               <div className="space-y-3">
-                <div className="flex justify-between p-2 hover:bg-gray-50 rounded-md">
+                <div className="flex justify-between p-2 hover:bg-muted/50 rounded-md">
                   <div className="text-sm font-medium">Getting Started Guide</div>
                   <div className="text-sm font-bold">24,532</div>
                 </div>
-                <div className="flex justify-between p-2 hover:bg-gray-50 rounded-md">
+                <div className="flex justify-between p-2 hover:bg-muted/50 rounded-md">
                   <div className="text-sm font-medium">API Reference</div>
                   <div className="text-sm font-bold">18,245</div>
                 </div>
-                <div className="flex justify-between p-2 hover:bg-gray-50 rounded-md">
+                <div className="flex justify-between p-2 hover:bg-muted/50 rounded-md">
                   <div className="text-sm font-medium">Authentication Tutorial</div>
                   <div className="text-sm font-bold">12,678</div>
                 </div>
-                <div className="flex justify-between p-2 hover:bg-gray-50 rounded-md">
+                <div className="flex justify-between p-2 hover:bg-muted/50 rounded-md">
                   <div className="text-sm font-medium">Migration Guide</div>
                   <div className="text-sm font-bold">8,932</div>
                 </div>
-                <div className="flex justify-between p-2 hover:bg-gray-50 rounded-md">
+                <div className="flex justify-between p-2 hover:bg-muted/50 rounded-md">
                   <div className="text-sm font-medium">Best Practices</div>
                   <div className="text-sm font-bold">7,645</div>
                 </div>

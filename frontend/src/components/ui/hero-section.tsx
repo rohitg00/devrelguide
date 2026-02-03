@@ -42,7 +42,7 @@ export function HeroSection() {
               transition={{ duration: 0.5 }}
             >
               <motion.h1
-                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white"
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
@@ -52,7 +52,7 @@ export function HeroSection() {
                 Relations
               </motion.h1>
               <motion.p
-                className="mt-4 sm:mt-6 text-base sm:text-lg leading-7 sm:leading-8 text-white/60 px-4 sm:px-0"
+                className="mt-4 sm:mt-6 text-base sm:text-lg leading-7 sm:leading-8 text-muted-foreground px-4 sm:px-0"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
@@ -84,21 +84,21 @@ export function HeroSection() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
             >
-              <svg viewBox="0 0 300 300" className="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="30" y="30" width="240" height="240" stroke="rgba(255,255,255,0.15)" strokeWidth="1" strokeDasharray="4 4" />
-                <circle cx="150" cy="150" r="80" stroke="rgba(0,255,255,0.3)" strokeWidth="1.5" strokeDasharray="1000" strokeDashoffset="1000" className="animate-drafting-reveal" />
-                <circle cx="150" cy="150" r="50" stroke="rgba(0,255,255,0.2)" strokeWidth="1" strokeDasharray="1000" strokeDashoffset="1000" className="animate-drafting-reveal" style={{ animationDelay: '0.3s' }} />
-                <line x1="150" y1="30" x2="150" y2="270" stroke="rgba(255,255,255,0.08)" strokeWidth="0.5" />
-                <line x1="30" y1="150" x2="270" y2="150" stroke="rgba(255,255,255,0.08)" strokeWidth="0.5" />
-                <line x1="70" y1="150" x2="150" y2="70" stroke="rgba(255,51,51,0.4)" strokeWidth="1.5" strokeDasharray="1000" strokeDashoffset="1000" className="animate-drafting-reveal" style={{ animationDelay: '0.6s' }} />
-                <line x1="150" y1="70" x2="230" y2="150" stroke="rgba(255,51,51,0.4)" strokeWidth="1.5" strokeDasharray="1000" strokeDashoffset="1000" className="animate-drafting-reveal" style={{ animationDelay: '0.8s' }} />
-                <line x1="230" y1="150" x2="150" y2="230" stroke="rgba(255,51,51,0.4)" strokeWidth="1.5" strokeDasharray="1000" strokeDashoffset="1000" className="animate-drafting-reveal" style={{ animationDelay: '1s' }} />
-                <line x1="150" y1="230" x2="70" y2="150" stroke="rgba(255,51,51,0.4)" strokeWidth="1.5" strokeDasharray="1000" strokeDashoffset="1000" className="animate-drafting-reveal" style={{ animationDelay: '1.2s' }} />
-                <circle cx="70" cy="150" r="3" fill="rgba(0,255,255,0.6)" className="animate-coordinate-pulse" />
-                <circle cx="150" cy="70" r="3" fill="rgba(0,255,255,0.6)" className="animate-coordinate-pulse" style={{ animationDelay: '0.3s' }} />
-                <circle cx="230" cy="150" r="3" fill="rgba(0,255,255,0.6)" className="animate-coordinate-pulse" style={{ animationDelay: '0.6s' }} />
-                <circle cx="150" cy="230" r="3" fill="rgba(0,255,255,0.6)" className="animate-coordinate-pulse" style={{ animationDelay: '0.9s' }} />
-                <text x="150" y="155" textAnchor="middle" fill="rgba(255,255,255,0.4)" fontSize="10" fontFamily="monospace">DEVREL</text>
+              <svg viewBox="0 0 300 300" className="w-full h-full text-foreground" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="30" y="30" width="240" height="240" stroke="currentColor" strokeOpacity="0.15" strokeWidth="1" strokeDasharray="4 4" />
+                <circle cx="150" cy="150" r="80" className="stroke-secondary" strokeOpacity="0.4" strokeWidth="1.5" strokeDasharray="1000" strokeDashoffset="1000" style={{ animation: 'drafting-reveal 2s ease-out forwards' }} />
+                <circle cx="150" cy="150" r="50" className="stroke-secondary" strokeOpacity="0.25" strokeWidth="1" strokeDasharray="1000" strokeDashoffset="1000" style={{ animation: 'drafting-reveal 2s ease-out forwards', animationDelay: '0.3s' }} />
+                <line x1="150" y1="30" x2="150" y2="270" stroke="currentColor" strokeOpacity="0.08" strokeWidth="0.5" />
+                <line x1="30" y1="150" x2="270" y2="150" stroke="currentColor" strokeOpacity="0.08" strokeWidth="0.5" />
+                <line x1="70" y1="150" x2="150" y2="70" className="stroke-primary" strokeOpacity="0.5" strokeWidth="1.5" strokeDasharray="1000" strokeDashoffset="1000" style={{ animation: 'drafting-reveal 2s ease-out forwards', animationDelay: '0.6s' }} />
+                <line x1="150" y1="70" x2="230" y2="150" className="stroke-primary" strokeOpacity="0.5" strokeWidth="1.5" strokeDasharray="1000" strokeDashoffset="1000" style={{ animation: 'drafting-reveal 2s ease-out forwards', animationDelay: '0.8s' }} />
+                <line x1="230" y1="150" x2="150" y2="230" className="stroke-primary" strokeOpacity="0.5" strokeWidth="1.5" strokeDasharray="1000" strokeDashoffset="1000" style={{ animation: 'drafting-reveal 2s ease-out forwards', animationDelay: '1s' }} />
+                <line x1="150" y1="230" x2="70" y2="150" className="stroke-primary" strokeOpacity="0.5" strokeWidth="1.5" strokeDasharray="1000" strokeDashoffset="1000" style={{ animation: 'drafting-reveal 2s ease-out forwards', animationDelay: '1.2s' }} />
+                <circle cx="70" cy="150" r="3" className="fill-secondary" fillOpacity="0.7" style={{ animation: 'coordinate-pulse 2s ease-in-out infinite' }} />
+                <circle cx="150" cy="70" r="3" className="fill-secondary" fillOpacity="0.7" style={{ animation: 'coordinate-pulse 2s ease-in-out infinite', animationDelay: '0.3s' }} />
+                <circle cx="230" cy="150" r="3" className="fill-secondary" fillOpacity="0.7" style={{ animation: 'coordinate-pulse 2s ease-in-out infinite', animationDelay: '0.6s' }} />
+                <circle cx="150" cy="230" r="3" className="fill-secondary" fillOpacity="0.7" style={{ animation: 'coordinate-pulse 2s ease-in-out infinite', animationDelay: '0.9s' }} />
+                <text x="150" y="155" textAnchor="middle" fill="currentColor" fillOpacity="0.4" fontSize="10" fontFamily="monospace">DEVREL</text>
               </svg>
             </motion.div>
           </div>
@@ -113,15 +113,15 @@ export function HeroSection() {
           {metrics.map((metric) => (
             <motion.div
               key={metric.label}
-              className="crosshair-corners relative overflow-hidden border border-white/20 bg-card p-6 sm:p-8"
+              className="crosshair-corners relative overflow-hidden border border-border bg-card p-6 sm:p-8"
               whileHover={{ borderColor: "rgba(0,255,255,0.4)" }}
               transition={{ type: "spring", stiffness: 300 }}
             >
               <div className="flex items-center gap-4">
-                <metric.icon className="h-6 w-6 sm:h-8 sm:w-8 text-white/40" strokeWidth={1} />
+                <metric.icon className="h-6 w-6 sm:h-8 sm:w-8 text-muted-foreground/60" strokeWidth={1} />
                 <div>
                   <p className="text-2xl sm:text-3xl font-bold text-secondary font-mono">{metric.value}</p>
-                  <p className="text-xs sm:text-sm text-white/50 font-mono uppercase tracking-wider">{metric.label}</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground font-mono uppercase tracking-wider">{metric.label}</p>
                 </div>
               </div>
             </motion.div>

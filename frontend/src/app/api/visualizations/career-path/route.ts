@@ -4,10 +4,93 @@ import { readJsonData, writeJsonData } from '@/lib/data'
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
+const careerPathData = {
+  title: "DevRel Career Path",
+  level: "root",
+  children: [
+    {
+      title: "Entry Level",
+      level: "category",
+      children: [
+        {
+          title: "Junior Developer Advocate",
+          level: "Entry",
+          children: [
+            { title: "Developer Advocate", level: "Mid" },
+            { title: "Technical Writer", level: "Mid" },
+            { title: "Community Coordinator", level: "Mid" }
+          ]
+        },
+        {
+          title: "Associate Technical Writer",
+          level: "Entry",
+          children: [
+            { title: "Technical Writer", level: "Mid" }
+          ]
+        },
+        {
+          title: "Community Coordinator",
+          level: "Entry",
+          children: [
+            { title: "Community Manager", level: "Mid" }
+          ]
+        }
+      ]
+    },
+    {
+      title: "Mid Level",
+      level: "category",
+      children: [
+        {
+          title: "Developer Advocate",
+          level: "Mid",
+          children: [
+            { title: "Senior Developer Advocate", level: "Senior" },
+            { title: "DevRel Program Manager", level: "Senior" }
+          ]
+        },
+        {
+          title: "Technical Writer",
+          level: "Mid",
+          children: [
+            { title: "Lead Technical Writer", level: "Senior" }
+          ]
+        },
+        {
+          title: "Community Manager",
+          level: "Mid",
+          children: [
+            { title: "Senior Community Manager", level: "Senior" }
+          ]
+        }
+      ]
+    },
+    {
+      title: "Senior Level",
+      level: "category",
+      children: [
+        {
+          title: "Senior Developer Advocate",
+          level: "Senior",
+          children: [
+            { title: "DevRel Manager", level: "Leadership" }
+          ]
+        },
+        {
+          title: "DevRel Program Manager",
+          level: "Senior",
+          children: [
+            { title: "Head of DevRel", level: "Leadership" }
+          ]
+        }
+      ]
+    }
+  ]
+}
+
 export async function GET() {
   try {
-    const data = await readJsonData('career_path.json')
-    return NextResponse.json(data, {
+    return NextResponse.json(careerPathData, {
       headers: { 'Cache-Control': 'no-store, must-revalidate' },
     })
   } catch (error) {

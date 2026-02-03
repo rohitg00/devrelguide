@@ -4,10 +4,10 @@ export default function ProgramsLoading() {
       <div className="space-y-8 w-full max-w-4xl px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {Array.from({ length: 4 }).map((_, i) => (
-            <div key={i} className="crosshair-corners border border-white/10 bg-card p-6 h-40 animate-pulse">
-              <div className="h-4 w-28 bg-white/10 mb-4" />
-              <div className="h-3 w-full bg-white/5 mb-2" />
-              <div className="h-3 w-2/3 bg-white/5" />
+            <div key={i} className="crosshair-corners border border-border/50 bg-card p-6 h-40 animate-pulse">
+              <div className="h-4 w-28 bg-muted-foreground/20 mb-4" />
+              <div className="h-3 w-full bg-muted-foreground/10 mb-2" />
+              <div className="h-3 w-2/3 bg-muted-foreground/10" />
             </div>
           ))}
         </div>
