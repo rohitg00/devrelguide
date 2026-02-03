@@ -1,110 +1,114 @@
-# DevRel Resources Web Application
+# DevRel Guide
 
 A comprehensive web application for Developer Relations (DevRel) resources, tools, and visualizations designed to help DevRel professionals, teams, and organizations effectively bridge the gap between developers and business.
 
-## What is the DevRel Resources Application?
+## What is DevRel Guide?
 
 ![GIF](/frontend/public/images/homepage.gif)
 
 This application serves as a centralized hub for Developer Relations resources, providing tools, templates, strategies, and metrics to help DevRel professionals excel in their roles. Whether you're new to DevRel or an experienced professional, this application offers valuable resources to enhance your DevRel efforts.
 
-## Key Features and Benefits
+## Key Features
 
-### 📚 Comprehensive Resource Library
-- Curated collection of DevRel articles, guides, tools, and templates
-- Categorized resources for easy discovery and implementation
-- Best practices and industry standards for DevRel activities
+### Resource Library
+- 400+ curated DevRel blog posts, articles, and guides
+- 500+ GitHub programs and open-source DevRel tools
+- 40+ current job listings from companies like MongoDB, Tailscale, Stripe, Pinecone, and more
+- Categorized resources with search and pagination
 
-### 📊 Visualization and Metrics
-- Interactive dashboards for tracking DevRel performance
-- Metrics visualization to demonstrate the value of DevRel initiatives
-- Data-driven insights to guide DevRel strategy
+### Interactive Visualizations
+- 30 visualization types including career paths, community graphs, skills matrices, and ecosystem maps
+- Custom visualization builder for creating personalized dashboards
+- Metrics tracking for DevRel performance and ROI
 
-### 🛠️ Practical Tools
-- Email templates for developer outreach
-- Community management frameworks
-- Content planning tools for technical content
-- Event planning and management resources
+### DevRel Whitepaper
+- Free downloadable comprehensive guide on Developer Relations
+- Covers strategy, execution, and measuring impact
 
-### 🌐 Community Focus
-- Resources for building and nurturing developer communities
-- Strategies for community engagement and growth
-- Best practices for fostering an inclusive community
+### Programs Directory
+- Real-world DevRel programs from leading companies
+- Community metrics and engagement strategies
 
-## Architecture and Implementation
+## Tech Stack
 
-The application is built using a modern tech stack with a clear separation of concerns:
+- **Next.js 15** with App Router and API routes
+- **React 18** with TypeScript
+- **Tailwind CSS** with dark/light theme support
+- **D3.js**, **Nivo**, and **Recharts** for data visualizations
+- **Framer Motion** for animations
 
-### Frontend
-- Built with Next.js for server-side rendering and optimal performance
-- React for interactive UI components
-- Tailwind CSS for responsive and customizable styling
-- Modular architecture for easy maintenance and extension
+## Project Structure
 
-### Backend
-- FastAPI for high-performance API endpoints
-- Python for robust data processing
-- RESTful API design for easy integration
-- Asynchronous processing for efficient resource handling
-
-### Data Flow
-- Frontend makes API calls to the backend for resource data
-- Backend processes requests and retrieves data from structured JSON files
-- Data is formatted and returned to the frontend for presentation
-- User interactions are handled by the frontend with state management
-
-## Setup Instructions
-
-### Backend Setup
-```bash
-cd backend
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-pip install -r requirements.txt
-uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+```
+devrelguide/
+  frontend/
+    src/
+      app/                    # Next.js pages and API routes
+        api/                  # 19 API routes (resources, jobs, visualizations)
+      components/             # React components
+        visualizations/       # 30 visualization components
+        ui/                   # Shared UI components
+        layout/               # Header, footer, navigation
+      lib/                    # Utilities, data helpers, visualization generators
+    data/                     # JSON data files (resources, jobs, visualizations)
+    public/                   # Static assets and whitepaper
+  scripts/                    # Offline Python scraping tools (optional)
 ```
 
-### Frontend Setup
+## Getting Started
+
 ```bash
 cd frontend
-npm install
-echo "NEXT_PUBLIC_API_URL=http://localhost:8000" > .env  # Create environment file
-npm run dev
+npm install      # or pnpm install
+npm run dev      # Start development server at http://localhost:3000
 ```
 
-## Accessing the Application
+No separate backend needed. All API routes run within Next.js.
 
-Once both services are running, you can access the application at:
-- **Frontend:** http://localhost:3000
-- **Backend API:** http://localhost:8000/docs (Swagger UI documentation)
+### Build for Production
 
-## Development Workflow
+```bash
+npm run build
+npm run start
+```
 
-The application uses a decoupled architecture where:
-- Frontend and backend can be developed and deployed independently
-- Changes to one component don't necessarily require changes to the other
-- API versioning ensures backward compatibility
+## API Routes
 
-## Use Cases
+| Route | Description |
+|-------|-------------|
+| `GET /api/resources` | Combined blog posts, GitHub repos, and job listings |
+| `GET /api/jobs` | DevRel job listings |
+| `GET /api/visualizations/*` | Visualization data (metrics, career-path, community-graph, etc.) |
+| `POST /api/generate-pdf` | Markdown to HTML conversion |
+| `POST /api/analyze-data` | Resource data analysis |
+| `POST /api/verify-links` | Link verification |
+| `GET /api/healthz` | Health check |
 
-### For DevRel Professionals
-- Access curated resources to improve DevRel programs
-- Use templates and tools to streamline DevRel activities
-- Track metrics to demonstrate the value of DevRel initiatives
+## Pages
 
-### For Engineering Teams
-- Understand the role and value of DevRel
-- Access resources to improve technical documentation
-- Find strategies for better community engagement
+| Page | Description |
+|------|-------------|
+| `/` | Home page with hero, features overview |
+| `/resources` | Resource library with blog posts, GitHub programs, job listings |
+| `/visualizations` | 30 interactive DevRel visualizations |
+| `/builder/*` | Custom visualization builders (community, ecosystem, journey, metrics, etc.) |
+| `/whitepaper` | DevRel whitepaper download |
+| `/programs` | Real-world DevRel programs directory |
+| `/contact` | Consultation contact form |
 
-### For Organizations
-- Establish effective DevRel programs
-- Measure the impact of DevRel activities
-- Align DevRel goals with business objectives
+## Data Sources
+
+Resource data is stored as JSON files in `frontend/data/` and served via API routes. To refresh data from external sources, use the optional Python scraping scripts in `scripts/`:
+
+```bash
+cd scripts
+pip install -r requirements.txt
+python scraper/devrel_scraper.py
+```
 
 ## Contributing
 
-Contributions to the DevRel Resources Web Application are welcome! Feel free to submit pull requests or open issues to suggest improvements or report bugs.
+Contributions are welcome! Feel free to submit pull requests or open issues to suggest improvements or report bugs.
 
 ## License
 
