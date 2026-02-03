@@ -22,6 +22,13 @@ const architectsDaughter = Architects_Daughter({
 export const metadata: Metadata = {
   title: "DevRel Guide",
   description: "A comprehensive collection of Developer Relations resources, tools, and job opportunities.",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/Icon.svg", type: "image/svg+xml" },
+    ],
+    apple: "/Icon.svg",
+  },
 };
 
 export const viewport = {

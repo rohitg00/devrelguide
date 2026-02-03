@@ -18,10 +18,10 @@ export function CTABanner() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="relative bg-card border border-border p-4 max-w-sm mx-auto md:mx-0">
+      <div className="relative bg-card border border-border p-4 w-full sm:max-w-sm mx-auto md:mx-0">
         <button
           onClick={() => setIsVisible(false)}
-          className="absolute top-2 right-2 text-muted-foreground/60 hover:text-foreground"
+          className="absolute top-3 right-3 text-muted-foreground/60 hover:text-foreground"
           aria-label="Close banner"
         >
           <X className="h-4 w-4" />
