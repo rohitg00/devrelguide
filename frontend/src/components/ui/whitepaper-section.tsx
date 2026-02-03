@@ -1,10 +1,9 @@
 'use client'
 
-import React, { useState } from 'react'
+import React from 'react'
 import { motion } from 'framer-motion'
-import { CheckCircle2, BookOpen, Compass, Target, ArrowRight, Download } from 'lucide-react'
+import { CheckCircle2, BookOpen, Compass, Target, Download } from 'lucide-react'
 import { Button } from './button'
-import { Input } from './input'
 
 const researchHighlights = [
   {
@@ -34,46 +33,6 @@ const keyBenefits = [
 ]
 
 export function WhitepaperSection() {
-  const [email, setEmail] = useState('')
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isSubmitted, setIsSubmitted] = useState(false)
-  const [error, setError] = useState('')
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-    setError('')
-    
-    try {
-      const response = await fetch('/api/store-email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email }),
-      })
-
-      const data = await response.json()
-
-      if (!response.ok) {
-        // Check if error is related to already registered email
-        if (data.error === 'This email has already been registered') {
-          // Set isSubmitted to true to allow download instead of showing error
-          setIsSubmitted(true)
-          return
-        }
-        throw new Error(data.error || 'Failed to submit email')
-      }
-
-      setIsSubmitted(true)
-    } catch (error) {
-      console.error('Error:', error)
-      setError(error instanceof Error ? error.message : 'Failed to submit email. Please try again.')
-    } finally {
-      setIsSubmitting(false)
-    }
-  }
-  
   const handleDownload = () => {
     window.location.href = '/content/Developer Relations (DevRel)_ Bridging the Gap Between Developers and Business.html'
   }
@@ -152,52 +111,13 @@ export function WhitepaperSection() {
               <p className="text-muted-foreground mb-6">
                 Get practical insights and strategies to build better developer programs and measure their impact.
               </p>
-              
-              {error && (
-                <div className="mb-4 p-3 bg-destructive/10 border border-destructive/20 rounded-md text-destructive text-sm">
-                  {error}
-                </div>
-              )}
-              
-              {!isSubmitted ? (
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div>
-                    <Input
-                      type="email"
-                      placeholder="Enter your business email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      className="w-full"
-                      required
-                    />
-                  </div>
-                  <Button 
-                    type="submit" 
-                    className="w-full"
-                    disabled={isSubmitting}
-                  >
-                    {isSubmitting ? (
-                      'Processing...'
-                    ) : (
-                      <span className="flex items-center justify-center gap-2">
-                        Get Free Whitepaper
-                        <ArrowRight className="w-4 h-4" />
-                      </span>
-                    )}
-                  </Button>
-                  <p className="text-sm text-muted-foreground text-center">
-                    We respect your privacy. No spam, ever.
-                  </p>
-                </form>
-              ) : (
-                <div className="space-y-4">
-                  <p className="text-secondary">Thank you! Your whitepaper is ready for download.</p>
-                  <Button onClick={handleDownload} className="w-full">
-                    <Download className="mr-2 h-4 w-4" />
-                    Download Whitepaper
-                  </Button>
-                </div>
-              )}
+
+              <div className="space-y-4">
+                <Button onClick={handleDownload} className="w-full">
+                  <Download className="mr-2 h-4 w-4" />
+                  Download Whitepaper
+                </Button>
+              </div>
             </motion.div>
           </div>
         </div>
