@@ -8,7 +8,9 @@ export const dynamic = 'force-dynamic'
 export async function POST() {
   try {
     const markdownPath = path.join(process.cwd(), 'public', 'content', 'devrel-whitepaper.md')
-    const markdown = await fs.readFile(markdownPath, 'utf-8')
+    let markdown = await fs.readFile(markdownPath, 'utf-8')
+
+    markdown = markdown.replace(/^---[\s\S]*?---\n/, '')
 
     const html = await marked(markdown, { gfm: true, breaks: true })
 
@@ -16,18 +18,25 @@ export async function POST() {
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>DevRel Whitepaper</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Developer Relations (DevRel): Bridging the Gap Between Developers and Business</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-body { font-family: 'Roboto Mono', monospace; line-height: 1.6; max-width: 800px; margin: 0 auto; padding: 20px; background: #003366; color: #fff; }
-h1 { font-size: 2em; color: #FF3333; }
-h2 { font-size: 1.5em; color: #00FFFF; margin-top: 1.5em; }
-h3 { font-size: 1.25em; color: #00FFFF; }
-a { color: #00FFFF; }
-pre { background: rgba(255,255,255,0.05); padding: 1em; border: 1px solid rgba(255,255,255,0.15); overflow-x: auto; }
-code { font-family: 'Roboto Mono', monospace; font-size: 0.9em; }
-blockquote { border-left: 3px solid #FF3333; padding-left: 1em; color: rgba(255,255,255,0.7); }
-table { width: 100%; border-collapse: collapse; }
-th, td { border: 1px solid rgba(255,255,255,0.2); padding: 0.5em; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; line-height: 1.8; max-width: 860px; margin: 0 auto; padding: 40px 24px; background: #0f172a; color: #e2e8f0; }
+h1 { font-size: 2.25em; font-weight: 700; color: #38bdf8; margin-bottom: 0.5em; line-height: 1.3; }
+h2 { font-size: 1.6em; font-weight: 600; color: #7dd3fc; margin-top: 2em; margin-bottom: 0.75em; padding-bottom: 0.3em; border-bottom: 1px solid #1e3a5f; }
+h3 { font-size: 1.25em; font-weight: 600; color: #bae6fd; margin-top: 1.5em; margin-bottom: 0.5em; }
+p { margin-bottom: 1em; color: #cbd5e1; }
+a { color: #38bdf8; text-decoration: none; }
+a:hover { text-decoration: underline; }
+ul, ol { margin-bottom: 1em; padding-left: 1.5em; color: #cbd5e1; }
+li { margin-bottom: 0.4em; }
+img { max-width: 100%; height: auto; border-radius: 8px; margin: 1.5em 0; }
+blockquote { border-left: 3px solid #38bdf8; padding-left: 1em; margin: 1em 0; color: #94a3b8; }
+details { margin: 1em 0; background: #1e293b; border-radius: 8px; padding: 1em; }
+summary { cursor: pointer; font-weight: 600; color: #7dd3fc; }
+@media print { body { background: #fff; color: #1e293b; } h1 { color: #0369a1; } h2 { color: #0284c7; border-color: #e2e8f0; } h3 { color: #0369a1; } p, ul, ol, li { color: #334155; } a { color: #0284c7; } }
 </style>
 </head>
 <body>${html}</body>
