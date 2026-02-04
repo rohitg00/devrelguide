@@ -12,17 +12,16 @@ const Footer = () => {
       <div className="container py-10">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="space-y-4">
-            <Link href="/" className="flex items-center space-x-2">
+            <Link href="/" className="flex items-center gap-1.5">
               <Image
                 src="/Icon.svg"
                 alt="DevRel Guide"
-                width={32}
-                height={32}
-                style={{ width: 32, height: 32 }}
-                priority
+                width={28}
+                height={28}
+                style={{ width: 28, height: 28 }}
               />
-              <span className="font-mono font-bold text-xl text-foreground uppercase tracking-wider">
-                DevRel Guide
+              <span className="font-mono font-bold text-lg text-foreground tracking-tight">
+                DEVREL<span className="text-secondary">GUIDE</span>
               </span>
             </Link>
             <p className="text-sm text-muted-foreground font-mono">

@@ -17,7 +17,7 @@ export default function WhitepaperPage() {
           </p>
         </div>
         
-        <div className="grid md:grid-cols-2 gap-12 items-start max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-6 md:gap-12 items-start max-w-5xl mx-auto">
           <div className="space-y-6">
             <h2 className="text-2xl font-semibold">What&apos;s Inside:</h2>
             <ul className="space-y-4">

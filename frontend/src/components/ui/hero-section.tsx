@@ -79,7 +79,7 @@ export function HeroSection() {
             </motion.div>
 
             <motion.div
-              className="w-full lg:w-96 h-96 overflow-visible flex items-center justify-center"
+              className="w-full lg:w-96 h-48 sm:h-64 lg:h-96 overflow-visible flex items-center justify-center"
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}

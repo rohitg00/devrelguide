@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1045.1000000000001 538" width="1045.1000000000001" height="538" style="--bg:#0f172a;--fg:#e2e8f0;--line:#38bdf8;--accent:#7dd3fc;--muted:#94a3b8;--surface:#1e293b;--border:#1e3a5f;background:var(--bg)">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap');
+  text { font-family: 'Inter', system-ui, sans-serif; }
+  svg {
+    /* Derived from --bg and --fg (overridable via --line, --accent, etc.) */
+    --_text:          var(--fg);
+    --_text-sec:      var(--muted, color-mix(in srgb, var(--fg) 60%, var(--bg)));
+    --_text-muted:    var(--muted, color-mix(in srgb, var(--fg) 40%, var(--bg)));
+    --_text-faint:    color-mix(in srgb, var(--fg) 25%, var(--bg));
+    --_line:          var(--line, color-mix(in srgb, var(--fg) 30%, var(--bg)));
+    --_arrow:         var(--accent, color-mix(in srgb, var(--fg) 50%, var(--bg)));
+    --_node-fill:     var(--surface, color-mix(in srgb, var(--fg) 3%, var(--bg)));
+    --_node-stroke:   var(--border, color-mix(in srgb, var(--fg) 20%, var(--bg)));
+    --_group-fill:    var(--bg);
+    --_group-hdr:     color-mix(in srgb, var(--fg) 5%, var(--bg));
+    --_inner-stroke:  color-mix(in srgb, var(--fg) 12%, var(--bg));
+    --_key-badge:     color-mix(in srgb, var(--fg) 10%, var(--bg));
+  }
+</style>
+<defs>
+  <marker id="arrowhead" markerWidth="8" markerHeight="4.8" refX="8" refY="2.4" orient="auto">
+    <polygon points="0 0, 8 2.4, 0 4.8" fill="var(--_arrow)" />
+  </marker>
+  <marker id="arrowhead-start" markerWidth="8" markerHeight="4.8" refX="0" refY="2.4" orient="auto-start-reverse">
+    <polygon points="8 0, 0 2.4, 8 4.8" fill="var(--_arrow)" />
+  </marker>
+</defs>
+<rect x="40.00000000000003" y="40" width="506.8500000000001" height="285" rx="0" ry="0" fill="var(--_group-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+<rect x="40.00000000000003" y="40" width="506.8500000000001" height="28" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+<text x="52.00000000000003" y="54" dy="0.35em" font-size="12" font-weight="600" fill="var(--_text-sec)">A2A: Agent Collaboration</text>
+<rect x="566.8500000000001" y="213" width="438.2499999999999" height="112" rx="0" ry="0" fill="var(--_group-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+<rect x="566.8500000000001" y="213" width="438.2499999999999" height="28" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+<text x="578.8500000000001" y="227" dy="0.35em" font-size="12" font-weight="600" fill="var(--_text-sec)">Orchestrator Tools</text>
+<rect x="54.29999999999998" y="386" width="282.15" height="112" rx="0" ry="0" fill="var(--_group-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+<rect x="54.29999999999998" y="386" width="282.15" height="28" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+<text x="66.29999999999998" y="400" dy="0.35em" font-size="12" font-weight="600" fill="var(--_text-sec)">Research Tools</text>
+<rect x="356.45" y="386" width="296.45000000000005" height="112" rx="0" ry="0" fill="var(--_group-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+<rect x="356.45" y="386" width="296.45000000000005" height="28" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+<text x="368.45" y="400" dy="0.35em" font-size="12" font-weight="600" fill="var(--_text-sec)">Analytics Tools</text>
+<polyline points="444.5,132 444.5,152 128.04999999999998,152 128.04999999999998,269" fill="none" stroke="var(--_line)" stroke-width="0.75" marker-end="url(#arrowhead)" marker-start="url(#arrowhead-start)" />
+<polyline points="444.5,132 444.5,269" fill="none" stroke="var(--_line)" stroke-width="0.75" marker-end="url(#arrowhead)" marker-start="url(#arrowhead-start)" />
+<polyline points="444.5,132 444.5,152 501.965,152 501.965,287 588.8500000000001,287" fill="none" stroke="var(--_line)" stroke-width="0.75" stroke-dasharray="4 4" marker-end="url(#arrowhead)" />
+<polyline points="128.04999999999998,305 128.04999999999998,442" fill="none" stroke="var(--_line)" stroke-width="0.75" stroke-dasharray="4 4" marker-end="url(#arrowhead)" />
+<polyline points="444.5,305 444.5,442" fill="none" stroke="var(--_line)" stroke-width="0.75" stroke-dasharray="4 4" marker-end="url(#arrowhead)" />
+<rect x="111.46999999999998" y="187" width="33.16" height="27" rx="4" ry="4" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="0.5" />
+<text x="128.04999999999998" y="200.5" text-anchor="middle" dy="0.35em" font-size="11" font-weight="400" fill="var(--_text-muted)">A2A</text>
+<rect x="427.92" y="187" width="33.16" height="27" rx="4" ry="4" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="0.5" />
+<text x="444.5" y="200.5" text-anchor="middle" dy="0.35em" font-size="11" font-weight="400" fill="var(--_text-muted)">A2A</text>
+<rect x="485.385" y="187" width="33.16" height="27" rx="4" ry="4" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="0.5" />
+<text x="501.965" y="200.5" text-anchor="middle" dy="0.35em" font-size="11" font-weight="400" fill="var(--_text-muted)">MCP</text>
+<rect x="111.46999999999998" y="360" width="33.16" height="27" rx="4" ry="4" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="0.5" />
+<text x="128.04999999999998" y="373.5" text-anchor="middle" dy="0.35em" font-size="11" font-weight="400" fill="var(--_text-muted)">MCP</text>
+<rect x="427.92" y="360" width="33.16" height="27" rx="4" ry="4" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="0.5" />
+<text x="444.5" y="373.5" text-anchor="middle" dy="0.35em" font-size="11" font-weight="400" fill="var(--_text-muted)">MCP</text>
+<rect x="364.15" y="96" width="160.70000000000002" height="36" rx="0" ry="0" fill="#0369a1" stroke="#38bdf8" stroke-width="0.75" />
+<rect x="61.99999999999997" y="269" width="132.10000000000002" height="36" rx="0" ry="0" fill="#1e3a5f" stroke="#38bdf8" stroke-width="0.75" />
+<rect x="374.875" y="269" width="139.25" height="36" rx="0" ry="0" fill="#1e3a5f" stroke="#38bdf8" stroke-width="0.75" />
+<rect x="588.8500000000001" y="269" width="96.35000000000001" height="36" rx="0" ry="0" fill="#0f172a" stroke="#1e3a5f" stroke-width="0.75" />
+<rect x="709.2000000000002" y="269" width="124.95" height="36" rx="0" ry="0" fill="#0f172a" stroke="#1e3a5f" stroke-width="0.75" />
+<rect x="858.15" y="269" width="124.95" height="36" rx="0" ry="0" fill="#0f172a" stroke="#1e3a5f" stroke-width="0.75" />
+<rect x="76.29999999999998" y="442" width="103.5" height="36" rx="0" ry="0" fill="#0f172a" stroke="#1e3a5f" stroke-width="0.75" />
+<rect x="203.8" y="442" width="110.65" height="36" rx="0" ry="0" fill="#0f172a" stroke="#1e3a5f" stroke-width="0.75" />
+<rect x="378.45" y="442" width="132.10000000000002" height="36" rx="0" ry="0" fill="#0f172a" stroke="#1e3a5f" stroke-width="0.75" />
+<rect x="534.5500000000002" y="442" width="96.35000000000001" height="36" rx="0" ry="0" fill="#0f172a" stroke="#1e3a5f" stroke-width="0.75" />
+<text x="444.5" y="114" text-anchor="middle" dy="0.35em" font-size="13" font-weight="500" fill="#e2e8f0">Orchestrator Agent</text>
+<text x="128.04999999999998" y="287" text-anchor="middle" dy="0.35em" font-size="13" font-weight="500" fill="#e2e8f0">Research Agent</text>
+<text x="444.5" y="287" text-anchor="middle" dy="0.35em" font-size="13" font-weight="500" fill="#e2e8f0">Analytics Agent</text>
+<text x="637.0250000000001" y="287" text-anchor="middle" dy="0.35em" font-size="13" font-weight="500" fill="#94a3b8">User Data</text>
+<text x="771.6750000000002" y="287" text-anchor="middle" dy="0.35em" font-size="13" font-weight="500" fill="#94a3b8">Task Tracking</text>
+<text x="920.625" y="287" text-anchor="middle" dy="0.35em" font-size="13" font-weight="500" fill="#94a3b8">Notifications</text>
+<text x="128.04999999999998" y="460" text-anchor="middle" dy="0.35em" font-size="13" font-weight="500" fill="#94a3b8">Web Search</text>
+<text x="259.125" y="460" text-anchor="middle" dy="0.35em" font-size="13" font-weight="500" fill="#94a3b8">Document DB</text>
+<text x="444.5" y="460" text-anchor="middle" dy="0.35em" font-size="13" font-weight="500" fill="#94a3b8">Data Warehouse</text>
+<text x="582.7250000000001" y="460" text-anchor="middle" dy="0.35em" font-size="13" font-weight="500" fill="#94a3b8">Viz Tools</text>
+</svg>
