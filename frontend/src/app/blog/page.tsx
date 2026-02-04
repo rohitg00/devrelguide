@@ -3,23 +3,7 @@
 import Link from 'next/link'
 import { ArrowRight, Calendar, Clock } from 'lucide-react'
 import { motion } from 'framer-motion'
-
-const blogPosts = [
-  {
-    slug: 'mcp-vs-a2a',
-    title: 'MCP vs A2A: The Complete Guide to AI Agent Protocols in 2026',
-    description: 'The definitive comparison of MCP and A2A — covering MCP Apps, Streamable HTTP, Google ADK integration, and how these protocols work together.',
-    date: 'Updated February 2026',
-    readTime: '20 min read',
-  },
-  {
-    slug: 'why-devrel-is-needed',
-    title: 'Why DevRel is Needed for Your Company: Building Bridges to Developer Communities',
-    description: 'DevRel professionals connect companies and developers by giving technical guidance, support, and resources. Learn why DevRel has become essential.',
-    date: 'March 24, 2025',
-    readTime: '10 min read',
-  },
-]
+import { blogPosts } from './blog-data'
 
 export default function BlogPage() {
   return (
