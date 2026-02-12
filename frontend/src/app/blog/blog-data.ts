@@ -11,16 +11,16 @@ export interface BlogPost {
 export const blogPosts: BlogPost[] = [
   {
     slug: 'openclaw-ai-agent-phenomenon',
-    title: 'OpenClaw: From Side Project to 145K GitHub Stars — What Developers Should Know',
-    description: 'How an Austrian developer\'s lobster-themed AI agent went from hobby project to global phenomenon in weeks, and what it means for the future of open-source AI agents.',
-    date: 'February 2026',
-    readTime: '12 min read',
-    tags: ['AI Agents', 'Open Source', 'DevTools'],
+    title: 'OpenClaw: 180K GitHub Stars, a Critical CVE, and Agentic AI\'s Biggest Security Wake-Up Call',
+    description: 'From hobby project to 180K stars, CVE-2026-25253, 42K exposed instances, Moltbook\'s 1.5M agents, and the security fallout that redefined agentic AI risk.',
+    date: 'Updated February 12, 2026',
+    readTime: '16 min read',
+    tags: ['AI Agents', 'Open Source', 'Security'],
     accentColor: '#f97316',
   },
   {
     slug: 'moltbook-ai-social-network',
-    title: 'Moltbook: Inside the Social Network Where 770K AI Agents Post, Vote, and Scheme',
+    title: 'Moltbook: Inside the Social Network Where 1.5M AI Agents Post, Vote, and Scheme',
     description: 'A Reddit-style platform exclusively for AI bots raised questions about agent autonomy, prompt injection at scale, and what happens when machines form communities.',
     date: 'February 2026',
     readTime: '14 min read',
