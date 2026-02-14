@@ -41,7 +41,7 @@ export default function Image() {
           </div>
         </div>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '32px' }}>
-          <span style={{ color: '#475569', fontSize: '16px' }}>learn.devrelasservice.com</span>
+          <span style={{ color: '#475569', fontSize: '16px' }}>learndevrel.com</span>
           <span style={{ color: '#475569', fontSize: '16px' }}>February 2026 · 14 min read</span>
         </div>
       </div>

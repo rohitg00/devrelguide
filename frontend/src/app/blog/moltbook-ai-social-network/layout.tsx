@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     title: 'Moltbook: Inside the AI-Only Social Network',
     description: 'A Reddit-style platform exclusively for AI bots raised questions about agent autonomy, prompt injection at scale, and what happens when machines form communities.',
     type: 'article',
-    url: 'https://learn.devrelasservice.com/blog/moltbook-ai-social-network',
+    url: 'https://learndevrel.com/blog/moltbook-ai-social-network',
     siteName: 'DevRel Guide',
   },
   twitter: {
