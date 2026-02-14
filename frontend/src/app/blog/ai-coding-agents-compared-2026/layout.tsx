@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     title: 'AI Coding Agents Compared: 2026 Guide',
     description: 'A practical comparison of every major AI coding agent — model access, ecosystem depth, privacy, and which workflow fits your team.',
     type: 'article',
-    url: 'https://learn.devrelasservice.com/blog/ai-coding-agents-compared-2026',
+    url: 'https://learndevrel.com/blog/ai-coding-agents-compared-2026',
     siteName: 'DevRel Guide',
   },
   twitter: {

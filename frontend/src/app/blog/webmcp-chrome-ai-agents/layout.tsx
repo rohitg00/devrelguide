@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     title: 'WebMCP: Chrome Just Turned Every Website Into an API for AI Agents',
     description: 'Google and Microsoft shipped WebMCP in Chrome 146. Websites expose structured tools to AI agents via navigator.modelContext. 89% fewer tokens, 98% accuracy, and the web becomes agent-native.',
     type: 'article',
-    url: 'https://learn.devrelasservice.com/blog/webmcp-chrome-ai-agents',
+    url: 'https://learndevrel.com/blog/webmcp-chrome-ai-agents',
     siteName: 'DevRel Guide',
   },
   twitter: {

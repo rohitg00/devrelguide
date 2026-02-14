@@ -20,7 +20,11 @@ const architectsDaughter = Architects_Daughter({
 });
 
 export const metadata: Metadata = {
-  title: "DevRel Guide",
+  metadataBase: new URL('https://learndevrel.com'),
+  title: {
+    default: 'DevRel Guide',
+    template: '%s | DevRel Guide',
+  },
   description: "A comprehensive collection of Developer Relations resources, tools, and job opportunities.",
   icons: {
     icon: [
@@ -28,6 +32,20 @@ export const metadata: Metadata = {
       { url: "/Icon.svg", type: "image/svg+xml" },
     ],
     apple: "/Icon.svg",
+  },
+  openGraph: {
+    title: 'DevRel Guide',
+    description: 'A comprehensive collection of Developer Relations resources, tools, and job opportunities.',
+    url: 'https://learndevrel.com',
+    siteName: 'DevRel Guide',
+    type: 'website',
+    locale: 'en_US',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'DevRel Guide',
+    description: 'A comprehensive collection of Developer Relations resources, tools, and job opportunities.',
+    creator: '@anthropicdevrel',
   },
 };
 

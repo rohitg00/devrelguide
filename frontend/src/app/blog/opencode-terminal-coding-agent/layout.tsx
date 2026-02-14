@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     title: 'OpenCode: 95K Stars, 2.5M Monthly Developers',
     description: 'With 2.5M monthly developers, 75+ model providers, and zero hype, OpenCode became the quiet workhorse of terminal-based AI-assisted development.',
     type: 'article',
-    url: 'https://learn.devrelasservice.com/blog/opencode-terminal-coding-agent',
+    url: 'https://learndevrel.com/blog/opencode-terminal-coding-agent',
     siteName: 'DevRel Guide',
   },
   twitter: {

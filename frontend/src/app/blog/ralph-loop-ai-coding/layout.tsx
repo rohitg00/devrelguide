@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     title: 'The Ralph Loop: AI Coding\'s Most Important Technique',
     description: 'Named after Ralph Wiggum, this deliberately simple technique of running coding agents in a loop against specs is reshaping how software gets built.',
     type: 'article',
-    url: 'https://learn.devrelasservice.com/blog/ralph-loop-ai-coding',
+    url: 'https://learndevrel.com/blog/ralph-loop-ai-coding',
     siteName: 'DevRel Guide',
   },
   twitter: {

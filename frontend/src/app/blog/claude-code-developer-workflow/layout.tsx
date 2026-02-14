@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     title: 'Claude Code: Hooks, Skills, and MCP Workflow',
     description: 'How Claude Code\'s ecosystem of hooks, skills, MCP servers, and persistent memory turns a terminal agent into a complete development workflow.',
     type: 'article',
-    url: 'https://learn.devrelasservice.com/blog/claude-code-developer-workflow',
+    url: 'https://learndevrel.com/blog/claude-code-developer-workflow',
     siteName: 'DevRel Guide',
   },
   twitter: {
