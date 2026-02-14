@@ -10,6 +10,15 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'webmcp-chrome-ai-agents',
+    title: 'WebMCP: Chrome Just Turned Every Website Into an API for AI Agents',
+    description: 'Google and Microsoft shipped WebMCP in Chrome 146 — a W3C standard that lets websites expose structured tools to AI agents. 89% fewer tokens than screenshots, 980 GitHub stars in 48 hours.',
+    date: 'February 14, 2026',
+    readTime: '18 min read',
+    tags: ['WebMCP', 'Chrome', 'AI Agents'],
+    accentColor: '#22c55e',
+  },
+  {
     slug: 'openclaw-ai-agent-phenomenon',
     title: 'OpenClaw: 180K GitHub Stars, a Critical CVE, and Agentic AI\'s Biggest Security Wake-Up Call',
     description: 'From hobby project to 180K stars, CVE-2026-25253, 42K exposed instances, Moltbook\'s 1.5M agents, and the security fallout that redefined agentic AI risk.',
