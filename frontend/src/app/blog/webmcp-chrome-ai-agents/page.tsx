@@ -228,11 +228,11 @@ export default function WebMCPBlog() {
 
           <h3>DoorDash-Style Food Ordering Demo</h3>
           <p>
-            <a href="https://x.com/skirano" target="_blank" rel="noopener noreferrer">Suhail Kakar</a> built a starter template for a DoorDash-like food ordering app where an AI agent adds items to cart, configures options, and navigates checkout &mdash; all through WebMCP tool calls, never touching the UI.
+            <a href="https://x.com/skirano" target="_blank" rel="noopener noreferrer">Pietro Schirano</a> built a starter template for a DoorDash-like food ordering app where an AI agent adds items to cart, configures options, and navigates checkout &mdash; all through WebMCP tool calls, never touching the UI.
           </p>
           <TweetEmbed
             username="skirano"
-            name="Suhail Kakar"
+            name="Pietro Schirano"
             tweetId="2022387763421810989"
             text="WebMCP is the future of the web. Agents can now interact with any website without ever seeing the UI. I built a starter template to show how: A DoorDash like app where the agent adds items to cart..."
             likes="551"
@@ -246,7 +246,7 @@ export default function WebMCPBlog() {
           </p>
           <TweetEmbed
             username="azukiazusa9"
-            name="azukiazusa9"
+            name="azukiazusa"
             tweetId="2021417919419502669"
             text="WebMCP completely understood. Register tools with window.navigator.modelContext.provideContext and the AI agent executes JavaScript callbacks to add TODO items."
             likes="145"
