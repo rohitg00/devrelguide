@@ -19,33 +19,66 @@ const architectsDaughter = Architects_Daughter({
   variable: "--font-hand",
 });
 
+const SITE_URL = 'https://learndevrel.com';
+const SITE_NAME = 'DevRel Guide';
+const SITE_TITLE = 'DevRel Guide — Developer Relations Resources, Programs, and Jobs';
+const SITE_DESC = 'Developer Relations playbook: curated resources, DevRel program templates, blog posts, and live job opportunities for developer advocates and community builders.';
+
 export const metadata: Metadata = {
-  metadataBase: new URL('https://learndevrel.com'),
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: 'DevRel Guide',
+    default: SITE_TITLE,
     template: '%s | DevRel Guide',
   },
-  description: "A comprehensive collection of Developer Relations resources, tools, and job opportunities.",
+  description: SITE_DESC,
+  applicationName: SITE_NAME,
+  authors: [{ name: 'Rohit Ghumare', url: 'https://github.com/rohitg00' }],
+  keywords: [
+    'Developer Relations',
+    'DevRel',
+    'Developer Advocate',
+    'Developer Marketing',
+    'Community Building',
+    'DevRel jobs',
+    'DevRel programs',
+    'DevRel resources',
+    'Developer Experience',
+  ],
+  category: 'technology',
+  alternates: {
+    canonical: '/',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
+  },
   icons: {
     icon: [
-      { url: "/favicon.ico", sizes: "any" },
-      { url: "/Icon.svg", type: "image/svg+xml" },
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/Icon.svg', type: 'image/svg+xml' },
     ],
-    apple: "/Icon.svg",
+    apple: '/Icon.svg',
   },
   openGraph: {
-    title: 'DevRel Guide',
-    description: 'A comprehensive collection of Developer Relations resources, tools, and job opportunities.',
-    url: 'https://learndevrel.com',
-    siteName: 'DevRel Guide',
+    title: SITE_TITLE,
+    description: SITE_DESC,
+    url: SITE_URL,
+    siteName: SITE_NAME,
     type: 'website',
     locale: 'en_US',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'DevRel Guide',
-    description: 'A comprehensive collection of Developer Relations resources, tools, and job opportunities.',
-    creator: '@anthropicdevrel',
+    title: SITE_TITLE,
+    description: SITE_DESC,
+    creator: '@rohitg00',
   },
 };
 
@@ -70,6 +103,37 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen bg-background text-foreground">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@graph': [
+                {
+                  '@type': 'Organization',
+                  '@id': `${SITE_URL}#organization`,
+                  name: SITE_NAME,
+                  url: SITE_URL,
+                  logo: `${SITE_URL}/Icon.svg`,
+                  sameAs: [
+                    'https://github.com/rohitg00/devrelguide',
+                    'https://twitter.com/devrelasservice',
+                    'https://linkedin.com/company/devrel-as-service',
+                  ],
+                },
+                {
+                  '@type': 'WebSite',
+                  '@id': `${SITE_URL}#website`,
+                  url: SITE_URL,
+                  name: SITE_NAME,
+                  description: SITE_DESC,
+                  publisher: { '@id': `${SITE_URL}#organization` },
+                  inLanguage: 'en-US',
+                },
+              ],
+            }),
+          }}
+        />
         <ThemeProvider>
           <div className="min-h-screen flex flex-col">
             <Layout>
