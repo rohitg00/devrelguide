@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
-
-const SITE_URL = 'https://learndevrel.com'
+import { SITE_URL } from '@/lib/constants'
 
 export const metadata: Metadata = {
   title: 'DevRel Blog — Developer Relations, AI Agents, and Coding Workflows',

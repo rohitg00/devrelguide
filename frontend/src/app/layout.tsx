@@ -4,6 +4,7 @@ import "./globals.css";
 import Layout from "@/components/layout/Layout";
 import { CTABanner } from '@/components/ui/cta-banner'
 import { ThemeProvider } from "@/context/ThemeContext";
+import { SITE_URL, SITE_NAME, SITE_TITLE, SITE_DESC } from "@/lib/constants";
 
 const robotoMono = Roboto_Mono({
   subsets: ["latin"],
@@ -18,11 +19,6 @@ const architectsDaughter = Architects_Daughter({
   weight: ["400"],
   variable: "--font-hand",
 });
-
-const SITE_URL = 'https://learndevrel.com';
-const SITE_NAME = 'DevRel Guide';
-const SITE_TITLE = 'DevRel Guide — Developer Relations Resources, Programs, and Jobs';
-const SITE_DESC = 'Developer Relations playbook: curated resources, DevRel program templates, blog posts, and live job opportunities for developer advocates and community builders.';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

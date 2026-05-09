@@ -1,7 +1,6 @@
 import type { MetadataRoute } from 'next'
+import { SITE_URL } from '@/lib/constants'
 import { blogPosts } from './blog/blog-data'
-
-const SITE_URL = 'https://learndevrel.com'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date()
