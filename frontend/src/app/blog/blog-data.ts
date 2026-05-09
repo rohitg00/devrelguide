@@ -10,6 +10,33 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'content-addressed-memory-for-agents',
+    title: 'Your AI Agent’s Memory Is Probably Broken. Here Is Why.',
+    description: 'Random IDs duplicate facts on every re-import. Content-addressed IDs and reinforcement-on-write fix it in forty lines. Walkthrough with Letta, Mem0, and agentmemory.',
+    date: 'May 9, 2026',
+    readTime: '15 min read',
+    tags: ['AI Agents', 'Memory', 'Fundamentals'],
+    accentColor: '#3b82f6',
+  },
+  {
+    slug: 'agent-sandbox-runtimes-tested',
+    title: 'I Ran Six Agent Sandbox Runtimes Back to Back. Here Is What Actually Worked.',
+    description: 'E2B, Daytona, Modal, Morph, Vercel Sandbox, and Docker sbx — six microVM and gVisor runtimes for AI coding agents, tested on the same workload. Cold-start times, isolation models, persistence, network policies.',
+    date: 'May 3, 2026',
+    readTime: '16 min read',
+    tags: ['AI Agents', 'Sandboxes', 'microVM'],
+    accentColor: '#FF6B35',
+  },
+  {
+    slug: 'three-primitives-replace-fifty-sdks',
+    title: 'Three Primitives Are Enough: Rebuilding Backends Without Fifty SDKs',
+    description: 'Workers, functions, triggers — a small primitive set is collapsing the queue/cron/pubsub/HTTP/state/stream stack. The case, the code, and where it breaks.',
+    date: 'April 26, 2026',
+    readTime: '14 min read',
+    tags: ['Backend', 'Architecture', 'Fundamentals'],
+    accentColor: '#f3f724',
+  },
+  {
     slug: 'webmcp-chrome-ai-agents',
     title: 'WebMCP: Chrome Just Turned Every Website Into an API for AI Agents',
     description: 'Google and Microsoft shipped WebMCP in Chrome 146 — a W3C standard that lets websites expose structured tools to AI agents. 89% fewer tokens than screenshots, 980 GitHub stars in 48 hours.',
