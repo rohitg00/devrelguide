@@ -19,11 +19,9 @@ const Header = () => {
   const navLinks = [
     { href: '/', label: 'HOME' },
     { href: '/blog', label: 'BLOG', isNew: true },
-    { href: '/whitepaper', label: 'WHITEPAPER' },
     { href: '/resources', label: 'RESOURCES' },
-    { href: '/visualizations', label: 'VISUALIZATIONS' },
     { href: '/programs', label: 'PROGRAMS' },
-    { href: '/builder', label: 'BUILDER' },
+    { href: '/about', label: 'ABOUT' },
     { href: '/contact', label: 'CONTACT' }
   ]
 

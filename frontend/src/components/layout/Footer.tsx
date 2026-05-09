@@ -25,7 +25,7 @@ const Footer = () => {
               </span>
             </Link>
             <p className="text-sm text-muted-foreground font-mono">
-              Your comprehensive platform for Developer Relations resources, visualizations, and insights
+              Developer Relations playbook: programs, blogs, jobs, and curated resources.
             </p>
           </div>
 
@@ -34,23 +34,18 @@ const Footer = () => {
             <div className="w-full h-px bg-white/10 mb-4" />
             <ul className="space-y-2">
               <li>
-                <Link href="/whitepaper" className="text-sm text-muted-foreground hover:text-secondary transition-colors font-mono">
-                  Whitepaper
+                <Link href="/blog" className="text-sm text-muted-foreground hover:text-secondary transition-colors font-mono">
+                  Blog
+                </Link>
+              </li>
+              <li>
+                <Link href="/programs" className="text-sm text-muted-foreground hover:text-secondary transition-colors font-mono">
+                  Programs
                 </Link>
               </li>
               <li>
                 <Link href="/resources" className="text-sm text-muted-foreground hover:text-secondary transition-colors font-mono">
-                  Blog Posts
-                </Link>
-              </li>
-              <li>
-                <Link href="/resources" className="text-sm text-muted-foreground hover:text-secondary transition-colors font-mono">
-                  GitHub Programs
-                </Link>
-              </li>
-              <li>
-                <Link href="/resources" className="text-sm text-muted-foreground hover:text-secondary transition-colors font-mono">
-                  Job Opportunities
+                  Resources
                 </Link>
               </li>
             </ul>

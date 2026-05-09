@@ -65,9 +65,9 @@ export function HeroSection() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.4 }}
               >
-                <Link href="/visualizations" className="w-full sm:w-auto">
+                <Link href="/blog" className="w-full sm:w-auto">
                   <Button size="lg" className="w-full sm:w-auto uppercase tracking-wider">
-                    View Insights
+                    Read the Blog
                   </Button>
                 </Link>
                 <Link href="/resources" className="w-full sm:w-auto">
