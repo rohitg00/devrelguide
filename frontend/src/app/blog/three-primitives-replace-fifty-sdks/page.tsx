@@ -78,39 +78,48 @@ pino            // logs
           <p>
             Here is a complete worker that exposes an HTTP endpoint, runs a cron job, and reacts to a queue message. One file, no extra services:
           </p>
-          <pre><code>{`use iii_sdk::{Client, RegisterFunction, RegisterTrigger, IIIError};
+          <pre><code>{`use iii_sdk::{register_worker, InitOptions, RegisterFunction, RegisterTrigger};
 use serde_json::json;
 
 #[tokio::main]
-async fn main() -> Result<(), IIIError> {
-    let client = Client::connect("ws://localhost:49134").await?;
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let url = std::env::var("III_URL")
+        .unwrap_or_else(|_| "ws://127.0.0.1:49134".to_string());
+    let iii = register_worker(&url, InitOptions::default());
 
-    client.register_worker("orders").await?;
-
-    client.register_function(
-        RegisterFunction::new_async("orders::handle", |ctx, input| async move {
+    iii.register_function(RegisterFunction::new_async(
+        "orders::handle",
+        |ctx, input| async move {
             let order_id = input["order_id"].as_str().unwrap();
             ctx.state().update("orders", order_id, json!({
                 "status": "received",
                 "received_at": ctx.now(),
             })).await?;
             Ok(json!({ "ok": true }))
-        }),
-    ).await?;
+        },
+    ));
 
-    client.register_trigger(RegisterTrigger::http()
-        .method("POST")
-        .api_path("orders/new")
-        .function("orders::handle")).await?;
+    iii.register_trigger(
+        RegisterTrigger::http()
+            .method("POST")
+            .api_path("orders/new")
+            .function("orders::handle"),
+    );
 
-    client.register_trigger(RegisterTrigger::cron()
-        .schedule("*/5 * * * *")
-        .function("orders::reconcile")).await?;
+    iii.register_trigger(
+        RegisterTrigger::cron()
+            .schedule("*/5 * * * *")
+            .function("orders::reconcile"),
+    );
 
-    client.register_trigger(RegisterTrigger::queue("dead-letters")
-        .function("orders::dlq")).await?;
+    iii.register_trigger(
+        RegisterTrigger::queue("dead-letters")
+            .function("orders::dlq"),
+    );
 
-    client.run().await
+    tokio::signal::ctrl_c().await?;
+    iii.shutdown_async().await;
+    Ok(())
 }`}</code></pre>
           <p>
             Read the file. Three triggers. One function shown, two more by name. Zero lines about retries, persistence, transport, or observability. The runtime takes those.
@@ -223,17 +232,19 @@ queue::pop     // pop a message and route it to a target function`}</code></pre>
           <p>
             Then start the engine, scaffold a worker, and call your first function:
           </p>
-          <pre><code>{`iii engine start
+          <pre><code>{`# start the engine — workers in config.yaml come up automatically
+iii
 
-# in another terminal
-iii worker new hello --rust
+# in another terminal — write the Rust crate yourself, then
 cd hello
 cargo run
 
-# in a third terminal
-iii fn call hello::greet --input '{"name":"Rohit"}'`}</code></pre>
+# in a third terminal — invoke any registered function over the same WebSocket
+iii trigger \\
+  --function-id='hello::greet' \\
+  --payload='{"name":"Rohit"}'`}</code></pre>
           <p>
-            The hello worker registers one function and one HTTP trigger. The CLI calls the function over the same transport an HTTP request would have used. There is no second &ldquo;serve&rdquo; mode.
+            The hello worker registers one function and one HTTP trigger. <code>iii trigger</code> calls that function over the same transport an HTTP request would have used. There is no second &ldquo;serve&rdquo; mode.
           </p>
 
           <h2>Closing</h2>
