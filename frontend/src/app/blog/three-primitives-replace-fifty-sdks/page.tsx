@@ -167,7 +167,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
           <pre><code>{`queue::push    // append a message to a named queue
 queue::pop     // pop a message and route it to a target function`}</code></pre>
           <p>
-            That is it. The worker stores messages on disk, exposes a queue trigger type, and handles fan-out. Other workers register triggers like <code>queue::pop("dead-letters")</code> and the runtime calls them when messages arrive. To enqueue, you call <code>iii.trigger(&quot;queue::push&quot;, &#123; queue: &quot;dead-letters&quot;, body &#125;)</code>. No new vocabulary.
+            That is it. The worker stores messages on disk, exposes a queue trigger type, and handles fan-out. Other workers register triggers like <code>queue::pop("dead-letters")</code> and the runtime calls them when messages arrive. To enqueue, you call <code>{`iii.trigger("queue::push", { queue: "dead-letters", body })`}</code>. No new vocabulary.
           </p>
           <p>
             The same shape works for cron, pub/sub, state, and streams. Each one is a worker. Each one registers a small set of functions. Each one exposes a trigger type. The runtime stitches them together over the same transport that any other worker uses.

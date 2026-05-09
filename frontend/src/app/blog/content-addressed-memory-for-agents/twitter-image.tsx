@@ -23,7 +23,7 @@ export default function Image() {
           </div>
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', flex: 1, justifyContent: 'center' }}>
-          <h1 style={{ color: '#f1f5f9', fontSize: '50px', fontWeight: 700, lineHeight: 1.15, margin: 0, letterSpacing: '-0.02em' }}>Your Agent&apos;s Memory</h1>
+          <h1 style={{ color: '#f1f5f9', fontSize: '50px', fontWeight: 700, lineHeight: 1.15, margin: 0, letterSpacing: '-0.02em' }}>Your Agent's Memory</h1>
           <h1 style={{ color: '#f1f5f9', fontSize: '50px', fontWeight: 700, lineHeight: 1.15, margin: '8px 0 0 0', letterSpacing: '-0.02em' }}>Is Probably Broken</h1>
           <p style={{ color: '#94a3b8', fontSize: '24px', fontWeight: 400, margin: '20px 0 0 0', lineHeight: 1.4 }}>Content-addressed IDs, reinforcement-on-write, and forty lines of code.</p>
         </div>
