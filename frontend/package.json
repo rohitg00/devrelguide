@@ -28,7 +28,7 @@
     "framer-motion": "^11.15.0",
     "isomorphic-dompurify": "^2.19.0",
     "lucide-react": "^0.469.0",
-    "next": "15.5.11",
+    "next": "15.5.22",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.54.1",
@@ -41,10 +41,14 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^9",
-    "eslint-config-next": "15.5.11",
-    "postcss": "^8",
+    "eslint-config-next": "15.5.22",
+    "postcss": "^8.5.25",
     "tailwindcss": "^3.4.1",
     "tailwindcss-animate": "^1.0.7",
     "typescript": "^5"
+  },
+  "overrides": {
+    "postcss": "$postcss",
+    "sharp": "^0.35.3"
   }
 }
